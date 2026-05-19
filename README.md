@@ -1,87 +1,91 @@
-# AI Fan Engagement Agent
+# Sports Fan AI Agent
 
-A web-based agentic application where sports fans can chat with an AI, take quizzes, predict game outcomes, and earn points and badges.
-
-Built as a CS final at the College of Idaho.
-
----
+An AI-powered fan engagement platform that allows users to chat with an intelligent sports assistant, take quizzes, predict game outcomes, and earn rewards through continuous interaction.
 
 ## Overview
 
-This project focuses on building an agentic system where the AI decides how to respond by selecting between tools — rather than just generating text. It maintains long-term memory across sessions to personalize each user's experience.
+This project is an agentic AI system where the model does not just respond with text — it dynamically selects tools to perform actions such as generating quizzes, making predictions, and tracking user rewards.
 
----
+It also maintains long-term user memory to personalize interactions over time.
+
+## Key Features
+
+* 💬 AI Sports Chat Assistant
+* 🧠 Tool-based Agent Architecture (Quiz, Prediction, Rewards)
+* 🏆 Dynamic Quiz Generation with difficulty levels
+* 📊 Game Outcome Prediction Engine
+* 🎯 Points, Badges & Leaderboard System
+* 💾 Persistent User Memory (SQLite)
 
 ## Tech Stack
 
-- **Python / FastAPI** — backend API and agent orchestration
-- **OpenRouter API** — LLM access for chat, quiz generation, and predictions
-- **SQLite** — persistent storage for user profiles, quiz history, and predictions
-- **MCP tool architecture** — modular agent decision-making
-- **Vanilla JS / HTML / CSS** — frontend UI
-- **Deployed on Render**
+* Python (FastAPI backend)
+* OpenRouter API (LLM orchestration)
+* SQLite (persistent storage)
+* HTML / CSS / JavaScript (frontend)
+* Agentic tool-based architecture (MCP-style design)
+* Deployed on Render
 
----
+## System Design
 
-## Agent Capabilities
+The AI agent follows a tool-using architecture:
 
-### MCP Tools
+User Input → LLM → Tool Selection → Execution → Observation → Response
 
-1. **Quiz Generator** — generates sports trivia questions based on team, difficulty, and count using an LLM via OpenRouter API
-2. **Prediction Engine** — predicts match outcomes using team stats and historical context, returns a result with explanation
-3. **Fan Reward Tracker** — updates user points, badges, and leaderboard rankings based on quiz and prediction activity
+Available tools include:
 
-### Long-Term Memory
+* Quiz generation
+* Sports prediction engine
+* Reward tracking system
+* User memory updates
 
-User data is stored in SQLite across sessions. The agent remembers:
-- User profiles
-- Quiz history and scores
-- Past predictions
-- Total points and badges earned
+## Data Persistence
 
----
+The system stores:
 
-## Setup
+* User profiles
+* Quiz history and scores
+* Predictions
+* Points and badges
+* Leaderboard data
 
-### Prerequisites
-- Python 3.8+
-- OpenRouter API key
+## Setup Instructions
 
 ### Backend
 
 ```bash
-git clone https://github.com/Prabinr2004/CSCI_Final_proJect
-cd CSCI_Final_proJect/Final_Proj/backend
+cd backend
 pip install -r requirements.txt
+uvicorn app.main:app --reload
 ```
 
-Create a `.env` file and add your API key:
-OPENROUTER_API_KEY=your_key_here
+Server runs at:
 
-Run the server:
-```bash
-python -m uvicorn app.main:app --reload
 ```
-
-API available at `http://localhost:8000`
+http://localhost:8000
+```
 
 ### Frontend
 
 ```bash
-cd ../frontend
+cd frontend
 python -m http.server 8001
 ```
 
-Access at `http://localhost:8001`
+Open:
 
----
+```
+http://localhost:8001
+```
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/chat` | Send message to agent |
-| GET | `/api/user/<user_id>` | Get user profile |
-| GET | `/api/leaderboard` | Get top performers |
-| GET | `/api/quiz` | Get available quizzes |
-| POST | `/api/quiz/submit` | Submit quiz answers |
+* `POST /api/chat` → Chat with AI agent
+* `GET /api/user/<user_id>` → User profile
+* `GET /api/leaderboard` → Rankings
+* `GET /api/quiz` → Get quizzes
+* `POST /api/quiz/submit` → Submit answers
+
+## Purpose
+
+This project demonstrates an end-to-end AI agent system with tool use, persistent memory, and gamified user engagement.
