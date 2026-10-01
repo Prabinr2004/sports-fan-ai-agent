@@ -453,3 +453,32 @@ p { color: #7f93ad; }
   .matchup { gap: 10px; }
   .search kbd { display: none; }
 }
+
+
+.api-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 9px;
+  border: 1px solid #1c2d43;
+  border-radius: 999px;
+  color: #8296af;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.api-status span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8090a5;
+}
+
+.api-status.online span { background: #7cf3c7; box-shadow: 0 0 0 3px rgba(124, 243, 199, .08); }
+.api-status.online { color: #9cefd2; }
+.api-status.offline span { background: #ef7f87; }
+.api-status.offline { color: #ef9ba1; }
+
+@media (max-width: 650px) {
+  .api-status { display: none; }
+}
