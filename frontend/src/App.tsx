@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   BarChart3,
   Bell,
@@ -27,6 +28,18 @@ const fixtures = [
 ];
 
 function App() {
+  const [apiStatus, setApiStatus] = useState<"checking" | "online" | "offline">("checking");
+
+  useEffect(() => {
+    fetch("/api/v1/health")
+      .then((response) => {
+        if (!response.ok) throw new Error("API unavailable");
+        return response.json();
+      })
+      .then(() => setApiStatus("online"))
+      .catch(() => setApiStatus("offline"));
+  }, []);
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -62,6 +75,10 @@ function App() {
             <Search size={18} />
             <input aria-label="Search teams" placeholder="Search any football club..." />
             <kbd>⌘ K</kbd>
+          </div>
+          <div className={`api-status ${apiStatus}`}>
+            <span />
+            {apiStatus === "checking" ? "Connecting" : apiStatus === "online" ? "API online" : "API offline"}
           </div>
           <button className="icon-button" aria-label="Notifications">
             <Bell size={19} />
