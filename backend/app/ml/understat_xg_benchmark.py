@@ -2,10 +2,9 @@ from __future__ import annotations
 
 """Research-only Big Five xG benchmark using Understat's current JSON endpoints.
 
-This script DOES NOT write production model artifacts. It compares the same
-chronological match rows using (A) results/form features and (B) the same
-features plus rolling pre-match xG. The in-progress 2026/27 season is fetched
-only for current team state and is excluded from benchmark fitting/evaluation.
+Compares results/form features against richer rolling pre-match Understat team
+metrics. The in-progress 2026/27 season is state-only and never enters the
+historical benchmark fit/test rows. No production artifact is written.
 """
 
 import argparse
@@ -39,22 +38,24 @@ LEAGUES = {
 
 HISTORICAL_SEASONS = (2022, 2023, 2024, 2025)
 CURRENT_SEASON = 2026
-C_VALUES = (0.05, 0.1, 0.2, 0.35, 0.5, 0.8, 1.0)
+C_VALUES = (0.02, 0.05, 0.1, 0.2, 0.35, 0.5)
 
 BASE_FEATURES = [
-    "home_ppg_5", "away_ppg_5",
-    "home_ppg_10", "away_ppg_10",
-    "home_venue_ppg_5", "away_venue_ppg_5",
-    "home_gf_5", "away_gf_5",
-    "home_ga_5", "away_ga_5",
-    "home_gd_10", "away_gd_10",
+    "home_ppg_5", "away_ppg_5", "home_ppg_10", "away_ppg_10",
+    "home_venue_ppg_5", "away_venue_ppg_5", "home_gf_5", "away_gf_5",
+    "home_ga_5", "away_ga_5", "home_gd_10", "away_gd_10",
     "home_elo", "away_elo", "elo_diff",
 ]
 
 XG_FEATURES = BASE_FEATURES + [
-    "home_xgf_5", "away_xgf_5",
-    "home_xga_5", "away_xga_5",
+    "home_xgf_5", "away_xgf_5", "home_xga_5", "away_xga_5",
     "home_xgd_10", "away_xgd_10",
+]
+
+ADVANCED_FEATURES = XG_FEATURES + [
+    "home_npxgf_5", "away_npxgf_5", "home_npxga_5", "away_npxga_5",
+    "home_xpts_5", "away_xpts_5", "home_ppda_5", "away_ppda_5",
+    "home_deep_5", "away_deep_5",
 ]
 
 
@@ -65,6 +66,25 @@ class TeamState:
 
 def avg(values, default: float = 1.35) -> float:
     return float(sum(values) / len(values)) if values else float(default)
+
+
+def _f(value, default=0.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return float(default)
+
+
+def _team_history_by_date(payload: dict[str, Any]) -> dict[tuple[str, str], dict[str, Any]]:
+    result: dict[tuple[str, str], dict[str, Any]] = {}
+    teams = payload.get("teams") or {}
+    for team in teams.values():
+        title = team.get("title", "")
+        for match in team.get("history") or []:
+            date = match.get("date", "")
+            if title and date:
+                result[(title, date)] = match
+    return result
 
 
 def fetch_season(slug: str, season: int) -> list[dict[str, Any]]:
@@ -80,47 +100,50 @@ def fetch_season(slug: str, season: int) -> list[dict[str, Any]]:
     dates = payload.get("dates")
     if not isinstance(dates, list):
         raise RuntimeError(f"No dates list returned from {api_url}")
+    history = _team_history_by_date(payload)
 
     rows: list[dict[str, Any]] = []
     for match in dates:
         if not match.get("isResult"):
             continue
-        goals = match.get("goals") or {}
-        xg = match.get("xG") or {}
+        goals, xg = match.get("goals") or {}, match.get("xG") or {}
+        home = (match.get("h") or {}).get("title", "")
+        away = (match.get("a") or {}).get("title", "")
+        date = match.get("datetime", "")
+        date_key = date.split(" ")[0]
+        hh = history.get((home, date_key), {})
+        ah = history.get((away, date_key), {})
         try:
-            hg = int(goals.get("h"))
-            ag = int(goals.get("a"))
-            hxg = float(xg.get("h"))
-            axg = float(xg.get("a"))
+            hg, ag = int(goals.get("h")), int(goals.get("a"))
+            hxg, axg = float(xg.get("h")), float(xg.get("a"))
         except (TypeError, ValueError):
             continue
+
+        def ppda(hist):
+            p = hist.get("ppda") or {}
+            den = _f(p.get("def"), 0.0)
+            return _f(p.get("att"), 0.0) / den if den else 0.0
+
         rows.append({
-            "date": match.get("datetime", ""),
-            "home": (match.get("h") or {}).get("title", ""),
-            "away": (match.get("a") or {}).get("title", ""),
-            "hg": hg,
-            "ag": ag,
-            "hxg": hxg,
-            "axg": axg,
-            "season": season,
+            "date": date, "home": home, "away": away, "hg": hg, "ag": ag,
+            "hxg": hxg, "axg": axg, "season": season,
+            "hnpxg": _f(hh.get("npxG"), hxg), "anpxg": _f(ah.get("npxG"), axg),
+            "hnpxga": _f(hh.get("npxGA"), axg), "anpxga": _f(ah.get("npxGA"), hxg),
+            "hxpts": _f(hh.get("xpts"), 1.35), "axpts": _f(ah.get("xpts"), 1.35),
+            "hppda": ppda(hh), "appda": ppda(ah),
+            "hdeep": _f(hh.get("deep"), 0.0), "adeep": _f(ah.get("deep"), 0.0),
         })
     return rows
 
 
 def download_league(key: str, include_current: bool = False) -> list[dict[str, Any]]:
     cfg = LEAGUES[key]
-    seasons = list(HISTORICAL_SEASONS)
-    if include_current:
-        seasons.append(CURRENT_SEASON)
+    seasons = list(HISTORICAL_SEASONS) + ([CURRENT_SEASON] if include_current else [])
     rows: list[dict[str, Any]] = []
     for season in seasons:
         season_rows = fetch_season(cfg["slug"], season)
         rows.extend(season_rows)
-        print(
-            f"{cfg['name']} {season}/{str(season + 1)[-2:]}: "
-            f"{len(season_rows)} completed matches with xG",
-            flush=True,
-        )
+        print(f"{cfg['name']} {season}/{str(season + 1)[-2:]}: {len(season_rows)} completed matches", flush=True)
     rows.sort(key=lambda row: row["date"])
     return rows
 
@@ -131,273 +154,113 @@ def outcome(hg: int, ag: int) -> str:
 
 def build_examples(rows: list[dict[str, Any]]):
     state = defaultdict(TeamState)
-    points5 = defaultdict(lambda: deque(maxlen=5))
-    points10 = defaultdict(lambda: deque(maxlen=10))
-    homepoints5 = defaultdict(lambda: deque(maxlen=5))
-    awaypoints5 = defaultdict(lambda: deque(maxlen=5))
-    gf5 = defaultdict(lambda: deque(maxlen=5))
-    ga5 = defaultdict(lambda: deque(maxlen=5))
-    gd10 = defaultdict(lambda: deque(maxlen=10))
-    xgf5 = defaultdict(lambda: deque(maxlen=5))
-    xga5 = defaultdict(lambda: deque(maxlen=5))
-    xgd10 = defaultdict(lambda: deque(maxlen=10))
+    d5 = lambda: defaultdict(lambda: deque(maxlen=5))
+    d10 = lambda: defaultdict(lambda: deque(maxlen=10))
+    points5, points10, homepoints5, awaypoints5 = d5(), d10(), d5(), d5()
+    gf5, ga5, gd10 = d5(), d5(), d10()
+    xgf5, xga5, xgd10 = d5(), d5(), d10()
+    npxgf5, npxga5, xpts5, ppda5, deep5 = d5(), d5(), d5(), d5(), d5()
 
-    x_base: list[list[float]] = []
-    x_xg: list[list[float]] = []
-    y: list[str] = []
-    meta: list[dict[str, Any]] = []
-
+    xb, xx, xa, y, meta = [], [], [], [], []
     for row in rows:
         h, a = row["home"], row["away"]
-        hg, ag = int(row["hg"]), int(row["ag"])
-        hxg, axg = float(row["hxg"]), float(row["axg"])
-
-        # All features below are computed before this match is added to state.
-        if (
-            len(points5[h]) >= 3
-            and len(points5[a]) >= 3
-            and len(xgf5[h]) >= 3
-            and len(xgf5[a]) >= 3
-        ):
+        hg, ag, hxg, axg = int(row["hg"]), int(row["ag"]), float(row["hxg"]), float(row["axg"])
+        if len(points5[h]) >= 3 and len(points5[a]) >= 3:
             he, ae = state[h].elo, state[a].elo
-            base = [
-                avg(points5[h]), avg(points5[a]),
-                avg(points10[h]), avg(points10[a]),
-                avg(homepoints5[h]), avg(awaypoints5[a]),
-                avg(gf5[h]), avg(gf5[a]),
-                avg(ga5[h]), avg(ga5[a]),
-                avg(gd10[h], 0.0), avg(gd10[a], 0.0),
-                he, ae, he - ae,
-            ]
-            richer = base + [
-                avg(xgf5[h]), avg(xgf5[a]),
-                avg(xga5[h]), avg(xga5[a]),
-                avg(xgd10[h], 0.0), avg(xgd10[a], 0.0),
-            ]
-            x_base.append(base)
-            x_xg.append(richer)
-            y.append(outcome(hg, ag))
-            meta.append({
-                "date": row["date"],
-                "season": row["season"],
-                "home": h,
-                "away": a,
-            })
+            base = [avg(points5[h]), avg(points5[a]), avg(points10[h]), avg(points10[a]),
+                    avg(homepoints5[h]), avg(awaypoints5[a]), avg(gf5[h]), avg(gf5[a]),
+                    avg(ga5[h]), avg(ga5[a]), avg(gd10[h], 0), avg(gd10[a], 0), he, ae, he-ae]
+            xg = base + [avg(xgf5[h]), avg(xgf5[a]), avg(xga5[h]), avg(xga5[a]),
+                         avg(xgd10[h], 0), avg(xgd10[a], 0)]
+            advanced = xg + [avg(npxgf5[h]), avg(npxgf5[a]), avg(npxga5[h]), avg(npxga5[a]),
+                             avg(xpts5[h]), avg(xpts5[a]), avg(ppda5[h], 10), avg(ppda5[a], 10),
+                             avg(deep5[h], 0), avg(deep5[a], 0)]
+            xb.append(base); xx.append(xg); xa.append(advanced); y.append(outcome(hg, ag))
+            meta.append({"date": row["date"], "season": row["season"], "home": h, "away": a})
 
         result = outcome(hg, ag)
-        hp, ap = (
-            (3.0, 0.0) if result == "HOME"
-            else (1.0, 1.0) if result == "DRAW"
-            else (0.0, 3.0)
-        )
+        hp, ap = ((3., 0.) if result == "HOME" else (1., 1.) if result == "DRAW" else (0., 3.))
+        for d, team, val in [(points5,h,hp),(points5,a,ap),(points10,h,hp),(points10,a,ap)]: d[team].append(val)
+        homepoints5[h].append(hp); awaypoints5[a].append(ap)
+        gf5[h].append(hg); ga5[h].append(ag); gf5[a].append(ag); ga5[a].append(hg)
+        gd10[h].append(hg-ag); gd10[a].append(ag-hg)
+        xgf5[h].append(hxg); xga5[h].append(axg); xgf5[a].append(axg); xga5[a].append(hxg)
+        xgd10[h].append(hxg-axg); xgd10[a].append(axg-hxg)
+        npxgf5[h].append(row["hnpxg"]); npxgf5[a].append(row["anpxg"])
+        npxga5[h].append(row["hnpxga"]); npxga5[a].append(row["anpxga"])
+        xpts5[h].append(row["hxpts"]); xpts5[a].append(row["axpts"])
+        ppda5[h].append(row["hppda"]); ppda5[a].append(row["appda"])
+        deep5[h].append(row["hdeep"]); deep5[a].append(row["adeep"])
+        expected = 1/(1+10**((state[a].elo-(state[h].elo+60))/400))
+        actual = 1. if result == "HOME" else .5 if result == "DRAW" else 0.
+        delta = 20*(actual-expected); state[h].elo += delta; state[a].elo -= delta
 
-        points5[h].append(hp)
-        points5[a].append(ap)
-        points10[h].append(hp)
-        points10[a].append(ap)
-        homepoints5[h].append(hp)
-        awaypoints5[a].append(ap)
-        gf5[h].append(float(hg))
-        ga5[h].append(float(ag))
-        gf5[a].append(float(ag))
-        ga5[a].append(float(hg))
-        gd10[h].append(float(hg - ag))
-        gd10[a].append(float(ag - hg))
-        xgf5[h].append(hxg)
-        xga5[h].append(axg)
-        xgf5[a].append(axg)
-        xga5[a].append(hxg)
-        xgd10[h].append(hxg - axg)
-        xgd10[a].append(axg - hxg)
-
-        expected = 1.0 / (1.0 + 10 ** ((state[a].elo - (state[h].elo + 60.0)) / 400.0))
-        actual = 1.0 if result == "HOME" else 0.5 if result == "DRAW" else 0.0
-        delta = 20.0 * (actual - expected)
-        state[h].elo += delta
-        state[a].elo -= delta
-
-    current_state = {
-        team: {
-            "elo": round(team_state.elo, 2),
-            "ppg_5": round(avg(points5[team]), 3),
-            "xgf_5": round(avg(xgf5[team]), 3),
-            "xga_5": round(avg(xga5[team]), 3),
-            "xgd_10": round(avg(xgd10[team], 0.0), 3),
-        }
-        for team, team_state in state.items()
-    }
-    return (
-        np.asarray(x_base, dtype=float),
-        np.asarray(x_xg, dtype=float),
-        np.asarray(y),
-        meta,
-        current_state,
-    )
+    current = {t:{"elo":round(s.elo,2),"ppg_5":round(avg(points5[t]),3),"xgf_5":round(avg(xgf5[t]),3),
+                  "xga_5":round(avg(xga5[t]),3),"xgd_10":round(avg(xgd10[t],0),3)} for t,s in state.items()}
+    return np.asarray(xb,float), np.asarray(xx,float), np.asarray(xa,float), np.asarray(y), meta, current
 
 
 def multiclass_brier(y_true, probs, classes) -> float:
-    truth = np.zeros_like(probs)
-    lookup = {label: idx for idx, label in enumerate(classes)}
-    for i, label in enumerate(y_true):
-        truth[i, lookup[label]] = 1.0
-    return float(np.mean(np.sum((probs - truth) ** 2, axis=1)))
+    truth = np.zeros_like(probs); lookup = {label:i for i,label in enumerate(classes)}
+    for i,label in enumerate(y_true): truth[i,lookup[label]] = 1.
+    return float(np.mean(np.sum((probs-truth)**2, axis=1)))
 
 
-def calibration_summary(y_true, probs, classes) -> list[dict[str, Any]]:
-    # Calibration of the model's top-class confidence, useful as a compact
-    # diagnostic without pretending match outcome probabilities are certainty.
-    predicted_idx = np.argmax(probs, axis=1)
-    predicted = np.asarray([classes[i] for i in predicted_idx])
-    confidence = np.max(probs, axis=1)
-    correct = predicted == y_true
-    buckets = [(0.0, 0.4), (0.4, 0.5), (0.5, 0.6), (0.6, 0.7), (0.7, 1.01)]
-    result = []
-    for lo, hi in buckets:
-        mask = (confidence >= lo) & (confidence < hi)
-        if not np.any(mask):
-            continue
-        result.append({
-            "confidence_range": f"{lo:.1f}-{min(hi, 1.0):.1f}",
-            "rows": int(mask.sum()),
-            "mean_confidence": float(confidence[mask].mean()),
-            "accuracy": float(correct[mask].mean()),
-        })
+def calibration_summary(y_true, probs, classes):
+    idx=np.argmax(probs,axis=1); pred=np.asarray([classes[i] for i in idx]); conf=np.max(probs,axis=1); correct=pred==y_true
+    result=[]
+    for lo,hi in [(0,.4),(.4,.5),(.5,.6),(.6,.7),(.7,1.01)]:
+        mask=(conf>=lo)&(conf<hi)
+        if np.any(mask): result.append({"confidence_range":f"{lo:.1f}-{min(hi,1):.1f}","rows":int(mask.sum()),"mean_confidence":float(conf[mask].mean()),"accuracy":float(correct[mask].mean())})
     return result
 
 
-def make_model(c: float):
-    return Pipeline([
-        ("scaler", StandardScaler()),
-        ("classifier", LogisticRegression(max_iter=2500, C=c)),
-    ])
+def make_model(c):
+    return Pipeline([("scaler",StandardScaler()),("classifier",LogisticRegression(max_iter=2500,C=c))])
 
 
-def evaluate_variant(x, y, train_end: int, val_end: int):
-    best_c = None
-    best_loss = float("inf")
-    trials = []
-
+def evaluate_variant(x,y,train_end,val_end):
+    best_c,best_loss=None,float("inf")
     for c in C_VALUES:
-        model = make_model(c)
-        model.fit(x[:train_end], y[:train_end])
-        probs = model.predict_proba(x[train_end:val_end])
-        classes = model.classes_
-        loss = float(log_loss(y[train_end:val_end], probs, labels=classes))
-        trials.append({"C": c, "validation_log_loss": loss})
-        if loss < best_loss:
-            best_loss = loss
-            best_c = c
-
-    model = make_model(float(best_c))
-    model.fit(x[:val_end], y[:val_end])
-    probs = model.predict_proba(x[val_end:])
-    pred = model.predict(x[val_end:])
-    classes = model.classes_
-
-    return {
-        "selected_C": best_c,
-        "validation_log_loss": best_loss,
-        "test_accuracy": float(accuracy_score(y[val_end:], pred)),
-        "test_log_loss": float(log_loss(y[val_end:], probs, labels=classes)),
-        "test_brier": multiclass_brier(y[val_end:], probs, classes),
-        "calibration": calibration_summary(y[val_end:], probs, classes),
-        "candidate_trials": trials,
-    }
+        m=make_model(c); m.fit(x[:train_end],y[:train_end]); p=m.predict_proba(x[train_end:val_end]); loss=float(log_loss(y[train_end:val_end],p,labels=m.classes_))
+        if loss<best_loss: best_c,best_loss=c,loss
+    m=make_model(best_c); m.fit(x[:val_end],y[:val_end]); p=m.predict_proba(x[val_end:]); pred=m.predict(x[val_end:])
+    return {"selected_C":best_c,"validation_log_loss":best_loss,"test_accuracy":float(accuracy_score(y[val_end:],pred)),
+            "test_log_loss":float(log_loss(y[val_end:],p,labels=m.classes_)),"test_brier":multiclass_brier(y[val_end:],p,m.classes_),
+            "calibration":calibration_summary(y[val_end:],p,m.classes_)}
 
 
-def benchmark_league(key: str) -> dict[str, Any]:
-    # Fetch each season only once. 2026/27 is included for state only.
-    through_current = download_league(key, include_current=True)
-    historical = [row for row in through_current if row["season"] != CURRENT_SEASON]
-    current_raw = [row for row in through_current if row["season"] == CURRENT_SEASON]
-
-    x_base, x_xg, y, meta, _ = build_examples(historical)
-    n = len(y)
-    train_end = int(n * 0.70)
-    val_end = int(n * 0.80)
-    if train_end < 100 or val_end <= train_end or val_end >= n:
-        raise RuntimeError(f"Not enough benchmark rows for {LEAGUES[key]['name']}: {n}")
-
-    baseline = evaluate_variant(x_base, y, train_end, val_end)
-    richer = evaluate_variant(x_xg, y, train_end, val_end)
-
-    # Build current state from history + completed 2026/27 matches after metrics
-    # are finalized. This state never influences the benchmark split.
-    _, _, _, current_meta, current_state = build_examples(through_current)
-    current_feature_rows = [m for m in current_meta if m["season"] == CURRENT_SEASON]
-    current_teams = {
-        team
-        for row in current_raw
-        for team in (row["home"], row["away"])
-        if team
-    }
-
-    return {
-        "league": LEAGUES[key]["name"],
-        "historical_seasons": ["2022/23", "2023/24", "2024/25", "2025/26"],
-        "current_state_season": "2026/27",
-        "benchmark_rows": n,
-        "train_rows": train_end,
-        "validation_rows": val_end - train_end,
-        "test_rows": n - val_end,
-        "test_first_match": meta[val_end],
-        "test_last_match": meta[-1],
-        "results_only": baseline,
-        "results_plus_rolling_xg": richer,
-        "delta_log_loss_xg_minus_baseline": richer["test_log_loss"] - baseline["test_log_loss"],
-        "delta_brier_xg_minus_baseline": richer["test_brier"] - baseline["test_brier"],
-        "delta_accuracy_xg_minus_baseline": richer["test_accuracy"] - baseline["test_accuracy"],
-        "current_2026_27_completed_feature_rows": len(current_feature_rows),
-        "current_team_states": len(current_state),
-        "production_changed": False,
-    }
+def benchmark_league(key):
+    all_rows=download_league(key,True); hist=[r for r in all_rows if r["season"]!=CURRENT_SEASON]; current_raw=[r for r in all_rows if r["season"]==CURRENT_SEASON]
+    xb,xx,xa,y,meta,_=build_examples(hist); n=len(y); tr=int(n*.70); va=int(n*.80)
+    if tr<100 or va<=tr or va>=n: raise RuntimeError(f"Not enough rows for {LEAGUES[key]['name']}: {n}")
+    base=evaluate_variant(xb,y,tr,va); xg=evaluate_variant(xx,y,tr,va); advanced=evaluate_variant(xa,y,tr,va)
+    _,_,_,_,current_meta,current_state=build_examples(all_rows)
+    current_feature=[m for m in current_meta if m["season"]==CURRENT_SEASON]
+    active={t for r in current_raw for t in (r["home"],r["away"]) if t}
+    return {"league":LEAGUES[key]["name"],"benchmark_rows":n,"test_rows":n-va,"test_first_match":meta[va],"test_last_match":meta[-1],
+            "results_only":base,"results_plus_rolling_xg":xg,"results_plus_understat_team_stats":advanced,
+            "advanced_delta_log_loss":advanced["test_log_loss"]-base["test_log_loss"],"advanced_delta_brier":advanced["test_brier"]-base["test_brier"],
+            "advanced_delta_accuracy":advanced["test_accuracy"]-base["test_accuracy"],"current_2026_27_completed_matches":len(current_raw),
+            "current_2026_27_feature_rows":len(current_feature),"current_2026_27_active_teams":len(active),
+            "current_state_total_teams_including_prior_seasons":len(current_state),"current_state_has_all_active_teams":all(t in current_state for t in active),
+            "production_changed":False}
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Research-only Understat xG benchmark")
-    parser.add_argument(
-        "--league",
-        choices=[*LEAGUES.keys(), "all"],
-        default="all",
-        help="Run one league first for a network smoke test, or all five.",
-    )
-    args = parser.parse_args()
-    selected = list(LEAGUES) if args.league == "all" else [args.league]
-
-    results: dict[str, Any] = {
-        "source": "Understat current JSON endpoints",
-        "method": "chronological 70/10/20, same rows for baseline and xG variant",
-        "requested_league": args.league,
-        "production_changed": False,
-        "leagues": {},
-    }
+    parser=argparse.ArgumentParser(description="Research-only Understat richer-stat benchmark")
+    parser.add_argument("--league",choices=[*LEAGUES.keys(),"all"],default="all"); args=parser.parse_args()
+    selected=list(LEAGUES) if args.league=="all" else [args.league]
+    results={"source":"Understat current JSON endpoints","method":"chronological 70/10/20; current 2026/27 state-only","requested_league":args.league,"production_changed":False,"leagues":{}}
     for key in selected:
-        try:
-            results["leagues"][key] = benchmark_league(key)
-        except Exception as exc:
-            results["leagues"][key] = {
-                "league": LEAGUES[key]["name"],
-                "error": str(exc),
-                "production_changed": False,
-            }
-
-    wins = []
-    for key, result in results["leagues"].items():
-        if "error" in result:
-            continue
-        if (
-            result["delta_log_loss_xg_minus_baseline"] < 0
-            and result["delta_brier_xg_minus_baseline"] < 0
-        ):
-            wins.append(key)
-    results["xg_probability_quality_wins"] = wins
-    results["promotion_rule"] = (
-        "Do not promote from this research benchmark alone. xG must improve "
-        "held-out probability quality across multiple leagues, then be integrated "
-        "into the production trainer and revalidated."
-    )
-    print(json.dumps(results, indent=2))
+        try: results["leagues"][key]=benchmark_league(key)
+        except Exception as exc: results["leagues"][key]={"league":LEAGUES[key]["name"],"error":str(exc),"production_changed":False}
+    wins=[]
+    for key,r in results["leagues"].items():
+        if "error" not in r and r["advanced_delta_log_loss"]<0 and r["advanced_delta_brier"]<0: wins.append(key)
+    results["advanced_probability_quality_wins"]=wins
+    results["promotion_rule"]="Research only. Do not change production unless richer Understat features improve held-out probability quality across multiple leagues and pass production-trainer revalidation."
+    print(json.dumps(results,indent=2))
 
 
-if __name__ == "__main__":
-    main()
+if __name__=="__main__": main()
