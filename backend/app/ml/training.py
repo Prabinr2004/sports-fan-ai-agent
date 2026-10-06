@@ -13,6 +13,8 @@ import joblib
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, log_loss
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 FEATURE_NAMES = [
     "home_ppg_5", "away_ppg_5", "home_gf_5", "away_gf_5",
@@ -48,7 +50,6 @@ def _date(row: dict[str, str]) -> datetime:
 
 
 def download_epl_rows() -> list[dict[str, str]]:
-    """Download EPL CSVs using httpx/certifi instead of macOS urllib's certificate store."""
     rows: list[dict[str, str]] = []
     headers = {"User-Agent": "FanSphere-ML/1.0"}
     with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
@@ -126,29 +127,36 @@ def train(output_dir: Path) -> dict:
     split = int(len(y) * 0.8)
     x_train, x_test = x[:split], x[split:]
     y_train, y_test = y[:split], y[split:]
-    model = LogisticRegression(max_iter=2500, C=0.35, class_weight="balanced")
+
+    # Scaling matters because Elo values (~1500) and rolling form values (~0-3)
+    # otherwise live on very different numerical scales.
+    model = Pipeline([
+        ("scaler", StandardScaler()),
+        ("classifier", LogisticRegression(max_iter=1500, C=0.35, class_weight="balanced")),
+    ])
     model.fit(x_train, y_train)
     probabilities = model.predict_proba(x_test)
     predictions = model.predict(x_test)
+    classes = model.named_steps["classifier"].classes_
 
     metrics = {
         "model_version": "epl-logreg-v1",
-        "model_type": "multinomial-logistic-regression",
+        "model_type": "scaled-multinomial-logistic-regression",
         "features": FEATURE_NAMES,
         "rows_total": int(len(y)),
         "train_rows": int(len(y_train)),
         "test_rows": int(len(y_test)),
         "chronological_split": True,
         "test_accuracy": float(accuracy_score(y_test, predictions)),
-        "test_log_loss": float(log_loss(y_test, probabilities, labels=model.classes_)),
-        "test_brier": multiclass_brier(y_test, probabilities, model.classes_),
+        "test_log_loss": float(log_loss(y_test, probabilities, labels=classes)),
+        "test_brier": multiclass_brier(y_test, probabilities, classes),
         "test_first_match": meta[split] if split < len(meta) else None,
         "test_last_match": meta[-1] if meta else None,
         "data_source": "football-data.co.uk historical EPL results",
         "trained_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     output_dir.mkdir(parents=True, exist_ok=True)
-    joblib.dump({"model": model, "feature_names": FEATURE_NAMES}, output_dir / "epl_logreg_v1.joblib")
+    joblib.dump({"model": model, "feature_names": FEATURE_NAMES, "classes": list(classes)}, output_dir / "epl_logreg_v1.joblib")
     (output_dir / "epl_logreg_v1_metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
     return metrics
 
