@@ -17,6 +17,20 @@ def _provider_error(exc: httpx.HTTPStatusError) -> HTTPException:
     return HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=detail)
 
 
+async def _optional_provider_call(call, team_id: str) -> tuple[list, str | None]:
+    """Return optional team data without breaking the whole hub on plan limits."""
+    try:
+        return await call(team_id), None
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code in {401, 403, 404}:
+            return [], "This data is unavailable for this team on the current provider plan."
+        if exc.response.status_code == 429:
+            return [], "Provider rate limit reached for this section."
+        return [], "This section could not be loaded from the football provider."
+    except httpx.HTTPError:
+        return [], "This section could not reach the football provider."
+
+
 @router.get("/search")
 async def search_teams(q: str = Query(min_length=2, max_length=100)) -> dict:
     provider = get_football_provider()
@@ -30,20 +44,16 @@ async def search_teams(q: str = Query(min_length=2, max_length=100)) -> dict:
             detail="Could not reach the football provider.",
         ) from exc
 
-    return {
-        "query": q,
-        "results": results,
-        "provider_connected": True,
-    }
+    return {"query": q, "results": results, "provider_connected": True}
 
 
 @router.get("/{team_id}")
 async def get_team(team_id: str) -> dict:
     provider = get_football_provider()
+    # Core club/team identity must succeed; squad and fixtures are optional because
+    # football-data.org can restrict individual resources by competition/plan.
     try:
         team = await provider.get_team(team_id)
-        squad = await provider.get_squad(team_id)
-        fixtures = await provider.get_fixtures(team_id)
     except httpx.HTTPStatusError as exc:
         raise _provider_error(exc) from exc
     except httpx.HTTPError as exc:
@@ -52,9 +62,19 @@ async def get_team(team_id: str) -> dict:
             detail="Could not reach the football provider.",
         ) from exc
 
+    squad, squad_notice = await _optional_provider_call(provider.get_squad, team_id)
+    fixtures, fixtures_notice = await _optional_provider_call(provider.get_fixtures, team_id)
+
+    notices = {}
+    if squad_notice:
+        notices["squad"] = squad_notice
+    if fixtures_notice:
+        notices["fixtures"] = fixtures_notice
+
     return {
         "team": team,
         "squad": squad,
         "fixtures": fixtures,
+        "notices": notices,
         "provider_connected": True,
     }
