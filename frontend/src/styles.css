@@ -63,3 +63,15 @@
 .standing-metrics span{display:flex;flex-direction:column;gap:2px;color:#6f87a1;font-size:8px;font-weight:800;letter-spacing:.08em}
 .standing-metrics b{color:#eaf4ff;font-size:13px;letter-spacing:0}
 @media(max-width:600px){.standing-metrics{grid-template-columns:repeat(3,1fr)}}
+
+.season-leaders{margin-top:18px;padding:20px;border:1px solid #1d354e;border-radius:18px;background:#0a192a}
+.leader-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.leader-card{padding:14px;border:1px solid #213a54;border-radius:13px;background:#0c1d30;display:flex;align-items:center;gap:11px}
+.leader-rank{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:rgba(124,243,199,.09);color:#7cf3c7;font-size:11px;font-weight:900}
+.leader-card>div{display:flex;flex-direction:column;min-width:0;flex:1}
+.leader-card>div strong{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.leader-card>div small{margin-top:3px;color:#7189a5;font-size:9px}
+.leader-card>b{font-size:20px;color:#eaf4ff;text-align:right}
+.leader-card>b small{display:block;color:#7189a5;font-size:7px;letter-spacing:.08em}
+.team-hub:after{content:"Data provided by football-data.org";display:block;margin:16px 2px 0;color:#536a83;font-size:9px;text-align:right}
+@media(max-width:760px){.leader-cards{grid-template-columns:1fr}}
