@@ -15,6 +15,7 @@ from typing import Any
 import numpy as np
 from sklearn.metrics import accuracy_score, log_loss
 
+from app.ml.league_policy import candidate_for_league, eligible_for_candidate_review
 from app.ml.understat_xg_benchmark import (
     C_VALUES,
     CURRENT_SEASON,
