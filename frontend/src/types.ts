@@ -47,14 +47,13 @@ export type TeamStanding = {
 };
 
 export type TeamScorer = {
-  competition_id: string;
-  competition?: string | null;
   player_id: string;
   player_name?: string | null;
   goals: number;
   assists?: number | null;
   penalties?: number | null;
   played_matches?: number | null;
+  competitions?: string[];
 };
 
 export type TeamHubData = {
