@@ -110,13 +110,12 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
         .order_by(UserMatchPrediction.created_at.desc())
     ).all()
     provider = get_football_provider()
-    predictions = []
     hidden_incomplete = 0
-    correct = 0
-    scored = 0
     provider_checks = 0
     provider_limited = False
+    now = datetime.now(timezone.utc)
 
+    valid_rows = []
     for row in rows:
         has_real_teams = bool(
             row.home_team_name
@@ -128,33 +127,51 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
         if not has_real_teams or kickoff is None:
             hidden_incomplete += 1
             continue
+        valid_rows.append(row)
 
-        actual = None
-        status = "PENDING"
+    # Oldest unresolved matches get checked first so newer picks cannot starve
+    # finished matches when the provider-call budget is limited.
+    unresolved = sorted(
+        (
+            row for row in valid_rows
+            if row.result_status == "PENDING"
+            and (_parse_utc(row.kickoff_utc) or now) <= now
+        ),
+        key=lambda row: _parse_utc(row.kickoff_utc) or now,
+    )
+
+    for row in unresolved[:3]:
+        try:
+            provider_checks += 1
+            match = await provider.get_match(row.match_id)
+            actual = _actual_outcome(match)
+            if actual:
+                score = match.get("score") or {}
+                row.actual_outcome = actual
+                row.home_score = score.get("home")
+                row.away_score = score.get("away")
+                row.result_status = "CORRECT" if actual == row.predicted_outcome else "INCORRECT"
+                row.result_checked_at = now
+        except httpx.HTTPStatusError as exc:
+            if exc.response.status_code == 429:
+                provider_limited = True
+                break
+        except httpx.HTTPError:
+            continue
+
+    if db.dirty:
+        db.commit()
+
+    predictions = []
+    correct = 0
+    scored = 0
+    for row in valid_rows:
+        if row.result_status in {"CORRECT", "INCORRECT"}:
+            scored += 1
+            correct += int(row.result_status == "CORRECT")
         score = None
-        # Upcoming matches cannot have a result yet, so never spend an API call on them.
-        should_check_result = bool(
-            kickoff <= datetime.now(timezone.utc)
-            and provider_checks < 3
-            and not provider_limited
-        )
-        if should_check_result:
-            try:
-                provider_checks += 1
-                match = await provider.get_match(row.match_id)
-                actual = _actual_outcome(match)
-                if actual:
-                    scored += 1
-                    is_correct = actual == row.predicted_outcome
-                    correct += int(is_correct)
-                    status = "CORRECT" if is_correct else "INCORRECT"
-                    score = match.get("score")
-            except httpx.HTTPStatusError as exc:
-                if exc.response.status_code == 429:
-                    provider_limited = True
-            except httpx.HTTPError:
-                pass
-
+        if row.home_score is not None and row.away_score is not None:
+            score = {"home": row.home_score, "away": row.away_score}
         predictions.append({
             "id": row.id,
             "match_id": row.match_id,
@@ -163,14 +180,16 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
             "predicted_outcome": row.predicted_outcome,
             "kickoff_utc": row.kickoff_utc,
             "created_at": row.created_at,
-            "actual_outcome": actual,
-            "result_status": status,
+            "actual_outcome": row.actual_outcome,
+            "result_status": row.result_status,
             "score": score,
         })
 
     notice = None
     if provider_limited:
-        notice = "Live result refresh is temporarily paused because the football data provider rate limit was reached. Your saved predictions are still available."
+        notice = "Live result refresh is temporarily paused because the football data provider rate limit was reached. Saved results remain available."
+    elif unresolved and len(unresolved) > provider_checks:
+        notice = f"Checked {provider_checks} finished predictions this refresh. More pending results will be checked on the next refresh."
     elif not scored:
         notice = "Accuracy will appear after one of your predicted matches finishes."
 
