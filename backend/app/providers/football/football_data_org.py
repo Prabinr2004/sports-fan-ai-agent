@@ -135,7 +135,7 @@ class FootballDataOrgProvider(FootballProvider):
             if not competition_id:
                 continue
             try:
-                payload = await self._get(f"/competitions/{competition_id}/scorers", params={"limit": 50}, ttl=1800)
+                payload = await self._get(f"/competitions/{competition_id}/scorers", params={"limit": 500}, ttl=1800)
             except httpx.HTTPStatusError as exc:
                 if exc.response.status_code in {403, 404}:
                     continue
