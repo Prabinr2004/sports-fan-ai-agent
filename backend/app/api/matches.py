@@ -60,12 +60,7 @@ def _saved_team_ids(db: Session, user) -> list[str]:
 
 def _fixture_payload(fixture: dict, provider_team_id: str, saved: UserMatchPrediction | None = None) -> dict:
     kickoff = _parse_utc(fixture.get("utc_date"))
-    return {
-        **fixture,
-        "source_team_id": provider_team_id,
-        "user_prediction": saved.predicted_outcome if saved else None,
-        "prediction_locked": bool(kickoff and kickoff <= datetime.now(timezone.utc)),
-    }
+    return {**fixture, "source_team_id": provider_team_id, "user_prediction": saved.predicted_outcome if saved else None, "prediction_locked": bool(kickoff and kickoff <= datetime.now(timezone.utc))}
 
 
 async def _find_personalized_match(db: Session, user, match_id: str) -> dict | None:
@@ -87,7 +82,6 @@ async def personalized_matches(db: Session = Depends(get_db)) -> dict:
     team_ids = _saved_team_ids(db, user)
     if not team_ids:
         return {"matches": [], "notice": "Choose a primary team or follow teams to build your match feed."}
-
     provider = get_football_provider()
     collected: dict[str, dict] = {}
     unavailable = 0
@@ -102,7 +96,6 @@ async def personalized_matches(db: Session = Depends(get_db)) -> dict:
             if match_id and match_id not in collected:
                 saved = db.scalar(select(UserMatchPrediction).where(UserMatchPrediction.user_id == user.id, UserMatchPrediction.match_id == match_id))
                 collected[match_id] = _fixture_payload(fixture, provider_team_id, saved)
-
     matches = sorted(collected.values(), key=lambda match: match.get("utc_date") or "")
     notice = "Some followed-team fixtures are unavailable on the current football data plan." if unavailable else None
     return {"matches": matches[:30], "notice": notice}
@@ -116,43 +109,40 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
     predictions = []
     correct = 0
     scored = 0
+    provider_checks = 0
+    provider_limited = False
 
     for row in rows:
         actual = None
         status = "PENDING"
         score = None
-        try:
-            match = await provider.get_match(row.match_id)
-            actual = _actual_outcome(match)
-            if actual:
-                scored += 1
-                is_correct = actual == row.predicted_outcome
-                correct += int(is_correct)
-                status = "CORRECT" if is_correct else "INCORRECT"
-                score = match.get("score")
-        except httpx.HTTPError:
-            pass
-        predictions.append({
-            "id": row.id,
-            "match_id": row.match_id,
-            "home_team_name": row.home_team_name,
-            "away_team_name": row.away_team_name,
-            "predicted_outcome": row.predicted_outcome,
-            "kickoff_utc": row.kickoff_utc,
-            "created_at": row.created_at,
-            "actual_outcome": actual,
-            "result_status": status,
-            "score": score,
-        })
+        kickoff = _parse_utc(row.kickoff_utc)
+        # Upcoming matches cannot have a result yet, so never spend an API call on them.
+        should_check_result = bool(kickoff and kickoff <= datetime.now(timezone.utc) and provider_checks < 3 and not provider_limited)
+        if should_check_result:
+            try:
+                provider_checks += 1
+                match = await provider.get_match(row.match_id)
+                actual = _actual_outcome(match)
+                if actual:
+                    scored += 1
+                    is_correct = actual == row.predicted_outcome
+                    correct += int(is_correct)
+                    status = "CORRECT" if is_correct else "INCORRECT"
+                    score = match.get("score")
+            except httpx.HTTPStatusError as exc:
+                if exc.response.status_code == 429:
+                    provider_limited = True
+            except httpx.HTTPError:
+                pass
+        predictions.append({"id": row.id, "match_id": row.match_id, "home_team_name": row.home_team_name, "away_team_name": row.away_team_name, "predicted_outcome": row.predicted_outcome, "kickoff_utc": row.kickoff_utc, "created_at": row.created_at, "actual_outcome": actual, "result_status": status, "score": score})
 
-    return {
-        "predictions": predictions,
-        "total": len(rows),
-        "scored": scored,
-        "correct": correct,
-        "accuracy_percent": round((correct / scored) * 100, 1) if scored else None,
-        "notice": None if scored else "Accuracy will appear after one of your predicted matches finishes.",
-    }
+    notice = None
+    if provider_limited:
+        notice = "Live result refresh is temporarily paused because the football data provider rate limit was reached. Your saved predictions are still available."
+    elif not scored:
+        notice = "Accuracy will appear after one of your predicted matches finishes."
+    return {"predictions": predictions, "total": len(rows), "scored": scored, "correct": correct, "accuracy_percent": round((correct / scored) * 100, 1) if scored else None, "notice": notice}
 
 
 @router.post("/{match_id}/prediction")
@@ -160,18 +150,15 @@ async def save_prediction(match_id: str, choice: PredictionChoice, db: Session =
     outcome = choice.outcome.upper()
     if outcome not in {"HOME", "DRAW", "AWAY"}:
         raise HTTPException(status_code=400, detail="Prediction must be HOME, DRAW, or AWAY.")
-
     user = _get_or_create_local_user(db)
     fixture = await _find_personalized_match(db, user, match_id)
     if fixture is None:
         raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
-
     kickoff = _parse_utc(fixture.get("utc_date"))
     if kickoff is None:
         raise HTTPException(status_code=409, detail="This match does not have a valid kickoff time yet.")
     if kickoff <= datetime.now(timezone.utc):
         raise HTTPException(status_code=409, detail="Predictions are locked once the match kicks off.")
-
     home_name = (fixture.get("home_team") or {}).get("name") or "Home"
     away_name = (fixture.get("away_team") or {}).get("name") or "Away"
     kickoff_value = fixture.get("utc_date")
@@ -183,9 +170,7 @@ async def save_prediction(match_id: str, choice: PredictionChoice, db: Session =
         existing.kickoff_utc = kickoff_value
         db.commit()
         return {"prediction": outcome, "xp_awarded": 0, "updated": True, "progress": progress_summary(db, user.id)}
-
-    prediction = UserMatchPrediction(user_id=user.id, match_id=match_id, home_team_name=home_name, away_team_name=away_name, predicted_outcome=outcome, kickoff_utc=kickoff_value)
-    db.add(prediction)
+    db.add(UserMatchPrediction(user_id=user.id, match_id=match_id, home_team_name=home_name, away_team_name=away_name, predicted_outcome=outcome, kickoff_utc=kickoff_value))
     db.add(XPEvent(user_id=user.id, amount=10, source_type="match_prediction", source_id=match_id))
     db.commit()
     return {"prediction": outcome, "xp_awarded": 10, "updated": False, "progress": progress_summary(db, user.id)}
