@@ -305,8 +305,11 @@ def evaluate_variant(x, y, train_end: int, val_end: int):
 
 
 def benchmark_league(key: str) -> dict[str, Any]:
-    # Completed 2022/23-2025/26 only for benchmark.
-    historical = download_league(key, include_current=False)
+    # Fetch each season only once. 2026/27 is included for state only.
+    through_current = download_league(key, include_current=True)
+    historical = [row for row in through_current if row["season"] != CURRENT_SEASON]
+    current_raw = [row for row in through_current if row["season"] == CURRENT_SEASON]
+
     x_base, x_xg, y, meta, _ = build_examples(historical)
     n = len(y)
     train_end = int(n * 0.70)
@@ -317,10 +320,16 @@ def benchmark_league(key: str) -> dict[str, Any]:
     baseline = evaluate_variant(x_base, y, train_end, val_end)
     richer = evaluate_variant(x_xg, y, train_end, val_end)
 
-    # Current 2026/27 data is state-only and does not affect benchmark metrics.
-    through_current = download_league(key, include_current=True)
+    # Build current state from history + completed 2026/27 matches after metrics
+    # are finalized. This state never influences the benchmark split.
     _, _, _, current_meta, current_state = build_examples(through_current)
-    current_rows = [m for m in current_meta if m["season"] == CURRENT_SEASON]
+    current_feature_rows = [m for m in current_meta if m["season"] == CURRENT_SEASON]
+    current_teams = {
+        team
+        for row in current_raw
+        for team in (row["home"], row["away"])
+        if team
+    }
 
     return {
         "league": LEAGUES[key]["name"],
