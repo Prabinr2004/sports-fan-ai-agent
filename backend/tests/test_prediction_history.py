@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 
-from app.api.matches import _parse_utc
+from app.services.prediction_results import parse_utc
 
 
 def _is_complete_prediction(row) -> bool:
@@ -10,7 +10,7 @@ def _is_complete_prediction(row) -> bool:
         and row.home_team_name.strip().casefold() != "home"
         and row.away_team_name.strip().casefold() != "away"
     )
-    return has_real_teams and _parse_utc(row.kickoff_utc) is not None
+    return has_real_teams and parse_utc(row.kickoff_utc) is not None
 
 
 def test_real_prediction_metadata_is_complete():
