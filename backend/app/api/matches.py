@@ -104,21 +104,40 @@ async def personalized_matches(db: Session = Depends(get_db)) -> dict:
 @router.get("/predictions")
 async def saved_predictions(db: Session = Depends(get_db)) -> dict:
     user = _get_or_create_local_user(db)
-    rows = db.scalars(select(UserMatchPrediction).where(UserMatchPrediction.user_id == user.id).order_by(UserMatchPrediction.created_at.desc())).all()
+    rows = db.scalars(
+        select(UserMatchPrediction)
+        .where(UserMatchPrediction.user_id == user.id)
+        .order_by(UserMatchPrediction.created_at.desc())
+    ).all()
     provider = get_football_provider()
     predictions = []
+    hidden_incomplete = 0
     correct = 0
     scored = 0
     provider_checks = 0
     provider_limited = False
 
     for row in rows:
+        has_real_teams = bool(
+            row.home_team_name
+            and row.away_team_name
+            and row.home_team_name.strip().casefold() != "home"
+            and row.away_team_name.strip().casefold() != "away"
+        )
+        kickoff = _parse_utc(row.kickoff_utc)
+        if not has_real_teams or kickoff is None:
+            hidden_incomplete += 1
+            continue
+
         actual = None
         status = "PENDING"
         score = None
-        kickoff = _parse_utc(row.kickoff_utc)
         # Upcoming matches cannot have a result yet, so never spend an API call on them.
-        should_check_result = bool(kickoff and kickoff <= datetime.now(timezone.utc) and provider_checks < 3 and not provider_limited)
+        should_check_result = bool(
+            kickoff <= datetime.now(timezone.utc)
+            and provider_checks < 3
+            and not provider_limited
+        )
         if should_check_result:
             try:
                 provider_checks += 1
@@ -135,14 +154,40 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
                     provider_limited = True
             except httpx.HTTPError:
                 pass
-        predictions.append({"id": row.id, "match_id": row.match_id, "home_team_name": row.home_team_name, "away_team_name": row.away_team_name, "predicted_outcome": row.predicted_outcome, "kickoff_utc": row.kickoff_utc, "created_at": row.created_at, "actual_outcome": actual, "result_status": status, "score": score})
+
+        predictions.append({
+            "id": row.id,
+            "match_id": row.match_id,
+            "home_team_name": row.home_team_name,
+            "away_team_name": row.away_team_name,
+            "predicted_outcome": row.predicted_outcome,
+            "kickoff_utc": row.kickoff_utc,
+            "created_at": row.created_at,
+            "actual_outcome": actual,
+            "result_status": status,
+            "score": score,
+        })
 
     notice = None
     if provider_limited:
         notice = "Live result refresh is temporarily paused because the football data provider rate limit was reached. Your saved predictions are still available."
     elif not scored:
         notice = "Accuracy will appear after one of your predicted matches finishes."
-    return {"predictions": predictions, "total": len(rows), "scored": scored, "correct": correct, "accuracy_percent": round((correct / scored) * 100, 1) if scored else None, "notice": notice}
+
+    if hidden_incomplete:
+        noun = "prediction was" if hidden_incomplete == 1 else "predictions were"
+        cleanup = f"{hidden_incomplete} incomplete legacy {noun} hidden because valid fixture details were not saved."
+        notice = f"{notice} {cleanup}" if notice else cleanup
+
+    return {
+        "predictions": predictions,
+        "total": len(predictions),
+        "hidden_incomplete": hidden_incomplete,
+        "scored": scored,
+        "correct": correct,
+        "accuracy_percent": round((correct / scored) * 100, 1) if scored else None,
+        "notice": notice,
+    }
 
 
 @router.post("/{match_id}/prediction")
