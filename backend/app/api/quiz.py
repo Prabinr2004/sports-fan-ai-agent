@@ -10,6 +10,7 @@ from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
 from app.services.progress import progress_summary, record_activity_day
+from app.services.quiz_questions import build_team_questions
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
@@ -39,20 +40,20 @@ def quiz_id() -> str:
 
 
 def quiz_level_from_completions(completions: int) -> int:
-    # A level lasts five rewarded daily quizzes. Level 5 is the ongoing expert tier.
     return min(5, completions // 5 + 1)
 
 
 def rewarded_quiz_completions(db: Session, user_id: int) -> int:
-    return len(list(db.scalars(select(XPEvent.id).where(XPEvent.user_id == user_id, XPEvent.source_type == "daily_quiz")).all()))
+    return len(list(db.scalars(select(XPEvent.id).where(
+        XPEvent.user_id == user_id,
+        XPEvent.source_type == "daily_quiz",
+    )).all()))
 
 
 def quiz_context(db: Session, user) -> dict:
     completions = rewarded_quiz_completions(db, user.id)
     level = quiz_level_from_completions(completions)
     team = user.primary_team
-    # Team-specific generation is introduced after Level 1. Until the grounded
-    # team question builder is available, never invent club facts.
     effective_level = level if level == 1 or team is not None else 1
     meta = QUIZ_LEVELS[effective_level]
     return {
@@ -65,15 +66,32 @@ def quiz_context(db: Session, user) -> dict:
     }
 
 
-@router.get("/daily")
-def daily_quiz(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
-    event = db.scalar(select(XPEvent).where(XPEvent.user_id == user.id, XPEvent.source_type == "daily_quiz", XPEvent.source_id == quiz_id()))
+async def questions_for_user(db: Session, user) -> tuple[list[dict], dict]:
     context = quiz_context(db, user)
+    questions = list(GENERAL_QUESTIONS)
+    if context["level"] >= 2 and context["team"]:
+        grounded = await build_team_questions(
+            context["team"]["id"],
+            context["team"]["name"],
+            context["level"],
+            quiz_id(),
+        )
+        if grounded:
+            team_count = min(4, context["level"] - 1)
+            selected = grounded[:team_count]
+            questions = GENERAL_QUESTIONS[: 5 - len(selected)] + selected
+    return questions, context
 
-    # Level 1 is live now. Higher-level question builders will use grounded
-    # primary-team data rather than sharing generic or hallucinated questions.
-    questions = GENERAL_QUESTIONS
+
+@router.get("/daily")
+async def daily_quiz(db: Session = Depends(get_db)) -> dict:
+    user = _get_or_create_local_user(db)
+    event = db.scalar(select(XPEvent).where(
+        XPEvent.user_id == user.id,
+        XPEvent.source_type == "daily_quiz",
+        XPEvent.source_id == quiz_id(),
+    ))
+    questions, context = await questions_for_user(db, user)
     return {
         "quiz_id": quiz_id(),
         "title": context["theme"],
@@ -90,18 +108,22 @@ def daily_quiz(db: Session = Depends(get_db)) -> dict:
 
 
 @router.post("/daily/submit")
-def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
-    questions = GENERAL_QUESTIONS
+async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
+    user = _get_or_create_local_user(db)
+    questions, context = await questions_for_user(db, user)
     if len(submission.answers) != len(questions):
         raise HTTPException(status_code=400, detail="Answer every question before submitting.")
     if any(answer < 0 or answer >= len(questions[index]["options"]) for index, answer in enumerate(submission.answers)):
         raise HTTPException(status_code=400, detail="One or more quiz answers are invalid.")
 
-    user = _get_or_create_local_user(db)
     correct = sum(answer == question["answer"] for answer, question in zip(submission.answers, questions))
     score_percent = round((correct / len(questions)) * 100)
     source_id = quiz_id()
-    existing = db.scalar(select(XPEvent).where(XPEvent.user_id == user.id, XPEvent.source_type == "daily_quiz", XPEvent.source_id == source_id))
+    existing = db.scalar(select(XPEvent).where(
+        XPEvent.user_id == user.id,
+        XPEvent.source_type == "daily_quiz",
+        XPEvent.source_id == source_id,
+    ))
     xp_awarded = 0
 
     if not existing:
@@ -122,6 +144,6 @@ def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(get_db))
         "xp_awarded": xp_awarded,
         "already_rewarded": existing is not None or xp_awarded == 0,
         "correct_answers": [question["answer"] for question in questions],
-        "quiz": quiz_context(db, user),
+        "quiz": context,
         "progress": progress_summary(db, user.id),
     }
