@@ -28,7 +28,7 @@ def _key(name:str)->str:
 def _find(states,name):
  wanted=_key(name)
  if wanted in states:return states[wanted]
- aliases={"atleticomadrid":"clubatleticodemadrid","athleticbilbao":"athleticclub","betis":"realbetisbalompie","deportivo":"rcdeportivolacoruna","espanyolbarcelona":"rcdespanyoldebarcelona","racingsantander":"realracingclubdesantander","realsociedadsansebastian":"realsociedaddefutbol","celtavigo":"rcceltadevigo","manchestercity":"mancity","manchesterunited":"manutd","tottenhamhotspur":"tottenham","wolverhamptonwanderers":"wolves","brightonhovealbion":"brighton"};target=aliases.get(wanted,wanted)
+ aliases={"atleticomadrid":"clubatleticodemadrid","athleticbilbao":"athleticclub","betis":"realbetisbalompie","deportivo":"rcdeportivolacoruna","espanyolbarcelona":"rcdespanyoldebarcelona","racingsantander":"realracingclubdesantander","realsociedadsansebastian":"realsociedaddefutbol","celtavigo":"rcceltadevigo","manchestercity":"mancity","manchesterunited":"manutd","tottenhamhotspur":"tottenham","wolverhamptonwanderers":"wolves","brightonhovealbion":"brighton","bayernmunich":"bayernmunchen","bayernmunchen":"bayernmunchen","rbLeipzig".casefold():"rbleipzig","borussiadortmund":"dortmund"};target=aliases.get(wanted,wanted)
  for k,v in states.items():
   if aliases.get(k,k)==target:return v
  return None
