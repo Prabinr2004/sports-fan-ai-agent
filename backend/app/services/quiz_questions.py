@@ -7,7 +7,11 @@ from app.services.football import get_football_provider
 
 
 def shuffle_options(correct: str, distractors: list[str], seed: str) -> tuple[list[str], int]:
-    options = [correct, *[item for item in distractors if item and item != correct]][:4]
+    unique_distractors = []
+    for item in distractors:
+        if item and item != correct and item not in unique_distractors:
+            unique_distractors.append(item)
+    options = [correct, *unique_distractors[:3]]
     if len(options) < 4:
         return [], -1
     rng = random.Random(seed)
@@ -27,8 +31,18 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
 
     if level >= 2:
         facts = [
-            ("country", f"Which country is {team_name} from?", team.get("country"), ["England", "Spain", "Germany", "Italy"]),
-            ("venue", f"Which stadium is associated with {team_name}?", team.get("venue"), ["Old Trafford", "Anfield", "San Siro", "Allianz Arena"]),
+            (
+                "country",
+                f"Which country is {team_name} from?",
+                team.get("country"),
+                ["England", "Spain", "Germany", "Italy", "France", "Portugal", "Netherlands"],
+            ),
+            (
+                "venue",
+                f"Which stadium is associated with {team_name}?",
+                team.get("venue"),
+                ["Old Trafford", "Anfield", "San Siro", "Allianz Arena", "Emirates Stadium", "Signal Iduna Park"],
+            ),
         ]
         for key, question, correct, distractors in facts:
             if not correct:
