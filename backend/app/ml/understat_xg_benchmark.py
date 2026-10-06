@@ -347,7 +347,7 @@ def benchmark_league(key: str) -> dict[str, Any]:
         "delta_log_loss_xg_minus_baseline": richer["test_log_loss"] - baseline["test_log_loss"],
         "delta_brier_xg_minus_baseline": richer["test_brier"] - baseline["test_brier"],
         "delta_accuracy_xg_minus_baseline": richer["test_accuracy"] - baseline["test_accuracy"],
-        "current_2026_27_completed_feature_rows": len(current_rows),
+        "current_2026_27_completed_feature_rows": len(current_feature_rows),
         "current_team_states": len(current_state),
         "production_changed": False,
     }
