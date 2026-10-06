@@ -11,7 +11,7 @@ import numpy as np
 
 from app.ml.trained import predict_from_team_names
 
-ARTIFACT_DIR = Path(__file__).resolve().parent / "artifacts"
+ARTIFACT_DIR = Path(__file__).resolve().parent / "artifacts"\nREQUIRED_STATE_KEYS = {"ppg_5","ppg_10","home_ppg_5","away_ppg_5","gf_5","ga_5","gd_10","elo","xgf_5","xga_5","xgd_10","npxgf_5","npxga_5","xpts_5","ppda_5","deep_5"}
 
 
 @lru_cache(maxsize=5)
