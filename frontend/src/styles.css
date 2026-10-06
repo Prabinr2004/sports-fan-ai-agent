@@ -75,3 +75,8 @@
 .leader-card>b small{display:block;color:#7189a5;font-size:7px;letter-spacing:.08em}
 .team-hub:after{content:"Data provided by football-data.org";display:block;margin:16px 2px 0;color:#536a83;font-size:9px;text-align:right}
 @media(max-width:760px){.leader-cards{grid-template-columns:1fr}}
+
+.leader-groups{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.leader-groups h3{margin:0 0 9px;font-size:12px;color:#9fb4c9;text-transform:uppercase;letter-spacing:.08em}
+.leader-groups .leader-cards{grid-template-columns:1fr;margin-top:0}
+@media(max-width:760px){.leader-groups{grid-template-columns:1fr}}
