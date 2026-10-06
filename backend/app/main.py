@@ -12,6 +12,7 @@ from app.core.config import settings
 from app.database.session import Base, engine
 from app.models import prediction as prediction_models  # noqa: F401
 from app.models import progress as progress_models  # noqa: F401
+from app.models import quiz as quiz_models  # noqa: F401
 from app.models import team as team_models  # noqa: F401
 from app.models import user as user_models  # noqa: F401
 
