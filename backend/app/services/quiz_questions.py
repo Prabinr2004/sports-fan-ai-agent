@@ -9,7 +9,7 @@ from app.services.football import get_football_provider
 def shuffle_options(correct: str, distractors: list[str], seed: str) -> tuple[list[str], int]:
     unique_distractors = []
     for item in distractors:
-        if item and item != correct and item not in unique_distractors:
+        if item and item.casefold() != correct.casefold() and item.casefold() not in {value.casefold() for value in unique_distractors}:
             unique_distractors.append(item)
     options = [correct, *unique_distractors[:3]]
     if len(options) < 4:
