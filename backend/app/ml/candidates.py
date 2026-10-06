@@ -9,6 +9,8 @@ from typing import Any
 import joblib
 import numpy as np
 
+from app.ml.trained import predict_from_team_names
+
 ARTIFACT_DIR = Path(__file__).resolve().parent / "artifacts"
 
 
