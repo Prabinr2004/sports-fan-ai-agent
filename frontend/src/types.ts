@@ -46,15 +46,28 @@ export type TeamStanding = {
   goal_difference?: number | null;
 };
 
+export type TeamScorer = {
+  competition_id: string;
+  competition?: string | null;
+  player_id: string;
+  player_name?: string | null;
+  goals: number;
+  assists?: number | null;
+  penalties?: number | null;
+  played_matches?: number | null;
+};
+
 export type TeamHubData = {
   team: TeamSummary;
   squad: Player[];
   fixtures: Fixture[];
   standings: TeamStanding[];
+  scorers: TeamScorer[];
   notices?: {
     squad?: string;
     fixtures?: string;
     standings?: string;
+    scorers?: string;
   };
   provider_connected: boolean;
 };
