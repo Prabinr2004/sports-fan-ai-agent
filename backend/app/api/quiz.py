@@ -3,7 +3,7 @@ import json
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -45,12 +45,7 @@ def quiz_level_from_completions(completions: int) -> int:
     return min(5, completions // 5 + 1)
 
 
-def rewarded_quiz_completions(db: Session, user_id: int) -> int:
-    return len(list(db.scalars(select(XPEvent.id).where(
-        XPEvent.user_id == user_id,
-        XPEvent.source_type == "daily_quiz",
-    )).all()))
-
+def rewarded_quiz_completions(db: Session, user_id: int) -> int:\n    return int(db.scalar(select(func.count(XPEvent.id)).where(\n        XPEvent.user_id == user_id,\n        XPEvent.source_type == "daily_quiz",\n    )) or 0)
 
 def quiz_context(db: Session, user) -> dict:
     completions = rewarded_quiz_completions(db, user.id)
