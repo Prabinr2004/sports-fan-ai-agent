@@ -165,7 +165,7 @@ class FootballDataOrgProvider(FootballProvider):
 
         leaders = list(by_player.values())
         leaders.sort(key=lambda item: (item.get("goals") or 0, item.get("assists") or 0), reverse=True)
-        return leaders[:10]
+        return leaders
 
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=21600)
