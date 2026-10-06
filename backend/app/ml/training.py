@@ -3,13 +3,12 @@ from __future__ import annotations
 import csv
 import io
 import json
-import math
-import urllib.request
 from collections import defaultdict, deque
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
+import httpx
 import joblib
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -49,14 +48,25 @@ def _date(row: dict[str, str]) -> datetime:
 
 
 def download_epl_rows() -> list[dict[str, str]]:
+    """Download EPL CSVs using httpx/certifi instead of macOS urllib's certificate store."""
     rows: list[dict[str, str]] = []
-    for season in SEASONS:
-        with urllib.request.urlopen(DATA_URL.format(season=season), timeout=20) as response:
-            text = response.read().decode("utf-8-sig", errors="replace")
-        for row in csv.DictReader(io.StringIO(text)):
-            if row.get("HomeTeam") and row.get("AwayTeam") and row.get("FTR") in {"H", "D", "A"}:
-                row["_season"] = season
-                rows.append(row)
+    headers = {"User-Agent": "FanSphere-ML/1.0"}
+    with httpx.Client(timeout=30.0, follow_redirects=True, headers=headers) as client:
+        for season in SEASONS:
+            url = DATA_URL.format(season=season)
+            try:
+                response = client.get(url)
+                response.raise_for_status()
+            except httpx.HTTPError as exc:
+                raise RuntimeError(f"Could not download EPL season {season} from {url}: {exc}") from exc
+            text = response.content.decode("utf-8-sig", errors="replace")
+            season_rows = 0
+            for row in csv.DictReader(io.StringIO(text)):
+                if row.get("HomeTeam") and row.get("AwayTeam") and row.get("FTR") in {"H", "D", "A"}:
+                    row["_season"] = season
+                    rows.append(row)
+                    season_rows += 1
+            print(f"Loaded season {season}: {season_rows} completed matches")
     rows.sort(key=_date)
     return rows
 
@@ -135,7 +145,7 @@ def train(output_dir: Path) -> dict:
         "test_first_match": meta[split] if split < len(meta) else None,
         "test_last_match": meta[-1] if meta else None,
         "data_source": "football-data.co.uk historical EPL results",
-        "trained_at_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "trained_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     joblib.dump({"model": model, "feature_names": FEATURE_NAMES}, output_dir / "epl_logreg_v1.joblib")
