@@ -33,5 +33,9 @@ export type TeamHubData = {
   team: TeamSummary;
   squad: Player[];
   fixtures: Fixture[];
+  notices?: {
+    squad?: string;
+    fixtures?: string;
+  };
   provider_connected: boolean;
 };
