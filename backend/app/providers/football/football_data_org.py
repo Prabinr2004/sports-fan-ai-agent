@@ -126,6 +126,38 @@ class FootballDataOrgProvider(FootballProvider):
                 break
         return standings
 
+    async def get_team_scorers(self, provider_team_id: str) -> list[dict[str, Any]]:
+        raw_team = await self._get(f"/teams/{provider_team_id}", ttl=1800)
+        competitions = raw_team.get("runningCompetitions") or []
+        leaders: list[dict[str, Any]] = []
+        for competition in competitions:
+            competition_id = competition.get("id")
+            if not competition_id:
+                continue
+            try:
+                payload = await self._get(f"/competitions/{competition_id}/scorers", params={"limit": 50}, ttl=1800)
+            except httpx.HTTPStatusError as exc:
+                if exc.response.status_code in {403, 404}:
+                    continue
+                raise
+            for entry in payload.get("scorers", []):
+                team = entry.get("team") or {}
+                player = entry.get("player") or {}
+                if str(team.get("id")) != str(provider_team_id):
+                    continue
+                leaders.append({
+                    "competition_id": str(competition_id),
+                    "competition": (payload.get("competition") or {}).get("name") or competition.get("name"),
+                    "player_id": str(player.get("id")),
+                    "player_name": player.get("name"),
+                    "goals": entry.get("goals") or 0,
+                    "assists": entry.get("assists"),
+                    "penalties": entry.get("penalties"),
+                    "played_matches": entry.get("playedMatches"),
+                })
+        leaders.sort(key=lambda item: item.get("goals") or 0, reverse=True)
+        return leaders[:3]
+
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=21600)
         matches = [self._normalize_match(m) for m in payload.get("matches", [])]
