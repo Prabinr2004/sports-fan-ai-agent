@@ -30,5 +30,9 @@ class FootballProvider(ABC):
         raise NotImplementedError
 
     @abstractmethod
+    async def get_team_scorers(self, provider_team_id: str) -> list[dict[str, Any]]:
+        raise NotImplementedError
+
+    @abstractmethod
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
         raise NotImplementedError
