@@ -31,7 +31,6 @@ class FootballDataOrgProvider(FootballProvider):
         cached = self._cache.get(key)
         if cached and cached[0] > now:
             return cached[1]
-
         async with httpx.AsyncClient(timeout=15.0) as client:
             response = await client.get(f"{self.base_url}{path}", headers=self.headers, params=params)
             response.raise_for_status()
@@ -41,55 +40,49 @@ class FootballDataOrgProvider(FootballProvider):
 
     @staticmethod
     def _normalize_team(team: dict[str, Any]) -> dict[str, Any]:
-        area = team.get("area") or {}
-        running_competitions = team.get("runningCompetitions") or []
-        competition = running_competitions[0] if running_competitions else {}
+        area = team.get("area") or {}; running = team.get("runningCompetitions") or []; competition = running[0] if running else {}
         return {"id": str(team.get("id")), "name": team.get("name"), "short_name": team.get("shortName"), "tla": team.get("tla"), "country": area.get("name"), "league_name": competition.get("name"), "crest_url": team.get("crest"), "venue": team.get("venue"), "founded": team.get("founded"), "club_colors": team.get("clubColors"), "website": team.get("website")}
 
     @classmethod
     def _normalize_match(cls, match: dict[str, Any]) -> dict[str, Any]:
-        score = match.get("score") or {}
-        full_time = score.get("fullTime") or {}
+        score = match.get("score") or {}; full_time = score.get("fullTime") or {}
         return {"id": str(match.get("id")), "utc_date": match.get("utcDate"), "status": match.get("status"), "competition": (match.get("competition") or {}).get("name"), "home_team": cls._normalize_team(match.get("homeTeam") or {}), "away_team": cls._normalize_team(match.get("awayTeam") or {}), "score": {"home": full_time.get("home"), "away": full_time.get("away")}}
 
     async def _all_accessible_teams(self) -> list[dict[str, Any]]:
-        payload = await self._get("/teams", params={"limit": 500}, ttl=1800)
-        return payload.get("teams", [])
+        return (await self._get("/teams", params={"limit": 500}, ttl=1800)).get("teams", [])
 
     async def _cached_team_by_id(self, provider_team_id: str) -> dict[str, Any] | None:
-        teams = await self._all_accessible_teams()
-        return next((team for team in teams if str(team.get("id")) == str(provider_team_id)), None)
+        teams = await self._all_accessible_teams(); return next((team for team in teams if str(team.get("id")) == str(provider_team_id)), None)
 
     async def search_teams(self, query: str) -> list[dict[str, Any]]:
-        teams = await self._all_accessible_teams()
-        needle = query.casefold().strip()
-        matches = []
+        teams = await self._all_accessible_teams(); needle = query.casefold().strip(); matches = []
         for team in teams:
             searchable = " ".join(str(team.get(key) or "") for key in ("name", "shortName", "tla")).casefold()
-            if needle in searchable:
-                matches.append(self._normalize_team(team))
-        matches.sort(key=lambda team: (0 if (team.get("name") or "").casefold().startswith(needle) else 1, team.get("name") or ""))
-        return matches[:12]
+            if needle in searchable: matches.append(self._normalize_team(team))
+        matches.sort(key=lambda team: (0 if (team.get("name") or "").casefold().startswith(needle) else 1, team.get("name") or "")); return matches[:12]
 
     async def get_team(self, provider_team_id: str) -> dict[str, Any]:
         try:
-            payload = await self._get(f"/teams/{provider_team_id}", ttl=1800)
-            return self._normalize_team(payload)
+            return self._normalize_team(await self._get(f"/teams/{provider_team_id}", ttl=1800))
         except httpx.HTTPStatusError as exc:
             if exc.response.status_code == 403:
                 cached = await self._cached_team_by_id(provider_team_id)
-                if cached is not None:
-                    return self._normalize_team(cached)
+                if cached is not None: return self._normalize_team(cached)
             raise
 
     async def get_squad(self, provider_team_id: str) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}", ttl=1800)
-        return [{"id": str(player.get("id")), "name": player.get("name"), "position": player.get("position"), "date_of_birth": player.get("dateOfBirth"), "nationality": player.get("nationality")} for player in payload.get("squad", [])]
+        return [{"id": str(p.get("id")), "name": p.get("name"), "position": p.get("position"), "date_of_birth": p.get("dateOfBirth"), "nationality": p.get("nationality")} for p in payload.get("squad", [])]
 
     async def get_fixtures(self, provider_team_id: str) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "SCHEDULED", "limit": 10}, ttl=300)
-        return [self._normalize_match(match) for match in payload.get("matches", [])]
+        return [self._normalize_match(m) for m in payload.get("matches", [])]
 
     async def get_match(self, provider_match_id: str) -> dict[str, Any]:
-        payload = await self._get(f"/matches/{provider_match_id}", ttl=300)
-        return self._normalize_match(payload)
+        return self._normalize_match(await self._get(f"/matches/{provider_match_id}", ttl=300))
+
+    async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
+        payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=1800)
+        matches = [self._normalize_match(m) for m in payload.get("matches", [])]
+        matches.sort(key=lambda m: m.get("utc_date") or "")
+        return matches[-limit:]
