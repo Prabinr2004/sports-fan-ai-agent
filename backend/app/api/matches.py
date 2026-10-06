@@ -229,10 +229,13 @@ async def save_prediction(match_id: str, choice: PredictionChoice, db: Session =
     kickoff_value = fixture.get("utc_date")
     existing = db.scalar(select(UserMatchPrediction).where(UserMatchPrediction.user_id == user.id, UserMatchPrediction.match_id == match_id))
     if existing:
+        if existing.result_status != "PENDING":
+            raise HTTPException(status_code=409, detail="This prediction has already been scored and can no longer be changed.")
         existing.predicted_outcome = outcome
         existing.home_team_name = home_name
         existing.away_team_name = away_name
         existing.kickoff_utc = kickoff_value
+        existing.result_checked_at = None
         db.commit()
         return {"prediction": outcome, "xp_awarded": 0, "updated": True, "progress": progress_summary(db, user.id)}
     db.add(UserMatchPrediction(user_id=user.id, match_id=match_id, home_team_name=home_name, away_team_name=away_name, predicted_outcome=outcome, kickoff_utc=kickoff_value))
