@@ -64,17 +64,21 @@ async def get_team(team_id: str) -> dict:
 
     squad, squad_notice = await _optional_provider_call(provider.get_squad, team_id)
     fixtures, fixtures_notice = await _optional_provider_call(provider.get_fixtures, team_id)
+    standings, standings_notice = await _optional_provider_call(provider.get_team_standings, team_id)
 
     notices = {}
     if squad_notice:
         notices["squad"] = squad_notice
     if fixtures_notice:
         notices["fixtures"] = fixtures_notice
+    if standings_notice:
+        notices["standings"] = standings_notice
 
     return {
         "team": team,
         "squad": squad,
         "fixtures": fixtures,
+        "standings": standings,
         "notices": notices,
         "provider_connected": True,
     }
