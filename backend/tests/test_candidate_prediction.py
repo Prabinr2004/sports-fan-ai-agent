@@ -1,6 +1,7 @@
 import numpy as np
 
-from app.ml import candidates\nfrom app.ml.candidates import _candidate_feature_row
+from app.ml import candidates
+from app.ml.candidates import _candidate_feature_row
 
 
 def _state(seed: float):
@@ -25,7 +26,6 @@ def test_candidate_feature_row_respects_requested_order():
     assert np.isclose(row[0, 2], home["elo"] - away["elo"])
     assert np.isclose(row[0, 3], home["xpts_5"])
     assert np.isclose(row[0, 4], away["ppda_5"])
-
 
 
 def test_comparison_keeps_candidate_separate_from_production(monkeypatch):
