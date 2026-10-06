@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.health import router as health_router
 from app.api.leaderboard import router as leaderboard_router
 from app.api.matches import router as matches_router
+from app.api.ml_predictions import router as ml_predictions_router
 from app.api.profile import router as profile_router
 from app.api.quiz import router as quiz_router
 from app.api.teams import router as teams_router
@@ -28,6 +29,7 @@ def create_app() -> FastAPI:
     app.include_router(profile_router, prefix=settings.api_v1_prefix)
     app.include_router(quiz_router, prefix=settings.api_v1_prefix)
     app.include_router(matches_router, prefix=settings.api_v1_prefix)
+    app.include_router(ml_predictions_router, prefix=settings.api_v1_prefix)
     app.include_router(leaderboard_router, prefix=settings.api_v1_prefix)
 
     @app.get("/")
