@@ -178,6 +178,7 @@ async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(ge
             db.rollback()
             xp_awarded = 0
 
+    updated_context = quiz_context(db, user)
     return {
         "quiz_id": source_id,
         "correct": correct,
@@ -186,6 +187,6 @@ async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(ge
         "xp_awarded": xp_awarded,
         "already_rewarded": existing is not None or xp_awarded == 0,
         "correct_answers": [question["answer"] for question in questions],
-        "quiz": context,
+        "quiz": {**context, "unlocked_level": updated_context["unlocked_level"], "days_to_next_level": updated_context["days_to_next_level"]},
         "progress": progress_summary(db, user.id),
     }
