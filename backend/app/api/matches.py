@@ -14,6 +14,7 @@ from app.models.team import Team
 from app.models.user import UserFavoriteTeam
 from app.services.football import get_football_provider
 from app.services.progress import progress_summary
+from app.services.prediction_results import actual_outcome, parse_utc, result_check_due
 
 router = APIRouter(prefix="/matches", tags=["matches"])
 
@@ -59,7 +60,7 @@ def _saved_team_ids(db: Session, user) -> list[str]:
 
 
 def _fixture_payload(fixture: dict, provider_team_id: str, saved: UserMatchPrediction | None = None) -> dict:
-    kickoff = _parse_utc(fixture.get("utc_date"))
+    kickoff = parse_utc(fixture.get("utc_date"))
     return {**fixture, "source_team_id": provider_team_id, "user_prediction": saved.predicted_outcome if saved else None, "prediction_locked": bool(kickoff and kickoff <= datetime.now(timezone.utc))}
 
 
@@ -123,7 +124,7 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
             and row.home_team_name.strip().casefold() != "home"
             and row.away_team_name.strip().casefold() != "away"
         )
-        kickoff = _parse_utc(row.kickoff_utc)
+        kickoff = parse_utc(row.kickoff_utc)
         if not has_real_teams or kickoff is None:
             hidden_incomplete += 1
             continue
@@ -135,23 +136,23 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
         (
             row for row in valid_rows
             if row.result_status == "PENDING"
-            and (_parse_utc(row.kickoff_utc) or now) <= now
+            and result_check_due(row.result_status, row.kickoff_utc, row.result_checked_at, now)
         ),
-        key=lambda row: _parse_utc(row.kickoff_utc) or now,
+        key=lambda row: parse_utc(row.kickoff_utc) or now,
     )
 
     for row in unresolved[:3]:
         try:
             provider_checks += 1
             match = await provider.get_match(row.match_id)
-            actual = _actual_outcome(match)
+            actual = actual_outcome(match)
+            row.result_checked_at = now
             if actual:
                 score = match.get("score") or {}
                 row.actual_outcome = actual
                 row.home_score = score.get("home")
                 row.away_score = score.get("away")
                 row.result_status = "CORRECT" if actual == row.predicted_outcome else "INCORRECT"
-                row.result_checked_at = now
         except httpx.HTTPStatusError as exc:
             if exc.response.status_code == 429:
                 provider_limited = True
