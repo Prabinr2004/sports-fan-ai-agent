@@ -166,7 +166,7 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
     if provider_limited:
         notice = "Live result refresh is temporarily paused because the football data provider rate limit was reached. Saved results remain available."
     elif unresolved and len(unresolved) > provider_checks:
-        notice = f"Checked {provider_checks} finished predictions this refresh. More pending results will be checked on the next refresh."
+        notice = f"Checked {provider_checks} pending prediction result{'s' if provider_checks != 1 else ''} this refresh. More eligible results will be checked on the next refresh."
     elif not scored:
         notice = "Accuracy will appear after one of your predicted matches finishes."
 
