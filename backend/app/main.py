@@ -6,6 +6,7 @@ from app.api.profile import router as profile_router
 from app.api.teams import router as teams_router
 from app.core.config import settings
 from app.database.session import Base, engine
+from app.models import progress as progress_models  # noqa: F401
 from app.models import team as team_models  # noqa: F401
 from app.models import user as user_models  # noqa: F401
 
