@@ -16,3 +16,7 @@
 .answer:disabled{cursor:default}
 .question-list+.quiz-submit{margin-top:18px}
 @media(max-width:650px){.answer-grid{grid-template-columns:1fr}}
+
+.answer.answer-correct{border-color:#7cf3c7;background:rgba(124,243,199,.12);color:#eafff7;box-shadow:inset 0 0 0 1px rgba(124,243,199,.12)}
+.answer.answer-wrong{border-color:#ef9ba1;background:rgba(239,155,161,.1);color:#ffecef;box-shadow:inset 0 0 0 1px rgba(239,155,161,.1)}
+.answer.answer-correct:disabled,.answer.answer-wrong:disabled{opacity:1}
