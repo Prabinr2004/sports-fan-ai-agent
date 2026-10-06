@@ -4,6 +4,9 @@ from pathlib import Path
 from typing import Any
 import re,unicodedata,joblib,numpy as np
 ARTIFACT_DIR=Path(__file__).resolve().parent/"artifacts";SUPPORTED=("epl","laliga","bundesliga","seriea","ligue1")
+# Experimental artifacts (v3+) are intentionally not auto-promoted. Production
+# stays on the explicitly selected version until held-out evaluation justifies a change.
+PRODUCTION_MODEL_VERSION={"epl":"v2","laliga":"v2","bundesliga":"v2","seriea":"v2","ligue1":"v2"}
 LEAGUE_ALIASES={"premier league":"epl","epl":"epl","primera division":"laliga","la liga":"laliga","laliga":"laliga","bundesliga":"bundesliga","serie a":"seriea","ligue 1":"ligue1"}
 def league_key(name:str|None)->str|None:
  if not name:return None
@@ -13,7 +16,10 @@ def league_key(name:str|None)->str|None:
  return None
 @lru_cache(maxsize=10)
 def load_model_bundle(key:str)->dict[str,Any]|None:
- for version in ("v3","v2","v1"):
+ selected=PRODUCTION_MODEL_VERSION.get(key,"v2")
+ # Prefer the explicitly approved production artifact. Older versions are only
+ # compatibility fallbacks; newer experimental files never silently replace it.
+ for version in (selected,"v1"):
   path=ARTIFACT_DIR/f"{key}_logreg_{version}.joblib"
   if path.exists():return joblib.load(path)
  return None
