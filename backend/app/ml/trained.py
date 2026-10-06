@@ -11,9 +11,12 @@ def league_key(name:str|None)->str|None:
  for alias,key in LEAGUE_ALIASES.items():
   if alias in n:return key
  return None
-@lru_cache(maxsize=5)
+@lru_cache(maxsize=10)
 def load_model_bundle(key:str)->dict[str,Any]|None:
- path=ARTIFACT_DIR/f"{key}_logreg_v1.joblib";return joblib.load(path) if path.exists() else None
+ for version in ("v2","v1"):
+  path=ARTIFACT_DIR/f"{key}_logreg_{version}.joblib"
+  if path.exists():return joblib.load(path)
+ return None
 def _key(name:str)->str:
  s=unicodedata.normalize("NFKD",name).encode("ascii","ignore").decode().casefold();s=re.sub(r"\b(fc|cf|afc|calcio|football club|futbol club|club de futbol)\b"," ",s);return re.sub(r"[^a-z0-9]+","",s)
 def _find(states,name):
@@ -23,6 +26,9 @@ def _find(states,name):
  for k,v in states.items():
   if aliases.get(k,k)==target:return v
  return None
+def _features(home,away,names):
+ values={"home_ppg_5":home["ppg_5"],"away_ppg_5":away["ppg_5"],"home_ppg_10":home.get("ppg_10",home["ppg_5"]),"away_ppg_10":away.get("ppg_10",away["ppg_5"]),"home_gf_5":home["gf_5"],"away_gf_5":away["gf_5"],"home_ga_5":home["ga_5"],"away_ga_5":away["ga_5"],"home_gd_10":home.get("gd_10",home["gf_5"]-home["ga_5"]),"away_gd_10":away.get("gd_10",away["gf_5"]-away["ga_5"]),"home_elo":home["elo"],"away_elo":away["elo"],"elo_diff":home["elo"]-away["elo"],"home_advantage":1.}
+ return np.asarray([[values[n] for n in names]],float)
 def predict_from_team_names(home_name:str,away_name:str,competition:str|None=None)->dict[str,Any]|None:
  preferred=league_key(competition);keys=[preferred] if preferred else list(SUPPORTED)
  for key in keys:
@@ -31,6 +37,7 @@ def predict_from_team_names(home_name:str,away_name:str,competition:str|None=Non
   if bundle is None:continue
   states=bundle.get("team_states") or bundle.get("current_team_features") or {};home=_find(states,home_name);away=_find(states,away_name)
   if home is None or away is None:continue
-  features=np.asarray([[home["ppg_5"],away["ppg_5"],home["gf_5"],away["gf_5"],home["ga_5"],away["ga_5"],home["elo"],away["elo"],home["elo"]-away["elo"]]],float);model=bundle["model"];p=model.predict_proba(features)[0];classes=list(getattr(model,"classes_",bundle.get("classes",[])));probs={str(c):float(p[i]) for i,c in enumerate(classes)};pick=max(probs,key=probs.get)
-  return {"probabilities":{"HOME":probs.get("HOME",0.),"DRAW":probs.get("DRAW",0.),"AWAY":probs.get("AWAY",0.)},"pick":pick,"model_version":f"{key}-logreg-v1","league_model":bundle.get("league_name",key),"model_type":"scaled-multinomial-logistic-regression","training_status":"trained","feature_state":"historical-through-latest-dataset"}
+  names=bundle.get("feature_names") or ["home_ppg_5","away_ppg_5","home_gf_5","away_gf_5","home_ga_5","away_ga_5","home_elo","away_elo","elo_diff"]
+  features=_features(home,away,names);model=bundle["model"];p=model.predict_proba(features)[0];classes=list(getattr(model,"classes_",bundle.get("classes",[])));probs={str(c):float(p[i]) for i,c in enumerate(classes)};pick=max(probs,key=probs.get);version=bundle.get("model_version",f"{key}-logreg-v1")
+  return {"probabilities":{"HOME":probs.get("HOME",0.),"DRAW":probs.get("DRAW",0.),"AWAY":probs.get("AWAY",0.)},"pick":pick,"model_version":version,"league_model":bundle.get("league_name",key),"model_type":"calibrated-logistic-regression" if version.endswith("v2") else "scaled-multinomial-logistic-regression","training_status":"trained","feature_state":"historical-through-latest-dataset"}
  return None
