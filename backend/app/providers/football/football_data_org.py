@@ -129,7 +129,7 @@ class FootballDataOrgProvider(FootballProvider):
     async def get_team_scorers(self, provider_team_id: str) -> list[dict[str, Any]]:
         raw_team = await self._get(f"/teams/{provider_team_id}", ttl=1800)
         competitions = raw_team.get("runningCompetitions") or []
-        leaders: list[dict[str, Any]] = []
+        by_player: dict[str, dict[str, Any]] = {}
         for competition in competitions:
             competition_id = competition.get("id")
             if not competition_id:
@@ -140,23 +140,32 @@ class FootballDataOrgProvider(FootballProvider):
                 if exc.response.status_code in {403, 404}:
                     continue
                 raise
+            competition_name = (payload.get("competition") or {}).get("name") or competition.get("name")
             for entry in payload.get("scorers", []):
                 team = entry.get("team") or {}
                 player = entry.get("player") or {}
                 if str(team.get("id")) != str(provider_team_id):
                     continue
-                leaders.append({
-                    "competition_id": str(competition_id),
-                    "competition": (payload.get("competition") or {}).get("name") or competition.get("name"),
-                    "player_id": str(player.get("id")),
+                player_id = str(player.get("id"))
+                leader = by_player.setdefault(player_id, {
+                    "player_id": player_id,
                     "player_name": player.get("name"),
-                    "goals": entry.get("goals") or 0,
-                    "assists": entry.get("assists"),
-                    "penalties": entry.get("penalties"),
-                    "played_matches": entry.get("playedMatches"),
+                    "goals": 0,
+                    "assists": 0,
+                    "penalties": 0,
+                    "played_matches": 0,
+                    "competitions": [],
                 })
-        leaders.sort(key=lambda item: item.get("goals") or 0, reverse=True)
-        return leaders[:3]
+                leader["goals"] += entry.get("goals") or 0
+                leader["assists"] += entry.get("assists") or 0
+                leader["penalties"] += entry.get("penalties") or 0
+                leader["played_matches"] += entry.get("playedMatches") or 0
+                if competition_name and competition_name not in leader["competitions"]:
+                    leader["competitions"].append(competition_name)
+
+        leaders = list(by_player.values())
+        leaders.sort(key=lambda item: (item.get("goals") or 0, item.get("assists") or 0), reverse=True)
+        return leaders[:10]
 
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=21600)
