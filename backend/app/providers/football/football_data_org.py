@@ -9,11 +9,7 @@ from app.providers.football.base import FootballProvider
 
 
 class FootballDataOrgProvider(FootballProvider):
-    """football-data.org v4 adapter.
-
-    The rest of the application talks only to the FootballProvider contract so
-    the upstream provider can be replaced later without rewriting API routes.
-    """
+    """football-data.org v4 adapter."""
 
     def __init__(self, api_key: str, base_url: str = "https://api.football-data.org/v4") -> None:
         self.api_key = api_key
@@ -50,6 +46,20 @@ class FootballDataOrgProvider(FootballProvider):
             "website": team.get("website"),
         }
 
+    @classmethod
+    def _normalize_match(cls, match: dict[str, Any]) -> dict[str, Any]:
+        score = match.get("score") or {}
+        full_time = score.get("fullTime") or {}
+        return {
+            "id": str(match.get("id")),
+            "utc_date": match.get("utcDate"),
+            "status": match.get("status"),
+            "competition": (match.get("competition") or {}).get("name"),
+            "home_team": cls._normalize_team(match.get("homeTeam") or {}),
+            "away_team": cls._normalize_team(match.get("awayTeam") or {}),
+            "score": {"home": full_time.get("home"), "away": full_time.get("away")},
+        }
+
     async def _all_accessible_teams(self) -> list[dict[str, Any]]:
         if self._team_cache and time.monotonic() < self._team_cache_expires_at:
             return self._team_cache
@@ -59,9 +69,6 @@ class FootballDataOrgProvider(FootballProvider):
         return self._team_cache
 
     async def _cached_team_by_id(self, provider_team_id: str) -> dict[str, Any] | None:
-        """Find a team in the list endpoint, which may expose basic identity even
-        when the provider restricts the dedicated team resource (common for
-        national teams on some plans)."""
         teams = await self._all_accessible_teams()
         return next((team for team in teams if str(team.get("id")) == str(provider_team_id)), None)
 
@@ -81,9 +88,6 @@ class FootballDataOrgProvider(FootballProvider):
             payload = await self._get(f"/teams/{provider_team_id}")
             return self._normalize_team(payload)
         except httpx.HTTPStatusError as exc:
-            # A national team can appear in /teams search while its dedicated
-            # resource is restricted by the current subscription. Preserve the
-            # usable list representation so the Team Hub can still open.
             if exc.response.status_code == 403:
                 cached = await self._cached_team_by_id(provider_team_id)
                 if cached is not None:
@@ -96,4 +100,8 @@ class FootballDataOrgProvider(FootballProvider):
 
     async def get_fixtures(self, provider_team_id: str) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "SCHEDULED", "limit": 10})
-        return [{"id": str(match.get("id")), "utc_date": match.get("utcDate"), "status": match.get("status"), "competition": (match.get("competition") or {}).get("name"), "home_team": self._normalize_team(match.get("homeTeam") or {}), "away_team": self._normalize_team(match.get("awayTeam") or {})} for match in payload.get("matches", [])]
+        return [self._normalize_match(match) for match in payload.get("matches", [])]
+
+    async def get_match(self, provider_match_id: str) -> dict[str, Any]:
+        payload = await self._get(f"/matches/{provider_match_id}")
+        return self._normalize_match(payload)
