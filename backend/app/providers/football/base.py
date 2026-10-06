@@ -24,3 +24,7 @@ class FootballProvider(ABC):
     @abstractmethod
     async def get_match(self, provider_match_id: str) -> dict[str, Any]:
         raise NotImplementedError
+
+    @abstractmethod
+    async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
+        raise NotImplementedError
