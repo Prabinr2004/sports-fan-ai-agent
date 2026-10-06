@@ -353,13 +353,24 @@ def benchmark_league(key: str) -> dict[str, Any]:
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Research-only Understat xG benchmark")
+    parser.add_argument(
+        "--league",
+        choices=[*LEAGUES.keys(), "all"],
+        default="all",
+        help="Run one league first for a network smoke test, or all five.",
+    )
+    args = parser.parse_args()
+    selected = list(LEAGUES) if args.league == "all" else [args.league]
+
     results: dict[str, Any] = {
         "source": "Understat current JSON endpoints",
         "method": "chronological 70/10/20, same rows for baseline and xG variant",
+        "requested_league": args.league,
         "production_changed": False,
         "leagues": {},
     }
-    for key in LEAGUES:
+    for key in selected:
         try:
             results["leagues"][key] = benchmark_league(key)
         except Exception as exc:
