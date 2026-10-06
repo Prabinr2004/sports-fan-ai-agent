@@ -8,6 +8,7 @@ features plus rolling pre-match xG. The in-progress 2026/27 season is fetched
 only for current team state and is excluded from benchmark fitting/evaluation.
 """
 
+import argparse
 import json
 from collections import defaultdict, deque
 from dataclasses import dataclass
