@@ -2,8 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.health import router as health_router
+from app.api.profile import router as profile_router
 from app.api.teams import router as teams_router
 from app.core.config import settings
+from app.database.session import Base, engine
+from app.models import team as team_models  # noqa: F401
+from app.models import user as user_models  # noqa: F401
 
 
 def create_app() -> FastAPI:
@@ -21,8 +25,14 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
+    @app.on_event("startup")
+    def create_local_tables() -> None:
+        # Development convenience. Production will use Alembic migrations.
+        Base.metadata.create_all(bind=engine)
+
     app.include_router(health_router, prefix=settings.api_v1_prefix)
     app.include_router(teams_router, prefix=settings.api_v1_prefix)
+    app.include_router(profile_router, prefix=settings.api_v1_prefix)
 
     @app.get("/")
     def root() -> dict[str, str]:
