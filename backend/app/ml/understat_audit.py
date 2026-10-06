@@ -45,7 +45,7 @@ def fetch_league(slug: str, season: int):
     # Understat has historically exposed datesData in an encoded JSON blob.
     patterns = [
         r"datesData\s*=\s*JSON\.parse\('([^']+)'\)",
-        r"datesData\s*=\s*JSON\.parse\("([^"]+)"\)",
+        'datesData\\s*=\\s*JSON\\.parse\\(\"([^\"]+)\"\\)',
     ]
     for pattern in patterns:
         match = re.search(pattern, text)
