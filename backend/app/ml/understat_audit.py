@@ -8,8 +8,6 @@ xG before we spend time building another model. No production artifacts change.
 
 import json
 import re
-from collections import defaultdict
-
 import httpx
 
 BASE = "https://understat.com"
