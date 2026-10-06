@@ -32,19 +32,40 @@ EUROPE_ALIASES={
  "benfica":"sportlisboaebenfica",
  "olympiacos":"paeolympiakossfp",
  "olympiakos":"paeolympiakossfp",
+ "lasklinz":"lask",
+ "linzerask":"lask",
 }
+
+def _canonical(key:str)->str:
+ return EUROPE_ALIASES.get(key,key)
 
 @lru_cache(maxsize=1)
 def load_europe_bundle()->dict[str,Any]|None:
- path=ARTIFACT_DIR/"europe_logreg_v1.joblib"
- return joblib.load(path) if path.exists() else None
+ # Prefer the corrected chronologically-trained v2 artifact when present.
+ for filename in ("europe_logreg_v2.joblib","europe_logreg_v1.joblib"):
+  path=ARTIFACT_DIR/filename
+  if path.exists():return joblib.load(path)
+ return None
 
 def _find_europe(states:dict[str,Any],name:str):
- wanted=_key(name)
+ wanted=_canonical(_key(name))
  if wanted in states:return states[wanted]
- target=EUROPE_ALIASES.get(wanted,wanted)
- for k,v in states.items():
-  if EUROPE_ALIASES.get(k,k)==target:return v
+
+ # First compare canonical forms. This handles known provider/source aliases.
+ canonical_matches=[v for k,v in states.items() if _canonical(k)==wanted]
+ if len(canonical_matches)==1:return canonical_matches[0]
+
+ # Providers often append a city or legal suffix (for example "LASK Linz")
+ # while OpenFootball uses the shorter club name. Permit containment only when
+ # it produces one unambiguous candidate and the shorter key is substantial.
+ if len(wanted)>=4:
+  fuzzy=[]
+  for k,v in states.items():
+   candidate=_canonical(k)
+   shorter=min(len(wanted),len(candidate))
+   if shorter>=4 and (wanted.startswith(candidate) or candidate.startswith(wanted)):
+    fuzzy.append(v)
+  if len(fuzzy)==1:return fuzzy[0]
  return None
 
 def _feature_row(home:dict[str,Any],away:dict[str,Any],names:list[str])->np.ndarray:
@@ -62,7 +83,6 @@ def _feature_row(home:dict[str,Any],away:dict[str,Any],names:list[str])->np.ndar
   "home_elo":home["elo"],
   "away_elo":away["elo"],
   "elo_diff":home["elo"]-away["elo"],
-  "home_advantage":1.0,
  }
  return np.asarray([[values[n] for n in names]],float)
 
