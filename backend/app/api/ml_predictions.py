@@ -4,11 +4,9 @@ from app.ml.baseline import baseline_probabilities,form_from_matches
 from app.ml.trained import predict_from_team_names
 from app.services.football import get_football_provider
 router=APIRouter(prefix="/ml",tags=["ml-predictions"])
-
 @router.get("/predict/{match_id}")
 async def predict_match(match_id:str,home_name:str|None=Query(default=None),away_name:str|None=Query(default=None),competition:str|None=Query(default=None))->dict:
- # Top-five league models run entirely from local trained artifacts: no provider quota.
- if home_name and away_name and competition:
+ if home_name and away_name:
   trained=predict_from_team_names(home_name,away_name,competition)
   if trained is not None:return {"match_id":match_id,"home_team":home_name,"away_team":away_name,"available":True,**trained,"disclaimer":"FanSphere ML v1 uses a league-specific model trained on public-domain historical results."}
  provider=get_football_provider()
