@@ -31,10 +31,17 @@ class FootballDataOrgProvider(FootballProvider):
         cached = self._cache.get(key)
         if cached and cached[0] > now:
             return cached[1]
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            response = await client.get(f"{self.base_url}{path}", headers=self.headers, params=params)
-            response.raise_for_status()
-            payload = response.json()
+        try:
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                response = await client.get(f"{self.base_url}{path}", headers=self.headers, params=params)
+                response.raise_for_status()
+                payload = response.json()
+        except httpx.HTTPStatusError as exc:
+            # A previously successful response is still better than failing the UI
+            # when the free provider temporarily rate-limits us.
+            if exc.response.status_code == 429 and cached:
+                return cached[1]
+            raise
         self._cache[key] = (now + ttl, payload)
         return payload
 
@@ -82,7 +89,7 @@ class FootballDataOrgProvider(FootballProvider):
         return self._normalize_match(await self._get(f"/matches/{provider_match_id}", ttl=300))
 
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
-        payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=1800)
+        payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=21600)
         matches = [self._normalize_match(m) for m in payload.get("matches", [])]
         matches.sort(key=lambda m: m.get("utc_date") or "")
         return matches[-limit:]
