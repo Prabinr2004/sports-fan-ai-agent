@@ -1,6 +1,6 @@
 import numpy as np
 
-from app.ml.candidates import _candidate_feature_row
+from app.ml import candidates\nfrom app.ml.candidates import _candidate_feature_row
 
 
 def _state(seed: float):
@@ -25,3 +25,18 @@ def test_candidate_feature_row_respects_requested_order():
     assert np.isclose(row[0, 2], home["elo"] - away["elo"])
     assert np.isclose(row[0, 3], home["xpts_5"])
     assert np.isclose(row[0, 4], away["ppda_5"])
+
+
+
+def test_comparison_keeps_candidate_separate_from_production(monkeypatch):
+    production = {"model_version": "bundesliga-logreg-v2", "pick": "HOME"}
+    candidate = {"model_version": "bundesliga-understat-candidate-v1", "pick": "DRAW"}
+    monkeypatch.setattr(candidates, "predict_from_team_names", lambda *args: production)
+    monkeypatch.setattr(candidates, "predict_candidate", lambda *args: candidate)
+
+    result = candidates.compare_with_production(
+        "bundesliga", "Bayern Munich", "Borussia Dortmund", "Bundesliga"
+    )
+    assert result["production"] is production
+    assert result["candidate"] is candidate
+    assert result["production_changed"] is False
