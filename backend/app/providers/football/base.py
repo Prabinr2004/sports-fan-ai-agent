@@ -20,3 +20,7 @@ class FootballProvider(ABC):
     @abstractmethod
     async def get_fixtures(self, provider_team_id: str) -> list[dict[str, Any]]:
         raise NotImplementedError
+
+    @abstractmethod
+    async def get_match(self, provider_match_id: str) -> dict[str, Any]:
+        raise NotImplementedError
