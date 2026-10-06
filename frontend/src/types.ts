@@ -29,13 +29,32 @@ export type Fixture = {
   away_team: TeamSummary;
 };
 
+export type TeamStanding = {
+  competition_id: string;
+  competition?: string | null;
+  type?: string | null;
+  stage?: string | null;
+  group?: string | null;
+  position?: number | null;
+  played?: number | null;
+  won?: number | null;
+  drawn?: number | null;
+  lost?: number | null;
+  points?: number | null;
+  goals_for?: number | null;
+  goals_against?: number | null;
+  goal_difference?: number | null;
+};
+
 export type TeamHubData = {
   team: TeamSummary;
   squad: Player[];
   fixtures: Fixture[];
+  standings: TeamStanding[];
   notices?: {
     squad?: string;
     fixtures?: string;
+    standings?: string;
   };
   provider_connected: boolean;
 };
