@@ -35,3 +35,12 @@ def test_result_check_uses_cooldown():
 def test_parse_utc_rejects_invalid_values():
     assert parse_utc(None) is None
     assert parse_utc("not-a-date") is None
+
+
+def test_naive_result_check_timestamp_is_treated_as_utc():
+    naive_old = datetime(2026, 10, 7, 18, 0)
+    assert result_check_due("PENDING", "2026-10-07T17:00:00Z", naive_old, NOW)
+
+
+def test_missing_score_cannot_be_scored():
+    assert actual_outcome({"status": "FINISHED", "score": {"home": None, "away": 1}}) is None
