@@ -23,30 +23,6 @@ class PredictionChoice(BaseModel):
     outcome: str
 
 
-def _parse_utc(value: str | None) -> datetime | None:
-    if not value:
-        return None
-    try:
-        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-        return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
-    except ValueError:
-        return None
-
-
-def _actual_outcome(match: dict) -> str | None:
-    if match.get("status") != "FINISHED":
-        return None
-    score = match.get("score") or {}
-    home, away = score.get("home"), score.get("away")
-    if home is None or away is None:
-        return None
-    if home > away:
-        return "HOME"
-    if away > home:
-        return "AWAY"
-    return "DRAW"
-
-
 def _saved_team_ids(db: Session, user) -> list[str]:
     team_ids: list[str] = []
     if user.primary_team:
@@ -219,7 +195,7 @@ async def save_prediction(match_id: str, choice: PredictionChoice, db: Session =
     fixture = await _find_personalized_match(db, user, match_id)
     if fixture is None:
         raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
-    kickoff = _parse_utc(fixture.get("utc_date"))
+    kickoff = parse_utc(fixture.get("utc_date"))
     if kickoff is None:
         raise HTTPException(status_code=409, detail="This match does not have a valid kickoff time yet.")
     if kickoff <= datetime.now(timezone.utc):
