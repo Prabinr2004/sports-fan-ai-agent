@@ -88,6 +88,44 @@ class FootballDataOrgProvider(FootballProvider):
     async def get_match(self, provider_match_id: str) -> dict[str, Any]:
         return self._normalize_match(await self._get(f"/matches/{provider_match_id}", ttl=300))
 
+    async def get_team_standings(self, provider_team_id: str) -> list[dict[str, Any]]:
+        raw_team = await self._get(f"/teams/{provider_team_id}", ttl=1800)
+        competitions = raw_team.get("runningCompetitions") or []
+        standings: list[dict[str, Any]] = []
+        for competition in competitions:
+            competition_id = competition.get("id")
+            if not competition_id:
+                continue
+            try:
+                payload = await self._get(f"/competitions/{competition_id}/standings", ttl=900)
+            except httpx.HTTPStatusError as exc:
+                if exc.response.status_code in {403, 404}:
+                    continue
+                raise
+            for standing in payload.get("standings", []):
+                table = standing.get("table") or []
+                row = next((item for item in table if str((item.get("team") or {}).get("id")) == str(provider_team_id)), None)
+                if row is None:
+                    continue
+                standings.append({
+                    "competition_id": str(competition_id),
+                    "competition": (payload.get("competition") or {}).get("name") or competition.get("name"),
+                    "type": standing.get("type"),
+                    "stage": standing.get("stage"),
+                    "group": standing.get("group"),
+                    "position": row.get("position"),
+                    "played": row.get("playedGames"),
+                    "won": row.get("won"),
+                    "drawn": row.get("draw"),
+                    "lost": row.get("lost"),
+                    "points": row.get("points"),
+                    "goals_for": row.get("goalsFor"),
+                    "goals_against": row.get("goalsAgainst"),
+                    "goal_difference": row.get("goalDifference"),
+                })
+                break
+        return standings
+
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED", "limit": limit}, ttl=21600)
         matches = [self._normalize_match(m) for m in payload.get("matches", [])]
