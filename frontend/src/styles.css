@@ -52,3 +52,14 @@
 .empty-panel strong{color:#eaf2fb}
 @media(max-width:900px){.team-hero{grid-template-columns:110px 1fr}.team-hero-crest{width:105px;height:105px}.team-hero-crest img{width:82px;height:82px}.hub-grid{grid-template-columns:1fr}.squad-list{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.team-hero{grid-template-columns:1fr;padding:20px}.team-hero .team-actions{flex-direction:column}.team-hero .team-actions button{width:100%}.squad-list{grid-template-columns:1fr}.fixture-row{grid-template-columns:1fr}.fixture-row>span{grid-row:auto}}
+
+.season-snapshot{margin-top:18px;padding:20px;border:1px solid #1d354e;border-radius:18px;background:#0a192a}
+.standing-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-top:14px}
+.standing-card{padding:15px;border:1px solid #213a54;border-radius:13px;background:linear-gradient(145deg,#0d2034,#091625)}
+.standing-card>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.standing-card>div:first-child span{font-size:12px;font-weight:800;color:#dfeaf6}
+.standing-card>div:first-child strong{font-size:24px;color:#7cf3c7}
+.standing-metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:13px}
+.standing-metrics span{display:flex;flex-direction:column;gap:2px;color:#6f87a1;font-size:8px;font-weight:800;letter-spacing:.08em}
+.standing-metrics b{color:#eaf4ff;font-size:13px;letter-spacing:0}
+@media(max-width:600px){.standing-metrics{grid-template-columns:repeat(3,1fr)}}
