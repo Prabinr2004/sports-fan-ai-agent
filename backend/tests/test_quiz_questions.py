@@ -17,3 +17,10 @@ def test_shuffle_options_rejects_insufficient_unique_choices():
     options, answer = shuffle_options("Spain", ["Spain", "Spain"], "bad")
     assert options == []
     assert answer == -1
+
+
+def test_shuffle_options_deduplicates_case_insensitively():
+    options, answer = shuffle_options("Spain", ["spain", "England", "Germany", "Italy"], "casefold")
+    assert len(options) == 4
+    assert options[answer] == "Spain"
+    assert len({option.casefold() for option in options}) == 4
