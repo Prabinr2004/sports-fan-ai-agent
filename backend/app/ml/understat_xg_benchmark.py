@@ -195,8 +195,24 @@ def build_examples(rows: list[dict[str, Any]]):
         actual = 1. if result == "HOME" else .5 if result == "DRAW" else 0.
         delta = 20*(actual-expected); state[h].elo += delta; state[a].elo -= delta
 
-    current = {t:{"elo":round(s.elo,2),"ppg_5":round(avg(points5[t]),3),"xgf_5":round(avg(xgf5[t]),3),
-                  "xga_5":round(avg(xga5[t]),3),"xgd_10":round(avg(xgd10[t],0),3)} for t,s in state.items()}
+    current = {t:{
+        "elo": round(s.elo, 2),
+        "ppg_5": round(avg(points5[t]), 3),
+        "ppg_10": round(avg(points10[t]), 3),
+        "home_ppg_5": round(avg(homepoints5[t]), 3),
+        "away_ppg_5": round(avg(awaypoints5[t]), 3),
+        "gf_5": round(avg(gf5[t]), 3),
+        "ga_5": round(avg(ga5[t]), 3),
+        "gd_10": round(avg(gd10[t], 0), 3),
+        "xgf_5": round(avg(xgf5[t]), 3),
+        "xga_5": round(avg(xga5[t]), 3),
+        "xgd_10": round(avg(xgd10[t], 0), 3),
+        "npxgf_5": round(avg(npxgf5[t]), 3),
+        "npxga_5": round(avg(npxga5[t]), 3),
+        "xpts_5": round(avg(xpts5[t]), 3),
+        "ppda_5": round(avg(ppda5[t], 10), 3),
+        "deep_5": round(avg(deep5[t], 0), 3),
+    } for t,s in state.items()}
     return np.asarray(xb,float), np.asarray(xx,float), np.asarray(xa,float), np.asarray(y), meta, current
 
 
