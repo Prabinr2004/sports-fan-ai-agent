@@ -1,4 +1,5 @@
 from datetime import date
+import json
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -9,6 +10,7 @@ from sqlalchemy.orm import Session
 from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
+from app.models.quiz import DailyQuizSnapshot
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
 
@@ -25,9 +27,9 @@ GENERAL_QUESTIONS = [
 QUIZ_LEVELS = {
     1: {"theme": "Football Basics", "description": "General football rules and knowledge."},
     2: {"theme": "Know Your Club", "description": "Basic facts about your primary team."},
-    3: {"theme": "Players & Legends", "description": "Current players, club icons, and legends."},
-    4: {"theme": "Club History", "description": "History, trophies, rivalries, and important eras."},
-    5: {"theme": "Expert Mode", "description": "Matches, seasons, records, tactics, and advanced club knowledge."},
+    3: {"theme": "Players & Club", "description": "Current players and deeper club knowledge."},
+    4: {"theme": "Club Challenge", "description": "A harder mix of club and player knowledge."},
+    5: {"theme": "Expert Mode", "description": "The hardest available team-focused questions."},
 }
 
 
@@ -66,20 +68,60 @@ def quiz_context(db: Session, user) -> dict:
     }
 
 
-async def questions_for_user(db: Session, user) -> tuple[list[dict], dict]:
+async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], dict]:
+    today = quiz_id()
+    existing = db.scalar(select(DailyQuizSnapshot).where(
+        DailyQuizSnapshot.user_id == user.id,
+        DailyQuizSnapshot.quiz_date == today,
+    ))
     context = quiz_context(db, user)
+    if existing:
+        questions = json.loads(existing.questions_json)
+        snapshot_team = None
+        if existing.team_provider_id and existing.team_name:
+            snapshot_team = {"id": existing.team_provider_id, "name": existing.team_name}
+        snapshot_context = {
+            **context,
+            "level": existing.level,
+            "theme": existing.theme,
+            "team": snapshot_team,
+        }
+        return questions, snapshot_context
+
     questions = list(GENERAL_QUESTIONS)
     if context["level"] >= 2 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
             context["team"]["name"],
             context["level"],
-            quiz_id(),
+            today,
         )
         if grounded:
             team_count = min(4, context["level"] - 1)
             selected = grounded[:team_count]
             questions = GENERAL_QUESTIONS[: 5 - len(selected)] + selected
+
+    team = context["team"]
+    db.add(DailyQuizSnapshot(
+        user_id=user.id,
+        quiz_date=today,
+        level=context["level"],
+        theme=context["theme"],
+        team_provider_id=team["id"] if team else None,
+        team_name=team["name"] if team else None,
+        questions_json=json.dumps(questions),
+    ))
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        existing = db.scalar(select(DailyQuizSnapshot).where(
+            DailyQuizSnapshot.user_id == user.id,
+            DailyQuizSnapshot.quiz_date == today,
+        ))
+        if existing:
+            return json.loads(existing.questions_json), context
+        raise
     return questions, context
 
 
@@ -91,7 +133,7 @@ async def daily_quiz(db: Session = Depends(get_db)) -> dict:
         XPEvent.source_type == "daily_quiz",
         XPEvent.source_id == quiz_id(),
     ))
-    questions, context = await questions_for_user(db, user)
+    questions, context = await get_or_create_daily_snapshot(db, user)
     return {
         "quiz_id": quiz_id(),
         "title": context["theme"],
@@ -110,7 +152,7 @@ async def daily_quiz(db: Session = Depends(get_db)) -> dict:
 @router.post("/daily/submit")
 async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
     user = _get_or_create_local_user(db)
-    questions, context = await questions_for_user(db, user)
+    questions, context = await get_or_create_daily_snapshot(db, user)
     if len(submission.answers) != len(questions):
         raise HTTPException(status_code=400, detail="Answer every question before submitting.")
     if any(answer < 0 or answer >= len(questions[index]["options"]) for index, answer in enumerate(submission.answers)):
