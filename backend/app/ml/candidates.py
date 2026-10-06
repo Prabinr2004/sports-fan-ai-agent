@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 import joblib
+import numpy as np
 
 ARTIFACT_DIR = Path(__file__).resolve().parent / "artifacts"
 
