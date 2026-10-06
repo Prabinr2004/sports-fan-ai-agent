@@ -15,3 +15,9 @@ def test_quiz_advances_every_five_rewarded_days():
 
 def test_expert_level_is_capped():
     assert quiz_level_from_completions(100) == 5
+
+
+def test_quiz_level_boundaries_do_not_advance_early():
+    assert quiz_level_from_completions(9) == 2
+    assert quiz_level_from_completions(14) == 3
+    assert quiz_level_from_completions(19) == 4
