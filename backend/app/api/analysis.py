@@ -8,6 +8,7 @@ from app.core.config import settings
 from app.database.session import get_db
 from app.models.analysis import MatchAnalysisUnlock
 from app.services.analysis_access import analysis_access_summary, unlock_analysis
+from app.services.football import get_football_provider
 from app.services.openrouter import AIAnalysisUnavailable, explain_match
 
 router = APIRouter(prefix="/analysis", tags=["analysis"])
@@ -53,7 +54,7 @@ async def rich_match_analysis(match_id: str, db: Session = Depends(get_db)) -> d
             away_team=away.get("name") or "Away team",
             competition=competition.get("name"),
             model_outlook=None,
-            comparison=None,
+            comparison=comparison,
         )
     except AIAnalysisUnavailable as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
