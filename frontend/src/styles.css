@@ -115,3 +115,5 @@
 
 /* Match card detail action: keep it in normal flow so it never overlaps Model Outlook. */
 .match-open-button{position:static!important;display:flex!important;width:calc(100% - 28px);margin:10px 14px 14px!important;min-height:36px;align-items:center;justify-content:center;border:1px solid #24435f!important;border-radius:9px!important;background:#0b1b2c!important;color:#7cf3c7!important;font-size:10px!important;font-weight:800!important;letter-spacing:.02em;cursor:pointer}.match-open-button:hover{background:#10263b!important;border-color:#3b6c86!important;transform:translateY(-1px)}
+
+.comparison-standings{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.comparison-standings>div{display:grid;gap:7px;padding:12px 14px;border:1px solid #18314b;border-radius:11px;background:#091827}.comparison-standings>div>strong{font-size:10px;color:#7890aa;text-transform:uppercase;letter-spacing:.07em}.comparison-standings span{display:flex;justify-content:space-between;gap:10px;font-size:11px;color:#9cb0c7}.comparison-standings b{color:#dffbf1}@media(max-width:650px){.comparison-standings{grid-template-columns:1fr}}
