@@ -151,3 +151,12 @@
 .premium-pulse-fixture strong{font-size:11px;line-height:1.4;color:#e0eff5}
 .premium-pulse-fixture small{font-size:10px;color:#7cf3c7}
 @media(max-width:520px){.premium-quiz-rewards{grid-template-columns:1fr 1fr}.premium-quiz-rewards>div:last-child{grid-column:1/-1}}
+
+
+.premium-form{display:grid;gap:8px;padding:9px 0 4px}
+.premium-form>span{font-size:8px;letter-spacing:.1em;color:#83a1b8;font-weight:900}
+.premium-form>div{display:flex;gap:6px;flex-wrap:wrap}
+.premium-form-result{display:grid;place-items:center;width:25px;height:25px;border-radius:7px;font-size:11px;font-weight:900}
+.premium-form-result.form-w{background:rgba(70,211,143,.16);color:#72efb1}
+.premium-form-result.form-d{background:rgba(156,174,194,.19);color:#c6d2df}
+.premium-form-result.form-l{background:rgba(235,104,115,.16);color:#f69da5}
