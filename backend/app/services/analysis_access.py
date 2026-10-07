@@ -43,7 +43,7 @@ def analysis_access_summary(db: Session, user_id: int) -> dict:
     }
 
 
-def unlock_analysis(db: Session, user_id: int, match_id: str) -> dict:
+def unlock_analysis(db: Session, user_id: int, match_id: str, analysis_text: str | None = None) -> dict:
     existing = db.scalar(select(MatchAnalysisUnlock).where(
         MatchAnalysisUnlock.user_id == user_id,
         MatchAnalysisUnlock.match_id == match_id,
@@ -76,6 +76,7 @@ def unlock_analysis(db: Session, user_id: int, match_id: str) -> dict:
         match_id=match_id,
         unlock_source=source,
         unlock_date=today,
+        analysis_text=analysis_text,
     ))
     db.commit()
     return {"unlocked": True, "source": source, "charged": True, **analysis_access_summary(db, user_id)}
