@@ -64,6 +64,23 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
     monkeypatch.setattr(analysis_api, "get_football_provider", lambda: Provider())
     monkeypatch.setattr(analysis_api, "predict_match", model)
     monkeypatch.setattr(analysis_api, "explain_match", explain)
+    monkeypatch.setattr(
+        analysis_api,
+        "analysis_access_summary",
+        lambda db, user_id: {"tokens": 0, "free_remaining": 1, "date": "2026-10-07"},
+    )
+    monkeypatch.setattr(
+        analysis_api,
+        "unlock_analysis",
+        lambda db, user_id, match_id, analysis_text=None: {
+            "unlocked": True,
+            "source": "FREE_DAILY",
+            "charged": True,
+            "tokens": 0,
+            "free_remaining": 0,
+            "date": "2026-10-07",
+        },
+    )
 
     with TestClient(app) as client:
         response = client.post("/api/v1/analysis/server-grounding-test/rich")
