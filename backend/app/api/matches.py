@@ -78,6 +78,59 @@ async def personalized_matches(db: Session = Depends(get_db)) -> dict:
     return {"matches": matches[:30], "notice": notice}
 
 
+@router.get("/{match_id}/center")
+async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
+    user = _get_or_create_local_user(db)
+    fixture = await _find_personalized_match(db, user, match_id)
+    if fixture is None:
+        raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
+
+    provider = get_football_provider()
+    saved = db.scalar(select(UserMatchPrediction).where(
+        UserMatchPrediction.user_id == user.id,
+        UserMatchPrediction.match_id == match_id,
+    ))
+
+    async def team_form(team: dict) -> dict:
+        team_id = str(team.get("id"))
+        try:
+            results = await provider.get_recent_results(team_id, limit=5)
+        except (httpx.HTTPError, HTTPException):
+            return {"team_id": team_id, "form": [], "points": 0, "goals_for": 0, "goals_against": 0, "matches": 0}
+
+        form: list[str] = []
+        points = goals_for = goals_against = 0
+        for result in results:
+            home = result.get("home_team") or {}
+            away = result.get("away_team") or {}
+            score = result.get("score") or {}
+            home_score, away_score = score.get("home"), score.get("away")
+            if home_score is None or away_score is None:
+                continue
+            is_home = str(home.get("id")) == team_id
+            gf, ga = (home_score, away_score) if is_home else (away_score, home_score)
+            goals_for += gf
+            goals_against += ga
+            if gf > ga:
+                form.append("W")
+                points += 3
+            elif gf == ga:
+                form.append("D")
+                points += 1
+            else:
+                form.append("L")
+        return {"team_id": team_id, "form": form, "points": points, "goals_for": goals_for, "goals_against": goals_against, "matches": len(form)}
+
+    home = fixture.get("home_team") or {}
+    away = fixture.get("away_team") or {}
+    home_form = await team_form(home)
+    away_form = await team_form(away)
+    return {
+        "match": _fixture_payload(fixture, str(fixture.get("source_team_id") or home.get("id") or ""), saved),
+        "comparison": {"home": home_form, "away": away_form},
+    }
+
+
 @router.get("/predictions")
 async def saved_predictions(db: Session = Depends(get_db)) -> dict:
     user = _get_or_create_local_user(db)
