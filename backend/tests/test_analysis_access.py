@@ -1,6 +1,10 @@
 from fastapi.testclient import TestClient
 
+from sqlalchemy import delete
+
+from app.database.session import SessionLocal
 from app.main import app
+from app.models.analysis import MatchAnalysisUnlock
 
 
 def test_analysis_access_reports_daily_allowance_and_tokens() -> None:
