@@ -2,11 +2,7 @@ from uuid import uuid4
 
 from fastapi.testclient import TestClient
 
-from sqlalchemy import delete
-
-from app.database.session import SessionLocal
 from app.main import app
-from app.models.analysis import MatchAnalysisUnlock
 
 
 def test_analysis_access_reports_daily_allowance_and_tokens() -> None:
@@ -24,8 +20,10 @@ def test_rich_analysis_requires_server_match_when_ai_is_configured(monkeypatch) 
     from app.api import analysis as analysis_api
 
     monkeypatch.setattr(analysis_api.settings, "openrouter_api_key", "test-key")
+
     async def missing_match(db, user, match_id):
         return None
+
     monkeypatch.setattr(analysis_api, "_find_personalized_match", missing_match)
 
     with TestClient(app) as client:
@@ -38,10 +36,12 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
     from app.api import analysis as analysis_api
 
     monkeypatch.setattr(analysis_api.settings, "openrouter_api_key", "test-key")
+    match_id = f"server-grounding-{uuid4().hex}"
 
-    async def fixture(db, user, match_id):
+    async def fixture(db, user, requested_match_id):
+        assert requested_match_id == match_id
         return {
-            "id": match_id,
+            "id": requested_match_id,
             "home_team": {"id": "10", "name": "Server Home"},
             "away_team": {"id": "20", "name": "Server Away"},
             "competition": {"name": "Server League"},
@@ -51,13 +51,19 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
         async def get_recent_results(self, team_id, limit=5):
             return []
 
-    async def model(match_id, home_name=None, away_name=None, competition=None):
+    async def model(requested_match_id, home_name=None, away_name=None, competition=None):
+        assert requested_match_id == match_id
         assert home_name == "Server Home"
         assert away_name == "Server Away"
         assert competition == "Server League"
-        return {"available": True, "pick": "HOME", "probabilities": {"HOME": 0.5, "DRAW": 0.3, "AWAY": 0.2}}
+        return {
+            "available": True,
+            "pick": "HOME",
+            "probabilities": {"HOME": 0.5, "DRAW": 0.3, "AWAY": 0.2},
+        }
 
     captured = {}
+
     async def explain(**kwargs):
         captured.update(kwargs)
         return "Server-grounded explanation"
@@ -74,7 +80,7 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
     monkeypatch.setattr(
         analysis_api,
         "unlock_analysis",
-        lambda db, user_id, match_id, analysis_text=None: {
+        lambda db, user_id, requested_match_id, analysis_text=None: {
             "unlocked": True,
             "source": "FREE_DAILY",
             "charged": True,
@@ -85,8 +91,10 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
     )
 
     with TestClient(app) as client:
-        response = client.post("/api/v1/analysis/server-grounding-test/rich")
-        assert response.status_code == 200
-        assert captured["home_team"] == "Server Home"
-        assert captured["away_team"] == "Server Away"
-        assert captured["model_outlook"]["pick"] == "HOME"
+        response = client.post(f"/api/v1/analysis/{match_id}/rich")
+
+    assert response.status_code == 200
+    assert captured, "explain_match was not called"
+    assert captured["home_team"] == "Server Home"
+    assert captured["away_team"] == "Server Away"
+    assert captured["model_outlook"]["pick"] == "HOME"
