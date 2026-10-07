@@ -22,6 +22,21 @@ GENERAL_QUESTIONS = [
     {"id": "general-3", "question": "How long is a standard football match before added time?", "options": ["80 minutes", "90 minutes", "100 minutes", "120 minutes"], "answer": 1},
     {"id": "general-4", "question": "What is awarded when a defending player commits a direct-free-kick foul inside their own penalty area?", "options": ["Corner kick", "Drop ball", "Penalty kick", "Throw-in"], "answer": 2},
     {"id": "general-5", "question": "Which card sends a player off?", "options": ["Blue", "Green", "Red", "White"], "answer": 2},
+    {"id": "general-6", "question": "What restart is awarded when the ball fully crosses the touchline?", "options": ["Corner kick", "Throw-in", "Penalty kick", "Goal kick"], "answer": 1},
+    {"id": "general-7", "question": "How many halves are played in a standard football match?", "options": ["1", "2", "3", "4"], "answer": 1},
+    {"id": "general-8", "question": "What is a hat-trick?", "options": ["Three goals by one player", "Three assists by one player", "Three yellow cards", "Three substitutions"], "answer": 0},
+    {"id": "general-9", "question": "Which body part may an outfield player not deliberately use to control the ball?", "options": ["Head", "Chest", "Foot", "Hand"], "answer": 3},
+    {"id": "general-10", "question": "Where is a corner kick taken from?", "options": ["Centre circle", "Penalty spot", "Corner arc", "Goal area"], "answer": 2},
+    {"id": "general-11", "question": "What does a yellow card normally represent?", "options": ["A caution", "A goal", "A substitution", "Full-time"], "answer": 0},
+    {"id": "general-12", "question": "Which official primarily enforces the Laws of the Game on the field?", "options": ["Captain", "Coach", "Referee", "Fourth substitute"], "answer": 2},
+    {"id": "general-13", "question": "What happens when the score is level in a league match that allows draws?", "options": ["Home team wins", "Away team wins", "Match is a draw", "Penalty shootout"], "answer": 2},
+    {"id": "general-14", "question": "How many points does a team normally receive for a league win?", "options": ["1", "2", "3", "4"], "answer": 2},
+    {"id": "general-15", "question": "How many points does a team normally receive for a league draw?", "options": ["0", "1", "2", "3"], "answer": 1},
+    {"id": "general-16", "question": "Which restart begins each half?", "options": ["Throw-in", "Kick-off", "Corner kick", "Goal kick"], "answer": 1},
+    {"id": "general-17", "question": "What is added time intended to compensate for?", "options": ["Time lost during play", "Half-time", "Warm-ups", "Travel time"], "answer": 0},
+    {"id": "general-18", "question": "Which line must the whole ball cross for a goal to be scored?", "options": ["Touchline", "Halfway line", "Goal line between the posts", "Penalty-area line"], "answer": 2},
+    {"id": "general-19", "question": "Who usually wears a different-colored kit from their teammates?", "options": ["Goalkeeper", "Captain", "Striker", "Left-back"], "answer": 0},
+    {"id": "general-20", "question": "What is the area around the penalty spot called?", "options": ["Centre circle", "Technical area", "Penalty area", "Corner arc"], "answer": 2},
 ]
 
 QUIZ_LEVELS = {
@@ -88,7 +103,8 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         }
         return questions, snapshot_context
 
-    questions = list(GENERAL_QUESTIONS)
+    rng = __import__("random").Random(f"{today}:{user.id}:{context[\"level\"]}:daily")
+    questions = rng.sample(GENERAL_QUESTIONS, 5)
     if context["level"] >= 2 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
@@ -99,7 +115,9 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         if grounded:
             team_count = min(4, context["level"] - 1)
             selected = grounded[:team_count]
-            questions = GENERAL_QUESTIONS[: 5 - len(selected)] + selected
+            general_count = 5 - len(selected)
+            questions = rng.sample(GENERAL_QUESTIONS, general_count) + selected
+            rng.shuffle(questions)
 
     team = context["team"]
     db.add(DailyQuizSnapshot(
