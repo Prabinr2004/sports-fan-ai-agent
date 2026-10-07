@@ -33,3 +33,15 @@ class MatchAnalysisUnlock(Base):
     unlock_date: Mapped[str] = mapped_column(String(10), index=True)
     analysis_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class AnalysisDailyClaim(Base):
+    __tablename__ = "analysis_daily_claims"
+    __table_args__ = (
+        UniqueConstraint("user_id", "claim_date", name="uq_analysis_daily_claim"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
+    claim_date: Mapped[str] = mapped_column(String(10))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
