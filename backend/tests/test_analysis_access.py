@@ -1,4 +1,4 @@
-from fastapi.testclient import TestClient
+from uuid import uuid4\n\nfrom fastapi.testclient import TestClient
 
 from sqlalchemy import delete
 
