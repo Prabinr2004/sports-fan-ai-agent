@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -19,13 +21,15 @@ from app.models import team as team_models  # noqa: F401
 from app.models import user as user_models  # noqa: F401
 
 
-def create_app() -> FastAPI:
-    app = FastAPI(title=settings.app_name, version="2.0.0-dev", description="Personalized football fan platform with ML predictions and AI assistance.")
-    app.add_middleware(CORSMiddleware, allow_origins=[settings.frontend_origin], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    yield
 
-    @app.on_event("startup")
-    def create_local_tables() -> None:
-        Base.metadata.create_all(bind=engine)
+
+def create_app() -> FastAPI:
+    app = FastAPI(title=settings.app_name, version="2.0.0-dev", description="Personalized football fan platform with ML predictions and AI assistance.", lifespan=lifespan)
+    app.add_middleware(CORSMiddleware, allow_origins=[settings.frontend_origin], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
     app.include_router(health_router, prefix=settings.api_v1_prefix)
     app.include_router(analysis_router, prefix=settings.api_v1_prefix)
