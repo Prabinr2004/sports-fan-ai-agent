@@ -1,11 +1,13 @@
 import httpx
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.profile import _get_or_create_local_user
 from app.core.config import settings
 from app.database.session import get_db
+from app.models.analysis import MatchAnalysisUnlock
 from app.services.analysis_access import analysis_access_summary, unlock_analysis
 from app.services.openrouter import AIAnalysisUnavailable, explain_match
 
@@ -32,8 +34,9 @@ async def rich_match_analysis(match_id: str, request: RichAnalysisRequest, db: S
     if not settings.openrouter_api_key:
         raise HTTPException(status_code=503, detail="Rich FanSphere analysis is not configured.")
 
+    existing_unlock = db.scalar(select(MatchAnalysisUnlock).where(MatchAnalysisUnlock.user_id == user.id, MatchAnalysisUnlock.match_id == match_id))
     access = analysis_access_summary(db, user.id)
-    if access["free_remaining"] == 0 and access["tokens"] <= 0:
+    if existing_unlock is None and access["free_remaining"] == 0 and access["tokens"] <= 0:
         raise HTTPException(status_code=402, detail="Complete today's rewarded Daily Quiz to earn an Analysis Token.")
 
     try:
