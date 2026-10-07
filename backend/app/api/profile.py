@@ -8,6 +8,7 @@ from app.models.progress import XPEvent
 from app.models.prediction import UserMatchPrediction
 from app.models.team import Team
 from app.models.user import User, UserFavoriteTeam
+from app.services.analysis_access import analysis_access_summary
 from app.services.football import get_football_provider
 from app.services.progress import progress_summary
 
@@ -103,7 +104,7 @@ def get_achievements(db: Session = Depends(get_db)) -> dict:
         ("xp_500", "500 Club", "Earn 500 total XP", progress["total_xp"] >= 500, min(progress["total_xp"], 500), 500),
     ]
     achievements = [{"id": key, "name": name, "description": description, "unlocked": unlocked, "progress": value, "target": target} for key, name, description, unlocked, value, target in definitions]
-    return {"progress": progress, "stats": stats, "achievements": achievements, "unlocked": sum(1 for item in achievements if item["unlocked"]), "total": len(achievements)}
+    return {"progress": progress, "stats": stats, "analysis_access": analysis_access_summary(db, user.id), "achievements": achievements, "unlocked": sum(1 for item in achievements if item["unlocked"]), "total": len(achievements)}
 
 
 @router.put("/primary-team")
