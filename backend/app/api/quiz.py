@@ -12,6 +12,7 @@ from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
 from app.models.quiz import DailyQuizSnapshot
+from app.services.analysis_access import grant_quiz_token
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
 
@@ -250,10 +251,12 @@ async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(ge
         XPEvent.source_id == source_id,
     ))
     xp_awarded = 0
+    analysis_token_awarded = False
 
     if not existing:
         xp_awarded = 50 + correct * 10
         db.add(XPEvent(user_id=user.id, amount=xp_awarded, source_type="daily_quiz", source_id=source_id))
+        analysis_token_awarded = grant_quiz_token(db, user.id, source_id)
         record_activity_day(db, user.id)
         try:
             db.commit()
@@ -268,6 +271,7 @@ async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(ge
         "total": len(questions),
         "score_percent": score_percent,
         "xp_awarded": xp_awarded,
+        "analysis_token_awarded": analysis_token_awarded,
         "already_rewarded": existing is not None or xp_awarded == 0,
         "correct_answers": [question["answer"] for question in questions],
         "quiz": {**context, "unlocked_level": updated_context["unlocked_level"], "days_to_next_level": updated_context["days_to_next_level"]},
