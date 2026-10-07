@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.analysis import router as analysis_router
 from app.api.health import router as health_router
 from app.api.leaderboard import router as leaderboard_router
 from app.api.matches import router as matches_router
@@ -10,6 +11,7 @@ from app.api.quiz import router as quiz_router
 from app.api.teams import router as teams_router
 from app.core.config import settings
 from app.database.session import Base, engine
+from app.models import analysis as analysis_models  # noqa: F401
 from app.models import prediction as prediction_models  # noqa: F401
 from app.models import progress as progress_models  # noqa: F401
 from app.models import quiz as quiz_models  # noqa: F401
@@ -26,6 +28,7 @@ def create_app() -> FastAPI:
         Base.metadata.create_all(bind=engine)
 
     app.include_router(health_router, prefix=settings.api_v1_prefix)
+    app.include_router(analysis_router, prefix=settings.api_v1_prefix)
     app.include_router(teams_router, prefix=settings.api_v1_prefix)
     app.include_router(profile_router, prefix=settings.api_v1_prefix)
     app.include_router(quiz_router, prefix=settings.api_v1_prefix)
