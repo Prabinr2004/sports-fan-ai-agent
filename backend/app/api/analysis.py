@@ -48,6 +48,38 @@ async def rich_match_analysis(match_id: str, db: Session = Depends(get_db)) -> d
     away = fixture.get("away_team") or {}
     competition = fixture.get("competition") or {}
 
+    provider = get_football_provider()
+
+    async def recent_summary(team: dict) -> dict:
+        team_id = str(team.get("id") or "")
+        if not team_id:
+            return {"matches": 0}
+        try:
+            results = await provider.get_recent_results(team_id, limit=5)
+        except Exception:
+            return {"matches": 0}
+
+        wins = draws = losses = goals_for = goals_against = 0
+        for result in results:
+            result_home = result.get("home_team") or {}
+            score = result.get("score") or {}
+            home_score, away_score = score.get("home"), score.get("away")
+            if home_score is None or away_score is None:
+                continue
+            is_home = str(result_home.get("id")) == team_id
+            gf, ga = (home_score, away_score) if is_home else (away_score, home_score)
+            goals_for += gf
+            goals_against += ga
+            if gf > ga:
+                wins += 1
+            elif gf == ga:
+                draws += 1
+            else:
+                losses += 1
+        return {"matches": wins + draws + losses, "wins": wins, "draws": draws, "losses": losses, "goals_for": goals_for, "goals_against": goals_against}
+
+    comparison = {"home_recent": await recent_summary(home), "away_recent": await recent_summary(away)}
+
     try:
         explanation = await explain_match(
             home_team=home.get("name") or "Home team",
