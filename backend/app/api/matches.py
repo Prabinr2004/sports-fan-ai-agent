@@ -96,7 +96,7 @@ async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
         try:
             results = await provider.get_recent_results(team_id, limit=5)
         except (httpx.HTTPError, HTTPException):
-            return {"team_id": team_id, "form": [], "points": 0, "goals_for": 0, "goals_against": 0, "matches": 0}
+            return {"team_id": team_id, "form": [], "goals_for": None, "goals_against": None, "matches": 0}
 
         form: list[str] = []
         points = goals_for = goals_against = 0
@@ -119,7 +119,7 @@ async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
                 points += 1
             else:
                 form.append("L")
-        return {"team_id": team_id, "form": form, "points": points, "goals_for": goals_for, "goals_against": goals_against, "matches": len(form)}
+        return {"team_id": team_id, "form": form, "goals_for": goals_for if form else None, "goals_against": goals_against if form else None, "matches": len(form)}
 
     home = fixture.get("home_team") or {}
     away = fixture.get("away_team") or {}
