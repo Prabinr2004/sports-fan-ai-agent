@@ -33,6 +33,7 @@ def upgrade() -> None:
         sa.Column("match_id", sa.String(length=80), nullable=False),
         sa.Column("unlock_source", sa.String(length=20), nullable=False),
         sa.Column("unlock_date", sa.String(length=10), nullable=False),
+        sa.Column("analysis_text", sa.Text(), nullable=True),
         sa.Column("created_at", sa.DateTime(timezone=True), server_default=sa.func.now(), nullable=False),
         sa.UniqueConstraint("user_id", "match_id", name="uq_user_match_analysis_unlock"),
     )
