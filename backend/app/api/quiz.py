@@ -51,6 +51,7 @@ QUIZ_LEVELS = {
 
 class QuizSubmission(BaseModel):
     answers: list[int]
+    practice_round: int = 0
 
 
 def quiz_id() -> str:
@@ -145,7 +146,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
 
 
 
-async def build_practice_questions(db: Session, user) -> tuple[list[dict], dict]:
+async def build_practice_questions(db: Session, user, practice_round: int = 0) -> tuple[list[dict], dict]:
     context = quiz_context(db, user)
     daily_questions, _ = await get_or_create_daily_snapshot(db, user)
     daily_ids = {question["id"] for question in daily_questions}
@@ -160,14 +161,15 @@ async def build_practice_questions(db: Session, user) -> tuple[list[dict], dict]
         pool.extend(grounded)
     unseen = [question for question in pool if question["id"] not in daily_ids]
     candidates = unseen if len(unseen) >= 5 else pool
-    rng = random.Random(f"{quiz_id()}:{user.id}:{context['level']}:practice")
+    rng = random.Random(f"{quiz_id()}:{user.id}:{context['level']}:practice:{practice_round}")
     return rng.sample(candidates, min(5, len(candidates))), context
 
 
 @router.get("/practice")
-async def practice_quiz(db: Session = Depends(get_db)) -> dict:
+async def practice_quiz(round: int = 0, db: Session = Depends(get_db)) -> dict:
     user = _get_or_create_local_user(db)
-    questions, context = await build_practice_questions(db, user)
+    safe_round = max(0, min(round, 1000))
+    questions, context = await build_practice_questions(db, user, safe_round)
     return {
         "quiz_id": f"{quiz_id()}-practice",
         "title": f"{context['theme']} Practice",
@@ -187,7 +189,7 @@ async def practice_quiz(db: Session = Depends(get_db)) -> dict:
 @router.post("/practice/submit")
 async def submit_practice_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
     user = _get_or_create_local_user(db)
-    questions, context = await build_practice_questions(db, user)
+    questions, context = await build_practice_questions(db, user, max(0, min(submission.practice_round, 1000)))
     if len(submission.answers) != len(questions):
         raise HTTPException(status_code=400, detail="Answer every question before submitting.")
     if any(answer < 0 or answer >= len(questions[index]["options"]) for index, answer in enumerate(submission.answers)):
