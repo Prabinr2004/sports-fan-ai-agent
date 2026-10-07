@@ -3,7 +3,8 @@ from datetime import date
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from app.models.analysis import AnalysisTokenEvent, MatchAnalysisUnlock
+from app.models.analysis import AnalysisDailyClaim, AnalysisTokenEvent, MatchAnalysisUnlock
+from app.models.user import User
 
 
 def token_balance(db: Session, user_id: int) -> int:
@@ -31,10 +32,9 @@ def grant_quiz_token(db: Session, user_id: int, quiz_date: str) -> bool:
 
 def analysis_access_summary(db: Session, user_id: int) -> dict:
     today = date.today().isoformat()
-    free_used = db.scalar(select(MatchAnalysisUnlock).where(
-        MatchAnalysisUnlock.user_id == user_id,
-        MatchAnalysisUnlock.unlock_source == "FREE_DAILY",
-        MatchAnalysisUnlock.unlock_date == today,
+    free_used = db.scalar(select(AnalysisDailyClaim).where(
+        AnalysisDailyClaim.user_id == user_id,
+        AnalysisDailyClaim.claim_date == today,
     )) is not None
     return {
         "tokens": token_balance(db, user_id),
@@ -55,14 +55,16 @@ def unlock_analysis(db: Session, user_id: int, match_id: str, analysis_text: str
         return {"unlocked": True, "source": existing.unlock_source, "charged": False, **analysis_access_summary(db, user_id)}
 
     today = date.today().isoformat()
-    free_used = db.scalar(select(MatchAnalysisUnlock).where(
-        MatchAnalysisUnlock.user_id == user_id,
-        MatchAnalysisUnlock.unlock_source == "FREE_DAILY",
-        MatchAnalysisUnlock.unlock_date == today,
+    # Serialize allowance/token decisions per user on databases that support row locks.
+    db.scalar(select(User).where(User.id == user_id).with_for_update())
+    free_used = db.scalar(select(AnalysisDailyClaim).where(
+        AnalysisDailyClaim.user_id == user_id,
+        AnalysisDailyClaim.claim_date == today,
     )) is not None
 
     if not free_used:
         source = "FREE_DAILY"
+        db.add(AnalysisDailyClaim(user_id=user_id, claim_date=today))
     elif token_balance(db, user_id) > 0:
         source = "TOKEN"
         db.add(AnalysisTokenEvent(
