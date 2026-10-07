@@ -125,9 +125,17 @@ async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
     away = fixture.get("away_team") or {}
     home_form = await team_form(home)
     away_form = await team_form(away)
+    result = None
+    if saved and saved.result_status in {"CORRECT", "INCORRECT"}:
+        result = {
+            "status": saved.result_status,
+            "actual_outcome": saved.actual_outcome,
+            "score": {"home": saved.home_score, "away": saved.away_score},
+        }
     return {
         "match": _fixture_payload(fixture, str(fixture.get("source_team_id") or home.get("id") or ""), saved),
         "comparison": {"home": home_form, "away": away_form},
+        "result": result,
     }
 
 
