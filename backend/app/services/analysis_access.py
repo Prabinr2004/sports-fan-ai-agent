@@ -49,6 +49,9 @@ def unlock_analysis(db: Session, user_id: int, match_id: str, analysis_text: str
         MatchAnalysisUnlock.match_id == match_id,
     ))
     if existing:
+        if analysis_text and not existing.analysis_text:
+            existing.analysis_text = analysis_text
+            db.commit()
         return {"unlocked": True, "source": existing.unlock_source, "charged": False, **analysis_access_summary(db, user_id)}
 
     today = date.today().isoformat()
