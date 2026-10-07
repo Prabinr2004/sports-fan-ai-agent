@@ -117,6 +117,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         )
         if grounded:
             team_count = min(4, context["level"] - 1)
+            rng.shuffle(grounded)
             selected = grounded[:team_count]
             general_count = 5 - len(selected)
             questions = rng.sample(GENERAL_QUESTIONS, general_count) + selected
