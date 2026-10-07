@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config, pool
 
 from app.core.config import settings
 from app.database.session import Base
+from app.models import analysis as analysis_models  # noqa: F401
 from app.models import prediction as prediction_models  # noqa: F401
 from app.models import progress as progress_models  # noqa: F401
 from app.models import quiz as quiz_models  # noqa: F401
