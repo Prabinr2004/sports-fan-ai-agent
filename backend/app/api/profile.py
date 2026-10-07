@@ -1,9 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.database.session import get_db
+from app.models.progress import XPEvent
+from app.models.prediction import UserMatchPrediction
 from app.models.team import Team
 from app.models.user import User, UserFavoriteTeam
 from app.services.football import get_football_provider
@@ -80,6 +82,28 @@ def get_profile(db: Session = Depends(get_db)) -> dict:
         "progress": progress_summary(db, user.id),
         "mode": "local-development",
     }
+
+
+@router.get("/achievements")
+def get_achievements(db: Session = Depends(get_db)) -> dict:
+    user = _get_or_create_local_user(db)
+    progress = progress_summary(db, user.id)
+    quiz_completions = int(db.scalar(select(func.count(XPEvent.id)).where(XPEvent.user_id == user.id, XPEvent.source_type == "daily_quiz")) or 0)
+    predictions = int(db.scalar(select(func.count(UserMatchPrediction.id)).where(UserMatchPrediction.user_id == user.id)) or 0)
+    scored = int(db.scalar(select(func.count(UserMatchPrediction.id)).where(UserMatchPrediction.user_id == user.id, UserMatchPrediction.result_status.in_(["CORRECT", "INCORRECT"]))) or 0)
+    correct = int(db.scalar(select(func.count(UserMatchPrediction.id)).where(UserMatchPrediction.user_id == user.id, UserMatchPrediction.result_status == "CORRECT")) or 0)
+    stats = {"quiz_completions": quiz_completions, "predictions": predictions, "scored_predictions": scored, "correct_predictions": correct}
+    definitions = [
+        ("first_steps", "First Steps", "Earn your first XP", progress["total_xp"] >= 1, min(progress["total_xp"], 1), 1),
+        ("quiz_rookie", "Quiz Rookie", "Complete your first rewarded Daily Quiz", quiz_completions >= 1, min(quiz_completions, 1), 1),
+        ("quiz_regular", "Quiz Regular", "Complete 5 rewarded Daily Quizzes", quiz_completions >= 5, min(quiz_completions, 5), 5),
+        ("on_fire", "On Fire", "Reach a 3-day activity streak", progress["longest_streak"] >= 3, min(progress["longest_streak"], 3), 3),
+        ("fan_predictor", "Fan Predictor", "Make 5 match predictions", predictions >= 5, min(predictions, 5), 5),
+        ("called_it", "Called It", "Get a scored match prediction correct", correct >= 1, min(correct, 1), 1),
+        ("xp_500", "500 Club", "Earn 500 total XP", progress["total_xp"] >= 500, min(progress["total_xp"], 500), 500),
+    ]
+    achievements = [{"id": key, "name": name, "description": description, "unlocked": unlocked, "progress": value, "target": target} for key, name, description, unlocked, value, target in definitions]
+    return {"progress": progress, "stats": stats, "achievements": achievements, "unlocked": sum(1 for item in achievements if item["unlocked"]), "total": len(achievements)}
 
 
 @router.put("/primary-team")
