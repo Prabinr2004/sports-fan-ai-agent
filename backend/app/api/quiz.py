@@ -1,5 +1,6 @@
 from datetime import date
 import json
+import random
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -103,7 +104,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         }
         return questions, snapshot_context
 
-    rng = __import__("random").Random(f"{today}:{user.id}:{context[\"level\"]}:daily")
+    rng = random.Random(f"{today}:{user.id}:{context[\"level\"]}:daily")
     questions = rng.sample(GENERAL_QUESTIONS, 5)
     if context["level"] >= 2 and context["team"]:
         grounded = await build_team_questions(
@@ -142,6 +143,68 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         raise
     return questions, context
 
+
+
+async def build_practice_questions(db: Session, user) -> tuple[list[dict], dict]:
+    context = quiz_context(db, user)
+    daily_questions, _ = await get_or_create_daily_snapshot(db, user)
+    daily_ids = {question["id"] for question in daily_questions}
+    pool = list(GENERAL_QUESTIONS)
+    if context["level"] >= 2 and context["team"]:
+        grounded = await build_team_questions(
+            context["team"]["id"],
+            context["team"]["name"],
+            context["level"],
+            quiz_id() + ":practice",
+        )
+        pool.extend(grounded)
+    unseen = [question for question in pool if question["id"] not in daily_ids]
+    candidates = unseen if len(unseen) >= 5 else pool
+    rng = random.Random(f"{quiz_id()}:{user.id}:{context['level']}:practice")
+    return rng.sample(candidates, min(5, len(candidates))), context
+
+
+@router.get("/practice")
+async def practice_quiz(db: Session = Depends(get_db)) -> dict:
+    user = _get_or_create_local_user(db)
+    questions, context = await build_practice_questions(db, user)
+    return {
+        "quiz_id": f"{quiz_id()}-practice",
+        "title": f"{context['theme']} Practice",
+        "questions": [{"id": q["id"], "question": q["question"], "options": q["options"]} for q in questions],
+        "completed": False,
+        "xp_available": 0,
+        "practice": True,
+        "quiz_level": context["level"],
+        "unlocked_level": context["unlocked_level"],
+        "theme": context["theme"],
+        "description": "Practice with a different set of questions. Practice does not award XP or change your streak.",
+        "team": context["team"],
+        "days_to_next_level": context["days_to_next_level"],
+    }
+
+
+@router.post("/practice/submit")
+async def submit_practice_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
+    user = _get_or_create_local_user(db)
+    questions, context = await build_practice_questions(db, user)
+    if len(submission.answers) != len(questions):
+        raise HTTPException(status_code=400, detail="Answer every question before submitting.")
+    if any(answer < 0 or answer >= len(questions[index]["options"]) for index, answer in enumerate(submission.answers)):
+        raise HTTPException(status_code=400, detail="One or more quiz answers are invalid.")
+    correct = sum(answer == question["answer"] for answer, question in zip(submission.answers, questions))
+    return {
+        "quiz_id": f"{quiz_id()}-practice",
+        "correct": correct,
+        "total": len(questions),
+        "score_percent": round((correct / len(questions)) * 100) if questions else 0,
+        "xp_awarded": 0,
+        "already_rewarded": True,
+        "practice": True,
+        "correct_answers": [question["answer"] for question in questions],
+        "quiz": context,
+        "progress": progress_summary(db, user.id),
+    }
 
 @router.get("/daily")
 async def daily_quiz(db: Session = Depends(get_db)) -> dict:
