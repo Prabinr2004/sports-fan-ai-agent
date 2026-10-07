@@ -3,6 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.api.matches import _find_personalized_match
+from app.api.ml_predictions import predict_match
 from app.api.profile import _get_or_create_local_user
 from app.core.config import settings
 from app.database.session import get_db
@@ -79,13 +80,21 @@ async def rich_match_analysis(match_id: str, db: Session = Depends(get_db)) -> d
         return {"matches": wins + draws + losses, "wins": wins, "draws": draws, "losses": losses, "goals_for": goals_for, "goals_against": goals_against}
 
     comparison = {"home_recent": await recent_summary(home), "away_recent": await recent_summary(away)}
+    model_outlook = await predict_match(
+        match_id,
+        home_name=home.get("name"),
+        away_name=away.get("name"),
+        competition=competition.get("name"),
+    )
+    if model_outlook.get("available") is False:
+        model_outlook = None
 
     try:
         explanation = await explain_match(
             home_team=home.get("name") or "Home team",
             away_team=away.get("name") or "Away team",
             competition=competition.get("name"),
-            model_outlook=None,
+            model_outlook=model_outlook,
             comparison=comparison,
         )
     except AIAnalysisUnavailable as exc:
