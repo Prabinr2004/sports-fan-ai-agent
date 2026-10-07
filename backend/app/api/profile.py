@@ -107,7 +107,7 @@ async def get_club_pulse(db: Session = Depends(get_db)) -> dict:
             ("fixtures", provider.get_fixtures),
             ("standings", provider.get_team_standings),
             ("scorers", provider.get_team_scorers),
-            ("recent", lambda tid: provider.get_recent_results(tid, limit=1)),
+            ("recent", lambda tid: provider.get_recent_results(tid, limit=5)),
         ):
             try:
                 results[label] = await method(team.provider_id)
@@ -125,6 +125,20 @@ async def get_club_pulse(db: Session = Depends(get_db)) -> dict:
             "standing": next((s for s in standings if s.get("type") == "TOTAL"), standings[0] if standings else None),
             "top_scorer": max(scorers, key=lambda s: s.get("goals") or 0) if scorers else None,
             "latest_result": recent[-1] if recent else None,
+            "recent_form": [
+                (
+                    "D" if match["score"]["home"] == match["score"]["away"]
+                    else "W" if (
+                        (str(match["home_team"]["id"]) == str(team.provider_id) and match["score"]["home"] > match["score"]["away"])
+                        or (str(match["away_team"]["id"]) == str(team.provider_id) and match["score"]["away"] > match["score"]["home"])
+                    ) else "L"
+                )
+                for match in recent[-5:]
+                if match.get("score")
+                and match["score"].get("home") is not None
+                and match["score"].get("away") is not None
+                and (str(match["home_team"]["id"]) == str(team.provider_id) or str(match["away_team"]["id"]) == str(team.provider_id))
+            ],
             "unavailable": unavailable,
         })
     return {"clubs": clubs, "count": len(clubs)}
