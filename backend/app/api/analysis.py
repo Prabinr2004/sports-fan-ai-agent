@@ -36,6 +36,8 @@ async def rich_match_analysis(match_id: str, request: RichAnalysisRequest, db: S
 
     existing_unlock = db.scalar(select(MatchAnalysisUnlock).where(MatchAnalysisUnlock.user_id == user.id, MatchAnalysisUnlock.match_id == match_id))
     access = analysis_access_summary(db, user.id)
+    if existing_unlock is not None and existing_unlock.analysis_text:
+        return {"analysis": existing_unlock.analysis_text, "access": {"unlocked": True, "source": existing_unlock.unlock_source, "charged": False, **access}, "cached": True}
     if existing_unlock is None and access["free_remaining"] == 0 and access["tokens"] <= 0:
         raise HTTPException(status_code=402, detail="Complete today's rewarded Daily Quiz to earn an Analysis Token.")
 
@@ -50,7 +52,7 @@ async def rich_match_analysis(match_id: str, request: RichAnalysisRequest, db: S
     except AIAnalysisUnavailable as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 
-    unlocked = unlock_analysis(db, user.id, match_id)
+    unlocked = unlock_analysis(db, user.id, match_id, explanation)
     if not unlocked["unlocked"]:
         raise HTTPException(status_code=402, detail=unlocked["reason"])
-    return {"analysis": explanation, "access": unlocked}
+    return {"analysis": explanation, "access": unlocked, "cached": False}
