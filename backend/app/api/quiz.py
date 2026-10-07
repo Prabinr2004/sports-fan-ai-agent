@@ -263,6 +263,7 @@ async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(ge
         except IntegrityError:
             db.rollback()
             xp_awarded = 0
+            analysis_token_awarded = False
 
     updated_context = quiz_context(db, user)
     return {
