@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ModelOutlook from "./ModelOutlook";
 
 export type MatchCenterTeam={id:string;name:string;short_name?:string|null;tla?:string|null;crest_url?:string|null};
-export type MatchCenterMatch={id:string;utc_date?:string|null;status?:string|null;competition?:string|null;home_team:MatchCenterTeam;away_team:MatchCenterTeam;user_prediction?:"HOME"|"DRAW"|"AWAY"|null;prediction_locked?:boolean};
+export type MatchCenterMatch={id:string;source_team_id:string;utc_date?:string|null;status?:string|null;competition?:string|null;home_team:MatchCenterTeam;away_team:MatchCenterTeam;user_prediction?:"HOME"|"DRAW"|"AWAY"|null;prediction_locked?:boolean};
 type Props={match:MatchCenterMatch;onBack:()=>void;onPick:(match:MatchCenterMatch,outcome:"HOME"|"DRAW"|"AWAY")=>Promise<void>;saving:boolean;message?:string};
 function Team({team}:{team:MatchCenterTeam}){return <div className="match-center-team">{team.crest_url?<img src={team.crest_url} alt=""/>:<div className="match-center-fallback">{team.tla||team.name.slice(0,2)}</div>}<strong>{team.name}</strong></div>}
 type FormStats={form:string[];points:number;goals_for:number;goals_against:number;matches:number};
