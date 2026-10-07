@@ -26,6 +26,10 @@ async def rich_match_analysis(match_id: str, db: Session = Depends(get_db)) -> d
     if not settings.openrouter_api_key:
         raise HTTPException(status_code=503, detail="Rich FanSphere analysis is not configured.")
 
+    fixture = await _find_personalized_match(db, user, match_id)
+    if fixture is None:
+        raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
+
     existing_unlock = db.scalar(select(MatchAnalysisUnlock).where(
         MatchAnalysisUnlock.user_id == user.id,
         MatchAnalysisUnlock.match_id == match_id,
@@ -39,10 +43,6 @@ async def rich_match_analysis(match_id: str, db: Session = Depends(get_db)) -> d
         }
     if existing_unlock is None and access["free_remaining"] == 0 and access["tokens"] <= 0:
         raise HTTPException(status_code=402, detail="Complete today's rewarded Daily Quiz to earn an Analysis Token.")
-
-    fixture = await _find_personalized_match(db, user, match_id)
-    if fixture is None:
-        raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
 
     home = fixture.get("home_team") or {}
     away = fixture.get("away_team") or {}
