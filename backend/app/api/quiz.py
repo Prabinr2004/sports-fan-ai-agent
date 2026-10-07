@@ -105,7 +105,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         }
         return questions, snapshot_context
 
-    rng = random.Random(f"{today}:{user.id}:{context[\"level\"]}:daily")
+    rng = random.Random(f"{today}:{user.id}:{context['level']}:daily")
     questions = rng.sample(GENERAL_QUESTIONS, 5)
     if context["level"] >= 2 and context["team"]:
         grounded = await build_team_questions(
