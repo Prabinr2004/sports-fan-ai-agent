@@ -63,8 +63,7 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
 
     with TestClient(app) as client:
         response = client.post("/api/v1/analysis/server-grounding-test/rich")
-        assert response.status_code in (200, 402)
-        if response.status_code == 200:
-            assert captured["home_team"] == "Server Home"
-            assert captured["away_team"] == "Server Away"
-            assert captured["model_outlook"]["pick"] == "HOME"
+        assert response.status_code == 200
+        assert captured["home_team"] == "Server Home"
+        assert captured["away_team"] == "Server Away"
+        assert captured["model_outlook"]["pick"] == "HOME"
