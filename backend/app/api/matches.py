@@ -125,6 +125,20 @@ async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
     away = fixture.get("away_team") or {}
     home_form = await team_form(home)
     away_form = await team_form(away)
+
+    async def team_standings(team: dict) -> list[dict]:
+        try:
+            standings = await provider.get_team_standings(str(team.get("id")))
+        except (httpx.HTTPError, HTTPException):
+            return []
+        return [
+            {"competition": row.get("competition"), "position": row.get("position")}
+            for row in standings
+            if row.get("position") is not None
+        ]
+
+    home_standings = await team_standings(home)
+    away_standings = await team_standings(away)
     result = None
     if saved and saved.result_status in {"CORRECT", "INCORRECT"}:
         result = {
@@ -134,7 +148,7 @@ async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
         }
     return {
         "match": _fixture_payload(fixture, str(fixture.get("source_team_id") or home.get("id") or ""), saved),
-        "comparison": {"home": home_form, "away": away_form},
+        "comparison": {"home": home_form, "away": away_form, "standings": {"home": home_standings, "away": away_standings}},
         "result": result,
     }
 
