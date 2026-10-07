@@ -170,11 +170,6 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
     elif not scored:
         notice = "Accuracy will appear after one of your predicted matches finishes."
 
-    if hidden_incomplete:
-        noun = "prediction was" if hidden_incomplete == 1 else "predictions were"
-        cleanup = f"{hidden_incomplete} incomplete legacy {noun} hidden because valid fixture details were not saved."
-        notice = f"{notice} {cleanup}" if notice else cleanup
-
     return {
         "predictions": predictions,
         "total": len(predictions),
