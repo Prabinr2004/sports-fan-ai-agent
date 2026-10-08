@@ -148,7 +148,7 @@ async def get_player_position(team_id: str, player_id: str) -> dict:
 @router.get("/{team_id}")
 async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_team_data: bool = False) -> dict:
     provider = get_football_provider()
-    # Core club/team identity is cached so provider outages do not hide saved club hubs.\n    # Squad and fixtures are optional because
+    # Core club identity is cached; squad and fixtures are optional because
     # football-data.org can restrict individual resources by competition/plan.
     cached_team = _read_section(team_id, "identity")
     identity_stale = False
