@@ -176,11 +176,17 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
             today,
         )
         if grounded:
-            team_count = min(4, context["level"] - 1)
-            rng.shuffle(grounded)
-            selected = grounded[:team_count]
-            general_count = 5 - len(selected)
-            questions = rng.sample(GENERAL_QUESTIONS, general_count) + selected
+            # Favor this level's club questions; avoid previously served IDs.
+            fresh_team = [q for q in grounded if q["id"] not in seen_ids]
+            rng.shuffle(fresh_team)
+            chosen_team = fresh_team[:5]
+            if len(chosen_team) < 5:
+                repeat_team = [q for q in grounded if q["id"] not in {item["id"] for item in chosen_team}]
+                rng.shuffle(repeat_team)
+                chosen_team.extend(repeat_team[:5 - len(chosen_team)])
+            general_needed = 5 - len(chosen_team)
+            general_fallback = [q for q in questions if q["id"] not in {item["id"] for item in chosen_team}]
+            questions = chosen_team + general_fallback[:general_needed]
             rng.shuffle(questions)
 
     team = context["team"]
