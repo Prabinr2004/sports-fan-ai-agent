@@ -189,3 +189,17 @@
 .team-hub-tab-content{grid-template-columns:minmax(0,1fr)}
 .team-hub-hidden{display:none!important}
 @media(max-width:520px){.team-hub-tabs{width:100%}.team-hub-tabs button{flex:1;padding:10px 8px}}
+
+
+/* Phase 2: match cards */
+.team-fixture-card{display:flex;align-items:center;gap:20px;padding:17px 20px;min-height:96px}
+.team-fixture-date{flex:0 0 92px;display:flex;flex-direction:column;gap:6px;font-weight:800}
+.team-fixture-date small{font-size:12px;font-weight:500;color:#9cb4c7}
+.team-fixture-matchup{display:flex;align-items:center;gap:16px;flex:1;flex-wrap:wrap;min-width:0}
+.team-fixture-club{display:flex;align-items:center;gap:10px;min-width:0}
+.team-fixture-club img{width:34px;height:34px;object-fit:contain;flex-shrink:0}
+.team-fixture-club strong{font-size:14px;overflow-wrap:anywhere}
+.team-fixture-matchup em{font-size:11px;font-style:normal;font-weight:800;color:#7f9bac}
+.team-fixture-matchup>small{flex-basis:100%;color:#90aabe;font-size:12px}
+.team-fixture-status{font-size:11px;font-weight:750;color:#81ebc8;background:#173b43;border-radius:999px;padding:7px 10px;white-space:nowrap}
+@media(max-width:700px){.team-fixture-card{align-items:flex-start;flex-wrap:wrap;gap:12px}.team-fixture-date{flex-basis:100%}.team-fixture-status{margin-left:auto}.team-fixture-matchup{gap:10px}}
