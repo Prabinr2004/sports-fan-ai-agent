@@ -44,7 +44,7 @@ function App(){
  async function openTeam(team:TeamSummary|SavedTeam){
   const request=++teamRequest.current;const id=String("provider_id" in team?team.provider_id:team.id);
   const cached=authUser?readTeamHubCache(authUser.id,id):null;
-  setSearchMessage("");setPhotoRefreshMessage("");setTeamRefreshMessage("");setLoadingTeam(false);
+  setSearchMessage("");setPhotoRefreshMessage("");setTeamRefreshMessage("");setLoadingTeam(false);setRefreshingTeam(false);setRefreshingPhotos(false);
   if(cached){setSelectedTeam(cached);setSearchResults([]);setQuery("");return}
   setLoadingTeam(true);
   try{
@@ -58,11 +58,13 @@ function App(){
  }
  async function refreshTeamData(){
   if(!selectedTeam||refreshingTeam)return;
+  const request=teamRequest.current;
   setRefreshingTeam(true);setTeamRefreshMessage("");
   try{
    const id=selectedTeam.team.id;
    const r=await fetch(`/api/v1/teams/${encodeURIComponent(id)}?refresh_team_data=true`);
    const p=await r.json();
+   if(request!==teamRequest.current)return;
    if(!r.ok)throw new Error(p.detail||"Could not refresh team data.");
    const previous=authUser?readTeamHubCache(authUser.id,id):selectedTeam;
    const sections=["squad","fixtures","recent_results","standings","scorers"] as const;
@@ -76,7 +78,7 @@ function App(){
    setSelectedTeam(merged);
    if(authUser)saveTeamHubCache(authUser.id,merged);
    setTeamRefreshMessage(Object.keys(merged.notices||{}).length?"Refresh completed with limited provider coverage. Previously saved sections were preserved.":"Team data refreshed successfully.");
-  }catch(e){setTeamRefreshMessage(e instanceof Error?e.message:"Team refresh failed. Saved data remains available.")}
+  }catch(e){if(request===teamRequest.current)setTeamRefreshMessage(e instanceof Error?e.message:"Team refresh failed. Saved data remains available.")}
   finally{setRefreshingTeam(false)}
  }
  async function refreshPhotos(){if(!selectedTeam||refreshingPhotos)return;setRefreshingPhotos(true);setPhotoRefreshMessage("");try{const r=await fetch(`/api/v1/teams/${encodeURIComponent(selectedTeam.team.id)}?refresh_missing_photos=true`);const p=await r.json();if(!r.ok)throw new Error(p.detail||"Could not refresh player photos.");const merged={...selectedTeam,...p,notices:{...selectedTeam.notices,...p.notices}};for(const section of ["squad","fixtures","recent_results","standings","scorers"] as const){if((p.notices?.[section]||!p[section]?.length)&&selectedTeam[section]?.length){(merged as unknown as Record<string, unknown>)[section]=selectedTeam[section];}}setSelectedTeam(merged);if(authUser)saveTeamHubCache(authUser.id,merged);setPhotoRefreshMessage("Photo refresh finished. Previously saved team sections were preserved.");}catch(e){setPhotoRefreshMessage(e instanceof Error?e.message:"Photo refresh failed.")}finally{setRefreshingPhotos(false)}}
