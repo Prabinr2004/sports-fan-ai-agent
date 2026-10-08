@@ -11,7 +11,14 @@ import unicodedata
 
 import httpx
 
-TEAM_IDS = {"real madrid": 133738, "real madrid cf": 133738, "liverpool": 133602, "liverpool fc": 133602}
+TEAM_IDS = {
+    "real madrid": 133738, "real madrid cf": 133738,
+    "liverpool": 133602, "liverpool fc": 133602,
+    "manchester united": 133612, "manchester united fc": 133612,
+    "manchester city": 133613, "manchester city fc": 133613,
+    "arsenal": 133604, "arsenal fc": 133604,
+    "barcelona": 133739, "fc barcelona": 133739,
+}
 _TEAM_CACHE = {}
 _TEAM_CACHE_TTL = timedelta(days=7)
 _CACHE = {}
