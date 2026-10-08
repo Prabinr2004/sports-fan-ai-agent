@@ -19,14 +19,15 @@ from app.services.demo_migration import migrate_demo_progress
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--email", required=True, help="Already registered FanSphere email")
+    parser.add_argument("--source-user-id", type=int, help="Explicit source account ID (defaults to legacy demo)")
     parser.add_argument("--apply", action="store_true", help="Actually transfer records")
     args = parser.parse_args()
     if args.apply:
-        confirmation = input("Type TRANSFER to move legacy progress into this account: ")
+        confirmation = input(f"Type TRANSFER to move records from source ID {args.source_user_id or 'legacy demo'} into {args.email}: ")
         if confirmation != "TRANSFER":
             raise SystemExit("Cancelled without changes.")
     with SessionLocal() as db:
-        result = migrate_demo_progress(db, args.email, apply=args.apply)
+        result = migrate_demo_progress(db, args.email, apply=args.apply, source_user_id=args.source_user_id)
     print(json.dumps(result, indent=2, default=str))
 
 
