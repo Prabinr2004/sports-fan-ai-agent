@@ -7,6 +7,7 @@ from app.api.auth import require_user
 from app.database.session import get_db
 from app.models.user import User
 from app.models.gems import GemEvent
+from app.models.progress import XPEvent
 from app.services.gems import exchange_xp, gem_balance, spendable_xp, XP_PER_GEM
 
 router = APIRouter(prefix="/economy", tags=["economy"])
@@ -32,7 +33,16 @@ def exchange(body: ExchangeRequest, request: Request, db: Session = Depends(get_
 @router.get("/history")
 def history(request: Request, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
-    events = db.scalars(select(GemEvent).where(GemEvent.user_id == user.id).order_by(GemEvent.id.desc()).limit(30)).all()
-    return {"events": [{"amount": event.amount, "source": event.source_type,
-                        "created_at": event.created_at.isoformat() if event.created_at else None}
-                       for event in events]}
+    gem_events = db.scalars(select(GemEvent).where(GemEvent.user_id == user.id).order_by(GemEvent.id.desc()).limit(100)).all()
+    xp_events = db.scalars(select(XPEvent).where(XPEvent.user_id == user.id).order_by(XPEvent.id.desc()).limit(100)).all()
+    entries = [
+        {"id": f"gem-{event.id}", "currency": "GEM", "amount": event.amount,
+         "source": event.source_type, "created_at": event.created_at.isoformat() if event.created_at else None}
+        for event in gem_events
+    ] + [
+        {"id": f"xp-{event.id}", "currency": "XP", "amount": event.amount,
+         "source": event.source_type, "created_at": event.created_at.isoformat() if event.created_at else None}
+        for event in xp_events
+    ]
+    entries.sort(key=lambda entry: (entry["created_at"] or "", entry["id"]), reverse=True)
+    return {"events": entries[:100]}
