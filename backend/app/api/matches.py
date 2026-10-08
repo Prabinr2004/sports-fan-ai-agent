@@ -1,7 +1,8 @@
+from app.api.auth import require_user
 from datetime import datetime, timezone
 
 import httpx
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Request, APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -54,8 +55,8 @@ async def _find_personalized_match(db: Session, user, match_id: str) -> dict | N
 
 
 @router.get("")
-async def personalized_matches(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def personalized_matches(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     team_ids = _saved_team_ids(db, user)
     if not team_ids:
         return {"matches": [], "notice": "Choose a primary team or follow teams to build your match feed."}
@@ -79,8 +80,8 @@ async def personalized_matches(db: Session = Depends(get_db)) -> dict:
 
 
 @router.get("/{match_id}/center")
-async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def match_center(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     fixture = await _find_personalized_match(db, user, match_id)
     if fixture is None:
         raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
@@ -154,8 +155,8 @@ async def match_center(match_id: str, db: Session = Depends(get_db)) -> dict:
 
 
 @router.get("/predictions")
-async def saved_predictions(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     rows = db.scalars(
         select(UserMatchPrediction)
         .where(UserMatchPrediction.user_id == user.id)
@@ -262,11 +263,11 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
 
 
 @router.post("/{match_id}/prediction")
-async def save_prediction(match_id: str, choice: PredictionChoice, db: Session = Depends(get_db)) -> dict:
+async def save_prediction(match_id: str, choice: PredictionChoice, request: Request, db: Session = Depends(get_db)) -> dict:
     outcome = choice.outcome.upper()
     if outcome not in {"HOME", "DRAW", "AWAY"}:
         raise HTTPException(status_code=400, detail="Prediction must be HOME, DRAW, or AWAY.")
-    user = _get_or_create_local_user(db)
+    user = require_user(request, db)
     fixture = await _find_personalized_match(db, user, match_id)
     if fixture is None:
         raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
