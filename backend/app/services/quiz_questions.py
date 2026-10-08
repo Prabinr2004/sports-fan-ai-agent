@@ -40,7 +40,7 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
         if options:
             questions.append({"id": question_id, "question": question, "options": options, "answer": answer})
 
-    if level >= 2:
+    if level == 2:
         add(
             "club-country",
             f"Which country is {team_name} from?",
@@ -70,7 +70,7 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
 
     positioned = [player for player in squad if player.get("id") and player.get("name") and player.get("position")]
 
-    if level >= 3 and positioned:
+    if level == 3 and positioned:
         positions = list(dict.fromkeys(str(player["position"]) for player in positioned if player.get("position")))
         nationalities = list(dict.fromkeys(str(player["nationality"]) for player in positioned if player.get("nationality")))
 
@@ -92,7 +92,7 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
                     [value for value in nationalities if value != nationality],
                 )
 
-    if level >= 4 and positioned:
+    if level == 4 and positioned:
         for player in positioned:
             same_position = [p for p in positioned if p.get("position") == player.get("position")]
             other_names = [str(p["name"]) for p in positioned if p.get("id") != player.get("id") and p.get("position") != player.get("position")]
@@ -104,7 +104,7 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
                     other_names,
                 )
 
-    if level >= 5:
+    if level == 5:
         for player in positioned:
             dob = str(player.get("date_of_birth") or "")
             if len(dob) >= 4 and dob[:4].isdigit():
