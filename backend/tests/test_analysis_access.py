@@ -5,8 +5,14 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 
+def sign_in(client):
+    result = client.post('/api/v1/auth/register', json={'email': f'qa-{uuid4().hex}@example.com', 'password': 'testing-accounts-12345', 'display_name': 'Test Fan'})
+    assert result.status_code == 201, result.text
+
+
 def test_analysis_access_reports_daily_allowance_and_tokens() -> None:
     with TestClient(app) as client:
+        sign_in(client)
         response = client.get("/api/v1/analysis/access")
         assert response.status_code == 200
         payload = response.json()
@@ -27,6 +33,7 @@ def test_rich_analysis_requires_server_match_when_ai_is_configured(monkeypatch) 
     monkeypatch.setattr(analysis_api, "_find_personalized_match", missing_match)
 
     with TestClient(app) as client:
+        sign_in(client)
         response = client.post("/api/v1/analysis/not-a-real-personalized-match/rich")
         assert response.status_code == 404
         assert "personalized match feed" in response.json()["detail"]
@@ -91,6 +98,7 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
     )
 
     with TestClient(app) as client:
+        sign_in(client)
         response = client.post(f"/api/v1/analysis/{match_id}/rich")
 
     assert response.status_code == 200
