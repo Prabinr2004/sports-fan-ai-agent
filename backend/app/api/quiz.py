@@ -107,7 +107,24 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         return questions, snapshot_context
 
     rng = random.Random(f"{today}:{user.id}:{context['level']}:daily")
-    questions = rng.sample(GENERAL_QUESTIONS, 5)
+    # Prefer questions not seen in previous daily quizzes at the current level.
+    previous = db.scalars(select(DailyQuizSnapshot).where(
+        DailyQuizSnapshot.user_id == user.id,
+        DailyQuizSnapshot.level == context["level"],
+        DailyQuizSnapshot.quiz_date < today,
+    )).all()
+    seen_ids = set()
+    for snapshot in previous:
+        try:
+            seen_ids.update(q["id"] for q in json.loads(snapshot.questions_json))
+        except (ValueError, KeyError, TypeError):
+            continue
+    fresh = [q for q in GENERAL_QUESTIONS if q["id"] not in seen_ids]
+    selected = rng.sample(fresh, min(5, len(fresh)))
+    if len(selected) < 5:
+        remaining = [q for q in GENERAL_QUESTIONS if q["id"] not in {item["id"] for item in selected}]
+        selected.extend(rng.sample(remaining, 5 - len(selected)))
+    questions = selected
     if context["level"] >= 2 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
