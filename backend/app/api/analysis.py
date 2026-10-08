@@ -43,7 +43,7 @@ async def rich_match_analysis(match_id: str, request: Request, db: Session = Dep
             "access": {"unlocked": True, "source": existing_unlock.unlock_source, "charged": False, **access},
             "cached": True,
         }
-    if existing_unlock is None and access["free_remaining"] == 0 and access["tokens"] <= 0:
+    if existing_unlock is None and access["free_remaining"] == 0 and (access["extra_remaining"] <= 0 or access["gems"] < access["gems_per_analysis"]):
         raise HTTPException(status_code=402, detail="Complete today's rewarded Daily Quiz to earn an Analysis Token.")
 
     home = fixture.get("home_team") or {}
