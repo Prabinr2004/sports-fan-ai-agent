@@ -3,9 +3,7 @@
 Never replace the primary football-data.org squad. Match only when a name is
 unambiguous; prefer matching birth dates when available.
 """
-import asyncio
 from datetime import datetime, timedelta, timezone
-from difflib import SequenceMatcher
 import re
 import unicodedata
 
@@ -39,8 +37,14 @@ def _match(player, candidates):
         other_dob = _date(item.get("dateBorn"))
         if dob and other_dob and dob != other_dob:
             continue
-        # Exact names, or an unambiguous surname with matching birth date.
-        if name == other or (dob and other_dob == dob and (name.endswith(other) or other.endswith(name)) and min(len(name), len(other)) >= 5):
+        # Only use partial/alternate names when birth dates confirm identity.
+        aliases = [item.get("strPlayer"), item.get("strPlayerAlternate")]
+        exact_alias = any(_normalize(alias) == name for alias in aliases if alias)
+        player_parts = [_normalize(part) for part in str(player.get("name") or "").split()]
+        provider_parts = [_normalize(part) for part in str(item.get("strPlayer") or "").split()]
+        shared_surname = bool(player_parts and provider_parts and player_parts[-1] == provider_parts[-1] and len(player_parts[-1]) >= 5)
+        confirmed_partial = bool(dob and other_dob and dob == other_dob and shared_surname)
+        if exact_alias or confirmed_partial:
             matches.append(item)
     return matches[0] if len(matches) == 1 else None
 
