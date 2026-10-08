@@ -42,16 +42,33 @@ def _backoff_section(team_id, section):
     except sqlite3.Error:
         pass
 
+def _cooldown_missing_section(team_id, section):
+    """Remember temporary failures even when there is no previous success."""
+    try:
+        with _cache_db() as db:
+            db.execute(
+                "INSERT INTO team_sections(team_id,section,payload,saved_at,retry_after) VALUES(?,?,?,0,?) "
+                "ON CONFLICT(team_id,section) DO UPDATE SET retry_after=excluded.retry_after",
+                (str(team_id), section, "null", time.time() + _RETRY_AFTER),
+            )
+    except sqlite3.Error:
+        pass
+
 async def _cached_section(call, team_id, section, force=False):
     cached = _read_section(team_id, section)
     now = time.time()
-    if cached and (cached[2] > now or (not force and now-cached[1] < _SECTION_TTL[section])):
+    if cached and cached[2] > now:
+        if cached[0] is None:
+            return [], "Provider temporarily unavailable; retrying shortly."
+        return cached[0], None
+    if cached and cached[0] is not None and not force and now-cached[1] < _SECTION_TTL[section]:
         return cached[0], None
     data, notice = await _optional_provider_call(call, team_id)
     if notice:
         if cached:
             _backoff_section(team_id, section)
             return cached[0], "Showing previously saved data; provider is temporarily unavailable."
+        _cooldown_missing_section(team_id, section)
         return [], notice
     _write_section(team_id, section, data)
     return data, None
