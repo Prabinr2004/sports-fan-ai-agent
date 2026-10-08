@@ -60,11 +60,13 @@ export type TeamHubData = {
   team: TeamSummary;
   squad: Player[];
   fixtures: Fixture[];
+  recent_results?: (Fixture & {score?: {home?: number | null; away?: number | null}})[];
   standings: TeamStanding[];
   scorers: TeamScorer[];
   notices?: {
     squad?: string;
     fixtures?: string;
+    recent_results?: string;
     standings?: string;
     scorers?: string;
   };
