@@ -8,8 +8,10 @@ router = APIRouter(prefix="/teams", tags=["teams"])
 
 def _provider_error(exc: httpx.HTTPStatusError) -> HTTPException:
     upstream_status = exc.response.status_code
-    if upstream_status in {401, 403}:
-        detail = "Football provider rejected the API key or plan access."
+    if upstream_status == 401:
+        detail = "Football provider authentication failed (401). Check FOOTBALL_API_KEY in backend/.env."
+    elif upstream_status == 403:
+        detail = "Football provider denied access (403). Check API plan permissions or account status."
     elif upstream_status == 429:
         detail = "Football provider rate limit reached. Try again shortly."
     else:
