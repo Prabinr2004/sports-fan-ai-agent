@@ -149,6 +149,18 @@ async def get_player_position(team_id: str, player_id: str) -> dict:
         return {"player_id": player_id, "position": None, "source": "unavailable"}
 
 
+@router.get("/matches/{match_id}")
+async def match_details(match_id: int):
+    """Fetch verified goal events for a single match on demand."""
+    try:
+        return await get_football_provider().get_match(str(match_id))
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code in (403, 404, 429):
+            raise HTTPException(status_code=503, detail="Match events are unavailable from the provider.") from exc
+        raise HTTPException(status_code=502, detail="Could not retrieve match details.") from exc
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail="Could not reach match data provider.") from exc
+
 @router.get("/{team_id}")
 async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_team_data: bool = False) -> dict:
     provider = get_football_provider()
