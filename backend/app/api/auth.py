@@ -36,6 +36,13 @@ def _current_user(request: Request, db: Session) -> User | None:
     return db.get(User, session.user_id)
 
 
+def require_user(request: Request, db: Session = Depends(get_db)) -> User:
+    user = _current_user(request, db)
+    if user is None:
+        raise HTTPException(status_code=401, detail="Sign in to access your FanSphere account.")
+    return user
+
+
 def _set_session(response: Response, request: Request, db: Session, user: User) -> None:
     token = new_session_token()
     expires = datetime.now(timezone.utc) + timedelta(days=SESSION_DAYS)
