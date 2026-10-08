@@ -43,3 +43,26 @@ async def test_saved_section_survives_failed_refresh(monkeypatch, tmp_path):
     assert first == second
     assert notice
     assert attempts == 2
+
+
+@pytest.mark.asyncio
+async def test_failed_retry_never_returns_null_section(monkeypatch, tmp_path):
+    monkeypatch.setattr(teams, "_CACHE_DB", tmp_path / "sections.db")
+    attempts = 0
+
+    async def unavailable(team_id):
+        nonlocal attempts
+        attempts += 1
+        request = httpx.Request("GET", "https://example.test/teams")
+        response = httpx.Response(429, request=request)
+        raise httpx.HTTPStatusError("rate limit", request=request, response=response)
+
+    first, _ = await teams._cached_section(unavailable, "86", "fixtures")
+    assert first == []
+    with teams._cache_db() as db:
+        db.execute("UPDATE team_sections SET retry_after=0 WHERE team_id=? AND section=?", ("86", "fixtures"))
+    second, notice = await teams._cached_section(unavailable, "86", "fixtures")
+    assert second == []
+    assert isinstance(second, list)
+    assert notice
+    assert attempts == 2
