@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException, Query, status
 from app.services.football import get_football_provider
 from app.services.player_enrichment import enrich_squad
 from app.services.team_fallback import fallback_team
+from app.services.team_search_cache import read_search, save_search, postpone_search, SEARCH_TTL_SECONDS
 
 router = APIRouter(prefix="/teams", tags=["teams"])
 _CACHE_DB = Path(__file__).resolve().parents[2] / "team_sections_cache.sqlite3"
@@ -87,16 +88,26 @@ async def _optional_provider_call(call, team_id: str) -> tuple[list, str | None]
 @router.get("/search")
 async def search_teams(q: str = Query(min_length=2, max_length=100)) -> dict:
     provider = get_football_provider()
+    cached = read_search(q)
+    if cached and (time.time() - cached["saved_at"] < SEARCH_TTL_SECONDS or cached["retry_after"] > time.time()):
+        return {"query": q, "results": cached["results"], "provider_connected": False, "cached": True}
     try:
         results = await provider.search_teams(q)
     except httpx.HTTPStatusError as exc:
+        if cached:
+            postpone_search(q)
+            return {"query": q, "results": cached["results"], "provider_connected": False, "cached": True, "notice": "Showing saved results while provider is unavailable."}
         raise _provider_error(exc) from exc
     except httpx.HTTPError as exc:
+        if cached:
+            postpone_search(q)
+            return {"query": q, "results": cached["results"], "provider_connected": False, "cached": True, "notice": "Showing saved results while provider is unavailable."}
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
             detail="Could not reach the football provider.",
         ) from exc
 
+    save_search(q, results)
     return {"query": q, "results": results, "provider_connected": True}
 
 
