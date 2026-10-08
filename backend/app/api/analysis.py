@@ -1,5 +1,5 @@
 from app.api.auth import require_user
-from fastapi import Request, APIRouter, Depends, HTTPException
+from fastapi import Request, APIRouter, Depends, HTTPException, Query
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -17,9 +17,10 @@ router = APIRouter(prefix="/analysis", tags=["analysis"])
 
 
 @router.get("/access")
-def get_analysis_access(request: Request, db: Session = Depends(get_db)) -> dict:
+def get_analysis_access(request: Request, match_id: str | None = Query(default=None), db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
-    return {**analysis_access_summary(db, user.id), "rich_analysis_available": bool(settings.openrouter_api_key)}
+    existing = db.scalar(select(MatchAnalysisUnlock).where(MatchAnalysisUnlock.user_id == user.id, MatchAnalysisUnlock.match_id == match_id)) if match_id else None
+    return {**analysis_access_summary(db, user.id), "match_unlocked": existing is not None, "rich_analysis_available": bool(settings.openrouter_api_key)}
 
 
 @router.post("/{match_id}/rich")
@@ -44,7 +45,7 @@ async def rich_match_analysis(match_id: str, request: Request, db: Session = Dep
             "cached": True,
         }
     if existing_unlock is None and access["free_remaining"] == 0 and (access["extra_remaining"] <= 0 or access["gems"] < access["gems_per_analysis"]):
-        raise HTTPException(status_code=402, detail="Complete today's rewarded Daily Quiz to earn an Analysis Token.")
+        raise HTTPException(status_code=402, detail="No free match analysis remains today. Exchange XP for Gems in Wallet to unlock another match.")
 
     home = fixture.get("home_team") or {}
     away = fixture.get("away_team") or {}
