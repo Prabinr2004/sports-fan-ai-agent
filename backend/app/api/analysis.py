@@ -5,7 +5,6 @@ from sqlalchemy.orm import Session
 
 from app.api.matches import _find_personalized_match
 from app.api.ml_predictions import predict_match
-from app.api.profile import _get_or_create_local_user
 from app.core.config import settings
 from app.database.session import get_db
 from app.models.analysis import MatchAnalysisUnlock
