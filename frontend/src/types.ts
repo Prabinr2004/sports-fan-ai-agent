@@ -18,6 +18,8 @@ export type Player = {
   position?: string | null;
   date_of_birth?: string | null;
   nationality?: string | null;
+  photo_url?: string | null;
+  shirt_number?: number | null;
 };
 
 export type Fixture = {
