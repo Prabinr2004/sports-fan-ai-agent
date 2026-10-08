@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { Award, BarChart3, Bell, Check, Gem, Flame, Home, LoaderCircle, Search, Shield, Sparkles, Star, Trophy, Users, X } from "lucide-react";
 import type { TeamHubData, TeamSummary } from "./types";
@@ -33,28 +33,28 @@ function saveTeamHubCache(userId:number,data:TeamHubData){
 }
 function App(){
  const [authUser,setAuthUser]=useState<{id:number;display_name:string;email:string}|null>(null);const [authLoading,setAuthLoading]=useState(true);const [authError,setAuthError]=useState("");const [authMode,setAuthMode]=useState<"login"|"register">("login");const [authEmail,setAuthEmail]=useState("");const [authPassword,setAuthPassword]=useState("");const [authName,setAuthName]=useState("");
- const [apiStatus,setApiStatus]=useState<"checking"|"online"|"offline">("checking"); const [query,setQuery]=useState(""); const [searching,setSearching]=useState(false); const [searchResults,setSearchResults]=useState<TeamSummary[]>([]); const [searchMessage,setSearchMessage]=useState(""); const [selectedTeam,setSelectedTeam]=useState<TeamHubData|null>(null); const [loadingTeam,setLoadingTeam]=useState(false);const [refreshingPhotos,setRefreshingPhotos]=useState(false);const [refreshingTeam,setRefreshingTeam]=useState(false);const [teamRefreshMessage,setTeamRefreshMessage]=useState("");const [photoRefreshMessage,setPhotoRefreshMessage]=useState(""); const [profile,setProfile]=useState<Profile|null>(null); const [savingPreference,setSavingPreference]=useState(false); const [activePage,setActivePage]=useState(()=>{try{return window.sessionStorage.getItem("fansphere-active-page")||"Home"}catch{return "Home"}});const [homeMatchId,setHomeMatchId]=useState<string|null>(null);
+ const [apiStatus,setApiStatus]=useState<"checking"|"online"|"offline">("checking"); const [query,setQuery]=useState(""); const searchRequest=useRef(0);const teamRequest=useRef(0);const [searching,setSearching]=useState(false); const [searchResults,setSearchResults]=useState<TeamSummary[]>([]); const [searchMessage,setSearchMessage]=useState(""); const [selectedTeam,setSelectedTeam]=useState<TeamHubData|null>(null); const [loadingTeam,setLoadingTeam]=useState(false);const [refreshingPhotos,setRefreshingPhotos]=useState(false);const [refreshingTeam,setRefreshingTeam]=useState(false);const [teamRefreshMessage,setTeamRefreshMessage]=useState("");const [photoRefreshMessage,setPhotoRefreshMessage]=useState(""); const [profile,setProfile]=useState<Profile|null>(null); const [savingPreference,setSavingPreference]=useState(false); const [activePage,setActivePage]=useState(()=>{try{return window.sessionStorage.getItem("fansphere-active-page")||"Home"}catch{return "Home"}});const [homeMatchId,setHomeMatchId]=useState<string|null>(null);
  useEffect(()=>{try{window.sessionStorage.setItem("fansphere-active-page",activePage)}catch{}},[activePage]);
  async function loadProfile(){const r=await fetch("/api/v1/profile");if(r.ok)setProfile(await r.json())}
  useEffect(()=>{fetch("/api/v1/health").then(r=>{if(!r.ok)throw new Error();return r.json()}).then(()=>setApiStatus("online")).catch(()=>setApiStatus("offline"));fetch("/api/v1/auth/me").then(async r=>{if(r.ok){const p=await r.json();setAuthUser(p.user);await loadProfile()}}).catch(()=>undefined).finally(()=>setAuthLoading(false))},[]);
  async function submitAuth(e:FormEvent){e.preventDefault();setAuthError("");try{const r=await fetch(`/api/v1/auth/${authMode}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:authEmail,password:authPassword,...(authMode==="register"?{display_name:authName}:{})})});const p=await r.json();if(!r.ok)throw new Error(typeof p.detail==="string"?p.detail:"Please check your details.");setAuthUser(p.user);setAuthPassword("");await loadProfile()}catch(e){setAuthError(e instanceof Error?e.message:"Authentication failed.")}}
- async function logout(){await fetch("/api/v1/auth/logout",{method:"POST"});setAuthUser(null);setProfile(null);setActivePage("Home")}
+ async function logout(){searchRequest.current++;teamRequest.current++;await fetch("/api/v1/auth/logout",{method:"POST"});setAuthUser(null);setProfile(null);setSelectedTeam(null);setSearchResults([]);setActivePage("Home")}
 
- async function searchTeams(e:FormEvent){e.preventDefault();const t=query.trim();if(t.length<2)return;setSearching(true);setSearchMessage("");setSearchResults([]);try{const r=await fetch(`/api/v1/teams/search?q=${encodeURIComponent(t)}`);const p=await r.json();if(!r.ok)throw new Error(p.detail||"Team search failed.");setSearchResults(p.results||[]);if(p.notice)setSearchMessage(p.notice);else if(!p.results?.length)setSearchMessage("No matching teams found.")}catch(e){setSearchMessage(e instanceof Error?e.message:"Team search failed.")}finally{setSearching(false)}}
+ async function searchTeams(e:FormEvent){e.preventDefault();const t=query.trim();if(t.length<2)return;const request=++searchRequest.current;setSearching(true);setSearchMessage("");setSearchResults([]);try{const r=await fetch(`/api/v1/teams/search?q=${encodeURIComponent(t)}`);const p=await r.json();if(request!==searchRequest.current)return;if(!r.ok)throw new Error(p.detail||"Team search failed.");setSearchResults(p.results||[]);if(p.notice)setSearchMessage(p.notice);else if(!p.results?.length)setSearchMessage("No matching teams found.")}catch(e){if(request===searchRequest.current)setSearchMessage(e instanceof Error?e.message:"Team search failed.")}finally{if(request===searchRequest.current)setSearching(false)}}
  async function openTeam(team:TeamSummary|SavedTeam){
-  const id=String("provider_id" in team?team.provider_id:team.id);
+  const request=++teamRequest.current;const id=String("provider_id" in team?team.provider_id:team.id);
   const cached=authUser?readTeamHubCache(authUser.id,id):null;
-  setSearchMessage("");setPhotoRefreshMessage("");setTeamRefreshMessage("");
+  setSearchMessage("");setPhotoRefreshMessage("");setTeamRefreshMessage("");setLoadingTeam(false);
   if(cached){setSelectedTeam(cached);setSearchResults([]);setQuery("");return}
   setLoadingTeam(true);
   try{
    const r=await fetch(`/api/v1/teams/${encodeURIComponent(id)}`);
    const p=await r.json();
-   if(!r.ok)throw new Error(p.detail||"Could not load the team hub.");
+   if(request!==teamRequest.current)return;if(!r.ok)throw new Error(p.detail||"Could not load the team hub.");
    setSelectedTeam(p);if(authUser)saveTeamHubCache(authUser.id,p);
    setSearchResults([]);setQuery("");
-  }catch(e){setSearchMessage(e instanceof Error?e.message:"Could not load the team hub.")}
-  finally{setLoadingTeam(false)}
+  }catch(e){if(request===teamRequest.current)setSearchMessage(e instanceof Error?e.message:"Could not load the team hub.")}
+  finally{if(request===teamRequest.current)setLoadingTeam(false)}
  }
  async function refreshTeamData(){
   if(!selectedTeam||refreshingTeam)return;
