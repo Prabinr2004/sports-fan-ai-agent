@@ -84,3 +84,24 @@ async def test_saved_section_cooldown_displays_stale_notice(monkeypatch, tmp_pat
     assert data == [{"id": "player1"}]
     assert "saved" in notice.lower()
     assert calls == 0
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("status_code", "expected"),
+    [
+        (401, "authentication"),
+        (403, "denied"),
+        (404, "not available"),
+        (429, "rate limit"),
+    ],
+)
+async def test_optional_team_section_explains_provider_status(status_code, expected):
+    async def unavailable(team_id):
+        request = httpx.Request("GET", "https://example.test/teams/86/squad")
+        response = httpx.Response(status_code, request=request)
+        raise httpx.HTTPStatusError("provider error", request=request, response=response)
+
+    data, notice = await teams._optional_provider_call(unavailable, "86")
+    assert data == []
+    assert expected in notice.lower()
