@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, Query, status
 
 from app.services.football import get_football_provider
 from app.services.player_enrichment import enrich_squad
+from app.services.team_fallback import fallback_team
 
 router = APIRouter(prefix="/teams", tags=["teams"])
 
@@ -73,8 +74,15 @@ async def get_team(team_id: str) -> dict:
     try:
         team = await provider.get_team(team_id)
     except httpx.HTTPStatusError as exc:
+        if exc.response.status_code in {401, 403, 429}:
+            fallback = await fallback_team(team_id)
+            if fallback is not None:
+                return fallback
         raise _provider_error(exc) from exc
     except httpx.HTTPError as exc:
+        fallback = await fallback_team(team_id)
+        if fallback is not None:
+            return fallback
         raise HTTPException(
             status_code=status.HTTP_502_BAD_GATEWAY,
             detail="Could not reach the football provider.",
