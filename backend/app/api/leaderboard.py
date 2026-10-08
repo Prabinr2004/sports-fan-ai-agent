@@ -3,7 +3,7 @@ from fastapi import Request, APIRouter, Depends
 from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session
 
-from app.api.profile import _get_or_create_local_user
+from app.api.profile import DEMO_EMAIL
 from app.database.session import get_db
 from app.models.progress import XPEvent
 from app.models.prediction import UserMatchPrediction
@@ -20,6 +20,7 @@ def leaderboard(request: Request, db: Session = Depends(get_db)) -> dict:
     rows = db.execute(
         select(User, xp_total)
         .outerjoin(XPEvent, XPEvent.user_id == User.id)
+        .where(User.email != DEMO_EMAIL)
         .group_by(User.id)
         .order_by(xp_total.desc(), User.created_at.asc())
         .limit(50)
@@ -56,6 +57,6 @@ def leaderboard(request: Request, db: Session = Depends(get_db)) -> dict:
     return {
         "entries": entries,
         "current_user_email": current_user.email,
-        "mode": "local-development",
-        "notice": "The leaderboard currently ranks real local accounts only. More users will appear after authentication is added.",
+        "mode": "registered-accounts",
+        "notice": "Rankings include registered FanSphere accounts. The legacy development account is excluded.",
     }
