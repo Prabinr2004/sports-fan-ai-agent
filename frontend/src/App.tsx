@@ -44,7 +44,7 @@ function App(){
  async function openTeam(team:TeamSummary|SavedTeam){
   const id=String("provider_id" in team?team.provider_id:team.id);
   const cached=authUser?readTeamHubCache(authUser.id,id):null;
-  setSearchMessage("");setPhotoRefreshMessage("");
+  setSearchMessage("");setPhotoRefreshMessage("");setTeamRefreshMessage("");
   if(cached){setSelectedTeam(cached);setSearchResults([]);setQuery("");return}
   setLoadingTeam(true);
   try{
