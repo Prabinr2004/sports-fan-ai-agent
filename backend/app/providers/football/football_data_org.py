@@ -172,7 +172,7 @@ class FootballDataOrgProvider(FootballProvider):
         # limit for finished-match history on some plans. Fetch the provider's
         # normal finished set, then trim locally so Match Center has a stable
         # last-N view and shares one cached response across callers.
-        payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED"}, ttl=21600)
+        payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED"}, ttl=300)
         matches = [self._normalize_match(m) for m in payload.get("matches", [])]
         matches.sort(key=lambda m: m.get("utc_date") or "")
         return matches[-limit:]
