@@ -19,10 +19,11 @@ SESSION_DAYS = 14
 
 class Credentials(BaseModel):
     email: EmailStr
-    password: str = Field(min_length=12, max_length=128)
+    password: str = Field(min_length=1, max_length=128)
 
 
 class Registration(Credentials):
+    password: str = Field(min_length=12, max_length=128)
     display_name: str = Field(min_length=2, max_length=60)
 
 
