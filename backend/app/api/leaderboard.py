@@ -16,7 +16,7 @@ router = APIRouter(prefix="/leaderboard", tags=["leaderboard"])
 @router.get("")
 def leaderboard(request: Request, db: Session = Depends(get_db)) -> dict:
     current_user = require_user(request, db)
-    xp_total = func.coalesce(func.sum(XPEvent.amount), 0).label("total_xp")
+    xp_total = func.coalesce(func.sum(case((XPEvent.amount > 0, XPEvent.amount), else_=0)), 0).label("total_xp")
     rows = db.execute(
         select(User, xp_total)
         .outerjoin(XPEvent, XPEvent.user_id == User.id)
