@@ -1,8 +1,9 @@
+from app.api.auth import require_user
 from datetime import date
 import json
 import random
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Request, APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
@@ -248,8 +249,8 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
 
 
 @router.get("/practice")
-async def practice_quiz(round: int = 0, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def practice_quiz(round: int = 0, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     safe_round = max(0, min(round, 1000))
     questions, context = await build_practice_questions(db, user, safe_round)
     return {
@@ -269,8 +270,8 @@ async def practice_quiz(round: int = 0, db: Session = Depends(get_db)) -> dict:
 
 
 @router.post("/practice/submit")
-async def submit_practice_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def submit_practice_quiz(submission: QuizSubmission, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     questions, context = await build_practice_questions(db, user, max(0, min(submission.practice_round, 1000)))
     if len(submission.answers) != len(questions):
         raise HTTPException(status_code=400, detail="Answer every question before submitting.")
@@ -291,8 +292,8 @@ async def submit_practice_quiz(submission: QuizSubmission, db: Session = Depends
     }
 
 @router.get("/daily")
-async def daily_quiz(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def daily_quiz(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     event = db.scalar(select(XPEvent).where(
         XPEvent.user_id == user.id,
         XPEvent.source_type == "daily_quiz",
@@ -315,8 +316,8 @@ async def daily_quiz(db: Session = Depends(get_db)) -> dict:
 
 
 @router.post("/daily/submit")
-async def submit_daily_quiz(submission: QuizSubmission, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     questions, context = await get_or_create_daily_snapshot(db, user)
     if len(submission.answers) != len(questions):
         raise HTTPException(status_code=400, detail="Answer every question before submitting.")
