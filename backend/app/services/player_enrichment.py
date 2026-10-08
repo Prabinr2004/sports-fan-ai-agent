@@ -12,6 +12,8 @@ import httpx
 TEAM_IDS = {"real madrid": 133738, "real madrid cf": 133738, "liverpool": 133602, "liverpool fc": 133602}
 _CACHE = {}
 _CACHE_TTL = timedelta(hours=12)
+_SEARCH_CACHE = {}
+_MAX_SEARCHES_PER_TEAM = 8
 
 
 def _normalize(value):
@@ -74,6 +76,54 @@ async def enrich_squad(team, squad):
             _CACHE[team_id] = (now, players)
         except (httpx.HTTPError, ValueError, TypeError):
             return squad
+
+    # The free team-list API only returns a subset. Search a small number of
+    # missing players by name, respecting the free API's 30 requests/minute.
+    missing = [p for p in squad if not _match(p, players)]
+    searched = 0
+    for player in missing:
+        if searched >= _MAX_SEARCHES_PER_TEAM:
+            break
+        name = str(player.get("name") or "").strip()
+        key = (team_id, _normalize(name))
+        if not key[1]:
+            continue
+        cached = _SEARCH_CACHE.get(key)
+        if cached and now - cached[0] < _CACHE_TTL:
+            candidates = cached[1]
+        else:
+            searched += 1
+            try:
+                async with httpx.AsyncClient(timeout=5.0, follow_redirects=False) as client:
+                    response = await client.get(
+                        "https://www.thesportsdb.com/api/v1/json/123/searchplayers.php",
+                        params={"p": name},
+                    )
+                    response.raise_for_status()
+                    payload = response.json()
+                candidates = payload.get("player") or []
+                if not isinstance(candidates, list):
+                    candidates = []
+                _SEARCH_CACHE[key] = (now, candidates)
+            except (httpx.HTTPError, ValueError, TypeError):
+                # Avoid retry storms when the optional provider is unavailable.
+                _SEARCH_CACHE[key] = (now, [])
+                continue
+        # A player search can return namesakes from other clubs. Require the
+        # same TheSportsDB team ID, or an exact matching birth date.
+        verified = [
+            item for item in candidates
+            if isinstance(item, dict) and (
+                str(item.get("idTeam") or "") == str(team_id)
+                or (
+                    _date(player.get("date_of_birth"))
+                    and _date(item.get("dateBorn")) == _date(player.get("date_of_birth"))
+                )
+            )
+        ]
+        match = _match(player, verified)
+        if match:
+            players.append(match)
 
     enriched = []
     for player in squad:
