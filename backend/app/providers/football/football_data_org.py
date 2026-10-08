@@ -53,7 +53,7 @@ class FootballDataOrgProvider(FootballProvider):
     @classmethod
     def _normalize_match(cls, match: dict[str, Any]) -> dict[str, Any]:
         score = match.get("score") or {}; full_time = score.get("fullTime") or {}
-        return {"id": str(match.get("id")), "utc_date": match.get("utcDate"), "status": match.get("status"), "competition": (match.get("competition") or {}).get("name"), "home_team": cls._normalize_team(match.get("homeTeam") or {}), "away_team": cls._normalize_team(match.get("awayTeam") or {}), "score": {"home": full_time.get("home"), "away": full_time.get("away")}}
+        return {"id": str(match.get("id")), "utc_date": match.get("utcDate"), "status": match.get("status"), "competition": (match.get("competition") or {}).get("name"), "home_team": cls._normalize_team(match.get("homeTeam") or {}), "away_team": cls._normalize_team(match.get("awayTeam") or {}), "score": {"home": full_time.get("home"), "away": full_time.get("away")}, "goals": [{"player_name": (goal.get("scorer") or {}).get("name") or "Unknown scorer", "minute": goal.get("minute"), "extra_time": goal.get("injuryTime") if goal.get("injuryTime") is not None else goal.get("extraTime"), "team_id": str((goal.get("team") or {}).get("id")) if (goal.get("team") or {}).get("id") is not None else None} for goal in (match.get("goals") or []) if isinstance(goal, dict)]}
 
     async def _all_accessible_teams(self) -> list[dict[str, Any]]:
         return (await self._get("/teams", params={"limit": 500}, ttl=1800)).get("teams", [])
