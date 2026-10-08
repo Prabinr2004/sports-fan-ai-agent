@@ -10,6 +10,8 @@ import unicodedata
 import httpx
 
 TEAM_IDS = {"real madrid": 133738, "real madrid cf": 133738, "liverpool": 133602, "liverpool fc": 133602}
+_TEAM_CACHE = {}
+_TEAM_CACHE_TTL = timedelta(days=7)
 _CACHE = {}
 _CACHE_TTL = timedelta(hours=12)
 _SEARCH_CACHE = {}
@@ -51,10 +53,54 @@ def _match(player, candidates):
     return matches[0] if len(matches) == 1 else None
 
 
+async def _resolve_team_id(team):
+    """Resolve TheSportsDB ID, never assume IDs match football-data.org."""
+    name = str(team.get("name") or "").strip()
+    key = _normalize(name)
+    if not key:
+        return None
+    known = TEAM_IDS.get(name.lower())
+    if known:
+        return known
+    now = datetime.now(timezone.utc)
+    cached = _TEAM_CACHE.get(key)
+    if cached and now - cached[0] < _TEAM_CACHE_TTL:
+        return cached[1]
+
+    # The free API may return only one search result; accept only a unique,
+    # exact team name/alternate-name match in the Soccer sport.
+    result = None
+    try:
+        async with httpx.AsyncClient(timeout=6.0, follow_redirects=False) as client:
+            response = await client.get(
+                "https://www.thesportsdb.com/api/v1/json/123/searchteams.php",
+                params={"t": name},
+            )
+            response.raise_for_status()
+            teams = (response.json() or {}).get("teams") or []
+        matches = [
+            item for item in teams
+            if isinstance(item, dict)
+            and _normalize(item.get("strSport")) in {"soccer", "football"}
+            and key in {
+                _normalize(item.get("strTeam")),
+                _normalize(item.get("strTeamAlternate")),
+            }
+            and str(item.get("idTeam") or "").isdigit()
+        ]
+        if len(matches) == 1:
+            result = int(matches[0]["idTeam"])
+    except (httpx.HTTPError, ValueError, TypeError, AttributeError):
+        pass
+    # Cache misses as well: a restricted free API must not be hammered.
+    _TEAM_CACHE[key] = (now, result)
+    return result
+
+
 async def enrich_squad(team, squad):
     if not squad:
         return squad
-    team_id = TEAM_IDS.get(str(team.get("name") or "").strip().lower())
+    team_id = await _resolve_team_id(team)
     if not team_id:
         return squad
     now = datetime.now(timezone.utc)
