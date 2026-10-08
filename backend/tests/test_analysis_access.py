@@ -117,3 +117,28 @@ def test_match_unlock_status_is_scoped_to_match() -> None:
         assert first.json()["match_unlocked"] is False
         assert second.status_code == 200
         assert second.json()["match_unlocked"] is False
+
+
+def test_existing_match_unlock_is_reported_without_charging_again() -> None:
+    from app.database.session import get_db
+    from app.models.analysis import MatchAnalysisUnlock
+
+    with TestClient(app) as client:
+        sign_in(client)
+        db = next(get_db())
+        try:
+            from app.api.auth import require_user
+            from sqlalchemy import select
+            from app.models.user import User
+            user = db.scalar(select(User).order_by(User.id.desc()))
+            assert user is not None
+            match_id = f"reopen-{uuid4().hex}"
+            db.add(MatchAnalysisUnlock(user_id=user.id, match_id=match_id, unlock_source="FREE_DAILY", unlock_date="2026-10-08"))
+            db.commit()
+            response = client.get(f"/api/v1/analysis/access?match_id={match_id}")
+            other = client.get("/api/v1/analysis/access?match_id=another-match")
+            assert response.status_code == 200
+            assert response.json()["match_unlocked"] is True
+            assert other.json()["match_unlocked"] is False
+        finally:
+            db.close()
