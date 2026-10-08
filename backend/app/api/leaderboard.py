@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends
+from app.api.auth import require_user
+from fastapi import Request, APIRouter, Depends
 from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session
 
-from app.api.profile import DEMO_EMAIL, _get_or_create_local_user
+from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
 from app.models.prediction import UserMatchPrediction
@@ -13,8 +14,8 @@ router = APIRouter(prefix="/leaderboard", tags=["leaderboard"])
 
 
 @router.get("")
-def leaderboard(db: Session = Depends(get_db)) -> dict:
-    current_user = _get_or_create_local_user(db)
+def leaderboard(request: Request, db: Session = Depends(get_db)) -> dict:
+    current_user = require_user(request, db)
     xp_total = func.coalesce(func.sum(XPEvent.amount), 0).label("total_xp")
     rows = db.execute(
         select(User, xp_total)
@@ -54,7 +55,7 @@ def leaderboard(db: Session = Depends(get_db)) -> dict:
 
     return {
         "entries": entries,
-        "current_user_email": DEMO_EMAIL,
+        "current_user_email": current_user.email,
         "mode": "local-development",
         "notice": "The leaderboard currently ranks real local accounts only. More users will appear after authentication is added.",
     }
