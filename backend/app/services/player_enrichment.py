@@ -142,7 +142,7 @@ async def enrich_squad(team, squad, refresh_missing=False):
             player["photo_url"] = player.get("photo_url") or saved[0]
             if player.get("shirt_number") is None:
                 player["shirt_number"] = saved[1]
-    if all(player.get("photo_url") for player in squad):
+    if all(player.get("photo_url") and player.get("shirt_number") is not None for player in squad):
         return squad
     now = datetime.now(timezone.utc)
     entry = _CACHE.get(team_id)
@@ -166,7 +166,7 @@ async def enrich_squad(team, squad, refresh_missing=False):
 
     # The free team-list API only returns a subset. Search a small number of
     # missing players by name, respecting the free API's 30 requests/minute.
-    missing = [p for p in squad if not p.get("photo_url") and not _match(p, players)]
+    missing = [p for p in squad if (not p.get("photo_url") or p.get("shirt_number") is None) and not _match(p, players)]
     searched = 0
     for player in missing:
         if searched >= _MAX_SEARCHES_PER_TEAM:
@@ -221,7 +221,7 @@ async def enrich_squad(team, squad, refresh_missing=False):
             if isinstance(image, str) and image.startswith("https://") and "thesportsdb.com/" in image.split("/")[2] + "/":
                 updated["photo_url"] = image
             number = candidate.get("strNumber")
-            if str(number or "").strip().isdigit() and 0 <= int(number) <= 99:
+            if updated.get("shirt_number") is None and str(number or "").strip().isdigit() and 0 <= int(number) <= 99:
                 updated["shirt_number"] = int(number)
         _save_artwork(team_id, player, updated.get('photo_url'), updated.get('shirt_number'))
         enriched.append(updated)
