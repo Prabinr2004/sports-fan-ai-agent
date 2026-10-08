@@ -206,9 +206,14 @@ async def saved_predictions(db: Session = Depends(get_db)) -> dict:
                 row.result_status = "CORRECT" if actual == row.predicted_outcome else "INCORRECT"
         except httpx.HTTPStatusError as exc:
             if exc.response.status_code == 429:
+                # Back off on subsequent refreshes instead of repeatedly hitting the limit.
+                row.result_checked_at = now
                 provider_limited = True
                 break
+            # Other provider errors must not erase or score saved picks.
+            row.result_checked_at = now
         except httpx.HTTPError:
+            row.result_checked_at = now
             continue
 
     if db.dirty:
