@@ -60,7 +60,7 @@ async def _cached_section(call, team_id, section, force=False):
     if cached and cached[2] > now:
         if cached[0] is None:
             return [], "Provider temporarily unavailable; retrying shortly."
-        return cached[0], None
+        return cached[0], "Showing saved team data while the football provider recovers."
     if cached and cached[0] is not None and not force and now-cached[1] < _SECTION_TTL[section]:
         return cached[0], None
     data, notice = await _optional_provider_call(call, team_id)
