@@ -27,13 +27,14 @@ TABLES = (
 )
 
 
-def migrate_demo_progress(db: Session, target_email: str, *, apply: bool = False) -> dict:
+def migrate_demo_progress(db: Session, target_email: str, *, apply: bool = False, source_user_id: int | None = None) -> dict:
     """Preview by default; transfer only after explicit local confirmation."""
     email = target_email.strip().lower()
-    source = db.scalar(select(User).where(User.email == DEMO_EMAIL))
+    source = (db.get(User, source_user_id) if source_user_id is not None
+              else db.scalar(select(User).where(User.email == DEMO_EMAIL)))
     target = db.scalar(select(User).where(User.email == email))
     if source is None:
-        raise ValueError("No legacy demo account exists in this database.")
+        raise ValueError("Source account does not exist in this database.")
     if target is None or target.id == source.id:
         raise ValueError("Register and sign into a different account before migration.")
     if not target.password_hash.startswith("pbkdf2_sha256$"):
@@ -64,5 +65,5 @@ def migrate_demo_progress(db: Session, target_email: str, *, apply: bool = False
             for row in db.scalars(select(model).where(model.user_id == source.id)).all():
                 row.user_id = target.id
         db.commit()
-    return {"source": DEMO_EMAIL, "target": email, "applied": apply, "records": counts,
+    return {"source": source.email, "source_user_id": source.id, "target": email, "applied": apply, "records": counts,
             "primary_team_transfer": primary_team_transfer}
