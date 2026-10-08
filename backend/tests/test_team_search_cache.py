@@ -24,6 +24,7 @@ async def test_search_uses_cache_and_stale_results_on_provider_failure(monkeypat
     second = await teams.search_teams(" real   madrid ")
     assert first["results"] == second["results"]
     assert second["cached"] is True
+    assert second["provider_connected"] is True
     assert len(calls) == 1
 
     with team_search_cache._connect() as db:
@@ -37,6 +38,8 @@ async def test_search_uses_cache_and_stale_results_on_provider_failure(monkeypat
 
     backoff = await teams.search_teams("Real Madrid")
     assert backoff["cached"] is True
+    assert backoff["provider_connected"] is False
+    assert "notice" in backoff
     assert len(calls) == 2
 
 
