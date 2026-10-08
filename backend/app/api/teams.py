@@ -65,7 +65,7 @@ async def _cached_section(call, team_id, section, force=False):
         return cached[0], None
     data, notice = await _optional_provider_call(call, team_id)
     if notice:
-        if cached:
+        if cached and cached[0] is not None:
             _backoff_section(team_id, section)
             return cached[0], "Showing previously saved data; provider is temporarily unavailable."
         _cooldown_missing_section(team_id, section)
