@@ -116,4 +116,24 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
                     numeric_distractors(year),
                 )
 
+    # Verified historical questions for Real Madrid; other clubs keep provider-grounded questions.
+    if "real madrid" in team_name.casefold():
+        history = [
+            (3, "rm-threepeat-years", "In which three years did Real Madrid win three consecutive Champions League titles?", "2016, 2017, 2018", ["2014, 2015, 2016", "2015, 2016, 2017", "2017, 2018, 2019"]),
+            (3, "rm-threepeat-coach", "Who coached Real Madrid to the 2016–2018 Champions League three-peat?", "Zinedine Zidane", ["Carlo Ancelotti", "José Mourinho", "Rafael Benítez"]),
+            (3, "rm-record-scorer", "Who is Real Madrid's all-time leading goalscorer?", "Cristiano Ronaldo", ["Karim Benzema", "Raúl González", "Alfredo Di Stéfano"]),
+            (4, "rm-decima-year", "In which year did Real Madrid win La Décima, their tenth European Cup?", "2014", ["2012", "2016", "2018"]),
+            (4, "rm-decima-coach", "Who coached Real Madrid to La Décima in 2014?", "Carlo Ancelotti", ["Zinedine Zidane", "José Mourinho", "Rafael Benítez"]),
+            (4, "rm-2018-final", "Which club did Real Madrid beat in the 2018 Champions League final?", "Liverpool", ["Juventus", "Atlético Madrid", "Bayern Munich"]),
+            (4, "rm-2017-final", "Which club did Real Madrid beat in the 2017 Champions League final?", "Juventus", ["Liverpool", "Atlético Madrid", "Manchester City"]),
+            (5, "rm-2018-final-bale", "Who scored twice for Real Madrid in the 2018 Champions League final?", "Gareth Bale", ["Karim Benzema", "Cristiano Ronaldo", "Isco"]),
+            (5, "rm-2017-final-ronaldo", "Who scored twice for Real Madrid in the 2017 Champions League final?", "Cristiano Ronaldo", ["Gareth Bale", "Karim Benzema", "Sergio Ramos"]),
+            (5, "rm-record-goals", "How many official goals did Cristiano Ronaldo score for Real Madrid?", "451", ["438", "312", "405"]),
+            (5, "rm-2014-final-opponent", "Who did Real Madrid defeat in the 2014 Champions League final?", "Atlético Madrid", ["Juventus", "Liverpool", "Barcelona"]),
+            (5, "rm-2018-final-city", "In which city was the 2018 Champions League final played?", "Kyiv", ["Cardiff", "Lisbon", "Milan"]),
+        ]
+        for minimum_level, question_id, question, correct, distractors in history:
+            if level == minimum_level:
+                add(question_id, question, correct, distractors)
+
     return questions
