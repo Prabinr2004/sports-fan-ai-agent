@@ -106,8 +106,10 @@ async def _optional_provider_call(call, team_id: str) -> tuple[list, str | None]
 async def search_teams(q: str = Query(min_length=2, max_length=100)) -> dict:
     provider = get_football_provider()
     cached = read_search(q)
-    if cached and (time.time() - cached["saved_at"] < SEARCH_TTL_SECONDS or cached["retry_after"] > time.time()):
-        return {"query": q, "results": cached["results"], "provider_connected": False, "cached": True}
+    if cached and time.time() - cached["saved_at"] < SEARCH_TTL_SECONDS:
+        return {"query": q, "results": cached["results"], "provider_connected": True, "cached": True}
+    if cached and cached["retry_after"] > time.time():
+        return {"query": q, "results": cached["results"], "provider_connected": False, "cached": True, "notice": "Showing saved results while provider is unavailable."}
     try:
         results = await provider.search_teams(q)
     except httpx.HTTPStatusError as exc:
