@@ -17,6 +17,19 @@ type FanMatch = { id:string; utc_date?:string|null; status?:string|null; competi
 
 const navItems=[{label:"Home",icon:Home},{label:"My Team",icon:Shield},{label:"Favorites",icon:Star},{label:"Matches",icon:Trophy},{label:"Predictions",icon:BarChart3},{label:"Daily Quiz",icon:Sparkles},{label:"Leaderboard",icon:Users},{label:"Profile",icon:Award}];
 
+const TEAM_HUB_CACHE_MS=30*60*1000;
+const TEAM_HUB_CACHE_PREFIX="fansphere-team-hub-v2";
+function readTeamHubCache(userId:number,teamId:string):TeamHubData|null{
+ try{
+  const raw=window.localStorage.getItem(`${TEAM_HUB_CACHE_PREFIX}:${userId}:${teamId}`);
+  if(!raw)return null;
+  const entry=JSON.parse(raw);
+  return entry&&Date.now()-entry.savedAt<TEAM_HUB_CACHE_MS&&entry.data?.team?.id===teamId?entry.data:null;
+ }catch{return null}
+}
+function saveTeamHubCache(userId:number,data:TeamHubData){
+ try{window.localStorage.setItem(`${TEAM_HUB_CACHE_PREFIX}:${userId}:${data.team.id}`,JSON.stringify({savedAt:Date.now(),data}))}catch{}
+}
 function App(){
  const [authUser,setAuthUser]=useState<{id:number;display_name:string;email:string}|null>(null);const [authLoading,setAuthLoading]=useState(true);const [authError,setAuthError]=useState("");const [authMode,setAuthMode]=useState<"login"|"register">("login");const [authEmail,setAuthEmail]=useState("");const [authPassword,setAuthPassword]=useState("");const [authName,setAuthName]=useState("");
  const [apiStatus,setApiStatus]=useState<"checking"|"online"|"offline">("checking"); const [query,setQuery]=useState(""); const [searching,setSearching]=useState(false); const [searchResults,setSearchResults]=useState<TeamSummary[]>([]); const [searchMessage,setSearchMessage]=useState(""); const [selectedTeam,setSelectedTeam]=useState<TeamHubData|null>(null); const [loadingTeam,setLoadingTeam]=useState(false);const [refreshingPhotos,setRefreshingPhotos]=useState(false);const [photoRefreshMessage,setPhotoRefreshMessage]=useState(""); const [profile,setProfile]=useState<Profile|null>(null); const [savingPreference,setSavingPreference]=useState(false); const [activePage,setActivePage]=useState(()=>{try{return window.sessionStorage.getItem("fansphere-active-page")||"Home"}catch{return "Home"}});const [homeMatchId,setHomeMatchId]=useState<string|null>(null);
@@ -27,8 +40,22 @@ function App(){
  async function logout(){await fetch("/api/v1/auth/logout",{method:"POST"});setAuthUser(null);setProfile(null);setActivePage("Home")}
 
  async function searchTeams(e:FormEvent){e.preventDefault();const t=query.trim();if(t.length<2)return;setSearching(true);setSearchMessage("");setSearchResults([]);try{const r=await fetch(`/api/v1/teams/search?q=${encodeURIComponent(t)}`);const p=await r.json();if(!r.ok)throw new Error(p.detail||"Team search failed.");setSearchResults(p.results||[]);if(!p.results?.length)setSearchMessage("No matching teams found.")}catch(e){setSearchMessage(e instanceof Error?e.message:"Team search failed.")}finally{setSearching(false)}}
- async function openTeam(team:TeamSummary|SavedTeam){const id="provider_id" in team?team.provider_id:team.id;setLoadingTeam(true);setSearchMessage("");try{const r=await fetch(`/api/v1/teams/${id}`);const p=await r.json();if(!r.ok)throw new Error(p.detail||"Could not load the team hub.");setSelectedTeam(p);setPhotoRefreshMessage("");setSearchResults([]);setQuery("")}catch(e){setSearchMessage(e instanceof Error?e.message:"Could not load the team hub.")}finally{setLoadingTeam(false)}}
- async function refreshPhotos(){if(!selectedTeam||refreshingPhotos)return;setRefreshingPhotos(true);setPhotoRefreshMessage("");try{const r=await fetch(`/api/v1/teams/${encodeURIComponent(selectedTeam.team.id)}?refresh_missing_photos=true`);const p=await r.json();if(!r.ok)throw new Error(p.detail||"Could not refresh player photos.");setSelectedTeam(p);setPhotoRefreshMessage("Photo refresh finished. Available portraits have been saved.");}catch(e){setPhotoRefreshMessage(e instanceof Error?e.message:"Photo refresh failed.")}finally{setRefreshingPhotos(false)}}
+ async function openTeam(team:TeamSummary|SavedTeam){
+  const id=String("provider_id" in team?team.provider_id:team.id);
+  const cached=authUser?readTeamHubCache(authUser.id,id):null;
+  setSearchMessage("");setPhotoRefreshMessage("");
+  if(cached){setSelectedTeam(cached);setSearchResults([]);setQuery("");return}
+  setLoadingTeam(true);
+  try{
+   const r=await fetch(`/api/v1/teams/${encodeURIComponent(id)}`);
+   const p=await r.json();
+   if(!r.ok)throw new Error(p.detail||"Could not load the team hub.");
+   setSelectedTeam(p);if(authUser)saveTeamHubCache(authUser.id,p);
+   setSearchResults([]);setQuery("");
+  }catch(e){setSearchMessage(e instanceof Error?e.message:"Could not load the team hub.")}
+  finally{setLoadingTeam(false)}
+ }
+ async function refreshPhotos(){if(!selectedTeam||refreshingPhotos)return;setRefreshingPhotos(true);setPhotoRefreshMessage("");try{const r=await fetch(`/api/v1/teams/${encodeURIComponent(selectedTeam.team.id)}?refresh_missing_photos=true`);const p=await r.json();if(!r.ok)throw new Error(p.detail||"Could not refresh player photos.");setSelectedTeam(p);if(authUser)saveTeamHubCache(authUser.id,p);setPhotoRefreshMessage("Photo refresh finished. Available portraits have been saved.");}catch(e){setPhotoRefreshMessage(e instanceof Error?e.message:"Photo refresh failed.")}finally{setRefreshingPhotos(false)}}
  async function savePreference(kind:"primary"|"favorite",id:string){setSavingPreference(true);try{const r=await fetch(kind==="primary"?"/api/v1/profile/primary-team":"/api/v1/profile/favorites",{method:kind==="primary"?"PUT":"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({provider_team_id:id})});if(!r.ok)throw new Error();await loadProfile()}finally{setSavingPreference(false)}}
  async function removeFavorite(id:string){setSavingPreference(true);try{await fetch(`/api/v1/profile/favorites/${id}`,{method:"DELETE"});await loadProfile()}finally{setSavingPreference(false)}}
  if(authLoading)return <div className="matches-loading"><LoaderCircle className="spin"/> Loading FanSphere...</div>;
