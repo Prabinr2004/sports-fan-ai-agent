@@ -55,18 +55,58 @@ async def test_personalized_quiz_pool_expands_with_provider_backed_facts(monkeyp
             ]
 
     monkeypatch.setattr("app.services.quiz_questions.get_football_provider", lambda: Provider())
-    questions = await build_team_questions("86", "Test Club", 5, "2026-10-07")
+    level2 = await build_team_questions("86", "Test Club", 2, "2026-10-07")
+    level3 = await build_team_questions("86", "Test Club", 3, "2026-10-07")
+    level5 = await build_team_questions("86", "Test Club", 5, "2026-10-07")
+    assert {"club-country", "club-venue", "club-founded", "club-colors"} <= {q["id"] for q in level2}
+    assert any(q["id"].startswith("player-position-") for q in level3)
+    assert any(q["id"].startswith("player-nationality-") for q in level3)
+    assert any(q["id"].startswith("player-birth-year-") for q in level5)
+    for questions in (level2, level3, level5):
+        ids = [q["id"] for q in questions]
+        assert len(ids) == len(set(ids))
+        for q in questions:
+            assert len(q["options"]) == 4
+            assert len({option.casefold() for option in q["options"]}) == 4
+            assert q["options"][q["answer"]]
 
-    ids = [question["id"] for question in questions]
-    assert len(ids) == len(set(ids))
-    assert "club-country" in ids
-    assert "club-venue" in ids
-    assert "club-founded" in ids
-    assert "club-colors" in ids
-    assert any(question_id.startswith("player-position-") for question_id in ids)
-    assert any(question_id.startswith("player-nationality-") for question_id in ids)
-    assert any(question_id.startswith("player-birth-year-") for question_id in ids)
-    for question in questions:
-        assert len(question["options"]) == 4
-        assert len({option.casefold() for option in question["options"]}) == 4
-        assert question["options"][question["answer"]]
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("club", ["Real Madrid", "Liverpool", "Manchester United", "Barcelona"])
+async def test_offline_history_and_level_separation(monkeypatch, club):
+    class OfflineProvider:
+        async def get_team(self, team_id):
+            raise RuntimeError("provider offline")
+
+        async def get_squad(self, team_id):
+            raise RuntimeError("provider offline")
+
+    monkeypatch.setattr("app.services.quiz_questions.get_football_provider", lambda: OfflineProvider())
+    levels = {}
+    for level in (2, 3, 4, 5):
+        questions = await build_team_questions("86", club, level, "2026-10-07")
+        assert questions, f"{club} level {level} has no offline questions"
+        levels[level] = {q["id"] for q in questions}
+        for q in questions:
+            assert len(q["options"]) == 4
+            assert 0 <= q["answer"] < 4
+            assert len(set(q["options"])) == 4
+    for first in levels:
+        for second in levels:
+            if first < second:
+                assert levels[first].isdisjoint(levels[second])
+
+
+@pytest.mark.asyncio
+async def test_real_madrid_record_goal_answer_offline(monkeypatch):
+    class OfflineProvider:
+        async def get_team(self, team_id):
+            raise RuntimeError("offline")
+
+        async def get_squad(self, team_id):
+            raise RuntimeError("offline")
+
+    monkeypatch.setattr("app.services.quiz_questions.get_football_provider", lambda: OfflineProvider())
+    questions = await build_team_questions("86", "Real Madrid", 5, "2026-10-07")
+    record = next(q for q in questions if q["id"] == "rm-record-goals")
+    assert record["options"][record["answer"]] == "450"
