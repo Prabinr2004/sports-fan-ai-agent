@@ -138,6 +138,37 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
             if level == minimum_level:
                 add(question_id, question, correct, distractors)
 
+    # Club identity facts supplement the live provider's small Level 2 pool.
+    identity = {
+        "real madrid": [
+            ("rm-identity-city", "Which city is Real Madrid based in?", "Madrid", ["Barcelona", "Seville", "Valencia"]),
+            ("rm-identity-rival", "Which club faces Real Madrid in El Clásico?", "Barcelona", ["Atlético Madrid", "Sevilla", "Valencia"]),
+            ("rm-identity-nickname", "Which nickname is commonly associated with Real Madrid?", "Los Blancos", ["The Reds", "The Gunners", "The Blues"]),
+        ],
+        "liverpool": [
+            ("liv-identity-city", "Which city is Liverpool FC based in?", "Liverpool", ["Manchester", "Leeds", "Birmingham"]),
+            ("liv-identity-ground", "What is Liverpool's home stadium?", "Anfield", ["Old Trafford", "Goodison Park", "Stamford Bridge"]),
+            ("liv-identity-song", "Which song is famously associated with Liverpool supporters?", "You'll Never Walk Alone", ["Blue Moon", "Glory Glory Man United", "I'm Forever Blowing Bubbles"]),
+        ],
+        "manchester united": [
+            ("mun-identity-ground", "What is Manchester United's home stadium?", "Old Trafford", ["Anfield", "Etihad Stadium", "Stamford Bridge"]),
+            ("mun-identity-nickname", "What is Manchester United's traditional nickname?", "The Red Devils", ["The Toffees", "The Gunners", "The Foxes"]),
+            ("mun-identity-city", "Which city is Manchester United associated with?", "Manchester", ["Liverpool", "Leeds", "London"]),
+        ],
+        "barcelona": [
+            ("bar-identity-city", "Which city is FC Barcelona based in?", "Barcelona", ["Madrid", "Valencia", "Bilbao"]),
+            ("bar-identity-nickname", "Which nickname refers to Barcelona's blue-and-maroon colors?", "Blaugrana", ["Los Blancos", "The Red Devils", "The Rossoneri"]),
+            ("bar-identity-rival", "Which club plays Barcelona in El Clásico?", "Real Madrid", ["Atlético Madrid", "Espanyol", "Sevilla"]),
+        ],
+    }
+    if level == 2:
+        normalized = team_name.casefold().strip()
+        for club_key, items in identity.items():
+            if normalized == club_key or normalized.startswith(club_key + " "):
+                for question_id, question, correct, distractors in items:
+                    add(question_id, question, correct, distractors)
+                break
+
     # Stable historical facts do not depend on the live squad feed.
     club = team_name.casefold().strip()
     historical = {
