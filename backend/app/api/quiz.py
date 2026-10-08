@@ -221,10 +221,23 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
             quiz_id() + ":practice",
         )
         pool.extend(grounded)
-    unseen = [question for question in pool if question["id"] not in daily_ids]
-    candidates = unseen if len(unseen) >= 5 else pool
+    previous = db.scalars(select(DailyQuizSnapshot).where(
+        DailyQuizSnapshot.user_id == user.id,
+        DailyQuizSnapshot.level == context["level"],
+    )).all()
+    seen_ids = set(daily_ids)
+    for snapshot in previous:
+        try:
+            seen_ids.update(q["id"] for q in json.loads(snapshot.questions_json))
+        except (ValueError, KeyError, TypeError):
+            continue
     rng = random.Random(f"{quiz_id()}:{user.id}:{context['level']}:practice:{practice_round}")
-    return rng.sample(candidates, min(5, len(candidates))), context
+    unseen = [question for question in pool if question["id"] not in seen_ids]
+    chosen = rng.sample(unseen, min(5, len(unseen)))
+    if len(chosen) < 5:
+        fallback = [question for question in pool if question["id"] not in {q["id"] for q in chosen} and question["id"] not in daily_ids]
+        chosen.extend(rng.sample(fallback, min(5 - len(chosen), len(fallback))))
+    return chosen, context
 
 
 @router.get("/practice")
