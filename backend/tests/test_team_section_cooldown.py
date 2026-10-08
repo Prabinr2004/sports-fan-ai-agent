@@ -66,3 +66,21 @@ async def test_failed_retry_never_returns_null_section(monkeypatch, tmp_path):
     assert isinstance(second, list)
     assert notice
     assert attempts == 2
+
+
+@pytest.mark.asyncio
+async def test_saved_section_cooldown_displays_stale_notice(monkeypatch, tmp_path):
+    monkeypatch.setattr(teams, "_CACHE_DB", tmp_path / "sections.db")
+    teams._write_section("86", "squad", [{"id": "player1"}])
+    teams._backoff_section("86", "squad")
+    calls = 0
+
+    async def provider(team_id):
+        nonlocal calls
+        calls += 1
+        return []
+
+    data, notice = await teams._cached_section(provider, "86", "squad")
+    assert data == [{"id": "player1"}]
+    assert "saved" in notice.lower()
+    assert calls == 0
