@@ -81,6 +81,14 @@ class FootballDataOrgProvider(FootballProvider):
         payload = await self._get(f"/teams/{provider_team_id}", ttl=1800)
         return [{"id": str(p.get("id")), "name": p.get("name"), "position": p.get("position"), "date_of_birth": p.get("dateOfBirth"), "nationality": p.get("nationality")} for p in payload.get("squad", [])]
 
+    async def get_player_position(self, player_id: str) -> str | None:
+        """Fetch an individual player's more specific position on demand.
+
+        Cached for a day to avoid making one request per squad member on page load.
+        """
+        payload = await self._get(f"/persons/{player_id}", ttl=86400)
+        return payload.get("position")
+
     async def get_fixtures(self, provider_team_id: str) -> list[dict[str, Any]]:
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "SCHEDULED", "limit": 10}, ttl=300)
         return [self._normalize_match(m) for m in payload.get("matches", [])]
