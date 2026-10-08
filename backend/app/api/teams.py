@@ -2,6 +2,7 @@ import httpx
 from fastapi import APIRouter, HTTPException, Query, status
 
 from app.services.football import get_football_provider
+from app.services.player_enrichment import enrich_squad
 
 router = APIRouter(prefix="/teams", tags=["teams"])
 
@@ -80,6 +81,7 @@ async def get_team(team_id: str) -> dict:
         ) from exc
 
     squad, squad_notice = await _optional_provider_call(provider.get_squad, team_id)
+    squad = await enrich_squad(team, squad)
     fixtures, fixtures_notice = await _optional_provider_call(provider.get_fixtures, team_id)
     recent_results, recent_notice = await _optional_provider_call(provider.get_recent_results, team_id)
     standings, standings_notice = await _optional_provider_call(provider.get_team_standings, team_id)
