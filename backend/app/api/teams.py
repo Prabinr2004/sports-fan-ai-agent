@@ -64,6 +64,7 @@ async def get_team(team_id: str) -> dict:
 
     squad, squad_notice = await _optional_provider_call(provider.get_squad, team_id)
     fixtures, fixtures_notice = await _optional_provider_call(provider.get_fixtures, team_id)
+    recent_results, recent_notice = await _optional_provider_call(provider.get_recent_results, team_id)
     standings, standings_notice = await _optional_provider_call(provider.get_team_standings, team_id)
     scorers, scorers_notice = await _optional_provider_call(provider.get_team_scorers, team_id)
 
@@ -72,6 +73,8 @@ async def get_team(team_id: str) -> dict:
         notices["squad"] = squad_notice
     if fixtures_notice:
         notices["fixtures"] = fixtures_notice
+    if recent_notice:
+        notices["recent_results"] = recent_notice
     if standings_notice:
         notices["standings"] = standings_notice
     if scorers_notice:
@@ -81,6 +84,7 @@ async def get_team(team_id: str) -> dict:
         "team": team,
         "squad": squad,
         "fixtures": fixtures,
+        "recent_results": recent_results[:5],
         "standings": standings,
         "scorers": scorers,
         "notices": notices,
