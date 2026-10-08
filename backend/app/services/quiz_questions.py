@@ -138,4 +138,45 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
             if level == minimum_level:
                 add(question_id, question, correct, distractors)
 
+    # Stable historical facts do not depend on the live squad feed.
+    club = team_name.casefold().strip()
+    historical = {
+        "liverpool": [
+            (3, "liv-2005-coach", "Who managed Liverpool when they won the 2005 Champions League?", "Rafael Benítez", ["Jürgen Klopp", "Gérard Houllier", "Roy Hodgson"]),
+            (3, "liv-2005-final", "Which club did Liverpool defeat in the 2005 Champions League final?", "AC Milan", ["Juventus", "Real Madrid", "Barcelona"]),
+            (3, "liv-record-scorer", "Who is Liverpool's all-time leading goalscorer?", "Ian Rush", ["Steven Gerrard", "Mohamed Salah", "Robbie Fowler"]),
+            (4, "liv-2005-city", "In which city was Liverpool's 2005 Champions League comeback final played?", "Istanbul", ["Athens", "Rome", "Madrid"]),
+            (4, "liv-2019-final", "Who did Liverpool beat in the 2019 Champions League final?", "Tottenham Hotspur", ["Chelsea", "Bayern Munich", "Ajax"]),
+            (4, "liv-2019-coach", "Who managed Liverpool when they won the 2019 Champions League?", "Jürgen Klopp", ["Rafael Benítez", "Brendan Rodgers", "Kenny Dalglish"]),
+            (5, "liv-2005-penalties", "Who was Liverpool's goalkeeper in the 2005 Champions League final shootout?", "Jerzy Dudek", ["Pepe Reina", "Alisson Becker", "Simon Mignolet"]),
+            (5, "liv-2019-opening-goal", "Who scored Liverpool's opening goal in the 2019 Champions League final?", "Mohamed Salah", ["Sadio Mané", "Divock Origi", "Roberto Firmino"]),
+        ],
+        "manchester united": [
+            (3, "mun-1999-manager", "Who managed Manchester United during their 1999 treble season?", "Alex Ferguson", ["Matt Busby", "José Mourinho", "Louis van Gaal"]),
+            (3, "mun-1999-final", "Who did Manchester United beat in the 1999 Champions League final?", "Bayern Munich", ["Juventus", "Barcelona", "Real Madrid"]),
+            (3, "mun-record-scorer", "Who is Manchester United's all-time leading goalscorer?", "Wayne Rooney", ["Bobby Charlton", "Cristiano Ronaldo", "Denis Law"]),
+            (4, "mun-1999-winning-goal", "Who scored Manchester United's winning goal in the 1999 Champions League final?", "Ole Gunnar Solskjær", ["Teddy Sheringham", "David Beckham", "Ryan Giggs"]),
+            (4, "mun-2008-final", "Which club did Manchester United defeat in the 2008 Champions League final?", "Chelsea", ["Arsenal", "Liverpool", "Barcelona"]),
+            (4, "mun-2008-coach", "Who managed Manchester United when they won the 2008 Champions League?", "Alex Ferguson", ["David Moyes", "José Mourinho", "Ron Atkinson"]),
+            (5, "mun-1999-equaliser", "Who scored Manchester United's equaliser in the 1999 Champions League final?", "Teddy Sheringham", ["Ole Gunnar Solskjær", "Paul Scholes", "Dwight Yorke"]),
+            (5, "mun-2008-final-city", "In which city was the 2008 Champions League final played?", "Moscow", ["London", "Rome", "Munich"]),
+        ],
+        "barcelona": [
+            (3, "bar-2009-coach", "Who coached Barcelona to the 2009 Champions League title?", "Pep Guardiola", ["Frank Rijkaard", "Luis Enrique", "Johan Cruyff"]),
+            (3, "bar-2009-final", "Who did Barcelona defeat in the 2009 Champions League final?", "Manchester United", ["Chelsea", "Arsenal", "Bayern Munich"]),
+            (3, "bar-record-scorer", "Who is Barcelona's all-time leading goalscorer?", "Lionel Messi", ["Luis Suárez", "César Rodríguez", "Samuel Eto'o"]),
+            (4, "bar-2015-coach", "Who coached Barcelona to the 2015 Champions League title?", "Luis Enrique", ["Pep Guardiola", "Frank Rijkaard", "Xavi Hernández"]),
+            (4, "bar-2015-final", "Who did Barcelona beat in the 2015 Champions League final?", "Juventus", ["Manchester United", "Bayern Munich", "Real Madrid"]),
+            (4, "bar-2006-final", "Who did Barcelona beat in the 2006 Champions League final?", "Arsenal", ["Chelsea", "Liverpool", "AC Milan"]),
+            (5, "bar-2009-second-goal", "Who scored Barcelona's second goal in the 2009 Champions League final?", "Lionel Messi", ["Samuel Eto'o", "Xavi", "Andrés Iniesta"]),
+            (5, "bar-2015-final-city", "In which city was the 2015 Champions League final played?", "Berlin", ["Rome", "Lisbon", "Paris"]),
+        ],
+    }
+    for club_key, items in historical.items():
+        if club == club_key or club.startswith(club_key + " "):
+            for required_level, question_id, question, correct, distractors in items:
+                if level == required_level:
+                    add(question_id, question, correct, distractors)
+            break
+
     return questions
