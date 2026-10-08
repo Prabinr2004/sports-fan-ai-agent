@@ -93,8 +93,12 @@ async def _optional_provider_call(call, team_id: str) -> tuple[list, str | None]
     try:
         return await call(team_id), None
     except httpx.HTTPStatusError as exc:
-        if exc.response.status_code in {401, 403, 404}:
-            return [], "This data is unavailable for this team on the current provider plan."
+        if exc.response.status_code == 401:
+            return [], "Football provider authentication failed for this section."
+        if exc.response.status_code == 403:
+            return [], "Football provider denied access to this section."
+        if exc.response.status_code == 404:
+            return [], "This section is not available for the requested team."
         if exc.response.status_code == 429:
             return [], "Provider rate limit reached for this section."
         return [], "This section could not be loaded from the football provider."
