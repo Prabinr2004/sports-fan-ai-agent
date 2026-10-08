@@ -203,3 +203,14 @@
 .team-fixture-matchup>small{flex-basis:100%;color:#90aabe;font-size:12px}
 .team-fixture-status{font-size:11px;font-weight:750;color:#81ebc8;background:#173b43;border-radius:999px;padding:7px 10px;white-space:nowrap}
 @media(max-width:700px){.team-fixture-card{align-items:flex-start;flex-wrap:wrap;gap:12px}.team-fixture-date{flex-basis:100%}.team-fixture-status{margin-left:auto}.team-fixture-matchup{gap:10px}}
+
+
+/* Phase 2: results and form */
+.team-hub-tab-content{display:grid;gap:22px}
+.team-result-row{display:flex;align-items:center;gap:20px;padding:16px 20px}
+.team-result-score{font-size:19px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.team-result-form{margin-left:auto;flex:0 0 32px;width:32px;height:32px;border-radius:9px;display:grid;place-items:center;font-weight:900;font-size:12px;background:#26394b;color:#c8d5df}
+.team-result-form.form-w{background:#164a3b;color:#8cf3c3}
+.team-result-form.form-d{background:#4a4230;color:#ffe19a}
+.team-result-form.form-l{background:#4d2d3a;color:#ff9eb0}
+@media(max-width:700px){.team-result-row{flex-wrap:wrap;gap:12px}.team-result-form{margin-left:auto}.team-result-score{font-size:16px}}
