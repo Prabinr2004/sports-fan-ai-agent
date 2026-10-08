@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.models.analysis import AnalysisDailyClaim, AnalysisTokenEvent, MatchAnalysisUnlock
 from app.models.user import User
+from app.services.gems import gem_balance, spendable_xp, spend_analysis_gems, XP_PER_GEM, GEMS_PER_ANALYSIS, MAX_EXTRA_ANALYSES
 
 
 def token_balance(db: Session, user_id: int) -> int:
@@ -37,8 +38,19 @@ def analysis_access_summary(db: Session, user_id: int) -> dict:
         AnalysisDailyClaim.user_id == user_id,
         AnalysisDailyClaim.claim_date == today,
     )) is not None
+    extras_used = int(db.scalar(select(func.count(MatchAnalysisUnlock.id)).where(
+        MatchAnalysisUnlock.user_id == user_id,
+        MatchAnalysisUnlock.unlock_date == today,
+        MatchAnalysisUnlock.unlock_source == "GEMS",
+    )) or 0)
     return {
         "tokens": token_balance(db, user_id),
+        "gems": gem_balance(db, user_id),
+        "spendable_xp": spendable_xp(db, user_id),
+        "xp_per_gem": XP_PER_GEM,
+        "gems_per_analysis": GEMS_PER_ANALYSIS,
+        "extra_remaining": max(0, MAX_EXTRA_ANALYSES - extras_used),
+        "extra_daily_limit": MAX_EXTRA_ANALYSES,
         "free_remaining": 0 if free_used else 1,
         "date": today,
     }
@@ -66,16 +78,19 @@ def unlock_analysis(db: Session, user_id: int, match_id: str, analysis_text: str
     if not free_used:
         source = "FREE_DAILY"
         db.add(AnalysisDailyClaim(user_id=user_id, claim_date=today))
-    elif token_balance(db, user_id) > 0:
-        source = "TOKEN"
-        db.add(AnalysisTokenEvent(
-            user_id=user_id,
-            amount=-1,
-            source_type="match_analysis",
-            source_id=match_id,
-        ))
     else:
-        return {"unlocked": False, "reason": "Complete today's rewarded Daily Quiz to earn an Analysis Token.", **analysis_access_summary(db, user_id)}
+        extras_used = int(db.scalar(select(func.count(MatchAnalysisUnlock.id)).where(
+            MatchAnalysisUnlock.user_id == user_id,
+            MatchAnalysisUnlock.unlock_date == today,
+            MatchAnalysisUnlock.unlock_source == "GEMS",
+        )) or 0)
+        if extras_used >= MAX_EXTRA_ANALYSES:
+            return {"unlocked": False, "reason": "Daily limit reached: 1 free plus 3 gem-unlocked analyses.", **analysis_access_summary(db, user_id)}
+        try:
+            spend_analysis_gems(db, user_id, match_id)
+        except ValueError as exc:
+            return {"unlocked": False, "reason": str(exc), **analysis_access_summary(db, user_id)}
+        source = "GEMS"
 
     db.add(MatchAnalysisUnlock(
         user_id=user_id,
