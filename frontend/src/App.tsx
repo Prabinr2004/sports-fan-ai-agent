@@ -75,7 +75,7 @@ function App(){
    }
    setSelectedTeam(merged);
    if(authUser)saveTeamHubCache(authUser.id,merged);
-   setTeamRefreshMessage("Team data refreshed. Previously saved sections were preserved where updates were unavailable.");
+   setTeamRefreshMessage(Object.keys(merged.notices||{}).length?"Refresh completed with limited provider coverage. Previously saved sections were preserved.":"Team data refreshed successfully.");
   }catch(e){setTeamRefreshMessage(e instanceof Error?e.message:"Team refresh failed. Saved data remains available.")}
   finally{setRefreshingTeam(false)}
  }
