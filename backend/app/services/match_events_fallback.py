@@ -15,7 +15,8 @@ BASE = "https://www.thesportsdb.com/api/v1/json/123"
 
 def _name(value: str | None) -> str:
     text = (value or "").casefold()
-    text = text.replace("internazionale milano", "inter").replace("internazionale", "inter")\n    text = re.sub(r"\\b(cf|fc|afc|sc|club|football|milano)\\b", " ", text)
+    text = text.replace("internazionale milano", "inter").replace("internazionale", "inter")
+    text = re.sub(r"\\b(cf|fc|afc|sc|club|football|milano)\\b", " ", text)
     return re.sub(r"[^a-z0-9]", "", text)
 
 
