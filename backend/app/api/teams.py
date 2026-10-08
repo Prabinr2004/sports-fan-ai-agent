@@ -49,6 +49,21 @@ async def search_teams(q: str = Query(min_length=2, max_length=100)) -> dict:
     return {"query": q, "results": results, "provider_connected": True}
 
 
+@router.get("/{team_id}/players/{player_id}/position")
+async def get_player_position(team_id: str, player_id: str) -> dict:
+    """Optional on-demand player position lookup; never invent tactical roles."""
+    provider = get_football_provider()
+    try:
+        position = await provider.get_player_position(player_id)
+        return {"player_id": player_id, "position": position, "source": "football-data.org"}
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code in {401, 403, 404, 429}:
+            return {"player_id": player_id, "position": None, "source": "unavailable"}
+        raise _provider_error(exc) from exc
+    except httpx.HTTPError:
+        return {"player_id": player_id, "position": None, "source": "unavailable"}
+
+
 @router.get("/{team_id}")
 async def get_team(team_id: str) -> dict:
     provider = get_football_provider()
