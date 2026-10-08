@@ -42,7 +42,7 @@ function App(){
 
  async function searchTeams(e:FormEvent){e.preventDefault();const t=query.trim();if(t.length<2)return;const request=++searchRequest.current;setSearching(true);setSearchMessage("");setSearchResults([]);try{const r=await fetch(`/api/v1/teams/search?q=${encodeURIComponent(t)}`);const p=await r.json();if(request!==searchRequest.current)return;if(!r.ok)throw new Error(p.detail||"Team search failed.");setSearchResults(p.results||[]);if(p.notice)setSearchMessage(p.notice);else if(!p.results?.length)setSearchMessage("No matching teams found.")}catch(e){if(request===searchRequest.current)setSearchMessage(e instanceof Error?e.message:"Team search failed.")}finally{if(request===searchRequest.current)setSearching(false)}}
  async function openTeam(team:TeamSummary|SavedTeam){
-  const request=++teamRequest.current;const id=String("provider_id" in team?team.provider_id:team.id);
+  const request=++teamRequest.current;searchRequest.current++;setSearching(false);const id=String("provider_id" in team?team.provider_id:team.id);
   const cached=authUser?readTeamHubCache(authUser.id,id):null;
   setSearchMessage("");setPhotoRefreshMessage("");setTeamRefreshMessage("");setLoadingTeam(false);setRefreshingTeam(false);setRefreshingPhotos(false);
   if(cached){setSelectedTeam(cached);setSearchResults([]);setQuery("");return}
