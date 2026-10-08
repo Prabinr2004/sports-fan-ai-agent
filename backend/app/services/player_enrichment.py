@@ -5,6 +5,8 @@ unambiguous; prefer matching birth dates when available.
 """
 from datetime import datetime, timedelta, timezone
 import re
+import sqlite3
+from pathlib import Path
 import unicodedata
 
 import httpx
@@ -16,6 +18,29 @@ _CACHE = {}
 _CACHE_TTL = timedelta(hours=12)
 _SEARCH_CACHE = {}
 _MAX_SEARCHES_PER_TEAM = 8
+_DB_PATH = Path(__file__).resolve().parents[2] / "player_artwork_cache.sqlite3"
+
+def _db():
+    db = sqlite3.connect(_DB_PATH, timeout=5)
+    db.execute("CREATE TABLE IF NOT EXISTS player_artwork (team_id TEXT NOT NULL, player_key TEXT NOT NULL, photo_url TEXT, shirt_number INTEGER, PRIMARY KEY(team_id, player_key))")
+    return db
+
+def _saved_artwork(team_id, player):
+    try:
+        with _db() as db:
+            return db.execute("SELECT photo_url, shirt_number FROM player_artwork WHERE team_id=? AND player_key=?", (str(team_id), _normalize(player.get("name")))).fetchone()
+    except sqlite3.Error:
+        return None
+
+def _save_artwork(team_id, player, photo, number):
+    if not photo and number is None:
+        return
+    try:
+        with _db() as db:
+            db.execute("INSERT INTO player_artwork (team_id, player_key, photo_url, shirt_number) VALUES (?, ?, ?, ?) ON CONFLICT(team_id, player_key) DO UPDATE SET photo_url=COALESCE(excluded.photo_url, photo_url), shirt_number=COALESCE(excluded.shirt_number, shirt_number)", (str(team_id), _normalize(player.get("name")), photo, number))
+    except sqlite3.Error:
+        pass
+
 
 
 def _normalize(value):
@@ -97,11 +122,20 @@ async def _resolve_team_id(team):
     return result
 
 
-async def enrich_squad(team, squad):
+async def enrich_squad(team, squad, refresh_missing=False):
     if not squad:
         return squad
     team_id = await _resolve_team_id(team)
     if not team_id:
+        return squad
+    squad = [dict(player) for player in squad]
+    for player in squad:
+        saved = _saved_artwork(team_id, player)
+        if saved:
+            player["photo_url"] = player.get("photo_url") or saved[0]
+            if player.get("shirt_number") is None:
+                player["shirt_number"] = saved[1]
+    if not refresh_missing and all(player.get("photo_url") for player in squad):
         return squad
     now = datetime.now(timezone.utc)
     entry = _CACHE.get(team_id)
@@ -125,7 +159,7 @@ async def enrich_squad(team, squad):
 
     # The free team-list API only returns a subset. Search a small number of
     # missing players by name, respecting the free API's 30 requests/minute.
-    missing = [p for p in squad if not _match(p, players)]
+    missing = [p for p in squad if not p.get('photo_url') and not _match(p, players)]
     searched = 0
     for player in missing:
         if searched >= _MAX_SEARCHES_PER_TEAM:
@@ -135,7 +169,7 @@ async def enrich_squad(team, squad):
         if not key[1]:
             continue
         cached = _SEARCH_CACHE.get(key)
-        if cached and now - cached[0] < _CACHE_TTL:
+        if cached and now - cached[0] < _CACHE_TTL and not refresh_missing:
             candidates = cached[1]
         else:
             searched += 1
@@ -182,5 +216,6 @@ async def enrich_squad(team, squad):
             number = candidate.get("strNumber")
             if str(number or "").strip().isdigit() and 0 <= int(number) <= 99:
                 updated["shirt_number"] = int(number)
+        _save_artwork(team_id, player, updated.get('photo_url'), updated.get('shirt_number'))
         enriched.append(updated)
     return enriched
