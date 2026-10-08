@@ -24,13 +24,13 @@ def numeric_distractors(value: int, offsets: tuple[int, ...] = (-2, -1, 1, 2, 5,
 
 
 async def build_team_questions(provider_team_id: str, team_name: str, level: int, day: str) -> list[dict]:
-    provider = get_football_provider()
     team, squad = {}, []
     try:
+        provider = get_football_provider()
         team = await provider.get_team(provider_team_id)
         squad = await provider.get_squad(provider_team_id)
-    except (httpx.HTTPError, HTTPException):
-        # Historical questions remain available during provider outages.
+    except (httpx.HTTPError, HTTPException, ValueError, RuntimeError):
+        # Static history questions remain available even if provider setup fails.
         pass
 
     questions: list[dict] = []
