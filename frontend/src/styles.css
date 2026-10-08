@@ -169,3 +169,12 @@
 .premium-pulse-recent{display:grid;gap:5px;margin-top:12px}
 .premium-pulse-recent>span{font-size:8px;font-weight:900;letter-spacing:.1em;color:#83a1b8}
 .premium-pulse-recent small{font-size:11px;color:#c4d7e4;line-height:1.4}
+
+
+/* Give club standings breathing room beside each crest */
+.premium-pulse-top{display:flex;align-items:center;gap:16px;width:100%}
+.premium-pulse-top .premium-pulse-crest{flex:0 0 54px}
+.premium-pulse-top .premium-pulse-standing{flex:1;min-width:0;margin-right:0;padding-left:2px}
+.premium-pulse-top .premium-pulse-arrow{flex:0 0 auto;margin-left:auto;align-self:flex-start}
+.premium-pulse-standing strong{display:block;font-size:20px;line-height:1.15}
+.premium-pulse-standing small{display:block;max-width:100%;overflow-wrap:anywhere}
