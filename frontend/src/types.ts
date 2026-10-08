@@ -22,7 +22,10 @@ export type Player = {
   shirt_number?: number | null;
 };
 
+export type MatchGoal = {player_name: string; minute?: number | null; extra_time?: number | null; team_id?: string | null};
+
 export type Fixture = {
+  goals?: MatchGoal[];
   id: string;
   utc_date?: string | null;
   status?: string | null;
