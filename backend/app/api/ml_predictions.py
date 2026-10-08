@@ -1,5 +1,9 @@
 import httpx
-from fastapi import APIRouter,HTTPException,Query
+from fastapi import APIRouter,HTTPException,Query,Request,Depends
+from sqlalchemy.orm import Session
+from app.api.auth import require_user
+from app.database.session import get_db
+from app.services.analysis_access import unlock_analysis
 from app.ml.europe import predict_cross_league,predict_trained_europe
 from app.ml.trained import predict_from_team_names
 from app.services.football import get_football_provider
@@ -11,8 +15,7 @@ def _is_european_competition(name:str|None)->bool:
  n=name.casefold()
  return any(token in n for token in ("champions league","europa league","conference league","uefa"))
 
-@router.get("/predict/{match_id}")
-async def predict_match(match_id:str,home_name:str|None=Query(default=None),away_name:str|None=Query(default=None),competition:str|None=Query(default=None))->dict:
+async def predict_match(match_id:str,home_name:str|None=None,away_name:str|None=None,competition:str|None=None)->dict:
  if home_name and away_name:
   if _is_european_competition(competition):
    european=predict_trained_europe(home_name,away_name)
@@ -33,3 +36,22 @@ async def predict_match(match_id:str,home_name:str|None=Query(default=None),away
  except (httpx.HTTPStatusError,HTTPException):
   resolved_home=home_name;resolved_away=away_name
  return {"match_id":match_id,"home_team":resolved_home,"away_team":resolved_away,"available":False,"reason":"FanSphere does not have a validated local model for one or both clubs yet. An uncalibrated recent-form percentage is intentionally not shown.","training_status":"unsupported-club-awaiting-european-model"}
+
+
+@router.get("/predict/{match_id}")
+async def predict_match_endpoint(
+    match_id: str, request: Request, db: Session = Depends(get_db),
+    home_name: str | None = Query(default=None),
+    away_name: str | None = Query(default=None),
+    competition: str | None = Query(default=None),
+) -> dict:
+    """One shared daily match unlock for ML predictions and rich analysis."""
+    user = require_user(request, db)
+    # Do not consume an allowance for unsupported matches.
+    result = await predict_match(match_id, home_name, away_name, competition)
+    if not result.get("available"):
+        return result
+    access = unlock_analysis(db, user.id, match_id)
+    if not access["unlocked"]:
+        raise HTTPException(status_code=402, detail=access["reason"])
+    return {**result, "access": access}
