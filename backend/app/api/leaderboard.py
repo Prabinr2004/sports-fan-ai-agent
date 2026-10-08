@@ -21,6 +21,9 @@ def leaderboard(request: Request, db: Session = Depends(get_db)) -> dict:
         select(User, xp_total)
         .outerjoin(XPEvent, XPEvent.user_id == User.id)
         .where(User.email != DEMO_EMAIL)
+        .where(~User.email.like("%@example.com"))
+        .where(~User.email.like("qa-%"))
+        .where(~User.email.like("fan-%@example.com"))
         .group_by(User.id)
         .order_by(xp_total.desc(), User.created_at.asc())
         .limit(50)
@@ -58,5 +61,5 @@ def leaderboard(request: Request, db: Session = Depends(get_db)) -> dict:
         "entries": entries,
         "current_user_email": current_user.email,
         "mode": "registered-accounts",
-        "notice": "Rankings include registered FanSphere accounts. The legacy development account is excluded.",
+        "notice": "Rankings exclude development and automated test accounts.",
     }
