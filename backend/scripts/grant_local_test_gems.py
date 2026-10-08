@@ -2,7 +2,10 @@
 
 Run from backend: python scripts/grant_local_test_gems.py
 """
-from getpass import getpass
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from sqlalchemy import select
 from app.database.session import SessionLocal, engine
 from app.models.user import User
