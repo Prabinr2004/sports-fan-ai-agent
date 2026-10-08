@@ -1,5 +1,6 @@
+from app.api.auth import require_user
 import httpx
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import Request, APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
@@ -68,8 +69,8 @@ async def _get_or_create_team(db: Session, provider_team_id: str) -> Team:
 
 
 @router.get("")
-def get_profile(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+def get_profile(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     favorite_links = db.scalars(select(UserFavoriteTeam).where(UserFavoriteTeam.user_id == user.id)).all()
     favorites = []
     for link in favorite_links:
@@ -88,9 +89,9 @@ def get_profile(db: Session = Depends(get_db)) -> dict:
 
 
 @router.get("/club-pulse")
-async def get_club_pulse(db: Session = Depends(get_db)) -> dict:
+async def get_club_pulse(request: Request, db: Session = Depends(get_db)) -> dict:
     """Personalized club facts; never fabricate unavailable provider data."""
-    user = _get_or_create_local_user(db)
+    user = require_user(request, db)
     saved = []
     if user.primary_team:
         saved.append((user.primary_team, True))
@@ -145,8 +146,8 @@ async def get_club_pulse(db: Session = Depends(get_db)) -> dict:
 
 
 @router.get("/achievements")
-def get_achievements(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+def get_achievements(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     progress = progress_summary(db, user.id)
     quiz_completions = int(db.scalar(select(func.count(XPEvent.id)).where(XPEvent.user_id == user.id, XPEvent.source_type == "daily_quiz")) or 0)
     predictions = int(db.scalar(select(func.count(UserMatchPrediction.id)).where(UserMatchPrediction.user_id == user.id)) or 0)
@@ -167,8 +168,8 @@ def get_achievements(db: Session = Depends(get_db)) -> dict:
 
 
 @router.put("/primary-team")
-async def set_primary_team(choice: TeamChoice, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def set_primary_team(choice: TeamChoice, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     team = await _get_or_create_team(db, choice.provider_team_id)
     user.primary_team_id = team.id
     db.commit()
@@ -177,8 +178,8 @@ async def set_primary_team(choice: TeamChoice, db: Session = Depends(get_db)) ->
 
 
 @router.post("/favorites", status_code=status.HTTP_201_CREATED)
-async def add_favorite(choice: TeamChoice, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def add_favorite(choice: TeamChoice, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     team = await _get_or_create_team(db, choice.provider_team_id)
     existing = db.scalar(select(UserFavoriteTeam).where(UserFavoriteTeam.user_id == user.id, UserFavoriteTeam.team_id == team.id))
     if not existing:
@@ -188,8 +189,8 @@ async def add_favorite(choice: TeamChoice, db: Session = Depends(get_db)) -> dic
 
 
 @router.delete("/favorites/{provider_team_id}", status_code=status.HTTP_204_NO_CONTENT)
-def remove_favorite(provider_team_id: str, db: Session = Depends(get_db)) -> None:
-    user = _get_or_create_local_user(db)
+def remove_favorite(provider_team_id: str, request: Request, db: Session = Depends(get_db)) -> None:
+    user = require_user(request, db)
     team = db.scalar(select(Team).where(Team.provider_id == provider_team_id))
     if not team:
         raise HTTPException(status_code=404, detail="Favorite team not found.")
