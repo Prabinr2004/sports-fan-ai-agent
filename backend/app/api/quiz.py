@@ -249,7 +249,7 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
 
 
 @router.get("/practice")
-async def practice_quiz(round: int = 0, request: Request, db: Session = Depends(get_db)) -> dict:
+async def practice_quiz(request: Request, round: int = 0, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
     safe_round = max(0, min(round, 1000))
     questions, context = await build_practice_questions(db, user, safe_round)
