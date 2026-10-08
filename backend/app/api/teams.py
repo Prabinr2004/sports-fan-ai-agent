@@ -153,7 +153,11 @@ async def get_player_position(team_id: str, player_id: str) -> dict:
 async def match_details(match_id: int):
     """Fetch verified goal events for a single match on demand."""
     try:
-        return await get_football_provider().get_match(str(match_id))
+        match = await get_football_provider().get_match(str(match_id))
+        if not match.get("goals") and match.get("status") == "FINISHED":
+            from app.services.match_events_fallback import lookup_goal_events
+            match["goals"] = await lookup_goal_events(match)
+        return match
     except httpx.HTTPStatusError as exc:
         if exc.response.status_code in (403, 404, 429):
             raise HTTPException(status_code=503, detail="Match events are unavailable from the provider.") from exc
