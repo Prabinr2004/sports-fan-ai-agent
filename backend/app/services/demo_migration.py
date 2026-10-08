@@ -56,6 +56,7 @@ def migrate_demo_progress(db: Session, target_email: str, *, apply: bool = False
             raise ValueError(f"Migration stopped: {len(conflicts)} overlapping {model.__tablename__} records. Nothing transferred.")
         counts[model.__tablename__] = len(old)
 
+    primary_team_transfer = bool(source.primary_team_id and not target.primary_team_id)
     if apply:
         if source.primary_team_id and not target.primary_team_id:
             target.primary_team_id = source.primary_team_id
@@ -64,4 +65,4 @@ def migrate_demo_progress(db: Session, target_email: str, *, apply: bool = False
                 row.user_id = target.id
         db.commit()
     return {"source": DEMO_EMAIL, "target": email, "applied": apply, "records": counts,
-            "primary_team_transfer": bool(source.primary_team_id and not target.primary_team_id)}
+            "primary_team_transfer": primary_team_transfer}
