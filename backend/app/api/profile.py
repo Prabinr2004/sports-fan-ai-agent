@@ -162,6 +162,19 @@ def get_achievements(request: Request, db: Session = Depends(get_db)) -> dict:
         ("fan_predictor", "Fan Predictor", "Make 5 match predictions", predictions >= 5, min(predictions, 5), 5),
         ("called_it", "Called It", "Get a scored match prediction correct", correct >= 1, min(correct, 1), 1),
         ("xp_500", "500 Club", "Earn 500 total XP", progress["total_xp"] >= 500, min(progress["total_xp"], 500), 500),
+        ("quiz_veteran", "Quiz Veteran", "Complete 15 rewarded Daily Quizzes", quiz_completions >= 15, min(quiz_completions, 15), 15),
+        ("quiz_legend", "Quiz Legend", "Complete 30 rewarded Daily Quizzes", quiz_completions >= 30, min(quiz_completions, 30), 30),
+        ("week_warrior", "Week Warrior", "Reach a 7-day activity streak", progress["longest_streak"] >= 7, min(progress["longest_streak"], 7), 7),
+        ("streak_champion", "Streak Champion", "Reach a 14-day activity streak", progress["longest_streak"] >= 14, min(progress["longest_streak"], 14), 14),
+        ("unstoppable", "Unstoppable", "Reach a 30-day activity streak", progress["longest_streak"] >= 30, min(progress["longest_streak"], 30), 30),
+        ("match_scout", "Match Scout", "Make 10 match predictions", predictions >= 10, min(predictions, 10), 10),
+        ("prediction_pro", "Prediction Pro", "Make 25 match predictions", predictions >= 25, min(predictions, 25), 25),
+        ("prediction_legend", "Prediction Legend", "Make 50 match predictions", predictions >= 50, min(predictions, 50), 50),
+        ("sharp_eye", "Sharp Eye", "Get 5 scored match predictions correct", correct >= 5, min(correct, 5), 5),
+        ("oracle", "Oracle", "Get 20 scored match predictions correct", correct >= 20, min(correct, 20), 20),
+        ("xp_1000", "1K Club", "Earn 1,000 lifetime XP", progress["total_xp"] >= 1000, min(progress["total_xp"], 1000), 1000),
+        ("xp_2500", "2.5K Club", "Earn 2,500 lifetime XP", progress["total_xp"] >= 2500, min(progress["total_xp"], 2500), 2500),
+        ("xp_5000", "5K Club", "Earn 5,000 lifetime XP", progress["total_xp"] >= 5000, min(progress["total_xp"], 5000), 5000),
     ]
     achievements = [{"id": key, "name": name, "description": description, "unlocked": unlocked, "progress": value, "target": target} for key, name, description, unlocked, value, target in definitions]
     return {"progress": progress, "stats": stats, "analysis_access": analysis_access_summary(db, user.id), "achievements": achievements, "unlocked": sum(1 for item in achievements if item["unlocked"]), "total": len(achievements)}
