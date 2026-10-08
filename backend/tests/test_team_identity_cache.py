@@ -39,3 +39,7 @@ async def test_team_identity_cached_and_survives_provider_outage(monkeypatch, tm
     assert stale["provider_connected"] is False
     assert "saved" in stale["notices"]["team"].lower()
     assert calls == 2
+    cooldown = await teams.get_team("86", refresh_team_data=True)
+    assert cooldown["team"] == first["team"]
+    assert cooldown["provider_connected"] is False
+    assert calls == 2  # Identity provider is not retried during its cooldown.
