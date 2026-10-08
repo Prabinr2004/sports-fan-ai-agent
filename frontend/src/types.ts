@@ -66,6 +66,7 @@ export type TeamHubData = {
   standings: TeamStanding[];
   scorers: TeamScorer[];
   notices?: {
+    team?: string;
     squad?: string;
     fixtures?: string;
     recent_results?: string;
