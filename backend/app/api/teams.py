@@ -148,24 +148,38 @@ async def get_player_position(team_id: str, player_id: str) -> dict:
 @router.get("/{team_id}")
 async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_team_data: bool = False) -> dict:
     provider = get_football_provider()
-    # Core club/team identity must succeed; squad and fixtures are optional because
+    # Core club/team identity is cached so provider outages do not hide saved club hubs.\n    # Squad and fixtures are optional because
     # football-data.org can restrict individual resources by competition/plan.
-    try:
-        team = await provider.get_team(team_id)
-    except httpx.HTTPStatusError as exc:
-        if exc.response.status_code in {401, 403, 429}:
-            fallback = await fallback_team(team_id)
-            if fallback is not None:
-                return fallback
-        raise _provider_error(exc) from exc
-    except httpx.HTTPError as exc:
-        fallback = await fallback_team(team_id)
-        if fallback is not None:
-            return fallback
-        raise HTTPException(
-            status_code=status.HTTP_502_BAD_GATEWAY,
-            detail="Could not reach the football provider.",
-        ) from exc
+    cached_team = _read_section(team_id, "identity")
+    identity_stale = False
+    if cached_team and cached_team[0] is not None and not refresh_team_data and time.time() - cached_team[1] < 86400:
+        team = cached_team[0]
+    else:
+        try:
+            team = await provider.get_team(team_id)
+            _write_section(team_id, "identity", team)
+        except httpx.HTTPStatusError as exc:
+            if cached_team and cached_team[0] is not None:
+                team = cached_team[0]
+                identity_stale = True
+            else:
+                if exc.response.status_code in {401, 403, 429}:
+                    fallback = await fallback_team(team_id)
+                    if fallback is not None:
+                        return fallback
+                raise _provider_error(exc) from exc
+        except httpx.HTTPError as exc:
+            if cached_team and cached_team[0] is not None:
+                team = cached_team[0]
+                identity_stale = True
+            else:
+                fallback = await fallback_team(team_id)
+                if fallback is not None:
+                    return fallback
+                raise HTTPException(
+                    status_code=status.HTTP_502_BAD_GATEWAY,
+                    detail="Could not reach the football provider.",
+                ) from exc
 
     squad, squad_notice = await _cached_section(provider.get_squad, team_id, "squad", force=refresh_team_data)
     squad = await enrich_squad(team, squad, refresh_missing=refresh_missing_photos)
@@ -175,6 +189,8 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_t
     scorers, scorers_notice = await _cached_section(provider.get_team_scorers, team_id, "scorers", force=refresh_team_data)
 
     notices = {}
+    if identity_stale:
+        notices["team"] = "Showing saved club information while the football provider is unavailable."
     if squad_notice:
         notices["squad"] = squad_notice
     if fixtures_notice:
@@ -194,5 +210,5 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_t
         "standings": standings,
         "scorers": scorers,
         "notices": notices,
-        "provider_connected": True,
+        "provider_connected": not identity_stale,
     }
