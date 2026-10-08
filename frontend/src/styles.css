@@ -160,3 +160,12 @@
 .premium-form-result.form-w{background:rgba(70,211,143,.16);color:#72efb1}
 .premium-form-result.form-d{background:rgba(156,174,194,.19);color:#c6d2df}
 .premium-form-result.form-l{background:rgba(235,104,115,.16);color:#f69da5}
+
+
+/* Consistent club card: crest + league standing, then latest match */
+.premium-pulse-standing{display:flex;flex-direction:column;gap:3px;align-items:flex-start;min-width:0;margin-right:auto}
+.premium-pulse-standing strong{font-size:20px;line-height:1;color:#75edc4}
+.premium-pulse-standing small{font-size:10px;color:#9bb2c4;line-height:1.35}
+.premium-pulse-recent{display:grid;gap:5px;margin-top:12px}
+.premium-pulse-recent>span{font-size:8px;font-weight:900;letter-spacing:.1em;color:#83a1b8}
+.premium-pulse-recent small{font-size:11px;color:#c4d7e4;line-height:1.4}
