@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
+from app.api.auth import require_user
+from fastapi import Request, APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -16,14 +17,14 @@ router = APIRouter(prefix="/analysis", tags=["analysis"])
 
 
 @router.get("/access")
-def get_analysis_access(db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+def get_analysis_access(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     return {**analysis_access_summary(db, user.id), "rich_analysis_available": bool(settings.openrouter_api_key)}
 
 
 @router.post("/{match_id}/rich")
-async def rich_match_analysis(match_id: str, db: Session = Depends(get_db)) -> dict:
-    user = _get_or_create_local_user(db)
+async def rich_match_analysis(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
     if not settings.openrouter_api_key:
         raise HTTPException(status_code=503, detail="Rich FanSphere analysis is not configured.")
 
