@@ -25,11 +25,13 @@ def numeric_distractors(value: int, offsets: tuple[int, ...] = (-2, -1, 1, 2, 5,
 
 async def build_team_questions(provider_team_id: str, team_name: str, level: int, day: str) -> list[dict]:
     provider = get_football_provider()
+    team, squad = {}, []
     try:
         team = await provider.get_team(provider_team_id)
         squad = await provider.get_squad(provider_team_id)
     except (httpx.HTTPError, HTTPException):
-        return []
+        # Historical questions remain available during provider outages.
+        pass
 
     questions: list[dict] = []
 
@@ -128,7 +130,7 @@ async def build_team_questions(provider_team_id: str, team_name: str, level: int
             (4, "rm-2017-final", "Which club did Real Madrid beat in the 2017 Champions League final?", "Juventus", ["Liverpool", "Atlético Madrid", "Manchester City"]),
             (5, "rm-2018-final-bale", "Who scored twice for Real Madrid in the 2018 Champions League final?", "Gareth Bale", ["Karim Benzema", "Cristiano Ronaldo", "Isco"]),
             (5, "rm-2017-final-ronaldo", "Who scored twice for Real Madrid in the 2017 Champions League final?", "Cristiano Ronaldo", ["Gareth Bale", "Karim Benzema", "Sergio Ramos"]),
-            (5, "rm-record-goals", "How many official goals did Cristiano Ronaldo score for Real Madrid?", "451", ["438", "312", "405"]),
+            (5, "rm-record-goals", "How many official goals did Cristiano Ronaldo score for Real Madrid?", "450", ["438", "312", "405"]),
             (5, "rm-2014-final-opponent", "Who did Real Madrid defeat in the 2014 Champions League final?", "Atlético Madrid", ["Juventus", "Liverpool", "Barcelona"]),
             (5, "rm-2018-final-city", "In which city was the 2018 Champions League final played?", "Kyiv", ["Cardiff", "Lisbon", "Milan"]),
         ]
