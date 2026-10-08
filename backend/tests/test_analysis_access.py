@@ -106,3 +106,14 @@ def test_rich_analysis_uses_server_fixture_and_model_context(monkeypatch) -> Non
     assert captured["home_team"] == "Server Home"
     assert captured["away_team"] == "Server Away"
     assert captured["model_outlook"]["pick"] == "HOME"
+
+
+def test_match_unlock_status_is_scoped_to_match() -> None:
+    with TestClient(app) as client:
+        sign_in(client)
+        first = client.get("/api/v1/analysis/access?match_id=never-unlocked")
+        second = client.get("/api/v1/analysis/access")
+        assert first.status_code == 200
+        assert first.json()["match_unlocked"] is False
+        assert second.status_code == 200
+        assert second.json()["match_unlocked"] is False
