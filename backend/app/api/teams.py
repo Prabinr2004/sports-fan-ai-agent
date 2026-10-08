@@ -1,4 +1,8 @@
 import httpx
+import sqlite3
+import json
+import time
+from pathlib import Path
 from fastapi import APIRouter, HTTPException, Query, status
 
 from app.services.football import get_football_provider
@@ -6,6 +10,51 @@ from app.services.player_enrichment import enrich_squad
 from app.services.team_fallback import fallback_team
 
 router = APIRouter(prefix="/teams", tags=["teams"])
+_CACHE_DB = Path(__file__).resolve().parents[2] / "team_sections_cache.sqlite3"
+_SECTION_TTL = {"squad": 86400, "fixtures": 900, "recent_results": 1800, "standings": 1800, "scorers": 1800}
+_RETRY_AFTER = 180
+
+def _cache_db():
+    db = sqlite3.connect(_CACHE_DB, timeout=5)
+    db.execute("CREATE TABLE IF NOT EXISTS team_sections (team_id TEXT NOT NULL, section TEXT NOT NULL, payload TEXT NOT NULL, saved_at REAL NOT NULL, retry_after REAL NOT NULL DEFAULT 0, PRIMARY KEY(team_id, section))")
+    return db
+
+def _read_section(team_id, section):
+    try:
+        with _cache_db() as db:
+            row = db.execute("SELECT payload, saved_at, retry_after FROM team_sections WHERE team_id=? AND section=?", (str(team_id), section)).fetchone()
+        return (json.loads(row[0]), row[1], row[2]) if row else None
+    except (sqlite3.Error, ValueError, TypeError):
+        return None
+
+def _write_section(team_id, section, payload):
+    try:
+        with _cache_db() as db:
+            db.execute("INSERT INTO team_sections (team_id,section,payload,saved_at,retry_after) VALUES(?,?,?,?,0) ON CONFLICT(team_id,section) DO UPDATE SET payload=excluded.payload,saved_at=excluded.saved_at,retry_after=0", (str(team_id),section,json.dumps(payload),time.time()))
+    except (sqlite3.Error, TypeError, ValueError):
+        pass
+
+def _backoff_section(team_id, section):
+    try:
+        with _cache_db() as db:
+            db.execute("UPDATE team_sections SET retry_after=? WHERE team_id=? AND section=?", (time.time()+_RETRY_AFTER,str(team_id),section))
+    except sqlite3.Error:
+        pass
+
+async def _cached_section(call, team_id, section, force=False):
+    cached = _read_section(team_id, section)
+    now = time.time()
+    if cached and (cached[2] > now or (not force and now-cached[1] < _SECTION_TTL[section])):
+        return cached[0], None
+    data, notice = await _optional_provider_call(call, team_id)
+    if notice:
+        if cached:
+            _backoff_section(team_id, section)
+            return cached[0], "Showing previously saved data; provider is temporarily unavailable."
+        return [], notice
+    _write_section(team_id, section, data)
+    return data, None
+
 
 
 def _provider_error(exc: httpx.HTTPStatusError) -> HTTPException:
@@ -67,7 +116,7 @@ async def get_player_position(team_id: str, player_id: str) -> dict:
 
 
 @router.get("/{team_id}")
-async def get_team(team_id: str, refresh_missing_photos: bool = False) -> dict:
+async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_team_data: bool = False) -> dict:
     provider = get_football_provider()
     # Core club/team identity must succeed; squad and fixtures are optional because
     # football-data.org can restrict individual resources by competition/plan.
@@ -88,12 +137,12 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False) -> dict:
             detail="Could not reach the football provider.",
         ) from exc
 
-    squad, squad_notice = await _optional_provider_call(provider.get_squad, team_id)
+    squad, squad_notice = await _cached_section(provider.get_squad, team_id, "squad", force=refresh_team_data)
     squad = await enrich_squad(team, squad, refresh_missing=refresh_missing_photos)
-    fixtures, fixtures_notice = await _optional_provider_call(provider.get_fixtures, team_id)
-    recent_results, recent_notice = await _optional_provider_call(provider.get_recent_results, team_id)
-    standings, standings_notice = await _optional_provider_call(provider.get_team_standings, team_id)
-    scorers, scorers_notice = await _optional_provider_call(provider.get_team_scorers, team_id)
+    fixtures, fixtures_notice = await _cached_section(provider.get_fixtures, team_id, "fixtures", force=refresh_team_data)
+    recent_results, recent_notice = await _cached_section(provider.get_recent_results, team_id, "recent_results", force=refresh_team_data)
+    standings, standings_notice = await _cached_section(provider.get_team_standings, team_id, "standings", force=refresh_team_data)
+    scorers, scorers_notice = await _cached_section(provider.get_team_scorers, team_id, "scorers", force=refresh_team_data)
 
     notices = {}
     if squad_notice:
