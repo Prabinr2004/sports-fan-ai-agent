@@ -156,7 +156,10 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_t
     # football-data.org can restrict individual resources by competition/plan.
     cached_team = _read_section(team_id, "identity")
     identity_stale = False
-    if cached_team and cached_team[0] is not None and not refresh_team_data and time.time() - cached_team[1] < 86400:
+    if cached_team and cached_team[0] is not None and cached_team[2] > time.time():
+        team = cached_team[0]
+        identity_stale = True
+    elif cached_team and cached_team[0] is not None and not refresh_team_data and time.time() - cached_team[1] < 86400:
         team = cached_team[0]
     else:
         try:
@@ -166,6 +169,7 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_t
             if cached_team and cached_team[0] is not None:
                 team = cached_team[0]
                 identity_stale = True
+                _backoff_section(team_id, "identity")
             else:
                 if exc.response.status_code in {401, 403, 429}:
                     fallback = await fallback_team(team_id)
@@ -176,6 +180,7 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_t
             if cached_team and cached_team[0] is not None:
                 team = cached_team[0]
                 identity_stale = True
+                _backoff_section(team_id, "identity")
             else:
                 fallback = await fallback_team(team_id)
                 if fallback is not None:
