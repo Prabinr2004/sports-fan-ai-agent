@@ -22,7 +22,7 @@ def level_from_xp(total_xp: int) -> dict:
 
 
 def total_xp(db: Session, user_id: int) -> int:
-    return int(db.scalar(select(func.coalesce(func.sum(XPEvent.amount), 0)).where(XPEvent.user_id == user_id)) or 0)
+    return int(db.scalar(select(func.coalesce(func.sum(XPEvent.amount), 0)).where(XPEvent.user_id == user_id, XPEvent.amount > 0)) or 0)
 
 
 def record_activity_day(db: Session, user_id: int, activity_date: date | None = None) -> None:
