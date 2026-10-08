@@ -5,6 +5,11 @@ Apply only after reviewing the preview and backing up the SQLite database.
 """
 import argparse
 import json
+import sys
+from pathlib import Path
+
+# Support invocation as: python scripts/migrate_demo_progress.py
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.database.session import SessionLocal
 from app.models import analysis, prediction, progress, quiz, team, user  # noqa: F401
