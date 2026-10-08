@@ -180,13 +180,14 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
             fresh_team = [q for q in grounded if q["id"] not in seen_ids]
             rng.shuffle(fresh_team)
             chosen_team = fresh_team[:5]
-            if len(chosen_team) < 5:
-                repeat_team = [q for q in grounded if q["id"] not in {item["id"] for item in chosen_team}]
-                rng.shuffle(repeat_team)
-                chosen_team.extend(repeat_team[:5 - len(chosen_team)])
             general_needed = 5 - len(chosen_team)
             general_fallback = [q for q in questions if q["id"] not in {item["id"] for item in chosen_team}]
             questions = chosen_team + general_fallback[:general_needed]
+            # Only reuse club questions when the fresh general pool cannot fill the quiz.
+            if len(questions) < 5:
+                repeats = [q for q in grounded if q["id"] not in {item["id"] for item in questions}]
+                rng.shuffle(repeats)
+                questions.extend(repeats[:5 - len(questions)])
             rng.shuffle(questions)
 
     team = context["team"]
