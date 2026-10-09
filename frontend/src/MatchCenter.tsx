@@ -4,12 +4,44 @@ import ModelOutlook from "./ModelOutlook";
 
 export type MatchCenterTeam={id:string;name:string;short_name?:string|null;tla?:string|null;crest_url?:string|null};
 export type MatchCenterMatch={id:string;source_team_id:string;utc_date?:string|null;status?:string|null;competition?:string|null;home_team:MatchCenterTeam;away_team:MatchCenterTeam;user_prediction?:"HOME"|"DRAW"|"AWAY"|null;prediction_locked?:boolean};
-type Props={match:MatchCenterMatch;onBack:()=>void;onPick:(match:MatchCenterMatch,outcome:"HOME"|"DRAW"|"AWAY")=>Promise<void>;saving:boolean;message?:string};
+type Props={match:MatchCenterMatch;onBack:()=>void;onPick:(match:MatchCenterMatch,outcome:"HOME"|"DRAW"|"AWAY")=>Promise<void>;saving:boolean;message?:string;userId?:number};
 function Team({team}:{team:MatchCenterTeam}){return <div className="match-center-team">{team.crest_url?<img src={team.crest_url} alt=""/>:<div className="match-center-fallback">{team.tla||team.name.slice(0,2)}</div>}<strong>{team.name}</strong></div>}
 type FormStats={form:string[];goals_for:number|null;goals_against:number|null;matches:number};
 type Standing={competition?:string|null;position:number};
+const HUB_TTL=30*60*1000;
+function cachedHub(userId:number|undefined,teamId:string){
+ if(!userId)return null;
+ try{
+  const entry=JSON.parse(window.localStorage.getItem(`fansphere-team-hub-v2:${userId}:${teamId}`)||"null");
+  return entry&&Date.now()-entry.savedAt<HUB_TTL&&String(entry.data?.team?.id)===teamId?entry.data:null;
+ }catch{return null}
+}
+function comparisonFromCache(userId:number|undefined,match:MatchCenterMatch){
+ const sides=[match.home_team,match.away_team].map(team=>{
+  const hub=cachedHub(userId,String(team.id));
+  if(!hub)return null;
+  const recent=(hub.recent_results||[]).filter((m:any)=>m.score?.home!=null&&m.score?.away!=null).sort((a:any,b:any)=>(a.utc_date||"").localeCompare(b.utc_date||"")).slice(-5);
+  let goalsFor=0,goalsAgainst=0;
+  const form=recent.map((m:any)=>{
+   const home=String(m.home_team?.id)===String(team.id);
+   const gf=home?m.score.home:m.score.away,ga=home?m.score.away:m.score.home;
+   goalsFor+=gf;goalsAgainst+=ga;
+   return gf>ga?"W":gf===ga?"D":"L";
+  });
+  return {stats:{form,goals_for:form.length?goalsFor:null,goals_against:form.length?goalsAgainst:null,matches:form.length} as FormStats,standings:(hub.standings||[]).filter((s:any)=>s.position!=null).map((s:any)=>({competition:s.competition,position:s.position})) as Standing[]};
+ });
+ if(!sides.some(Boolean))return null;
+ return {home:sides[0]?.stats||{form:[],goals_for:null,goals_against:null,matches:0},away:sides[1]?.stats||{form:[],goals_for:null,goals_against:null,matches:0},standings:{home:sides[0]?.standings||[],away:sides[1]?.standings||[]}};
+}
+function mergeComparison(incoming:Comparison|null,cached:Comparison|null):Comparison|null{
+ if(!cached)return incoming;
+ if(!incoming)return cached;
+ const stats=(a:FormStats,b:FormStats):FormStats=>a?.form?.length?a:b;
+ return {home:stats(incoming.home,cached.home),away:stats(incoming.away,cached.away),standings:{home:incoming.standings?.home?.length?incoming.standings.home:cached.standings?.home||[],away:incoming.standings?.away?.length?incoming.standings.away:cached.standings?.away||[]}};
+}
+type Comparison={home:FormStats;away:FormStats;standings?:{home:Standing[];away:Standing[]}};
 function FormRow({stats}:{stats?:FormStats}){return <div className="form-row">{stats?.form?.length?stats.form.map((r,i)=><span key={i} className={"form-dot "+r.toLowerCase()}>{r}</span>):<small>Form unavailable</small>}</div>}
-export default function MatchCenter({match,onBack,onPick,saving,message}:Props){const kickoffDate=match.utc_date?new Date(match.utc_date):null;const kickoff=kickoffDate&&Number.isFinite(kickoffDate.getTime())?kickoffDate:null;const [now,setNow]=useState(Date.now());const [lastChecked,setLastChecked]=useState<number|null>(null);const [refreshing,setRefreshing]=useState(false);const [liveStatus,setLiveStatus]=useState(match.status||"SCHEDULED");const [liveScore,setLiveScore]=useState<{home:number|null;away:number|null}|null>(null);const [comparison,setComparison]=useState<{home:FormStats;away:FormStats;standings?:{home:Standing[];away:Standing[]}}|null>(null);const [result,setResult]=useState<{status:"CORRECT"|"INCORRECT";actual_outcome:"HOME"|"DRAW"|"AWAY";score:{home:number|null;away:number|null}}|null>(null);useEffect(()=>{let active=true;setComparison(null);setResult(null);fetch("/api/v1/matches/"+encodeURIComponent(match.id)+"/center").then(r=>r.ok?r.json():null).then(p=>{if(!active)return;setComparison(p?.comparison||null);setResult(p?.result||null)}).catch(()=>undefined);return()=>{active=false}},[match.id]);useEffect(()=>{setLiveStatus(match.status||"SCHEDULED");setLiveScore(null)},[match.id,match.status]);
+export default function MatchCenter({match,onBack,onPick,saving,message,userId}:Props){const kickoffDate=match.utc_date?new Date(match.utc_date):null;const kickoff=kickoffDate&&Number.isFinite(kickoffDate.getTime())?kickoffDate:null;const [now,setNow]=useState(Date.now());const [lastChecked,setLastChecked]=useState<number|null>(null);const [refreshing,setRefreshing]=useState(false);const [liveStatus,setLiveStatus]=useState(match.status||"SCHEDULED");const [liveScore,setLiveScore]=useState<{home:number|null;away:number|null}|null>(null);const [comparison,setComparison]=useState<Comparison|null>(null);const [result,setResult]=useState<{status:"CORRECT"|"INCORRECT";actual_outcome:"HOME"|"DRAW"|"AWAY";score:{home:number|null;away:number|null}}|null>(null);useEffect(()=>{let active=true;const cached=comparisonFromCache(userId,match);setComparison(cached);setResult(null);fetch("/api/v1/matches/"+encodeURIComponent(match.id)+"/center").then(r=>r.ok?r.json():null).then(p=>{if(!active)return;setComparison(mergeComparison(p?.comparison||null,cached));setResult(p?.result||null)}).catch(()=>undefined);return()=>{active=false}},[match.id,userId]);useEffect(()=>{setLiveStatus(match.status||"SCHEDULED");setLiveScore(null)},[match.id,match.status]);
 useEffect(()=>{const timer=window.setInterval(()=>setNow(Date.now()),30000);return()=>window.clearInterval(timer)},[]);
 const statusUpper=liveStatus.toUpperCase();
 const isLive=["IN_PLAY","PAUSED","LIVE","HALFTIME","HALF_TIME"].includes(statusUpper);
