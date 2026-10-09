@@ -127,7 +127,8 @@ async def match_center(match_id: str, request: Request, db: Session = Depends(ge
     async def team_snapshot(team: dict) -> dict:
         team_id = str(team.get("id"))
         cached = _COMPARISON_CACHE.get(team_id)
-        if cached and time.monotonic() - cached[0] < _COMPARISON_TTL_SECONDS:
+        if (cached and time.monotonic() - cached[0] < _COMPARISON_TTL_SECONDS
+                and cached[1]["form"]["form"] and cached[1]["standings"]):
             return cached[1]
         fallback = cached[1] if cached else {
             "form": {"team_id": team_id, "form": [], "goals_for": None,
@@ -167,6 +168,8 @@ async def match_center(match_id: str, request: Request, db: Session = Depends(ge
         except (httpx.HTTPError, HTTPException):
             pass
         if updated:
+            # Do not let a partially populated cache prevent future attempts
+            # to retrieve the missing section for the next half hour.
             _COMPARISON_CACHE[team_id] = (time.monotonic(), snapshot)
         return snapshot
 
