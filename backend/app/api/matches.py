@@ -1,5 +1,6 @@
 from app.api.auth import require_user
 from datetime import datetime, timezone
+import time
 
 import httpx
 from fastapi import Request, APIRouter, Depends, HTTPException
@@ -18,6 +19,10 @@ from app.services.progress import progress_summary
 from app.services.prediction_results import actual_outcome, parse_utc, result_check_due
 
 router = APIRouter(prefix="/matches", tags=["matches"])
+
+_COMPARISON_CACHE: dict[str, tuple[float, dict]] = {}
+_COMPARISON_TTL_SECONDS = 30 * 60
+
 
 
 class PredictionChoice(BaseModel):
@@ -119,54 +124,58 @@ async def match_center(match_id: str, request: Request, db: Session = Depends(ge
         UserMatchPrediction.match_id == match_id,
     ))
 
-    async def team_form(team: dict) -> dict:
+    async def team_snapshot(team: dict) -> dict:
         team_id = str(team.get("id"))
+        cached = _COMPARISON_CACHE.get(team_id)
+        if cached and time.monotonic() - cached[0] < _COMPARISON_TTL_SECONDS:
+            return cached[1]
+        fallback = cached[1] if cached else {
+            "form": {"team_id": team_id, "form": [], "goals_for": None,
+                     "goals_against": None, "matches": 0},
+            "standings": [],
+        }
+        snapshot = {"form": fallback["form"], "standings": fallback["standings"]}
+        updated = False
         try:
             results = await provider.get_recent_results(team_id, limit=5)
+            form = []
+            goals_for = goals_against = 0
+            for item in results:
+                score = item.get("score") or {}
+                h, a = score.get("home"), score.get("away")
+                if h is None or a is None:
+                    continue
+                is_home = str((item.get("home_team") or {}).get("id")) == team_id
+                gf, ga = (h, a) if is_home else (a, h)
+                goals_for += gf
+                goals_against += ga
+                form.append("W" if gf > ga else "D" if gf == ga else "L")
+            if form:
+                snapshot["form"] = {"team_id": team_id, "form": form,
+                                    "goals_for": goals_for, "goals_against": goals_against,
+                                    "matches": len(form)}
+                updated = True
         except (httpx.HTTPError, HTTPException):
-            return {"team_id": team_id, "form": [], "goals_for": None, "goals_against": None, "matches": 0}
-
-        form: list[str] = []
-        points = goals_for = goals_against = 0
-        for result in results:
-            home = result.get("home_team") or {}
-            away = result.get("away_team") or {}
-            score = result.get("score") or {}
-            home_score, away_score = score.get("home"), score.get("away")
-            if home_score is None or away_score is None:
-                continue
-            is_home = str(home.get("id")) == team_id
-            gf, ga = (home_score, away_score) if is_home else (away_score, home_score)
-            goals_for += gf
-            goals_against += ga
-            if gf > ga:
-                form.append("W")
-                points += 3
-            elif gf == ga:
-                form.append("D")
-                points += 1
-            else:
-                form.append("L")
-        return {"team_id": team_id, "form": form, "goals_for": goals_for if form else None, "goals_against": goals_against if form else None, "matches": len(form)}
+            pass
+        try:
+            rows = await provider.get_team_standings(team_id)
+            standings = [{"competition": row.get("competition"), "position": row["position"]}
+                         for row in rows if row.get("position") is not None]
+            if standings:
+                snapshot["standings"] = standings
+                updated = True
+        except (httpx.HTTPError, HTTPException):
+            pass
+        if updated:
+            _COMPARISON_CACHE[team_id] = (time.monotonic(), snapshot)
+        return snapshot
 
     home = fixture.get("home_team") or {}
     away = fixture.get("away_team") or {}
-    home_form = await team_form(home)
-    away_form = await team_form(away)
-
-    async def team_standings(team: dict) -> list[dict]:
-        try:
-            standings = await provider.get_team_standings(str(team.get("id")))
-        except (httpx.HTTPError, HTTPException):
-            return []
-        return [
-            {"competition": row.get("competition"), "position": row.get("position")}
-            for row in standings
-            if row.get("position") is not None
-        ]
-
-    home_standings = await team_standings(home)
-    away_standings = await team_standings(away)
+    home_data = await team_snapshot(home)
+    away_data = await team_snapshot(away)
+    home_form, away_form = home_data["form"], away_data["form"]
+    home_standings, away_standings = home_data["standings"], away_data["standings"]
     result = None
     if saved and saved.result_status in {"CORRECT", "INCORRECT"}:
         result = {
