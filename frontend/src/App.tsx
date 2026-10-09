@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
-import { Award, BarChart3, Bell, Check, Gem, Flame, Home, LoaderCircle, Search, Shield, Sparkles, Star, Trophy, Users, X } from "lucide-react";
+import { Award, BarChart3, Bell, Check, Crown, Gem, Flame, Home, LoaderCircle, Search, Shield, Sparkles, Star, Trophy, Users, X } from "lucide-react";
 import type { Player, TeamHubData, TeamSummary } from "./types";
 import LeaderboardPage from "./LeaderboardPage";
 import PredictionsPage from "./PredictionsPage";
