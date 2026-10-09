@@ -96,6 +96,46 @@ class FootballDataOrgProvider(FootballProvider):
     async def get_match(self, provider_match_id: str) -> dict[str, Any]:
         return self._normalize_match(await self._get(f"/matches/{provider_match_id}", ttl=300))
 
+    async def get_league_recent_results(self, provider_team_id: str, competition_name: str, limit: int = 5) -> list[dict[str, Any]]:
+        """Fallback for missing team match history; one cached league feed serves all clubs."""
+        name = (competition_name or "").casefold()
+        if "premier league" in name:
+            competition = "PL"
+        elif "primera" in name or "la liga" in name:
+            competition = "PD"
+        else:
+            return []
+        payload = await self._get(f"/competitions/{competition}/matches",
+                                  params={"status": "FINISHED"}, ttl=900)
+        matches = [
+            self._normalize_match(item)
+            for item in payload.get("matches", [])
+            if str((item.get("homeTeam") or {}).get("id")) == str(provider_team_id)
+            or str((item.get("awayTeam") or {}).get("id")) == str(provider_team_id)
+        ]
+        matches.sort(key=lambda item: item.get("utc_date") or "")
+        return matches[-limit:]
+
+    async def get_league_team_standings(self, provider_team_id: str, competition_name: str) -> list[dict[str, Any]]:
+        """Direct league-table lookup without first fetching a team resource."""
+        name = (competition_name or "").casefold()
+        if "premier league" in name:
+            competition = "PL"
+        elif "primera" in name or "la liga" in name:
+            competition = "PD"
+        else:
+            return []
+        payload = await self._get(f"/competitions/{competition}/standings", ttl=900)
+        rows = []
+        for standing in payload.get("standings", []):
+            if standing.get("type") != "TOTAL":
+                continue
+            for row in standing.get("table") or []:
+                if str((row.get("team") or {}).get("id")) == str(provider_team_id) and row.get("position") is not None:
+                    rows.append({"competition": (payload.get("competition") or {}).get("name") or competition,
+                                 "position": row["position"]})
+        return rows
+
     async def get_team_standings(self, provider_team_id: str) -> list[dict[str, Any]]:
         raw_team = await self._get(f"/teams/{provider_team_id}", ttl=1800)
         competitions = raw_team.get("runningCompetitions") or []
