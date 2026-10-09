@@ -79,6 +79,33 @@ async def personalized_matches(request: Request, db: Session = Depends(get_db)) 
     return {"matches": matches[:30], "notice": notice}
 
 
+@router.get("/{match_id}/live")
+async def live_match_snapshot(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
+    """Small match-status endpoint; avoid refetching form and standings on each poll."""
+    user = require_user(request, db)
+    provider = get_football_provider()
+    try:
+        match = await provider.get_match(match_id)
+    except httpx.HTTPStatusError as exc:
+        if exc.response.status_code == 429:
+            raise HTTPException(status_code=503, detail="Football provider rate limited. Try again later.") from exc
+        raise HTTPException(status_code=502, detail="Live match data temporarily unavailable.") from exc
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=502, detail="Live match data temporarily unavailable.") from exc
+    followed = set(_saved_team_ids(db, user))
+    home_id = str((match.get("home_team") or {}).get("id") or "")
+    away_id = str((match.get("away_team") or {}).get("id") or "")
+    if not followed.intersection({home_id, away_id}):
+        raise HTTPException(status_code=404, detail="Match is not from a followed club.")
+    score = match.get("score") or {}
+    return {
+        "id": str(match.get("id")),
+        "status": match.get("status"),
+        "score": {"home": score.get("home"), "away": score.get("away")},
+        "checked_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+
 @router.get("/{match_id}/center")
 async def match_center(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
