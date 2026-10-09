@@ -167,6 +167,39 @@ async def match_center(match_id: str, request: Request, db: Session = Depends(ge
                 updated = True
         except (httpx.HTTPError, HTTPException):
             pass
+        # League-level fallback covers clubs whose individual team endpoint
+        # is unavailable on the provider plan. Shared provider cache reduces calls.
+        league = fixture.get("competition") or ""
+        if not snapshot["form"]["form"] and hasattr(provider, "get_league_recent_results"):
+            try:
+                league_results = await provider.get_league_recent_results(team_id, league, limit=5)
+                form = []
+                goals_for = goals_against = 0
+                for item in league_results:
+                    score = item.get("score") or {}
+                    h, a = score.get("home"), score.get("away")
+                    if h is None or a is None:
+                        continue
+                    is_home = str((item.get("home_team") or {}).get("id")) == team_id
+                    gf, ga = (h, a) if is_home else (a, h)
+                    goals_for += gf
+                    goals_against += ga
+                    form.append("W" if gf > ga else "D" if gf == ga else "L")
+                if form:
+                    snapshot["form"] = {"team_id": team_id, "form": form,
+                                        "goals_for": goals_for, "goals_against": goals_against,
+                                        "matches": len(form)}
+                    updated = True
+            except (httpx.HTTPError, HTTPException):
+                pass
+        if not snapshot["standings"] and hasattr(provider, "get_league_team_standings"):
+            try:
+                rows = await provider.get_league_team_standings(team_id, league)
+                if rows:
+                    snapshot["standings"] = rows
+                    updated = True
+            except (httpx.HTTPError, HTTPException):
+                pass
         if updated:
             # Do not let a partially populated cache prevent future attempts
             # to retrieve the missing section for the next half hour.
