@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
+from app.models.analysis import AnalysisTokenEvent
 from app.models.quiz import DailyQuizSnapshot
 from app.services.analysis_access import grant_quiz_token
 from app.services.progress import progress_summary, record_activity_day
@@ -356,11 +357,28 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
     ))
     xp_awarded = 0
     analysis_token_awarded = False
+    level_bonus_tokens = 0
+    completed_level = None
 
     if not existing:
         xp_awarded = 50 + correct * 10
         db.add(XPEvent(user_id=user.id, amount=xp_awarded, source_type="daily_quiz", source_id=source_id))
         analysis_token_awarded = grant_quiz_token(db, user.id, source_id)
+        # Award each level milestone exactly once, in the same transaction as XP.
+        completion_count = rewarded_quiz_completions(db, user.id) + 1
+        if completion_count in (5, 10, 15, 20, 25):
+            completed_level = completion_count // 5
+            bonus_amount = {1: 2, 2: 3, 3: 5, 4: 6, 5: 8}[completed_level]
+            bonus_id = f"level-{completed_level}"
+            previous_bonus = db.scalar(select(AnalysisTokenEvent).where(
+                AnalysisTokenEvent.user_id == user.id,
+                AnalysisTokenEvent.source_type == "quiz_level_bonus",
+                AnalysisTokenEvent.source_id == bonus_id,
+            ))
+            if previous_bonus is None:
+                db.add(AnalysisTokenEvent(user_id=user.id, amount=bonus_amount,
+                                          source_type="quiz_level_bonus", source_id=bonus_id))
+                level_bonus_tokens = bonus_amount
         record_activity_day(db, user.id)
         try:
             db.commit()
@@ -368,6 +386,8 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
             db.rollback()
             xp_awarded = 0
             analysis_token_awarded = False
+            level_bonus_tokens = 0
+            completed_level = None
 
     updated_context = quiz_context(db, user)
     return {
@@ -377,6 +397,8 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
         "score_percent": score_percent,
         "xp_awarded": xp_awarded,
         "analysis_token_awarded": analysis_token_awarded,
+        "level_bonus_tokens": level_bonus_tokens,
+        "completed_level": completed_level,
         "already_rewarded": existing is not None or xp_awarded == 0,
         "correct_answers": [question["answer"] for question in questions],
         "quiz": {**context, "unlocked_level": updated_context["unlocked_level"], "days_to_next_level": updated_context["days_to_next_level"]},
