@@ -355,7 +355,7 @@ AC_MILAN_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "ac-milan-l2-33",
-    "question": "Which Milan midfielder scored a famous long-range goal against Manchester United in 2007?",
+    "question": "Which Milan midfielder scored in the 2007 Champions League semi-final second leg against Manchester United?",
     "options": [
       "Clarence Seedorf",
       "Andrea Pirlo",
