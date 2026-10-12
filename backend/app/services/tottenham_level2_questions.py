@@ -91,7 +91,7 @@ TOTTENHAM_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "tottenham-l2-09",
-    "question": "Which Tottenham nickname is derived from the name of the local area?",
+    "question": "Which nickname refers to Tottenham's traditional white shirts?",
     "options": [
       "Lilywhites",
       "Toffees",
@@ -256,7 +256,7 @@ TOTTENHAM_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "tottenham-l2-24",
-    "question": "Which Welsh winger scored Tottenham's winner against Inter Milan in 2010?",
+    "question": "Which Welsh winger scored a hat-trick against Inter Milan in the 2010 Champions League group stage?",
     "options": [
       "Gareth Bale",
       "Aaron Lennon",
@@ -377,7 +377,7 @@ TOTTENHAM_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "tottenham-l2-35",
-    "question": "Which Tottenham forward scored the late winning goal in the 2008 League Cup final?",
+    "question": "Which Tottenham defender scored the extra-time winner in the 2008 League Cup final?",
     "options": [
       "Jonathan Woodgate",
       "Dimitar Berbatov",
