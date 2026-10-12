@@ -94,7 +94,8 @@ def fallback_question_pool(level: int) -> list[dict]:
         return list(GENERAL_QUESTIONS)
     # Never reuse the 60 Level 1 questions at higher levels.
     if level == 2:
-        return [q for q in ADVANCED_QUESTIONS if q["min_level"] == 2]
+        # Temporary non-Level-1 fallback until the dedicated 60-question bank is built.
+        return list(ADVANCED_QUESTIONS)
     return [q for q in ADVANCED_QUESTIONS if q["min_level"] == level]
 
 
