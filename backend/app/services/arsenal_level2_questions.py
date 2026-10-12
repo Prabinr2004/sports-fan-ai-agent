@@ -358,7 +358,7 @@ ARSENAL_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "arsenal-l2-33",
-    "question": "Which Arsenal winger scored a hat-trick against Slavia Prague in the 2007–08 Champions League group stage?",
+    "question": "Which Arsenal winger scored a hat-trick in the 7–3 Premier League win against Newcastle in 2012?",
     "options": [
       "Theo Walcott",
       "Freddie Ljungberg",
