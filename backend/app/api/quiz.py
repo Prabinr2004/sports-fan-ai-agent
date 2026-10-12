@@ -92,17 +92,30 @@ ADVANCED_QUESTIONS = [{"id":"advanced-1","question":"What is the main purpose of
 def fallback_question_pool(level: int) -> list[dict]:
     if level <= 1:
         return list(GENERAL_QUESTIONS)
+    # Never reuse the 60 Level 1 questions at higher levels.
     if level == 2:
-        return [q for q in GENERAL_QUESTIONS if int(q["id"].split("-")[-1]) >= 21]
-    return [q for q in ADVANCED_QUESTIONS if q["min_level"] <= level] + [q for q in GENERAL_QUESTIONS if 35 <= int(q["id"].split("-")[-1]) <= 45]
+        return [q for q in ADVANCED_QUESTIONS if q["min_level"] == 2]
+    return [q for q in ADVANCED_QUESTIONS if q["min_level"] == level]
+
 
 def shuffle_answers(questions: list[dict], rng: random.Random) -> list[dict]:
+    """Shuffle answer choices while balancing correct letters across a daily round."""
+    if not questions:
+        return []
+    # For a five-question round: A/B/C/D each appears at least once,
+    # with one randomly selected letter appearing twice.
+    targets = list(range(4))
+    while len(targets) < len(questions):
+        targets.append(rng.randrange(4))
+    rng.shuffle(targets)
     result = []
-    for question in questions:
+    for question, target in zip(questions, targets):
         options = list(question["options"])
         correct = options[question["answer"]]
-        rng.shuffle(options)
-        result.append({**question, "options": options, "answer": options.index(correct)})
+        distractors = [option for index, option in enumerate(options) if index != question["answer"]]
+        rng.shuffle(distractors)
+        distractors.insert(target, correct)
+        result.append({**question, "options": distractors, "answer": target})
     return result
 
 QUIZ_LEVELS = {
