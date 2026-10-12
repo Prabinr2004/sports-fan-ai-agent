@@ -326,6 +326,7 @@ async def daily_quiz(request: Request, db: Session = Depends(get_db)) -> dict:
         "title": context["theme"],
         "questions": [{"id": q["id"], "question": q["question"], "options": q["options"]} for q in questions],
         "completed": event is not None,
+        "correct_answers": [q["answer"] for q in questions] if event is not None else None,
         "xp_available": 100,
         "quiz_level": context["level"],
         "unlocked_level": context["unlocked_level"],
