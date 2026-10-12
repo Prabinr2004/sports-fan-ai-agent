@@ -18,6 +18,7 @@ from app.services.analysis_access import grant_quiz_token
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
 from app.services.club_knowledge_questions import CLUB_KNOWLEDGE_QUESTIONS
+from app.services.real_madrid_level2_questions import REAL_MADRID_LEVEL_2_QUESTIONS
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
@@ -98,6 +99,15 @@ def fallback_question_pool(level: int) -> list[dict]:
         # Temporary non-Level-1 fallback until the dedicated 60-question bank is built.
         return list(CLUB_KNOWLEDGE_QUESTIONS)
     return [q for q in ADVANCED_QUESTIONS if q["min_level"] == level]
+
+
+def level_question_pool(level: int, team: dict | None) -> list[dict]:
+    """Use dedicated favorite-club questions when a reviewed bank exists."""
+    if level == 2 and team:
+        team_name = team.get("name", "").casefold()
+        if "real madrid" in team_name:
+            return list(REAL_MADRID_LEVEL_2_QUESTIONS)
+    return fallback_question_pool(level)
 
 
 def shuffle_answers(questions: list[dict], rng: random.Random) -> list[dict]:
@@ -198,7 +208,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
             seen_ids.update(q["id"] for q in json.loads(snapshot.questions_json))
         except (ValueError, KeyError, TypeError):
             continue
-    pool = fallback_question_pool(context["level"])
+    pool = level_question_pool(context["level"], context["team"])
     fresh = [q for q in pool if q["id"] not in seen_ids]
     selected = rng.sample(fresh, min(5, len(fresh)))
     if len(selected) < 5:
@@ -257,7 +267,7 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
     context = quiz_context(db, user)
     daily_questions, _ = await get_or_create_daily_snapshot(db, user)
     daily_ids = {question["id"] for question in daily_questions}
-    pool = fallback_question_pool(context["level"])
+    pool = level_question_pool(context["level"], context["team"])
     if context["level"] >= 3 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
