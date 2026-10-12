@@ -17,6 +17,7 @@ from app.models.quiz import DailyQuizSnapshot
 from app.services.analysis_access import grant_quiz_token
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
+from app.services.club_knowledge_questions import CLUB_KNOWLEDGE_QUESTIONS
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
@@ -95,7 +96,7 @@ def fallback_question_pool(level: int) -> list[dict]:
     # Never reuse the 60 Level 1 questions at higher levels.
     if level == 2:
         # Temporary non-Level-1 fallback until the dedicated 60-question bank is built.
-        return list(ADVANCED_QUESTIONS)
+        return list(CLUB_KNOWLEDGE_QUESTIONS)
     return [q for q in ADVANCED_QUESTIONS if q["min_level"] == level]
 
 
@@ -121,7 +122,7 @@ def shuffle_answers(questions: list[dict], rng: random.Random) -> list[dict]:
 
 QUIZ_LEVELS = {
     1: {"theme": "Football Basics", "description": "General football rules and knowledge."},
-    2: {"theme": "Know Your Club", "description": "Basic facts about your primary team."},
+    2: {"theme": "Club Knowledge", "description": "Explore football clubs, stadiums, legends, rivalries, history and traditions."},
     3: {"theme": "Players & Club", "description": "Current players and deeper club knowledge."},
     4: {"theme": "Club Challenge", "description": "A harder mix of club and player knowledge."},
     5: {"theme": "Expert Mode", "description": "The hardest available team-focused questions."},
@@ -204,7 +205,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         remaining = [q for q in pool if q["id"] not in {item["id"] for item in selected}]
         selected.extend(rng.sample(remaining, 5 - len(selected)))
     questions = selected
-    if context["level"] >= 2 and context["team"]:
+    if context["level"] >= 3 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
             context["team"]["name"],
@@ -257,7 +258,7 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
     daily_questions, _ = await get_or_create_daily_snapshot(db, user)
     daily_ids = {question["id"] for question in daily_questions}
     pool = fallback_question_pool(context["level"])
-    if context["level"] >= 2 and context["team"]:
+    if context["level"] >= 3 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
             context["team"]["name"],
