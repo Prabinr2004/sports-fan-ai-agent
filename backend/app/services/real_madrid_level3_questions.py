@@ -291,10 +291,10 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-25",
-    "question": "Which Chelsea player scored a hat-trick against Real Madrid in the 2021 Champions League semifinal?",
+    "question": "Who scored Chelsea's opening goal against Real Madrid in the 2021 Champions League semifinal second leg?",
     "options": [
       "Timo Werner",
-      "None; no Chelsea player scored a hat-trick",
+      "Timo Werner",
       "Mason Mount",
       "Kai Havertz"
     ],
@@ -327,11 +327,11 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-28",
-    "question": "Who scored both Real Madrid goals in the 2000 Champions League final?",
+    "question": "Who scored Real Madrid's second goal in the 2000 Champions League final?",
     "options": [
       "Raúl",
       "Fernando Morientes",
-      "No single player scored both",
+      "Steve McManaman",
       "Steve McManaman"
     ],
     "answer": 2,
@@ -591,9 +591,9 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-50",
-    "question": "Which Real Madrid defender scored the late penalty against Juventus in the 2018 Champions League quarterfinal second leg?",
+    "question": "Who converted Real Madrid's late penalty against Juventus in the 2018 Champions League quarterfinal second leg?",
     "options": [
-      "Cristiano Ronaldo was the scorer",
+      "Cristiano Ronaldo",
       "Sergio Ramos",
       "Marcelo",
       "Dani Carvajal"
