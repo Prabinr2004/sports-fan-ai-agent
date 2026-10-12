@@ -336,7 +336,7 @@ LIVERPOOL_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "liverpool-l2-31",
-    "question": "Which Liverpool legend scored 346 league goals for the club?",
+    "question": "Which Liverpool legend scored 346 goals for the club in all competitions?",
     "options": [
       "Ian Rush",
       "Roger Hunt",
