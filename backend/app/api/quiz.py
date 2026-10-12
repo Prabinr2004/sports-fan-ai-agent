@@ -85,6 +85,25 @@ GENERAL_QUESTIONS.extend([
     {"id": "general-60", "question": "What is the purpose of the centre circle at kick-off?", "options": ["Keep opponents the required distance from the ball","Mark the penalty area","Show where corners are taken","Define the technical area"], "answer": 0},
 ])
 
+
+ADVANCED_QUESTIONS = [{"id":"advanced-1","question":"What is the main purpose of counter-pressing after losing possession?","options":["Regain the ball before the opponent can organize an attack","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":3},{"id":"advanced-2","question":"Why might an inverted full-back move into central midfield?","options":["To create an extra central passing option","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":3},{"id":"advanced-3","question":"What is a half-space?","options":["The channel between the wide and central zones","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":3},{"id":"advanced-4","question":"What does a double pivot refer to?","options":["Two central midfielders operating together","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":3},{"id":"advanced-5","question":"Why does a winger hold a wide position during buildup?","options":["To stretch the opponent's defensive shape","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":3},{"id":"advanced-6","question":"What is rest defence?","options":["Defensive positioning maintained while a team attacks","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":4},{"id":"advanced-7","question":"What is an overload-to-isolate pattern?","options":["Attract defenders to one area before switching to an isolated attacker","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":4},{"id":"advanced-8","question":"What is a third-man combination?","options":["Using an additional teammate to bypass an opponent's pressure","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":4},{"id":"advanced-9","question":"What is a pressing trigger?","options":["An opponent action that prompts coordinated pressure","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":4},{"id":"advanced-10","question":"What is a mid-block?","options":["A defensive structure focused around the middle third","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":4},{"id":"advanced-11","question":"What does expected goals (xG) estimate?","options":["The probability that a shot becomes a goal","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":5},{"id":"advanced-12","question":"What is a cover shadow in pressing?","options":["A passing lane blocked by the pressing player's positioning","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":5},{"id":"advanced-13","question":"What is a line-breaking pass?","options":["A pass that bypasses an opposition line","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":5},{"id":"advanced-14","question":"Why might high possession coexist with low xG?","options":["The team may create few high-quality chances","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":5},{"id":"advanced-15","question":"What is the tactical benefit of staggered passing angles?","options":["Providing options at different depths to progress the ball","It automatically awards a free kick","It requires the goalkeeper to leave the pitch","It prevents substitutions for the rest of the match"],"answer":0,"min_level":5}]
+
+def fallback_question_pool(level: int) -> list[dict]:
+    if level <= 1:
+        return list(GENERAL_QUESTIONS)
+    if level == 2:
+        return [q for q in GENERAL_QUESTIONS if int(q["id"].split("-")[-1]) >= 21]
+    return [q for q in ADVANCED_QUESTIONS if q["min_level"] <= level] + [q for q in GENERAL_QUESTIONS if 35 <= int(q["id"].split("-")[-1]) <= 45]
+
+def shuffle_answers(questions: list[dict], rng: random.Random) -> list[dict]:
+    result = []
+    for question in questions:
+        options = list(question["options"])
+        correct = options[question["answer"]]
+        rng.shuffle(options)
+        result.append({**question, "options": options, "answer": options.index(correct)})
+    return result
+
 QUIZ_LEVELS = {
     1: {"theme": "Football Basics", "description": "General football rules and knowledge."},
     2: {"theme": "Know Your Club", "description": "Basic facts about your primary team."},
@@ -163,10 +182,11 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
             seen_ids.update(q["id"] for q in json.loads(snapshot.questions_json))
         except (ValueError, KeyError, TypeError):
             continue
-    fresh = [q for q in GENERAL_QUESTIONS if q["id"] not in seen_ids]
+    pool = fallback_question_pool(context["level"])
+    fresh = [q for q in pool if q["id"] not in seen_ids]
     selected = rng.sample(fresh, min(5, len(fresh)))
     if len(selected) < 5:
-        remaining = [q for q in GENERAL_QUESTIONS if q["id"] not in {item["id"] for item in selected}]
+        remaining = [q for q in pool if q["id"] not in {item["id"] for item in selected}]
         selected.extend(rng.sample(remaining, 5 - len(selected)))
     questions = selected
     if context["level"] >= 2 and context["team"]:
@@ -191,6 +211,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
                 questions.extend(repeats[:5 - len(questions)])
             rng.shuffle(questions)
 
+    questions = shuffle_answers(questions, rng)
     team = context["team"]
     db.add(DailyQuizSnapshot(
         user_id=user.id,
@@ -220,7 +241,7 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
     context = quiz_context(db, user)
     daily_questions, _ = await get_or_create_daily_snapshot(db, user)
     daily_ids = {question["id"] for question in daily_questions}
-    pool = list(GENERAL_QUESTIONS)
+    pool = fallback_question_pool(context["level"])
     if context["level"] >= 2 and context["team"]:
         grounded = await build_team_questions(
             context["team"]["id"],
@@ -245,7 +266,7 @@ async def build_practice_questions(db: Session, user, practice_round: int = 0) -
     if len(chosen) < 5:
         fallback = [question for question in pool if question["id"] not in {q["id"] for q in chosen} and question["id"] not in daily_ids]
         chosen.extend(rng.sample(fallback, min(5 - len(chosen), len(fallback))))
-    return chosen, context
+    return shuffle_answers(chosen, rng), context
 
 
 @router.get("/practice")
