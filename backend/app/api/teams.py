@@ -210,6 +210,23 @@ async def get_team(team_id: str, refresh_missing_photos: bool = False, refresh_t
     squad = await enrich_squad(team, squad, refresh_missing=refresh_missing_photos)
     fixtures, fixtures_notice = await _cached_section(provider.get_fixtures, team_id, "fixtures", force=refresh_team_data)
     recent_results, recent_notice = await _cached_section(provider.get_recent_results, team_id, "recent_results", force=refresh_team_data)
+    # Team-history endpoints sometimes lag behind the league's finished-match feed.
+    # Merge verified provider results from both sources, never fabricate scores.
+    league_name = str(team.get("league_name") or "")
+    if any(name in league_name.casefold() for name in ("primera", "la liga", "premier league")):
+        try:
+            league_results = await provider.get_league_recent_results(team_id, league_name, limit=12)
+            by_id = {str(item.get("id")): item for item in recent_results if item.get("id")}
+            for item in league_results:
+                if item.get("id") and item.get("status") == "FINISHED" and item.get("score", {}).get("home") is not None and item.get("score", {}).get("away") is not None:
+                    by_id[str(item["id"])] = item
+            if by_id:
+                recent_results = sorted(by_id.values(), key=lambda item: item.get("utc_date") or "", reverse=True)
+                if league_results:
+                    recent_notice = None
+        except (httpx.HTTPError, HTTPException):
+            pass  # Preserve the original team results if league coverage is limited.
+    recent_results = sorted(recent_results, key=lambda item: item.get("utc_date") or "", reverse=True)
     standings, standings_notice = await _cached_section(provider.get_team_standings, team_id, "standings", force=refresh_team_data)
     scorers, scorers_notice = await _cached_section(provider.get_team_scorers, team_id, "scorers", force=refresh_team_data)
 
