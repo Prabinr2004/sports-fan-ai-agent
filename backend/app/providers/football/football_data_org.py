@@ -21,19 +21,19 @@ class FootballDataOrgProvider(FootballProvider):
         return {"X-Auth-Token": self.api_key}
 
     @staticmethod
-    def _cache_key(path: str, params: dict[str, Any] | None) -> str:
+    def _cache_key(path: str, params: dict[str, Any] | None, extra_headers: dict[str, str] | None = None) -> str:
         values = tuple(sorted((params or {}).items()))
-        return f"{path}:{values}"
+        return f"{path}:{values}:{tuple(sorted((extra_headers or {}).items()))}"
 
-    async def _get(self, path: str, params: dict[str, Any] | None = None, ttl: int = 300) -> dict[str, Any]:
-        key = self._cache_key(path, params)
+    async def _get(self, path: str, params: dict[str, Any] | None = None, ttl: int = 300, extra_headers: dict[str, str] | None = None) -> dict[str, Any]:
+        key = self._cache_key(path, params, extra_headers)
         now = time.monotonic()
         cached = self._cache.get(key)
         if cached and cached[0] > now:
             return cached[1]
         try:
             async with httpx.AsyncClient(timeout=15.0) as client:
-                response = await client.get(f"{self.base_url}{path}", headers=self.headers, params=params)
+                response = await client.get(f"{self.base_url}{path}", headers={**self.headers, **(extra_headers or {})}, params=params)
                 response.raise_for_status()
                 payload = response.json()
         except httpx.HTTPStatusError as exc:
@@ -53,7 +53,7 @@ class FootballDataOrgProvider(FootballProvider):
     @classmethod
     def _normalize_match(cls, match: dict[str, Any]) -> dict[str, Any]:
         score = match.get("score") or {}; full_time = score.get("fullTime") or {}
-        return {"id": str(match.get("id")), "utc_date": match.get("utcDate"), "status": match.get("status"), "competition": (match.get("competition") or {}).get("name"), "home_team": cls._normalize_team(match.get("homeTeam") or {}), "away_team": cls._normalize_team(match.get("awayTeam") or {}), "score": {"home": full_time.get("home"), "away": full_time.get("away")}, "goals": [{"player_name": (goal.get("scorer") or {}).get("name") or "Unknown scorer", "minute": goal.get("minute"), "extra_time": goal.get("injuryTime") if goal.get("injuryTime") is not None else goal.get("extraTime"), "team_id": str((goal.get("team") or {}).get("id")) if (goal.get("team") or {}).get("id") is not None else None} for goal in (match.get("goals") or []) if isinstance(goal, dict)]}
+        return {"id": str(match.get("id")), "utc_date": match.get("utcDate"), "status": match.get("status"), "competition": "LaLiga" if ((match.get("competition") or {}).get("code") == "PD" or "primera divisi" in str((match.get("competition") or {}).get("name") or "").lower()) else (match.get("competition") or {}).get("name"), "home_team": cls._normalize_team(match.get("homeTeam") or {}), "away_team": cls._normalize_team(match.get("awayTeam") or {}), "score": {"home": full_time.get("home"), "away": full_time.get("away")}, "statistics": match.get("statistics") if isinstance(match.get("statistics"), (dict, list)) else None, "goals": [{"player_name": (goal.get("scorer") or {}).get("name") or "Unknown scorer", "minute": goal.get("minute"), "extra_time": goal.get("injuryTime") if goal.get("injuryTime") is not None else goal.get("extraTime"), "team_id": str((goal.get("team") or {}).get("id")) if (goal.get("team") or {}).get("id") is not None else None} for goal in (match.get("goals") or []) if isinstance(goal, dict)]}
 
     async def _all_accessible_teams(self) -> list[dict[str, Any]]:
         return (await self._get("/teams", params={"limit": 500}, ttl=1800)).get("teams", [])
@@ -94,7 +94,7 @@ class FootballDataOrgProvider(FootballProvider):
         return [self._normalize_match(m) for m in payload.get("matches", [])]
 
     async def get_match(self, provider_match_id: str) -> dict[str, Any]:
-        return self._normalize_match(await self._get(f"/matches/{provider_match_id}", ttl=300))
+        return self._normalize_match(await self._get(f"/matches/{provider_match_id}", ttl=300, extra_headers={"X-Unfold-Goals": "true", "X-Unfold-Bookings": "true", "X-Unfold-Subs": "true"}))
 
     async def get_league_recent_results(self, provider_team_id: str, competition_name: str, limit: int = 5) -> list[dict[str, Any]]:
         """Fallback for missing team match history; one cached league feed serves all clubs."""
