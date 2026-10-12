@@ -377,12 +377,12 @@ INTER_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "inter-l2-35",
-    "question": "Which Inter forward scored twice in the 2010 Coppa Italia semi-final second leg against Fiorentina?",
+    "question": "Which club did Inter defeat in the 2010 Coppa Italia semi-final?",
     "options": [
-      "No Inter forward scored twice in that match",
-      "Diego Milito",
-      "Samuel Eto'o",
-      "Mario Balotelli"
+      "Fiorentina",
+      "Roma",
+      "Juventus",
+      "Lazio"
     ],
     "answer": 0
   },
