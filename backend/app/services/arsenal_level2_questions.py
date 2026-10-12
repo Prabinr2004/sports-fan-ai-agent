@@ -325,7 +325,7 @@ ARSENAL_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "arsenal-l2-30",
-    "question": "Which Arsenal midfielder scored the extra-time winner in the 2017 FA Cup final?",
+    "question": "Which Arsenal midfielder scored the winning goal in the 2017 FA Cup final?",
     "options": [
       "Aaron Ramsey",
       "Alexis Sánchez",
@@ -358,12 +358,12 @@ ARSENAL_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "arsenal-l2-33",
-    "question": "Which Arsenal winger scored a hat-trick in the 2006 Champions League group stage against Hamburg?",
+    "question": "Which Arsenal winger scored a hat-trick against Slavia Prague in the 2007–08 Champions League group stage?",
     "options": [
-      "No Arsenal player scored a hat-trick in that match",
       "Theo Walcott",
       "Freddie Ljungberg",
-      "Robert Pirès"
+      "Robert Pirès",
+      "Alexander Hleb"
     ],
     "answer": 0
   },
