@@ -157,12 +157,12 @@ AC_MILAN_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "ac-milan-l2-15",
-    "question": "Which stadium hosted AC Milan's 2016 Champions League final city derby?",
+    "question": "Which Italian stadium hosted the 2016 Champions League final between Real Madrid and Atlético Madrid?",
     "options": [
-      "No such final occurred",
       "San Siro",
       "Stadio Olimpico",
-      "Allianz Stadium"
+      "Allianz Stadium",
+      "Stadio Diego Armando Maradona"
     ],
     "answer": 0
   },
