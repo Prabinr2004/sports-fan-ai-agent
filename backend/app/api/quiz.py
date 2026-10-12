@@ -24,6 +24,11 @@ from app.services.liverpool_level2_questions import LIVERPOOL_LEVEL_2_QUESTIONS
 from app.services.arsenal_level2_questions import ARSENAL_LEVEL_2_QUESTIONS
 from app.services.manchester_city_level2_questions import MANCHESTER_CITY_LEVEL_2_QUESTIONS
 from app.services.chelsea_level2_questions import CHELSEA_LEVEL_2_QUESTIONS
+from app.services.manutd_level2_questions import MANCHESTER_UNITED_LEVEL_2_QUESTIONS
+from app.services.tottenham_level2_questions import TOTTENHAM_LEVEL_2_QUESTIONS
+from app.services.bayern_level2_questions import BAYERN_LEVEL_2_QUESTIONS
+from app.services.inter_level2_questions import INTER_LEVEL_2_QUESTIONS
+from app.services.ac_milan_level2_questions import AC_MILAN_LEVEL_2_QUESTIONS
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
@@ -122,6 +127,16 @@ def level_question_pool(level: int, team: dict | None) -> list[dict]:
             return list(MANCHESTER_CITY_LEVEL_2_QUESTIONS)
         if "chelsea" in team_name:
             return list(CHELSEA_LEVEL_2_QUESTIONS)
+        if "manchester united" in team_name or team_name in {"man utd", "man united"}:
+            return list(MANCHESTER_UNITED_LEVEL_2_QUESTIONS)
+        if "tottenham" in team_name or team_name in {"spurs", "tottenham hotspur"}:
+            return list(TOTTENHAM_LEVEL_2_QUESTIONS)
+        if "bayern" in team_name:
+            return list(BAYERN_LEVEL_2_QUESTIONS)
+        if "internazionale" in team_name or "inter milan" in team_name or team_name in {"inter", "fc inter"}:
+            return list(INTER_LEVEL_2_QUESTIONS)
+        if "ac milan" in team_name or team_name in {"milan", "a.c. milan"}:
+            return list(AC_MILAN_LEVEL_2_QUESTIONS)
     return fallback_question_pool(level)
 
 
