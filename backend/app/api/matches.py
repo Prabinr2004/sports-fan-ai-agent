@@ -239,6 +239,7 @@ async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> 
     hidden_incomplete = 0
     provider_checks = 0
     provider_limited = False
+    check_notes: dict[str, str] = {}
     now = datetime.now(timezone.utc)
 
     valid_rows = []
@@ -272,6 +273,8 @@ async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> 
             match = await provider.get_match(row.match_id)
             actual = actual_outcome(match)
             row.result_checked_at = now
+            if not actual:
+                check_notes[str(row.match_id)] = "Provider has not confirmed a final score yet."
             if actual:
                 score = match.get("score") or {}
                 row.actual_outcome = actual
@@ -283,11 +286,14 @@ async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> 
                 # Back off on subsequent refreshes instead of repeatedly hitting the limit.
                 row.result_checked_at = now
                 provider_limited = True
+                check_notes[str(row.match_id)] = "Provider rate limit reached. Retry later."
                 break
             # Other provider errors must not erase or score saved picks.
             row.result_checked_at = now
+            check_notes[str(row.match_id)] = f"Provider request failed (HTTP {exc.response.status_code})."
         except httpx.HTTPError:
             row.result_checked_at = now
+            check_notes[str(row.match_id)] = "Provider connection failed. Retry later."
             continue
 
     if db.dirty:
@@ -313,6 +319,8 @@ async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> 
             "created_at": row.created_at,
             "actual_outcome": row.actual_outcome,
             "result_status": row.result_status,
+            "result_checked_at": row.result_checked_at.isoformat() if row.result_checked_at else None,
+            "check_note": check_notes.get(str(row.match_id)),
             "score": score,
         })
 
