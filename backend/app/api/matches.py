@@ -84,6 +84,23 @@ async def personalized_matches(request: Request, db: Session = Depends(get_db)) 
     return {"matches": matches[:30], "notice": notice}
 
 
+@router.get("/history/{match_id}")
+async def historical_prediction_match(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
+    """Open only a match for which the signed-in user has a saved prediction."""
+    user = require_user(request, db)
+    saved = db.scalar(select(UserMatchPrediction).where(
+        UserMatchPrediction.user_id == user.id,
+        UserMatchPrediction.match_id == match_id,
+    ))
+    if saved is None:
+        raise HTTPException(status_code=404, detail="No saved prediction for this match.")
+    try:
+        fixture = await get_football_provider().get_match(match_id)
+    except httpx.HTTPError as exc:
+        raise HTTPException(status_code=503, detail="Historical match details are temporarily unavailable.") from exc
+    return {"match": _fixture_payload(fixture, str((fixture.get("home_team") or {}).get("id") or ""), saved)}
+
+
 @router.get("/{match_id}/live")
 async def live_match_snapshot(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
     """Small match-status endpoint; avoid refetching form and standings on each poll."""
@@ -100,8 +117,11 @@ async def live_match_snapshot(match_id: str, request: Request, db: Session = Dep
     followed = set(_saved_team_ids(db, user))
     home_id = str((match.get("home_team") or {}).get("id") or "")
     away_id = str((match.get("away_team") or {}).get("id") or "")
-    if not followed.intersection({home_id, away_id}):
-        raise HTTPException(status_code=404, detail="Match is not from a followed club.")
+    saved = db.scalar(select(UserMatchPrediction.id).where(
+        UserMatchPrediction.user_id == user.id, UserMatchPrediction.match_id == match_id,
+    ))
+    if not followed.intersection({home_id, away_id}) and saved is None:
+        raise HTTPException(status_code=404, detail="Match is not from a followed club or saved prediction.")
     score = match.get("score") or {}
     return {
         "id": str(match.get("id")),
@@ -115,15 +135,20 @@ async def live_match_snapshot(match_id: str, request: Request, db: Session = Dep
 @router.get("/{match_id}/center")
 async def match_center(match_id: str, request: Request, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
-    fixture = await _find_personalized_match(db, user, match_id)
-    if fixture is None:
-        raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
-
-    provider = get_football_provider()
     saved = db.scalar(select(UserMatchPrediction).where(
         UserMatchPrediction.user_id == user.id,
         UserMatchPrediction.match_id == match_id,
     ))
+    fixture = await _find_personalized_match(db, user, match_id)
+    if fixture is None and saved is not None:
+        try:
+            fixture = await get_football_provider().get_match(match_id)
+        except httpx.HTTPError as exc:
+            raise HTTPException(status_code=503, detail="Historical match details are temporarily unavailable.") from exc
+    if fixture is None:
+        raise HTTPException(status_code=404, detail="This match is not available in your personalized match feed.")
+
+    provider = get_football_provider()
 
     async def team_snapshot(team: dict) -> dict:
         team_id = str(team.get("id"))
