@@ -245,12 +245,12 @@ INTER_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "inter-l2-23",
-    "question": "Which Inter defender captained Argentina at the 2022 World Cup?",
+    "question": "Which Inter legend was captain of Argentina's national team in the 2000s?",
     "options": [
-      "No Inter defender captained Argentina at that World Cup",
+      "Javier Zanetti",
       "Walter Samuel",
       "Nicolás Burdisso",
-      "Javier Zanetti"
+      "Esteban Cambiasso"
     ],
     "answer": 0
   },
@@ -333,7 +333,7 @@ INTER_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "inter-l2-31",
-    "question": "Which Italian defender was an Inter captain and later served as vice-president?",
+    "question": "Which former Inter captain became the club's vice-president?",
     "options": [
       "Javier Zanetti",
       "Giacinto Facchetti",
