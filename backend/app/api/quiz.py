@@ -361,11 +361,11 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
     completed_level = None
 
     if not existing:
+        completion_count = rewarded_quiz_completions(db, user.id) + 1
         xp_awarded = 50 + correct * 10
         db.add(XPEvent(user_id=user.id, amount=xp_awarded, source_type="daily_quiz", source_id=source_id))
         analysis_token_awarded = grant_quiz_token(db, user.id, source_id)
         # Award each level milestone exactly once, in the same transaction as XP.
-        completion_count = rewarded_quiz_completions(db, user.id) + 1
         if completion_count in (5, 10, 15, 20, 25):
             completed_level = completion_count // 5
             bonus_amount = {1: 2, 2: 3, 3: 5, 4: 6, 5: 8}[completed_level]
