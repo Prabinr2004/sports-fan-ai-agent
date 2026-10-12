@@ -21,6 +21,7 @@ from app.services.club_knowledge_questions import CLUB_KNOWLEDGE_QUESTIONS
 from app.services.real_madrid_level2_questions import REAL_MADRID_LEVEL_2_QUESTIONS
 from app.services.barcelona_level2_questions import BARCELONA_LEVEL_2_QUESTIONS
 from app.services.liverpool_level2_questions import LIVERPOOL_LEVEL_2_QUESTIONS
+from app.services.arsenal_level2_questions import ARSENAL_LEVEL_2_QUESTIONS
 
 router = APIRouter(prefix="/quiz", tags=["quiz"])
 
@@ -113,6 +114,8 @@ def level_question_pool(level: int, team: dict | None) -> list[dict]:
             return list(BARCELONA_LEVEL_2_QUESTIONS)
         if "liverpool" in team_name:
             return list(LIVERPOOL_LEVEL_2_QUESTIONS)
+        if "arsenal" in team_name:
+            return list(ARSENAL_LEVEL_2_QUESTIONS)
     return fallback_question_pool(level)
 
 
