@@ -652,7 +652,7 @@ BAYERN_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "bayern-l2-60",
-    "question": "Which Bayern winger joined Real Madrid in 2014?",
+    "question": "Which Bayern midfielder joined Real Madrid in 2014?",
     "options": [
       "Toni Kroos",
       "Arjen Robben",
