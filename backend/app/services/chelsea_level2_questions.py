@@ -69,12 +69,12 @@ CHELSEA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "chelsea-l2-07",
-    "question": "Which club did Chelsea beat to win their first English league title in 1955?",
+    "question": "In which season did Chelsea win their first English league title?",
     "options": [
-      "No single opponent; the title was won over a league season",
-      "Arsenal",
-      "Liverpool",
-      "Tottenham"
+      "1954–55",
+      "1951–52",
+      "1957–58",
+      "1964–65"
     ],
     "answer": 0
   },
@@ -344,7 +344,7 @@ CHELSEA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "chelsea-l2-32",
-    "question": "Which Chelsea defender scored the winning goal in the 2012 FA Cup final?",
+    "question": "Which Chelsea striker scored the winning goal in the 2012 FA Cup final?",
     "options": [
       "Didier Drogba",
       "John Terry",
@@ -619,7 +619,7 @@ CHELSEA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "chelsea-l2-57",
-    "question": "Which Chelsea midfielder scored the extra-time winning penalty in that Club World Cup final?",
+    "question": "Which Chelsea forward scored the extra-time winning penalty in that Club World Cup final?",
     "options": [
       "Kai Havertz",
       "Jorginho",
