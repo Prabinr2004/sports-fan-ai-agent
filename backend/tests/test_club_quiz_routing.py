@@ -18,6 +18,13 @@ def test_level_two_club_banks_and_fallback():
         ("FC Barcelona", "barcelona-l2-"),
         ("Liverpool FC", "liverpool-l2-"),
         ("Arsenal FC", "arsenal-l2-"),
+        ("Manchester City FC", "man-city-l2-"),
+        ("Chelsea FC", "chelsea-l2-"),
+        ("Manchester United FC", "manutd-l2-"),
+        ("Tottenham Hotspur", "tottenham-l2-"),
+        ("FC Bayern München", "bayern-l2-"),
+        ("FC Internazionale Milano", "inter-l2-"),
+        ("AC Milan", "ac-milan-l2-"),
     ]:
         questions = level_question_pool(2, {"id": 1, "name": team})
         assert len(questions) == 60
@@ -27,7 +34,7 @@ def test_level_two_club_banks_and_fallback():
         assert all(len(q["options"]) == 4 and len(set(q["options"])) == 4 for q in questions)
         assert all(0 <= q["answer"] < 4 for q in questions)
 
-    fallback = level_question_pool(2, {"id": 2, "name": "Bayern Munich"})
+    fallback = level_question_pool(2, {"id": 2, "name": "Napoli"})
     assert len(fallback) == 60
     assert all(q["id"].startswith("club-knowledge-") for q in fallback)
 
