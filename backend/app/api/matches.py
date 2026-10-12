@@ -228,7 +228,7 @@ async def match_center(match_id: str, request: Request, db: Session = Depends(ge
 
 
 @router.get("/predictions")
-async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> dict:
+async def saved_predictions(request: Request, refresh: bool = False, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
     rows = db.scalars(
         select(UserMatchPrediction)
@@ -262,7 +262,10 @@ async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> 
         (
             row for row in valid_rows
             if row.result_status == "PENDING"
-            and result_check_due(row.result_status, row.kickoff_utc, row.result_checked_at, now)
+            and (result_check_due(row.result_status, row.kickoff_utc, row.result_checked_at, now)
+                 or (refresh and parse_utc(row.kickoff_utc) is not None
+                     and parse_utc(row.kickoff_utc) <= now
+                     and (row.result_checked_at is None or (now - (row.result_checked_at.replace(tzinfo=timezone.utc) if row.result_checked_at.tzinfo is None else row.result_checked_at)).total_seconds() >= 60)))
         ),
         key=lambda row: parse_utc(row.kickoff_utc) or now,
     )
@@ -325,7 +328,9 @@ async def saved_predictions(request: Request, db: Session = Depends(get_db)) -> 
         })
 
     notice = None
-    if provider_limited:
+    if refresh and not unresolved and any(row.result_status == "PENDING" and parse_utc(row.kickoff_utc) and parse_utc(row.kickoff_utc) <= now for row in valid_rows):
+        notice = "A result was checked recently. Please wait at least a minute before checking it again."
+    elif provider_limited:
         notice = "Live result refresh is temporarily paused because the football data provider rate limit was reached. Saved results remain available."
     elif unresolved and len(unresolved) > provider_checks:
         notice = f"Checked {provider_checks} pending prediction result{'s' if provider_checks != 1 else ''} this refresh. More eligible results will be checked on the next refresh."
