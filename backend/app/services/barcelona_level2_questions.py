@@ -260,7 +260,7 @@ BARCELONA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "barcelona-l2-24",
-    "question": "Which Barcelona midfielder was nicknamed 'El Cerebro' for his playmaking?",
+    "question": "Which Barcelona midfielder was renowned for controlling matches with his passing and played 767 official games for the club?",
     "options": [
       "Xavi Hernández",
       "Javier Mascherano",
@@ -304,9 +304,9 @@ BARCELONA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "barcelona-l2-28",
-    "question": "Which Barcelona striker scored twice in the 2015 Champions League final?",
+    "question": "Which Barcelona forward scored the opening goal in the 2015 Champions League final?",
     "options": [
-      "No Barcelona player scored twice",
+      "Ivan Rakitić",
       "Luis Suárez",
       "Lionel Messi",
       "Neymar"
