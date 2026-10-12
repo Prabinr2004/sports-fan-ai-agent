@@ -300,7 +300,7 @@ CHELSEA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "chelsea-l2-28",
-    "question": "Which Chelsea midfielder scored the winner in the 2021 Champions League final?",
+    "question": "Which Chelsea forward scored the winner in the 2021 Champions League final?",
     "options": [
       "Kai Havertz",
       "Mason Mount",
@@ -333,7 +333,7 @@ CHELSEA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "chelsea-l2-31",
-    "question": "Which Chelsea forward scored the late winner in the 2013 Europa League final?",
+    "question": "Which Chelsea defender scored the late winner in the 2013 Europa League final?",
     "options": [
       "Branislav Ivanović",
       "Fernando Torres",
@@ -355,7 +355,7 @@ CHELSEA_LEVEL_2_QUESTIONS = [
   },
   {
     "id": "chelsea-l2-33",
-    "question": "Which Chelsea player scored a solo goal against Arsenal in the 2019 Europa League final?",
+    "question": "Which Chelsea player scored twice against Arsenal in the 2019 Europa League final?",
     "options": [
       "Eden Hazard",
       "Pedro",
