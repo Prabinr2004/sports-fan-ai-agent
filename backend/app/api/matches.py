@@ -127,6 +127,7 @@ async def live_match_snapshot(match_id: str, request: Request, db: Session = Dep
         "id": str(match.get("id")),
         "status": match.get("status"),
         "score": {"home": score.get("home"), "away": score.get("away")},
+        "statistics": match.get("statistics"),
         "events": [{"type": "GOAL", "minute": goal.get("minute"), "extra_time": goal.get("extra_time"), "player_name": goal.get("player_name"), "team_id": goal.get("team_id")} for goal in match.get("goals", []) if goal.get("minute") is not None],
         "checked_at": datetime.now(timezone.utc).isoformat(),
     }
