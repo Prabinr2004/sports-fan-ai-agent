@@ -296,3 +296,32 @@ body{background:#f8f6f1}
 .fansphere-premium .match-center-page .comparison-form strong,.fansphere-premium .match-center-page .comparison-table strong,.fansphere-premium .match-center-page .comparison-standings strong{color:#203a55}
 .fansphere-premium .match-center-page .comparison-table>div,.fansphere-premium .match-center-page .comparison-standings>div{border-color:#ebdfd2}
 @media(prefers-reduced-motion:reduce){.fansphere-premium .matches-page .match-card:hover{transform:none}}
+
+
+/* Match screen polish: override legacy dark button and comparison blocks */
+.fansphere-premium .matches-page .match-card > button.match-open-button{
+  appearance:none!important;position:static!important;display:block!important;align-self:stretch!important;
+  width:calc(100% - 28px)!important;margin:4px 14px 14px!important;padding:11px 14px!important;
+  background:#ee7966!important;color:#fff!important;border:1px solid #ee7966!important;
+  border-radius:10px!important;font-size:12px!important;font-weight:800!important;line-height:1.4!important;
+  text-align:center!important;box-shadow:0 5px 13px #d8776329!important;
+}
+.fansphere-premium .matches-page .match-card > button.match-open-button:hover{background:#d96250!important;border-color:#d96250!important;color:#fff!important}
+.fansphere-premium .match-center-page .comparison-form>div{background:#fff6ec!important;border:1px solid #e8d8c6!important}
+.fansphere-premium .match-center-page .comparison-form>div>strong{color:#1d3751!important}
+.fansphere-premium .match-center-page .comparison-standings>div{background:#fff8f0!important;border:1px solid #e8d8c6!important}
+.fansphere-premium .match-center-page .comparison-standings>div>strong{color:#946e51!important}
+.fansphere-premium .match-center-page .comparison-standings span{color:#526982!important}
+.fansphere-premium .match-center-page .comparison-standings b{color:#ad6744!important}
+.fansphere-premium .match-center-page .comparison-table{background:#fffefa;border-color:#e9dfd5}
+.fansphere-premium .match-center-page .comparison-table>div{border-bottom-color:#e9dfd5}
+.fansphere-premium .match-center-page .comparison-table span{color:#73859b}
+.fansphere-premium .match-center-page .form-dot.w{background:#e1f0e6;color:#377951}
+.fansphere-premium .match-center-page .form-dot.d{background:#fff0d6;color:#946827}
+.fansphere-premium .match-center-page .form-dot.l{background:#fbe4de;color:#b65b4b}
+.fansphere-premium .match-center-page .match-center-timeline{border-top-color:#e9dfd5}
+.fansphere-premium .match-center-page .match-center-timeline-empty{color:#76869b}
+.fansphere-premium .match-center-page .match-center-event{border-color:#e9dfd5}
+.fansphere-premium .match-center-page .match-center-event-minute{color:#b76a4c}
+.fansphere-premium .match-center-page .match-center-event-title{color:#1d3751}
+.fansphere-premium .match-center-page .match-center-event-details small{color:#74859a}
