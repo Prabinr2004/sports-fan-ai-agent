@@ -183,3 +183,9 @@ body{background:#f8f6f1}
 
 .fansphere-premium .my-team-dashboard .club-stadium-credit{display:block;width:fit-content;max-width:100%;margin-top:7px;font-size:11px;line-height:1.4;color:#806b58;text-decoration:underline;text-underline-offset:2px}
 .fansphere-premium .my-team-dashboard .club-stadium-credit:hover{color:#af6048}
+
+
+/* My Team finishing touches: stadium visibility and unobtrusive attribution */
+.fansphere-premium .my-team-dashboard .club-hero{background-image:linear-gradient(105deg,rgba(255,249,241,.86),rgba(255,245,230,.63)),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=80")}
+.fansphere-premium .my-team-dashboard .club-stadium-credit{display:block;width:fit-content;margin-top:5px;font-size:9px;line-height:1.35;color:#827b72;text-decoration:none;opacity:.75}
+.fansphere-premium .my-team-dashboard .club-stadium-credit:hover,.fansphere-premium .my-team-dashboard .club-stadium-credit:focus-visible{opacity:1;text-decoration:underline}
