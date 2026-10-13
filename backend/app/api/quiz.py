@@ -39,6 +39,8 @@ from app.services.manchester_city_level3_questions import MANCHESTER_CITY_LEVEL_
 from app.services.manchester_united_level3_questions import MANCHESTER_UNITED_LEVEL_3_QUESTIONS
 from app.services.tottenham_level3_questions import TOTTENHAM_LEVEL_3_QUESTIONS
 from app.services.bayern_munich_level3_questions import BAYERN_MUNICH_LEVEL_3_QUESTIONS
+from app.services.inter_milan_level3_questions import INTER_MILAN_LEVEL_3_QUESTIONS
+from app.services.ac_milan_level3_questions import AC_MILAN_LEVEL_3_QUESTIONS
 from app.services.level4_questions import LEVEL_4_QUESTIONS
 from app.services.level5_questions import LEVEL_5_QUESTIONS
 
@@ -148,6 +150,12 @@ def level_question_pool(level: int, team: dict | None) -> list[dict]:
             return list(TOTTENHAM_LEVEL_3_QUESTIONS)
         if "bayern" in team_name:
             return list(BAYERN_MUNICH_LEVEL_3_QUESTIONS)
+    if level == 3 and team:
+        team_name = team.get("name", "").casefold()
+        if "internazionale" in team_name or "inter milan" in team_name or team_name in {"inter", "fc inter"}:
+            return list(INTER_MILAN_LEVEL_3_QUESTIONS)
+        if "ac milan" in team_name or team_name in {"milan", "a.c. milan"}:
+            return list(AC_MILAN_LEVEL_3_QUESTIONS)
     if level == 2 and team:
         team_name = team.get("name", "").casefold()
         if "real madrid" in team_name:
