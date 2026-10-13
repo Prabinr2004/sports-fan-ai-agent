@@ -3,7 +3,7 @@
 MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   {
     "id": "man-city-l3-01",
-    "question": "In the 2023 Champions League semifinal second leg, who scored the opening goal against Real Madrid?",
+    "question": "In the 2023 Champions League semi-final second leg, who scored the opening goal against Real Madrid?",
     "options": [
       "Haaland",
       "Bernardo Silva",
@@ -15,7 +15,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-02",
-    "question": "In the 2023 Champions League semifinal second leg, who scored the second goal against Real Madrid?",
+    "question": "In the 2023 Champions League semi-final second leg, who scored the second goal against Real Madrid?",
     "options": [
       "Bernardo Silva",
       "Grealish",
@@ -27,19 +27,19 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-03",
-    "question": "Who scored Manchester City's third goal against Real Madrid in the 2023 Champions League semifinal second leg?",
+    "question": "What was the aggregate score of Manchester City's 2023 Champions League semi-final against Real Madrid?",
     "options": [
-      "Manuel Akanji",
-      "Bernardo Silva",
-      "Kevin De Bruyne",
-      "Julián Álvarez"
+      "4-1",
+      "5-1",
+      "5-2",
+      "6-1"
     ],
-    "answer": 0,
+    "answer": 1,
     "min_level": 3
   },
   {
     "id": "man-city-l3-04",
-    "question": "In the 2023 Champions League semifinal second leg, who scored the fourth goal against Real Madrid?",
+    "question": "In the 2023 Champions League semi-final second leg, who scored City's stoppage-time goal against Real Madrid?",
     "options": [
       "Foden",
       "Haaland",
@@ -51,7 +51,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-05",
-    "question": "Who scored Manchester City's goal away to Real Madrid in the 2023 Champions League semifinal first leg?",
+    "question": "Who scored Manchester City's goal away to Real Madrid in the 2023 Champions League semi-final first leg?",
     "options": [
       "Haaland",
       "Kevin De Bruyne",
@@ -63,7 +63,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-06",
-    "question": "Who scored Real Madrid's goal against Manchester City in the 2023 Champions League semifinal first leg?",
+    "question": "Who scored Real Madrid's goal against Manchester City in the 2023 Champions League semi-final first leg?",
     "options": [
       "Vinícius Júnior",
       "Rodrygo",
@@ -135,7 +135,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-12",
-    "question": "In 2023, which answer correctly matches this event: Champions League final Inter header off crossbar?",
+    "question": "Which Inter Milan player hit the crossbar with a header in the 2023 Champions League final?",
     "options": [
       "Lautaro Martínez",
       "Džeko",
@@ -147,7 +147,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-13",
-    "question": "In the 2023 FA Cup final City, who scored the opening goal?",
+    "question": "In the 2023 FA Cup final against Manchester United, who scored City's opening goal?",
     "options": [
       "Haaland",
       "İlkay Gündoğan",
@@ -159,7 +159,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-14",
-    "question": "In the 2023 FA Cup final City, who scored the second goal?",
+    "question": "In the 2023 FA Cup final against Manchester United, who scored City's second goal?",
     "options": [
       "İlkay Gündoğan",
       "Haaland",
@@ -183,7 +183,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-16",
-    "question": "In the 2011 FA Cup final City, who scored the winning goal?",
+    "question": "Who scored City's winning goal in the 2011 FA Cup final against Stoke City?",
     "options": [
       "Agüero",
       "Silva",
@@ -195,7 +195,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-17",
-    "question": "In the 2011 FA Cup semifinal City, who scored the winning goal against United?",
+    "question": "Who scored City's winning goal against Manchester United in the 2011 FA Cup semi-final?",
     "options": [
       "Silva",
       "Yaya Touré",
@@ -207,7 +207,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-18",
-    "question": "In the 2012 QPR title decider City 2-2, who scored the equalizer?",
+    "question": "In the 2012 title decider against QPR, who scored City's stoppage-time equalizer?",
     "options": [
       "Edin Džeko",
       "Agüero",
@@ -219,7 +219,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-19",
-    "question": "In the 2012 QPR title decider City, who scored the opening goal?",
+    "question": "In the 2012 title decider against QPR, who scored the opening goal?",
     "options": [
       "Agüero",
       "Džeko",
@@ -231,7 +231,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-20",
-    "question": "In the 2012 QPR title decider stoppage-time, who scored the winning goal?",
+    "question": "In the 2012 title decider against QPR, who scored City's stoppage-time winning goal?",
     "options": [
       "Džeko",
       "Balotelli",
@@ -279,7 +279,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-24",
-    "question": "In the 2011 6-1 derby at United City, who scored the opening goal?",
+    "question": "In the 2011 6-1 derby at Old Trafford, who scored City's opening goal?",
     "options": [
       "Agüero",
       "Džeko",
@@ -291,7 +291,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-25",
-    "question": "In 2011, which answer correctly matches this event: 6-1 derby at United sent-off player?",
+    "question": "Which Manchester United player was sent off in the 2011 6-1 derby?",
     "options": [
       "Ferdinand",
       "Jonny Evans",
@@ -303,7 +303,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-26",
-    "question": "In the 2011 6-1 derby at United City, who scored twice besides Balotelli?",
+    "question": "In the 2011 6-1 derby, who scored twice for City alongside Balotelli?",
     "options": [
       "Edin Džeko",
       "Nasri",
@@ -315,7 +315,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-27",
-    "question": "In the 2011 6-1 derby at United City, who scored the third goal?",
+    "question": "In the 2011 6-1 derby, who scored City's third goal?",
     "options": [
       "Balotelli",
       "Džeko",
@@ -339,7 +339,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-29",
-    "question": "In the 2022 Aston Villa title decider City 2-2, who scored the equalizer?",
+    "question": "In the 2022 title decider against Aston Villa, who scored City's equalizer to make it 2-2?",
     "options": [
       "Gündoğan",
       "Rodri",
@@ -351,7 +351,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-30",
-    "question": "In the 2022 Aston Villa title decider City, who scored the winning goal?",
+    "question": "In the 2022 title decider against Aston Villa, who scored City's winning goal?",
     "options": [
       "İlkay Gündoğan",
       "Rodri",
@@ -375,7 +375,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-32",
-    "question": "In the 2019 FA Cup final City, who scored the opening goal?",
+    "question": "In the 2019 FA Cup final against Watford, who scored City's opening goal?",
     "options": [
       "Sterling",
       "Jesus",
@@ -387,7 +387,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-33",
-    "question": "In the 2019 FA Cup final City, who scored the second goal?",
+    "question": "In the 2019 FA Cup final against Watford, who scored City's second goal?",
     "options": [
       "Sterling",
       "Gabriel Jesus",
@@ -399,7 +399,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-34",
-    "question": "In the 2019 FA Cup final City, who scored the third goal?",
+    "question": "In the 2019 FA Cup final against Watford, who scored City's third goal?",
     "options": [
       "Kevin De Bruyne",
       "Jesus",
@@ -411,7 +411,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-35",
-    "question": "In the 2019 FA Cup final City, who scored the fourth goal?",
+    "question": "In the 2019 FA Cup final against Watford, who scored City's fourth goal?",
     "options": [
       "Sterling",
       "De Bruyne",
@@ -423,7 +423,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-36",
-    "question": "In the 2019 FA Cup final City, who scored the fifth goal?",
+    "question": "In the 2019 FA Cup final against Watford, who scored City's fifth goal?",
     "options": [
       "Jesus",
       "Silva",
@@ -435,7 +435,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-37",
-    "question": "In the 2019 FA Cup final City, who scored the sixth goal?",
+    "question": "In the 2019 FA Cup final against Watford, who scored City's sixth goal?",
     "options": [
       "Jesus",
       "Raheem Sterling",
@@ -471,7 +471,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-40",
-    "question": "In the 2019 League Cup final City decisive shootout, who scored?",
+    "question": "Who scored City's winning penalty in the 2019 League Cup final shootout against Chelsea?",
     "options": [
       "Agüero",
       "Bernardo Silva",
@@ -495,7 +495,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-42",
-    "question": "In the 2018 League Cup final City, who scored the opening goal against Arsenal?",
+    "question": "In the 2018 League Cup final, who scored City's opening goal against Arsenal?",
     "options": [
       "Sergio Agüero",
       "Kompany",
@@ -507,7 +507,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-43",
-    "question": "In the 2018 League Cup final City, who scored the second goal against Arsenal?",
+    "question": "In the 2018 League Cup final, who scored City's second goal against Arsenal?",
     "options": [
       "Agüero",
       "Silva",
@@ -519,7 +519,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-44",
-    "question": "In the 2018 League Cup final City, who scored the third goal against Arsenal?",
+    "question": "In the 2018 League Cup final, who scored City's third goal against Arsenal?",
     "options": [
       "Agüero",
       "Kompany",
@@ -531,7 +531,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-45",
-    "question": "In the 2014 League Cup final City, who scored the opening goal against Sunderland?",
+    "question": "In the 2014 League Cup final, who scored City's first goal against Sunderland?",
     "options": [
       "Nasri",
       "Yaya Touré",
@@ -543,7 +543,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-46",
-    "question": "In the 2014 League Cup final City, who scored the second goal against Sunderland?",
+    "question": "In the 2014 League Cup final, who scored City's second goal against Sunderland?",
     "options": [
       "Samir Nasri",
       "Touré",
@@ -555,7 +555,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-47",
-    "question": "In the 2014 League Cup final City, who scored the third goal against Sunderland?",
+    "question": "In the 2014 League Cup final, who scored City's third goal against Sunderland?",
     "options": [
       "Touré",
       "Nasri",
@@ -567,7 +567,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-48",
-    "question": "In the 2014 League Cup final Sunderland, who scored?",
+    "question": "In the 2014 League Cup final, who scored Sunderland's goal?",
     "options": [
       "Johnson",
       "Wickham",
@@ -579,7 +579,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-49",
-    "question": "In the 2016 League Cup final City, who scored the opening goal against Liverpool?",
+    "question": "In the 2016 League Cup final, who scored City's opening goal against Liverpool?",
     "options": [
       "Agüero",
       "Fernandinho",
@@ -591,7 +591,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-50",
-    "question": "In the 2016 League Cup final Liverpool, who scored the equalizer?",
+    "question": "In the 2016 League Cup final, who scored Liverpool's equalizer?",
     "options": [
       "Philippe Coutinho",
       "Sturridge",
@@ -615,7 +615,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-52",
-    "question": "In the 1970 Cup Winners Cup final City penalty, who scored?",
+    "question": "In the 1970 Cup Winners' Cup final against Górnik Zabrze, who scored City's penalty?",
     "options": [
       "Bell",
       "Summerbee",
@@ -627,7 +627,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-53",
-    "question": "In the 1970 Cup Winners Cup final City, who scored the opening goal?",
+    "question": "In the 1970 Cup Winners' Cup final against Górnik Zabrze, who scored City's opening goal?",
     "options": [
       "Lee",
       "Neil Young",
@@ -639,7 +639,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-54",
-    "question": "In the 1969 FA Cup final City, who scored the winning goal against Leicester?",
+    "question": "In the 1969 FA Cup final, who scored City's winning goal against Leicester?",
     "options": [
       "Neil Young",
       "Bell",
@@ -651,7 +651,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-55",
-    "question": "In the 1976 League Cup final City overhead-kick, who scored?",
+    "question": "In the 1976 League Cup final against Newcastle, who scored City's winning overhead kick?",
     "options": [
       "Barnes",
       "Royle",
@@ -663,7 +663,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-56",
-    "question": "In the 1976 League Cup final City, who scored the opening goal?",
+    "question": "In the 1976 League Cup final against Newcastle, who scored City's opening goal?",
     "options": [
       "Tueart",
       "Royle",
@@ -675,7 +675,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-57",
-    "question": "In the 2023 Club World Cup final City, who scored the opening goal against Fluminense?",
+    "question": "In the 2023 Club World Cup final, who scored City's opening goal against Fluminense?",
     "options": [
       "Foden",
       "Julián Álvarez",
@@ -687,7 +687,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-58",
-    "question": "In the 2023 Club World Cup final City, who scored the third goal against Fluminense?",
+    "question": "In the 2023 Club World Cup final, who scored City's third goal against Fluminense?",
     "options": [
       "Phil Foden",
       "Álvarez",
@@ -699,7 +699,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-59",
-    "question": "In the 2023 Club World Cup final City, who scored the fourth goal against Fluminense?",
+    "question": "In the 2023 Club World Cup final, who scored City's fourth goal against Fluminense?",
     "options": [
       "Foden",
       "Rodri",
