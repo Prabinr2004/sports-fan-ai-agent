@@ -122,6 +122,18 @@ BARCELONA_LEVEL_3_QUESTIONS = [
     "min_level": 3
   },
   {
+    "id": "barcelona-l3-11",
+    "question": "Who scored Barcelona's second goal against Bayern Munich in the first leg of the 2015 Champions League semi-final?",
+    "options": [
+      "Neymar",
+      "Luis Suárez",
+      "Ivan Rakitić",
+      "Lionel Messi"
+    ],
+    "answer": 3,
+    "min_level": 3
+  },
+  {
     "id": "barcelona-l3-12",
     "question": "Who scored Barcelona's third goal against Bayern Munich in the 2015 Champions League semifinal first leg?",
     "options": [
@@ -537,6 +549,18 @@ BARCELONA_LEVEL_3_QUESTIONS = [
       "Samuel Eto'o",
       "Andrés Iniesta",
       "Yaya Touré"
+    ],
+    "answer": 0,
+    "min_level": 3
+  },
+  {
+    "id": "barcelona-l3-47",
+    "question": "Who scored Barcelona's second goal in their 5–0 La Liga victory over Real Madrid in November 2010?",
+    "options": [
+      "Pedro",
+      "David Villa",
+      "Xavi",
+      "Jeffrén Suárez"
     ],
     "answer": 0,
     "min_level": 3
