@@ -3,7 +3,7 @@
 BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   {
     "id": "bayern-l3-01",
-    "question": "In the 2013 Champions League final Bayern, who scored the winning goal scorer?",
+    "question": "In the 2013 Champions League final, who scored the winning goal?",
     "options": [
       "Müller",
       "Mandžukić",
@@ -15,7 +15,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-02",
-    "question": "In the 2013 Champions League final Bayern, who scored the opening goal scorer?",
+    "question": "In the 2013 Champions League final, who scored the opening goal?",
     "options": [
       "Robben",
       "Mario Mandžukić",
@@ -27,7 +27,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-03",
-    "question": "In the 2013 Champions League final Dortmund, who scored the equalizer scorer?",
+    "question": "In the 2013 Champions League final, who scored the equalizer?",
     "options": [
       "İlkay Gündoğan",
       "Reus",
@@ -39,7 +39,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-04",
-    "question": "In the 2013 Champions League final Bayern, who provided the assist?",
+    "question": "In the 2013 Champions League final, who provided the assist?",
     "options": [
       "Müller",
       "Lahm",
@@ -51,7 +51,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-05",
-    "question": "In the 2013 Champions League final Bayern, who was the goalkeeper?",
+    "question": "In the 2013 Champions League final, who was the goalkeeper?",
     "options": [
       "Ulreich",
       "Butt",
@@ -63,7 +63,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-06",
-    "question": "In the 2013 Champions League final Bayern, who was the captain?",
+    "question": "In the 2013 Champions League final, who was the captain?",
     "options": [
       "Schweinsteiger",
       "Philipp Lahm",
@@ -159,7 +159,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-14",
-    "question": "In the 2012 Champions League final Bayern, who scored the opening goal scorer against Chelsea?",
+    "question": "In the 2012 Champions League final, who scored the opening goal scorer against Chelsea?",
     "options": [
       "Robben",
       "Thomas Müller",
@@ -171,7 +171,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-15",
-    "question": "In the 2012 Champions League final Chelsea, who scored the equalizer scorer?",
+    "question": "In the 2012 Champions League final, who scored the equalizer?",
     "options": [
       "Didier Drogba",
       "Lampard",
@@ -207,7 +207,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-18",
-    "question": "In the 2012 Champions League final Bayern, who was the goalkeeper?",
+    "question": "In the 2012 Champions League final, who was the goalkeeper?",
     "options": [
       "Kahn",
       "Manuel Neuer",
@@ -219,7 +219,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-19",
-    "question": "In the 2020 Champions League final Bayern, who scored the winning goal scorer?",
+    "question": "In the 2020 Champions League final, who scored the winning goal?",
     "options": [
       "Kingsley Coman",
       "Lewandowski",
@@ -243,7 +243,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-21",
-    "question": "In the 2020 Champions League final Bayern, what was the opponent?",
+    "question": "In the 2020 Champions League final, what was the opponent?",
     "options": [
       "Chelsea",
       "Barcelona",
@@ -255,7 +255,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-22",
-    "question": "In the 2020 Champions League final Bayern, who was the goalkeeper?",
+    "question": "In the 2020 Champions League final, who was the goalkeeper?",
     "options": [
       "Ulreich",
       "Manuel Neuer",
@@ -483,7 +483,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-41",
-    "question": "In the 2020 Champions League final Bayern, what was the winning margin?",
+    "question": "In the 2020 Champions League final, what was the winning margin?",
     "options": [
       "Two goals",
       "Three goals",
@@ -615,7 +615,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-52",
-    "question": "In the 2001 Champions League final Bayern, who was the goalkeeper?",
+    "question": "In the 2001 Champions League final, who was the goalkeeper?",
     "options": [
       "Neuer",
       "Butt",
@@ -627,7 +627,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-53",
-    "question": "In the 2001 Champions League final Bayern, what was the decisive shootout save against?",
+    "question": "In the 2001 Champions League final, what was the decisive shootout save against?",
     "options": [
       "Mendieta",
       "Carew",
@@ -639,7 +639,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-54",
-    "question": "In the 2001 Champions League final Bayern, who was the manager?",
+    "question": "In the 2001 Champions League final, who was the manager?",
     "options": [
       "Heynckes",
       "Ottmar Hitzfeld",
@@ -675,7 +675,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-57",
-    "question": "In the 1975 European Cup final Bayern, who scored the opening goal against Leeds?",
+    "question": "In the 1975 European Cup final, who scored the opening goal against Leeds?",
     "options": [
       "Gerd Müller",
       "Hoeneß",
@@ -687,7 +687,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-58",
-    "question": "In the 1975 European Cup final Bayern, who scored the second goal against Leeds?",
+    "question": "In the 1975 European Cup final, who scored the second goal against Leeds?",
     "options": [
       "Roth",
       "Gerd Müller",
@@ -699,7 +699,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-59",
-    "question": "In the 1976 European Cup final Bayern, who scored the winning goal against Saint-Étienne?",
+    "question": "In the 1976 European Cup final, who scored the winning goal against Saint-Étienne?",
     "options": [
       "Franz Roth",
       "Gerd Müller",
