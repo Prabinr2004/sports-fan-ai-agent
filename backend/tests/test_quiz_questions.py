@@ -110,3 +110,33 @@ async def test_real_madrid_record_goal_answer_offline(monkeypatch):
     questions = await build_team_questions("86", "Real Madrid", 5, "2026-10-07")
     record = next(q for q in questions if q["id"] == "rm-record-goals")
     assert record["options"][record["answer"]] == "450"
+
+
+@pytest.mark.parametrize("module_name,bank_name", [
+    ("real_madrid_level3_questions", "REAL_MADRID_LEVEL_3_QUESTIONS"),
+    ("barcelona_level3_questions", "BARCELONA_LEVEL_3_QUESTIONS"),
+    ("liverpool_level3_questions", "LIVERPOOL_LEVEL_3_QUESTIONS"),
+    ("arsenal_level3_questions", "ARSENAL_LEVEL_3_QUESTIONS"),
+    ("chelsea_level3_questions", "CHELSEA_LEVEL_3_QUESTIONS"),
+    ("manchester_city_level3_questions", "MANCHESTER_CITY_LEVEL_3_QUESTIONS"),
+    ("manchester_united_level3_questions", "MANCHESTER_UNITED_LEVEL_3_QUESTIONS"),
+    ("tottenham_level3_questions", "TOTTENHAM_LEVEL_3_QUESTIONS"),
+    ("bayern_munich_level3_questions", "BAYERN_MUNICH_LEVEL_3_QUESTIONS"),
+    ("inter_milan_level3_questions", "INTER_MILAN_LEVEL_3_QUESTIONS"),
+    ("ac_milan_level3_questions", "AC_MILAN_LEVEL_3_QUESTIONS"),
+])
+def test_each_level3_club_bank_has_sixty_valid_unique_questions(module_name, bank_name):
+    from importlib import import_module
+
+    bank = getattr(import_module(f"app.services.{module_name}"), bank_name)
+    assert len(bank) == 60
+    assert len({question["id"] for question in bank}) == 60
+    assert len({question["question"].casefold() for question in bank}) == 60
+
+    for question in bank:
+        assert question["min_level"] == 3
+        assert question["question"].strip()
+        assert len(question["options"]) == 4
+        assert len({str(option).strip().casefold() for option in question["options"]}) == 4
+        assert 0 <= question["answer"] < 4
+        assert question["options"][question["answer"]]
