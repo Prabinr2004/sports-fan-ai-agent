@@ -3,7 +3,7 @@
 MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   {
     "id": "man-utd-l3-01",
-    "question": "In the 1999 Champions League final United, who scored the equalizer scorer?",
+    "question": "In the 1999 Champions League final, who scored the equalizer?",
     "options": [
       "Solskjær",
       "Cole",
@@ -15,7 +15,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-02",
-    "question": "In the 1999 Champions League final United, who scored the winning goal scorer?",
+    "question": "In the 1999 Champions League final, who scored the winning goal?",
     "options": [
       "Sheringham",
       "Ole Gunnar Solskjær",
@@ -27,7 +27,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-03",
-    "question": "In the 1999 Champions League final United corner taker before, who scored the equalizer?",
+    "question": "In the 1999 Champions League final, who took the corner leading to United's equalizer?",
     "options": [
       "David Beckham",
       "Giggs",
@@ -39,7 +39,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-04",
-    "question": "In the 1999 Champions League final United corner taker before, who scored the winning goal?",
+    "question": "In the 1999 Champions League final, who took the corner leading to United's winning goal?",
     "options": [
       "Giggs",
       "Scholes",
@@ -51,7 +51,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-05",
-    "question": "In the 1999 Champions League final Bayern, who scored?",
+    "question": "In the 1999 Champions League final, who scored?",
     "options": [
       "Effenberg",
       "Jancker",
@@ -63,7 +63,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-06",
-    "question": "In the 1999 Champions League final United, who was the goalkeeper?",
+    "question": "In the 1999 Champions League final, who was the goalkeeper?",
     "options": [
       "Van der Sar",
       "Peter Schmeichel",
@@ -75,7 +75,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-07",
-    "question": "In the 1999 Champions League final United, who was the captain?",
+    "question": "In the 1999 Champions League final, who was the captain?",
     "options": [
       "Peter Schmeichel",
       "Keane",
@@ -87,7 +87,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-08",
-    "question": "In the 1999 Champions League final United substitute who scored, who scored the winning goal?",
+    "question": "In the 1999 Champions League final, which United substitute scored the winning goal?",
     "options": [
       "Sheringham",
       "Blomqvist",
@@ -183,7 +183,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-16",
-    "question": "In the 1999 FA Cup final United, who scored the opening goal against Newcastle?",
+    "question": "In the 1999 FA Cup final, who scored the opening goal against Newcastle?",
     "options": [
       "Scholes",
       "Cole",
@@ -195,7 +195,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-17",
-    "question": "In the 1999 FA Cup final United, who scored the second goal against Newcastle?",
+    "question": "In the 1999 FA Cup final, who scored the second goal against Newcastle?",
     "options": [
       "Sheringham",
       "Cole",
@@ -207,7 +207,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-18",
-    "question": "In the 2008 Champions League final United, who scored the opening goal against Chelsea?",
+    "question": "In the 2008 Champions League final, who scored the opening goal against Chelsea?",
     "options": [
       "Rooney",
       "Cristiano Ronaldo",
@@ -219,7 +219,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-19",
-    "question": "In the 2008 Champions League final Chelsea, who scored the equalizer scorer?",
+    "question": "In the 2008 Champions League final, who scored the equalizer?",
     "options": [
       "Frank Lampard",
       "Drogba",
@@ -303,7 +303,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-26",
-    "question": "In the 2009 Champions League final Barcelona, who scored the opening goal against United?",
+    "question": "In the 2009 Champions League final, who scored the opening goal against United?",
     "options": [
       "Messi",
       "Samuel Eto'o",
@@ -315,7 +315,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-27",
-    "question": "In the 2009 Champions League final Barcelona, who scored the second goal against United?",
+    "question": "In the 2009 Champions League final, who scored the second goal against United?",
     "options": [
       "Lionel Messi",
       "Eto'o",
@@ -327,7 +327,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-28",
-    "question": "In the 2011 Champions League final United, who scored the equalizer against Barcelona?",
+    "question": "In the 2011 Champions League final, who scored the equalizer against Barcelona?",
     "options": [
       "Hernández",
       "Giggs",
@@ -339,7 +339,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-29",
-    "question": "In the 2011 Champions League final Barcelona, who scored the opening goal against United?",
+    "question": "In the 2011 Champions League final, who scored the opening goal against United?",
     "options": [
       "Messi",
       "Villa",
@@ -351,7 +351,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-30",
-    "question": "In the 2011 Champions League final Barcelona, who scored the second goal against United?",
+    "question": "In the 2011 Champions League final, who scored the second goal against United?",
     "options": [
       "Pedro",
       "Lionel Messi",
@@ -363,7 +363,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-31",
-    "question": "In the 2011 Champions League final Barcelona, who scored the third goal against United?",
+    "question": "In the 2011 Champions League final, who scored the third goal against United?",
     "options": [
       "David Villa",
       "Messi",
@@ -375,7 +375,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-32",
-    "question": "In the 2017 Europa League final United, who scored the opening goal against Ajax?",
+    "question": "In the 2017 Europa League final, who scored the opening goal against Ajax?",
     "options": [
       "Mkhitaryan",
       "Rashford",
@@ -387,7 +387,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-33",
-    "question": "In the 2017 Europa League final United, who scored the second goal against Ajax?",
+    "question": "In the 2017 Europa League final, who scored the second goal against Ajax?",
     "options": [
       "Pogba",
       "Rashford",
@@ -399,7 +399,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-34",
-    "question": "In the 2017 Europa League final United, who was the goalkeeper?",
+    "question": "In the 2017 Europa League final, who was the goalkeeper?",
     "options": [
       "De Gea",
       "Sergio Romero",
@@ -411,7 +411,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-35",
-    "question": "In the 2017 Europa League final United, who was the captain?",
+    "question": "In the 2017 Europa League final, who was the captain?",
     "options": [
       "Antonio Valencia",
       "Rooney",
@@ -435,7 +435,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-37",
-    "question": "In the 2016 FA Cup final United, who scored the equalizer against Crystal Palace?",
+    "question": "In the 2016 FA Cup final, who scored the equalizer against Crystal Palace?",
     "options": [
       "Lingard",
       "Rooney",
@@ -471,7 +471,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-40",
-    "question": "In the 2004 FA Cup final United, who scored the opening goal against Millwall?",
+    "question": "In the 2004 FA Cup final, who scored the opening goal against Millwall?",
     "options": [
       "Van Nistelrooy",
       "Scholes",
@@ -483,7 +483,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-41",
-    "question": "In the 2004 FA Cup final United, who scored the second goal against Millwall?",
+    "question": "In the 2004 FA Cup final, who scored the second goal against Millwall?",
     "options": [
       "Ronaldo",
       "Scholes",
@@ -495,7 +495,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-42",
-    "question": "In the 2004 FA Cup final United, who scored the third goal against Millwall?",
+    "question": "In the 2004 FA Cup final, who scored the third goal against Millwall?",
     "options": [
       "Ronaldo",
       "Ruud van Nistelrooy",
@@ -531,7 +531,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-45",
-    "question": "In the 2023 League Cup final United, who scored the opening goal against Newcastle?",
+    "question": "In the 2023 League Cup final, who scored the opening goal against Newcastle?",
     "options": [
       "Rashford",
       "Fernandes",
@@ -543,7 +543,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-46",
-    "question": "In the 2023 League Cup final United, who scored the second goal against Newcastle?",
+    "question": "In the 2023 League Cup final, who scored the second goal against Newcastle?",
     "options": [
       "Weghorst",
       "Marcus Rashford",
@@ -555,7 +555,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-47",
-    "question": "In the 2023 FA Cup final United, who scored the equalizer against City?",
+    "question": "In the 2023 FA Cup final, who scored the equalizer against City?",
     "options": [
       "Bruno Fernandes",
       "Rashford",
@@ -567,7 +567,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-48",
-    "question": "In the 2023 FA Cup final City, who scored the opening goal against United?",
+    "question": "In the 2023 FA Cup final, who scored the opening goal against United?",
     "options": [
       "Haaland",
       "Rodri",
@@ -579,7 +579,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-49",
-    "question": "In the 2023 FA Cup final City, who scored the winning goal against United?",
+    "question": "In the 2023 FA Cup final, who scored the winning goal against United?",
     "options": [
       "Haaland",
       "De Bruyne",
@@ -591,7 +591,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-50",
-    "question": "In the 2024 FA Cup final United, who scored the opening goal against City?",
+    "question": "In the 2024 FA Cup final, who scored the opening goal against City?",
     "options": [
       "Mainoo",
       "Alejandro Garnacho",
@@ -603,7 +603,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-51",
-    "question": "In the 2024 FA Cup final United, who scored the second goal against City?",
+    "question": "In the 2024 FA Cup final, who scored the second goal against City?",
     "options": [
       "Kobbie Mainoo",
       "Garnacho",
@@ -615,7 +615,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-52",
-    "question": "In the 2024 FA Cup final City, who scored against United?",
+    "question": "In the 2024 FA Cup final, who scored against United?",
     "options": [
       "Haaland",
       "Foden",
@@ -627,7 +627,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-53",
-    "question": "In the 2024 FA Cup final United, who was the manager?",
+    "question": "In the 2024 FA Cup final, who was the manager?",
     "options": [
       "Solskjær",
       "Mourinho",
