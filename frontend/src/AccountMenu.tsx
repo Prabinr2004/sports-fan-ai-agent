@@ -44,11 +44,11 @@ export default function AccountMenu({ name, email, onSignOut }: { name: string; 
       style={{ display: "flex", alignItems: "center", gap: 5, border: 0, padding: 0, background: "transparent", cursor: "pointer", color: "#a9c2d2" }}>
       <span className="avatar">{name.slice(0, 2).toUpperCase()}</span><ChevronDown size={14}/>
     </button>
-    {open && <section role="dialog" aria-label="Account" style={{ position: "absolute", right: 0, top: "calc(100% + 14px)",
+    {open && <section className="premium-account-popover" role="dialog" aria-label="Account" style={{ position: "absolute", right: 0, top: "calc(100% + 14px)",
       width: "min(320px, 85vw)", maxHeight: "75vh", overflowY: "auto", zIndex: 120,
       border: "1px solid #315269", borderRadius: 14, padding: 10, background: "#0d2234",
       boxShadow: "0 16px 45px rgba(0,0,0,.4)", color: "#e2edf7" }}>
-      <button type="button" style={actionStyle} onClick={() => setSection(v => !v)}><UserRound size={17}/> User Info <ChevronDown size={14}/></button>
+      <button className="premium-account-action" type="button" style={actionStyle} onClick={() => setSection(v => !v)}><UserRound size={17}/> User Info <ChevronDown size={14}/></button>
       {section && <div style={{ padding: "6px 12px 12px", fontSize: 13 }}>
         <div><strong>{name}</strong></div>
         <div style={{ color: "#a9c2d2", overflowWrap: "anywhere", marginTop: 5 }}>{email}</div>
@@ -59,12 +59,12 @@ export default function AccountMenu({ name, email, onSignOut }: { name: string; 
           <input type="password" autoComplete="current-password" placeholder="Current password" required value={current} onChange={e => setCurrent(e.target.value)} style={{ padding: 10, borderRadius: 7, width: "100%" }}/>
           <input type="password" autoComplete="new-password" placeholder="New password (12+ characters)" required minLength={12} value={next} onChange={e => setNext(e.target.value)} style={{ padding: 10, borderRadius: 7, width: "100%" }}/>
           <input type="password" autoComplete="new-password" placeholder="Confirm new password" required value={confirm} onChange={e => setConfirm(e.target.value)} style={{ padding: 10, borderRadius: 7, width: "100%" }}/>
-          <button type="submit" disabled={busy} style={{ padding: 10, borderRadius: 7, background: "#7cf3c7", color: "#0b2132", border: 0, fontWeight: 700, cursor: "pointer" }}>{busy ? "Saving…" : "Update password"}</button>
+          <button className="premium-account-save" type="submit" disabled={busy} style={{ padding: 10, borderRadius: 7, background: "#7cf3c7", color: "#0b2132", border: 0, fontWeight: 700, cursor: "pointer" }}>{busy ? "Saving…" : "Update password"}</button>
         </form>}
         {message && <p role="status" style={{ fontSize: 12, color: "#7cf3c7" }}>{message}</p>}
       </div>}
       <div style={{ borderTop: "1px solid #315269" }}/>
-      <button type="button" style={actionStyle} onClick={() => { setOpen(false); onSignOut(); }}><LogOut size={17}/> Sign Out</button>
+      <button className="premium-account-action" type="button" style={actionStyle} onClick={() => { setOpen(false); onSignOut(); }}><LogOut size={17}/> Sign Out</button>
     </section>}
   </div>;
 }
