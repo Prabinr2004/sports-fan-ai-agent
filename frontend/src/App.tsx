@@ -233,14 +233,31 @@ function MyTeamPage({profile,onOpen}:{profile:Profile|null;onOpen:(team:SavedTea
  const recent=[...(hub?.recent_results||[])].sort((a,b)=>new Date(b.utc_date||0).getTime()-new Date(a.utc_date||0).getTime()).slice(0,3);
  const league=hub?.standings?.find(s=>s.type==="TOTAL")||hub?.standings?.[0];
  const scorer=[...(hub?.scorers||[])].sort((a,b)=>b.goals-a.goals)[0];
- const previewPlayers=(hub?.squad||[]).slice(0,6);
+ const squad=hub?.squad||[];
+ const positionGroup=(position?:string|null)=>{
+  const p=(position||"").toLowerCase();
+  if (/goalkeeper|keeper|\bgk\b/.test(p))return "goalkeeper";
+  if (/defen|back|\bcb\b|\blb\b|\brb\b/.test(p))return "defender";
+  if (/midfield|\bcm\b|\bcdm\b|\bcam\b/.test(p))return "midfielder";
+  if (/attack|forward|striker|winger|\bst\b|\blw\b|\brw\b/.test(p))return "forward";
+  return "other";
+ };
+ const selectedPlayerIds=new Set<string>();
+ const previewPlayers=([
+  ...["goalkeeper","defender","midfielder","forward","defender","midfielder"].flatMap(group=>{
+   const player=squad.find(p=>positionGroup(p.position)===group&&!selectedPlayerIds.has(String(p.id)));
+   if(player)selectedPlayerIds.add(String(player.id));
+   return player?[player]:[];
+  }),
+  ...squad.filter(p=>!selectedPlayerIds.has(String(p.id)))
+ ]).slice(0,6);
  const panel:CSSProperties={background:"#0b2033",border:"1px solid #25435b",borderRadius:18,padding:22,minWidth:0};
  const heading:CSSProperties={fontSize:20,margin:"7px 0 16px",color:"#e8f2ff"};
  const muted:CSSProperties={color:"#9ab0c6",fontSize:13};
  return <div className="my-team-dashboard">
   <style>{`.my-team-dashboard .club-overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}.my-team-dashboard .club-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}.my-team-dashboard .club-stat{padding:18px;border:1px solid #25435b;border-radius:14px;background:#0b2033}.my-team-dashboard .club-stat strong{display:block;font-size:27px;color:#7cf3c7;margin:8px 0}.my-team-dashboard .club-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid #213b51}.my-team-dashboard .club-row:last-child{border-bottom:0}.my-team-dashboard .club-row strong{color:#edf5ff}.my-team-dashboard .club-row small{display:block;color:#9ab0c6;margin-top:5px}.my-team-dashboard .club-hero{display:flex;align-items:center;gap:24px;padding:28px;background:linear-gradient(110deg,#163b4c,#0b2033 72%);border:1px solid #2b5267;border-radius:20px;margin-top:20px}.my-team-dashboard .club-hero img{width:108px;height:108px;object-fit:contain;background:#f7f9fc;padding:14px;border-radius:20px}.my-team-dashboard .club-hero h2{font-size:34px;margin:8px 0}.my-team-dashboard .club-hero .primary-button{margin-top:16px}.my-team-dashboard .club-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.my-team-dashboard .club-player{border:1px solid #24435a;border-radius:12px;padding:12px}.my-team-dashboard .club-player small{display:block;color:#9ab0c6;margin-top:4px}@media(max-width:820px){.my-team-dashboard .club-overview-grid,.my-team-dashboard .club-stat-grid{grid-template-columns:1fr}.my-team-dashboard .club-hero{flex-direction:column;align-items:flex-start}.my-team-dashboard .club-hero h2{font-size:27px}}@media(max-width:480px){.my-team-dashboard .club-players{grid-template-columns:1fr}}`}</style>
   <span className="eyebrow">MY TEAM / CLUB HQ</span><h1>Your club, your world.</h1><p>Fixtures, form, players and season progress for your primary club.</p>
-  <section className="club-hero" style={stadium?{backgroundImage:`linear-gradient(105deg,rgba(255,249,241,.96),rgba(255,245,230,.80)),url("${commonsStadiumImage(stadium.file)}")`}:undefined}>
+  <section className="club-hero" style={stadium?{backgroundImage:`linear-gradient(105deg,rgba(255,249,241,.86),rgba(255,245,230,.63)),url("${commonsStadiumImage(stadium.file)}")`}:undefined}>
    {t.crest_url?<img src={t.crest_url} alt={`${t.name} crest`}/>:<div className="saved-team-crest">{t.name.slice(0,2)}</div>}
    <div><span className="eyebrow">YOUR PRIMARY CLUB</span><h2>{t.name}</h2><p>{[t.league_name,t.country].filter(Boolean).join(" · ")}</p>{hub?.team.venue&&<p style={muted}>Stadium: {hub.team.venue}</p>}{stadium&&<a className="club-stadium-credit" href={`https://commons.wikimedia.org/wiki/File:${encodeURIComponent(stadium.file.replaceAll(" ","_"))}`} target="_blank" rel="noopener noreferrer" title={stadium.credit}>Stadium photo: {stadium.name} · {stadium.credit}</a>}<button className="primary-button" onClick={()=>onOpen(t)}>Explore full team hub →</button></div>
   </section>
