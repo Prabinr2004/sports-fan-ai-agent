@@ -476,3 +476,69 @@ body{background:#f8f6f1}
 .fansphere-premium .leaderboard-page .fan-cell small{color:#ad7650}
 .fansphere-premium .leaderboard-page .leaderboard-rank-label{color:#75869b}
 .fansphere-premium .leaderboard-page .leaderboard-note{color:#78889b}
+
+
+/* Premium Football — Wallet */
+.fansphere-premium .profile-page{color:#1d3650}
+.fansphere-premium .profile-page h1,.fansphere-premium .profile-page h2,.fansphere-premium .profile-page h3{color:#1d3650}
+.fansphere-premium .profile-page .eyebrow{color:#a47752}
+.fansphere-premium .profile-page>p{color:#75879a}
+.fansphere-premium .profile-page .profile-stat-grid>div{background:#fffdfa;border:1px solid #e9ddd0;box-shadow:0 6px 18px #20394d0b}
+.fansphere-premium .profile-page .profile-stat-grid svg{color:#c18b49}
+.fansphere-premium .profile-page .profile-stat-grid span{color:#90785f}
+.fansphere-premium .profile-page .profile-stat-grid strong{color:#1e3953}
+.fansphere-premium .profile-page .profile-analysis-access{background:linear-gradient(120deg,#fff4e5,#fffdfa);border:1px solid #ead4b9;box-shadow:0 7px 22px #243c5010}
+.fansphere-premium .profile-page .profile-analysis-access strong{color:#1d3852}
+.fansphere-premium .profile-page .profile-analysis-access small,.fansphere-premium .profile-page .profile-analysis-access p{color:#75879a}
+.fansphere-premium .profile-page .profile-analysis-access>svg{color:#c58c48}
+.fansphere-premium .profile-page .profile-analysis-access label{color:#50667d}
+.fansphere-premium .profile-page .profile-analysis-access select{background:#fffefa!important;color:#203b54!important;border:1px solid #dfccbb!important}
+.fansphere-premium .profile-page .profile-analysis-access .primary-button{background:#ed7966;border-color:#ed7966;color:#fff}
+.fansphere-premium .profile-page .profile-analysis-access .primary-button:hover:not(:disabled){background:#d96250}
+.fansphere-premium .profile-page .profile-analysis-access p[role="status"]{color:#378355!important}
+.fansphere-premium .profile-page .wallet-history{background:#fffdfa;border:1px solid #e9ddd0;box-shadow:0 7px 22px #243c500d}
+.fansphere-premium .profile-page .wallet-history-heading p{color:#75879a}
+.fansphere-premium .profile-page .wallet-history-filters button{background:#fff8f0;border:1px solid #e7d9ca;color:#687e92}
+.fansphere-premium .profile-page .wallet-history-filters button[aria-pressed="true"]{background:#fce2d7;border-color:#eb816c;color:#a75041}
+.fansphere-premium .profile-page .wallet-history-list{scrollbar-color:#dbc7b7 #fff9f2}
+.fansphere-premium .profile-page .wallet-history-item{background:#fffaf5;border:1px solid #ebdfd4}
+.fansphere-premium .profile-page .wallet-history-details strong{color:#233c56}
+.fansphere-premium .profile-page .wallet-history-details small,.fansphere-premium .profile-page .wallet-history-empty{color:#7a8b9b}
+.fansphere-premium .profile-page .wallet-history-icon.earned{background:#e6f5e9;color:#3e8959}
+.fansphere-premium .profile-page .wallet-history-icon.spent{background:#fff0df;color:#bd7946}
+.fansphere-premium .profile-page .wallet-history-amount.earned{color:#358451}
+.fansphere-premium .profile-page .wallet-history-amount.spent{color:#b87442}
+.fansphere-premium .profile-page>.secondary-button{background:#fff1e6;border:1px solid #e8cdbb;color:#a65b47}
+/* Premium Football — Profile */
+.fansphere-premium .profile-page .profile-hero{background:linear-gradient(115deg,#fff1dd,#fffdfa);border:1px solid #e9d3b5;box-shadow:0 8px 22px #263b4c10}
+.fansphere-premium .profile-page .profile-avatar{background:linear-gradient(135deg,#f2a86f,#ed7966);color:#fff;box-shadow:0 5px 15px #e18b6b35}
+.fansphere-premium .profile-page .profile-hero p{color:#73879a}
+.fansphere-premium .profile-page .profile-level span{color:#a8794c}
+.fansphere-premium .profile-page .profile-level strong{color:#1d3953}
+.fansphere-premium .profile-page .profile-clubs,.fansphere-premium .profile-page .profile-progress,.fansphere-premium .profile-page .achievements-section,.fansphere-premium .profile-page .profile-prediction-record{background:#fffdfa;border:1px solid #e9ddd1;box-shadow:0 6px 19px #263b4c0a}
+.fansphere-premium .profile-page .profile-primary-club,.fansphere-premium .profile-page .profile-followed-clubs{background:#fff7ed;border:1px solid #edddcc}
+.fansphere-premium .profile-page .profile-primary-club small,.fansphere-premium .profile-page .profile-followed-clubs>small{color:#a07654}
+.fansphere-premium .profile-page .profile-primary-club strong,.fansphere-premium .profile-page .profile-followed-clubs strong{color:#203b55}
+.fansphere-premium .profile-page .profile-progress span,.fansphere-premium .profile-page .profile-section-heading p{color:#78899b}
+.fansphere-premium .profile-page .profile-prediction-record b{color:#c18747}
+.fansphere-premium .profile-page .achievement-count{background:#fff0e2;color:#ae6845}
+.fansphere-premium .profile-page .achievement-card{background:#faf7f2;border:1px solid #e9e0d7;opacity:.8}
+.fansphere-premium .profile-page .achievement-card.unlocked{background:#fff6e8;border-color:#e9cba4;opacity:1}
+.fansphere-premium .profile-page .achievement-icon{background:#efe9e2;color:#8290a0}
+.fansphere-premium .profile-page .achievement-card.unlocked .achievement-icon{background:#ffead1;color:#c48a46}
+.fansphere-premium .profile-page .achievement-copy h3{color:#203a53}
+.fansphere-premium .profile-page .achievement-copy p{color:#7a8b9c}
+.fansphere-premium .profile-page .unlocked-chip{color:#43845d!important}
+.fansphere-premium .profile-page .achievement-progress{background:#e9dfd4}
+.fansphere-premium .profile-page .achievement-progress span{background:#e6a85c}
+.fansphere-premium .profile-page .fan-rank-section{background:linear-gradient(130deg,#fff3e1,#fffdfa);border:1px solid #e9d2b1;box-shadow:0 7px 22px #263b4c0c}
+.fansphere-premium .profile-page .fan-rank-header p{color:#73869a}
+.fansphere-premium .profile-page .fan-rank-progress-top{color:#667c90}
+.fansphere-premium .profile-page .fan-rank-step{background:#fffaf4;border:1px solid #e9dcd0;color:#8c7b6c}
+.fansphere-premium .profile-page .fan-rank-step.achieved{background:#fff2d9;border-color:#e7bf79;color:#a47339}
+.fansphere-premium .profile-page .fan-rank-step.current{background:#ffe7c5;border-color:#db9b4a;color:#8f5b26}
+.fansphere-premium .profile-page .achievement-dashboard{background:#fff9ef;border:1px solid #ead7bc}
+.fansphere-premium .profile-page .achievement-dashboard strong{color:#203b55}
+.fansphere-premium .profile-page .achievement-dashboard p,.fansphere-premium .profile-page .achievement-dashboard small{color:#78899b}
+.fansphere-premium .profile-page .achievement-filter-row button,.fansphere-premium .profile-page .achievement-collapse-button{background:#fffaf5;border:1px solid #e9d8c9;color:#667b90}
+.fansphere-premium .profile-page .achievement-filter-row button[aria-pressed="true"],.fansphere-premium .profile-page .achievement-collapse-button:hover{background:#fce4d8;border-color:#e98973;color:#a95140}
