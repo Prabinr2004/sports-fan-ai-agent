@@ -30,9 +30,9 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
     "question": "How was Manchester City's third goal recorded in the 2023 Champions League semifinal second leg against Real Madrid?",
     "options": [
       "Éder Militão own goal",
-      "Manuel Akanji",
-      "John Stones",
-      "Rúben Dias"
+      "Bernardo Silva header",
+      "Kevin De Bruyne free kick",
+      "Julián Álvarez penalty"
     ],
     "answer": 0,
     "min_level": 3
