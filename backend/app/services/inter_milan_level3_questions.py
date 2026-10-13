@@ -219,7 +219,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-19",
-    "question": "In 2010, which answer correctly matches this event: treble Inter league?",
+    "question": "Which domestic league did Inter Milan win as part of their 2010 treble?",
     "options": [
       "Premier League",
       "La Liga",
@@ -231,7 +231,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-20",
-    "question": "In 2010, which answer correctly matches this event: treble Inter domestic cup?",
+    "question": "Which domestic cup did Inter Milan win as part of their 2010 treble?",
     "options": [
       "FA Cup",
       "Copa del Rey",
@@ -243,7 +243,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-21",
-    "question": "In 2010, which answer correctly matches this event: treble Inter European trophy?",
+    "question": "Which European competition did Inter Milan win to complete their 2010 treble?",
     "options": [
       "Europa League",
       "Champions League",
@@ -471,7 +471,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-40",
-    "question": "Who scored Inter Milan's equalizer to make it 2–2 in the 2022 Coppa Italia final against Juventus?",
+    "question": "Who scored Inter Milan's first extra-time goal against Juventus in the 2022 Coppa Italia final?",
     "options": [
       "Çalhanoğlu",
       "Barella",
@@ -483,7 +483,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-41",
-    "question": "In the 2022 Coppa Italia final Inter, who scored the extra-time second goal?",
+    "question": "Who scored Inter Milan's second extra-time goal against Juventus in the 2022 Coppa Italia final?",
     "options": [
       "Lautaro",
       "Ivan Perišić",
