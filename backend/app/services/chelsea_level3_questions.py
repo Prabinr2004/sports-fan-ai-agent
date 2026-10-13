@@ -63,7 +63,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-06",
-    "question": "Which Chelsea defender converted the team's second penalty in that 2012 shootout?",
+    "question": "Which Chelsea defender converted the team's second penalty in the 2012 Champions League final shootout against Bayern Munich?",
     "options": [
       "Ashley Cole",
       "David Luiz",
@@ -75,7 +75,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-07",
-    "question": "Which Chelsea midfielder converted the team's third penalty in that 2012 shootout?",
+    "question": "Which Chelsea midfielder converted the team's third penalty in the 2012 Champions League final shootout against Bayern Munich?",
     "options": [
       "Frank Lampard",
       "Mata",
@@ -87,7 +87,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-08",
-    "question": "Which Chelsea left-back converted the team's fourth penalty in that 2012 shootout?",
+    "question": "Which Chelsea left-back converted the team's fourth penalty in the 2012 Champions League final shootout against Bayern Munich?",
     "options": [
       "Bertrand",
       "Malouda",
@@ -159,7 +159,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-14",
-    "question": "Who scored Chelsea's stoppage-time equalizer at Barcelona in that 2012 semifinal?",
+    "question": "Who scored Chelsea's stoppage-time equalizer at Barcelona in the 2012 Champions League semifinal second leg?",
     "options": [
       "Ramires",
       "Fernando Torres",
@@ -183,7 +183,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-16",
-    "question": "Who scored Barcelona's first goal in the 2012 Champions League semifinal second leg?",
+    "question": "Who scored Barcelona's first goal against Chelsea in the 2012 Champions League semifinal second leg?",
     "options": [
       "Iniesta",
       "Messi",
@@ -195,7 +195,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-17",
-    "question": "Who scored Barcelona's second goal in that 2012 semifinal second leg?",
+    "question": "Who scored Barcelona's second goal against Chelsea in the 2012 Champions League semifinal second leg?",
     "options": [
       "Busquets",
       "Messi",
@@ -207,7 +207,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-18",
-    "question": "Who missed a penalty for Barcelona in that 2012 Champions League semifinal?",
+    "question": "Who missed a penalty for Barcelona against Chelsea in the 2012 Champions League semifinal second leg?",
     "options": [
       "Xavi",
       "Lionel Messi",
@@ -243,7 +243,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-21",
-    "question": "Who assisted Havertz's goal in the 2021 Champions League final?",
+    "question": "Who provided the assist for Chelsea's winning goal in the 2021 Champions League final?",
     "options": [
       "Werner",
       "Chilwell",
@@ -315,7 +315,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-27",
-    "question": "Who scored Chelsea's second goal against Real Madrid in that 2021 semifinal second leg?",
+    "question": "Who scored Chelsea's second goal against Real Madrid in the 2021 Champions League semifinal second leg?",
     "options": [
       "Mason Mount",
       "Werner",
@@ -351,7 +351,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-30",
-    "question": "Who scored Chelsea's opener against Porto in that 2021 quarterfinal first leg?",
+    "question": "Who scored Chelsea's opener against Porto in the 2021 Champions League quarterfinal first leg?",
     "options": [
       "Chilwell",
       "Mason Mount",
@@ -387,7 +387,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-33",
-    "question": "Who scored Chelsea's second goal against Atlético Madrid in that 2021 second leg?",
+    "question": "Who scored Chelsea's second goal against Atlético Madrid in the 2021 Champions League round of 16 second leg?",
     "options": [
       "Ziyech",
       "Giroud",
@@ -447,7 +447,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-38",
-    "question": "Who took the corner that Ivanović headed in to win the 2013 Europa League final?",
+    "question": "Who delivered the corner for Chelsea's winning goal in the 2013 Europa League final?",
     "options": [
       "Hazard",
       "Juan Mata",
@@ -603,7 +603,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-51",
-    "question": "Who saved Anelka's penalty in the 2008 Champions League final shootout?",
+    "question": "Which Manchester United goalkeeper saved the decisive penalty in the 2008 Champions League final shootout?",
     "options": [
       "Edwin van der Sar",
       "Kuszczak",
@@ -682,7 +682,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
       "John Dempsey",
       "Hudson"
     ],
-    "answer": 2,
+    "answer": 0,
     "min_level": 3
   },
   {
@@ -694,7 +694,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
       "Hollins",
       "Hudson"
     ],
-    "answer": 1,
+    "answer": 0,
     "min_level": 3
   },
   {
