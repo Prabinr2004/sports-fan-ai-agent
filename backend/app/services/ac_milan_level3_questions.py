@@ -15,7 +15,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-02",
-    "question": "In the 2007 Champions League final, who scored Milan's second goal?",
+    "question": "Who scored AC Milan's second goal against Liverpool in the 2007 Champions League final?",
     "options": [
       "Kaká",
       "Filippo Inzaghi",
@@ -39,7 +39,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-04",
-    "question": "In the 2007 Champions League final, who was the goalkeeper?",
+    "question": "Who was AC Milan's goalkeeper in the 2007 Champions League final?",
     "options": [
       "Abbiati",
       "Donnarumma",
@@ -51,7 +51,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-05",
-    "question": "In the 2007 Champions League final, who was the captain?",
+    "question": "Who captained AC Milan in the 2007 Champions League final?",
     "options": [
       "Gattuso",
       "Pirlo",
@@ -63,7 +63,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-06",
-    "question": "In the 2007 Champions League semifinal second leg, who scored the opening goal against United?",
+    "question": "Who scored Milan's opening goal against Manchester United in the second leg of the 2007 Champions League semi-final?",
     "options": [
       "Seedorf",
       "Kaká",
@@ -75,7 +75,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-07",
-    "question": "In the 2007 Champions League semifinal second leg, who scored the second goal against United?",
+    "question": "Who scored Milan's second goal against Manchester United in the second leg of the 2007 Champions League semi-final?",
     "options": [
       "Clarence Seedorf",
       "Kaká",
@@ -87,7 +87,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-08",
-    "question": "In the 2007 Champions League semifinal second leg, who scored the third goal against United?",
+    "question": "Who scored Milan's third goal against Manchester United in the second leg of the 2007 Champions League semi-final?",
     "options": [
       "Kaká",
       "Seedorf",
@@ -99,7 +99,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-09",
-    "question": "In the 2007 Champions League semifinal first leg first Milan, who scored at United?",
+    "question": "Who scored Milan's first goal at Old Trafford in the first leg of the 2007 Champions League semi-final against Manchester United?",
     "options": [
       "Seedorf",
       "Pirlo",
@@ -111,7 +111,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-10",
-    "question": "In the 2007 Champions League semifinal first leg second Milan, who scored at United?",
+    "question": "Who scored Milan's second goal at Old Trafford in the first leg of the 2007 Champions League semi-final against Manchester United?",
     "options": [
       "Seedorf",
       "Kaká",
@@ -123,7 +123,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-11",
-    "question": "In the 2007 Champions League semifinal first leg United, who scored the winning goal?",
+    "question": "Who scored Manchester United's winning goal against Milan in the first leg of the 2007 Champions League semi-final?",
     "options": [
       "Wayne Rooney",
       "Ronaldo",
@@ -147,7 +147,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-13",
-    "question": "Who scored AC Milan's second goal in the 2005 Champions League final?",
+    "question": "Who scored AC Milan's second goal in the 2005 Champions League final against Liverpool?",
     "options": [
       "Maldini",
       "Kaká",
@@ -159,7 +159,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-14",
-    "question": "Who scored AC Milan's third goal in the 2005 Champions League final?",
+    "question": "Who scored AC Milan's third goal in the 2005 Champions League final against Liverpool?",
     "options": [
       "Maldini",
       "Hernán Crespo",
@@ -183,7 +183,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-16",
-    "question": "Who scored Liverpool's second goal in the 2005 Champions League final?",
+    "question": "Who scored Liverpool's second goal in the 2005 Champions League final against AC Milan?",
     "options": [
       "Gerrard",
       "Alonso",
@@ -195,7 +195,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-17",
-    "question": "Who scored Liverpool's third goal in the 2005 Champions League final?",
+    "question": "Who scored Liverpool's third goal in the 2005 Champions League final against AC Milan?",
     "options": [
       "Gerrard",
       "Šmicer",
@@ -219,7 +219,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-19",
-    "question": "Who took AC Milan's final penalty in the 2005 Champions League final shootout?",
+    "question": "Whose penalty was saved by Jerzy Dudek to end the 2005 Champions League final shootout in Liverpool's favour?",
     "options": [
       "Andriy Shevchenko",
       "Pirlo",
@@ -231,7 +231,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-20",
-    "question": "In the 2003 Champions League final, who scored the winning goal?",
+    "question": "Who scored the decisive penalty in AC Milan's shootout win over Juventus in the 2003 Champions League final?",
     "options": [
       "Kaká",
       "Pirlo",
@@ -243,7 +243,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-21",
-    "question": "In the 2003 Champions League final, who was the goalkeeper?",
+    "question": "Who was AC Milan's goalkeeper in the 2003 Champions League final against Juventus?",
     "options": [
       "Abbiati",
       "Rossi",
@@ -255,7 +255,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-22",
-    "question": "In the 2003 Champions League final, who was the captain?",
+    "question": "Who captained AC Milan in the 2003 Champions League final against Juventus?",
     "options": [
       "Gattuso",
       "Paolo Maldini",
@@ -267,7 +267,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-23",
-    "question": "In the 2003 Champions League semifinal second leg Milan, who scored against Inter?",
+    "question": "Who scored Milan's goal in the 1-1 draw against Inter in the second leg of the 2003 Champions League semi-final?",
     "options": [
       "Andriy Shevchenko",
       "Kaká",
@@ -279,7 +279,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-24",
-    "question": "In the 2003 Champions League semifinal second leg Inter, who scored?",
+    "question": "Who scored Inter's goal in the 1-1 draw against Milan in the second leg of the 2003 Champions League semi-final?",
     "options": [
       "Crespo",
       "Vieri",
@@ -291,7 +291,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-25",
-    "question": "In the 2003 Champions League semifinal Milan, what was the qualification tiebreaker?",
+    "question": "After the 2003 Champions League semi-final against Inter finished level on aggregate (0-0 and 1-1), what decided which team went through?",
     "options": [
       "Penalties",
       "Extra time",
@@ -303,7 +303,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-26",
-    "question": "In the 2003 Champions League quarterfinal second leg Milan late, who scored the winning goal against Ajax?",
+    "question": "Who scored the stoppage-time winner for Milan against Ajax in the second leg of the 2003 Champions League quarter-final?",
     "options": [
       "Inzaghi",
       "Jon Dahl Tomasson",
@@ -315,7 +315,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-27",
-    "question": "In the 2003 Champions League quarterfinal second leg Milan, who scored the opening goal against Ajax?",
+    "question": "Who scored Milan's opening goal against Ajax in the second leg of the 2003 Champions League quarter-final?",
     "options": [
       "Filippo Inzaghi",
       "Tomasson",
@@ -327,7 +327,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-28",
-    "question": "In the 2003 Champions League quarterfinal second leg Milan, who scored the second goal against Ajax?",
+    "question": "Who scored Milan's second goal against Ajax in the second leg of the 2003 Champions League quarter-final?",
     "options": [
       "Tomasson",
       "Inzaghi",
@@ -339,7 +339,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-29",
-    "question": "In the 1994 Champions League final, who scored the opening goal?",
+    "question": "Who scored Milan's opening goal against Barcelona in the 1994 Champions League final?",
     "options": [
       "Savićević",
       "Desailly",
@@ -351,7 +351,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-30",
-    "question": "In the 1994 Champions League final, who scored the second goal?",
+    "question": "Who scored Milan's second goal against Barcelona in the 1994 Champions League final?",
     "options": [
       "Savićević",
       "Daniele Massaro",
@@ -363,7 +363,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-31",
-    "question": "In the 1994 Champions League final, who scored the third goal?",
+    "question": "Who scored Milan's third goal against Barcelona in the 1994 Champions League final?",
     "options": [
       "Dejan Savićević",
       "Massaro",
@@ -375,7 +375,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-32",
-    "question": "In the 1994 Champions League final, who scored the fourth goal?",
+    "question": "Who scored Milan's fourth goal against Barcelona in the 1994 Champions League final?",
     "options": [
       "Massaro",
       "Savićević",
@@ -411,7 +411,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-35",
-    "question": "In the 1994 Champions League final, who was the goalkeeper?",
+    "question": "Who was AC Milan's goalkeeper in the 1994 Champions League final against Barcelona?",
     "options": [
       "Sebastiano Rossi",
       "Dida",
@@ -423,7 +423,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-36",
-    "question": "In the 1989 European Cup final, who scored the opening goal?",
+    "question": "Who scored Milan's opening goal against Steaua Bucharest in the 1989 European Cup final?",
     "options": [
       "Van Basten",
       "Rijkaard",
@@ -435,7 +435,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-37",
-    "question": "In the 1989 European Cup final, who scored the second goal?",
+    "question": "Who scored Milan's second goal against Steaua Bucharest in the 1989 European Cup final?",
     "options": [
       "Gullit",
       "Rijkaard",
@@ -447,7 +447,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-38",
-    "question": "In the 1989 European Cup final, who scored the third goal?",
+    "question": "Who scored Milan's third goal against Steaua Bucharest in the 1989 European Cup final?",
     "options": [
       "Van Basten",
       "Ruud Gullit",
@@ -459,7 +459,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-39",
-    "question": "In the 1989 European Cup final, who scored the fourth goal?",
+    "question": "Who scored Milan's fourth goal against Steaua Bucharest in the 1989 European Cup final?",
     "options": [
       "Marco van Basten",
       "Gullit",
@@ -471,7 +471,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-40",
-    "question": "In the 1989 European Cup final, who was the manager?",
+    "question": "Who managed AC Milan in the 1989 European Cup final against Steaua Bucharest?",
     "options": [
       "Capello",
       "Ancelotti",
@@ -483,7 +483,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-41",
-    "question": "In the 1989 European Cup semifinal second leg Milan, who scored the opening goal against Real?",
+    "question": "Who scored Milan's opening goal against Real Madrid in the second leg of the 1989 European Cup semi-final?",
     "options": [
       "Gullit",
       "Rijkaard",
@@ -495,7 +495,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-42",
-    "question": "In the 1989 European Cup semifinal second leg Milan, who scored the second goal against Real?",
+    "question": "Who scored Milan's second goal against Real Madrid in the second leg of the 1989 European Cup semi-final?",
     "options": [
       "Ancelotti",
       "Frank Rijkaard",
@@ -507,7 +507,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-43",
-    "question": "In the 1989 European Cup semifinal second leg Milan, who scored the third goal against Real?",
+    "question": "Who scored Milan's third goal against Real Madrid in the second leg of the 1989 European Cup semi-final?",
     "options": [
       "Ruud Gullit",
       "Van Basten",
@@ -519,7 +519,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-44",
-    "question": "In the 1989 European Cup semifinal second leg Milan, who scored the fourth goal against Real?",
+    "question": "Who scored Milan's fourth goal against Real Madrid in the second leg of the 1989 European Cup semi-final?",
     "options": [
       "Gullit",
       "Rijkaard",
@@ -531,7 +531,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-45",
-    "question": "In the 1989 European Cup semifinal second leg Milan, who scored the fifth goal against Real?",
+    "question": "Who scored Milan's fifth goal against Real Madrid in the second leg of the 1989 European Cup semi-final?",
     "options": [
       "Van Basten",
       "Gullit",
@@ -543,7 +543,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-46",
-    "question": "In the 1990 European Cup final, who scored the winning goal?",
+    "question": "Who scored the winning goal for Milan against Benfica in the 1990 European Cup final?",
     "options": [
       "Van Basten",
       "Frank Rijkaard",
@@ -555,7 +555,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-47",
-    "question": "Who scored AC Milan's first goal against Benfica in the 1963 European Cup final?",
+    "question": "Who scored Milan's first goal against Benfica in the 1963 European Cup final?",
     "options": [
       "José Altafini",
       "Rivera",
@@ -567,7 +567,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-48",
-    "question": "Who scored AC Milan's second goal against Benfica in the 1963 European Cup final?",
+    "question": "Who scored Milan's second goal against Benfica in the 1963 European Cup final?",
     "options": [
       "Rivera",
       "Sani",
@@ -579,7 +579,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-49",
-    "question": "In the 1963 European Cup final Benfica, who scored the opening goal?",
+    "question": "Who scored Benfica's goal in AC Milan's 2-1 win in the 1963 European Cup final?",
     "options": [
       "Coluna",
       "Simões",
@@ -591,7 +591,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-50",
-    "question": "In the 1969 European Cup final, who scored the opening goal?",
+    "question": "Who scored Milan's first goal against Ajax in the 1969 European Cup final?",
     "options": [
       "Sormani",
       "Pierino Prati",
@@ -603,7 +603,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-51",
-    "question": "In the 1969 European Cup final, who scored the second goal?",
+    "question": "Who scored Milan's second goal against Ajax in the 1969 European Cup final?",
     "options": [
       "Pierino Prati",
       "Sormani",
@@ -615,7 +615,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-52",
-    "question": "In the 1969 European Cup final, who scored the third goal?",
+    "question": "Who scored Milan's third goal against Ajax in the 1969 European Cup final?",
     "options": [
       "Prati",
       "Rivera",
@@ -627,7 +627,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-53",
-    "question": "In the 1969 European Cup final, who scored the fourth goal?",
+    "question": "Who scored Milan's fourth goal against Ajax in the 1969 European Cup final?",
     "options": [
       "Sormani",
       "Rivera",
@@ -639,7 +639,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-54",
-    "question": "In the 1969 European Cup final, who was the manager?",
+    "question": "Who managed AC Milan in the 1969 European Cup final against Ajax?",
     "options": [
       "Sacchi",
       "Nereo Rocco",
@@ -651,7 +651,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-55",
-    "question": "In the 2007 Club World Cup final Milan, who scored the opening goal?",
+    "question": "Who scored Milan's first goal against Boca Juniors in the 2007 Club World Cup final?",
     "options": [
       "Filippo Inzaghi",
       "Kaká",
@@ -663,7 +663,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-56",
-    "question": "In the 2007 Club World Cup final Milan, who scored the second goal?",
+    "question": "Who scored Milan's second goal against Boca Juniors in the 2007 Club World Cup final?",
     "options": [
       "Inzaghi",
       "Kaká",
@@ -675,7 +675,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-57",
-    "question": "In the 2007 Club World Cup final Milan, who scored the third goal?",
+    "question": "Who scored Milan's third goal against Boca Juniors in the 2007 Club World Cup final?",
     "options": [
       "Inzaghi",
       "Nesta",
@@ -687,7 +687,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-58",
-    "question": "In the 2007 Club World Cup final Milan, who scored the fourth goal?",
+    "question": "Who scored Milan's fourth goal against Boca Juniors in the 2007 Club World Cup final?",
     "options": [
       "Kaká",
       "Filippo Inzaghi",
@@ -699,7 +699,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-59",
-    "question": "In the 2007 Club World Cup final Boca, who scored the opening goal?",
+    "question": "Who scored Boca Juniors' first goal against AC Milan in the 2007 Club World Cup final?",
     "options": [
       "Rodrigo Palacio",
       "Palermo",
@@ -711,7 +711,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-60",
-    "question": "Who managed AC Milan when they won the Serie A title in 2022?",
+    "question": "Who managed AC Milan when they won the 2021-22 Serie A title?",
     "options": [
       "Gattuso",
       "Inzaghi",
