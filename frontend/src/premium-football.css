@@ -555,3 +555,27 @@ body{background:#f8f6f1}
 .fansphere-premium .quiz-page .quiz-level-guide-footer p{margin:0;color:#718398;font-size:11px;line-height:1.5}
 .fansphere-premium .quiz-page .quiz-level-guide-footer>strong{color:#a65b44;font-size:12px}
 .fansphere-premium .quiz-page .quiz-level-guide-footer>small{color:#8290a0;font-size:10px}
+
+
+/* Premium header overlays: override component inline legacy dark styling */
+.fansphere-premium .premium-notifications-popover,.fansphere-premium .premium-account-popover{
+background:#fffdfa!important;border:1px solid #e8d8c8!important;color:#203a54!important;
+box-shadow:0 16px 42px #25374a2b!important;border-radius:15px!important
+}
+.fansphere-premium .premium-notifications-popover>div>strong{color:#203a54!important}
+.fansphere-premium .premium-notifications-popover>p{color:#788a9c!important}
+.fansphere-premium .premium-notifications-popover .premium-notifications-read{color:#b86c4e!important}
+.fansphere-premium .premium-notifications-popover .premium-notification-item{
+background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#223c55!important
+}
+.fansphere-premium .premium-notifications-popover .premium-notification-item:hover{background:#fce7d9!important}
+.fansphere-premium .premium-notifications-popover .premium-notification-item>span:first-child{color:#d18d4e!important}
+.fansphere-premium .premium-notifications-popover .premium-notification-item small{color:#76889b!important}
+.fansphere-premium .premium-account-popover .premium-account-action{color:#29415a!important;border-radius:9px!important}
+.fansphere-premium .premium-account-popover .premium-account-action:hover{background:#fff0e4!important;color:#ac604b!important}
+.fansphere-premium .premium-account-popover>div[style*="border-top"]{border-color:#ebddce!important}
+.fansphere-premium .premium-account-popover>div>div[style*="color"]{color:#71849a!important}
+.fansphere-premium .premium-account-popover button[style*="color: rgb(124, 243, 199)"],.fansphere-premium .premium-account-popover button[style*="color: #7cf3c7"]{color:#b5684c!important}
+.fansphere-premium .premium-account-popover input{background:#fffefa!important;border:1px solid #e1d1c2!important;color:#203a54!important}
+.fansphere-premium .premium-account-popover .premium-account-save{background:#ed7966!important;color:#fff!important;border-radius:9px!important}
+.fansphere-premium .premium-account-popover p[role="status"]{color:#43845b!important}
