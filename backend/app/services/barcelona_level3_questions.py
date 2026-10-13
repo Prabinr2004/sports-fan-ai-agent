@@ -423,7 +423,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-36",
-    "question": "For the 1992 European Cup final Barcelona captain, which option correctly completes the historical clue?",
+    "question": "Which Barcelona defender came on as a substitute in the 1992 European Cup final?",
     "options": [
       "Puyol",
       "Migueli",
@@ -471,7 +471,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-40",
-    "question": "For the 1993 FIFA World Player of Year Barcelona winner, which option correctly completes the historical clue?",
+    "question": "Which Barcelona forward won the 1994 FIFA World Player of the Year award?",
     "options": [
       "Stoichkov",
       "Koeman",
