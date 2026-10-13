@@ -135,7 +135,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-12",
-    "question": "In the 2005 Champions League final, who scored the opening goal?",
+    "question": "Who scored AC Milan's opening goal in the 2005 Champions League final against Liverpool?",
     "options": [
       "Crespo",
       "Kaká",
@@ -147,7 +147,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-13",
-    "question": "In the 2005 Champions League final, who scored the second goal?",
+    "question": "Who scored AC Milan's second goal in the 2005 Champions League final?",
     "options": [
       "Maldini",
       "Kaká",
@@ -159,7 +159,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-14",
-    "question": "In the 2005 Champions League final, who scored the third goal?",
+    "question": "Who scored AC Milan's third goal in the 2005 Champions League final?",
     "options": [
       "Maldini",
       "Hernán Crespo",
@@ -171,7 +171,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-15",
-    "question": "In the 2005 Champions League final, who scored the opening goal?",
+    "question": "Who scored Liverpool's first goal in the 2005 Champions League final against AC Milan?",
     "options": [
       "Steven Gerrard",
       "Šmicer",
@@ -183,7 +183,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-16",
-    "question": "In the 2005 Champions League final, who scored the second goal?",
+    "question": "Who scored Liverpool's second goal in the 2005 Champions League final?",
     "options": [
       "Gerrard",
       "Alonso",
@@ -195,7 +195,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-17",
-    "question": "In the 2005 Champions League final, who scored the third goal?",
+    "question": "Who scored Liverpool's third goal in the 2005 Champions League final?",
     "options": [
       "Gerrard",
       "Šmicer",
@@ -387,7 +387,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-33",
-    "question": "In the 1994 Champions League final, who was the manager?",
+    "question": "Who managed AC Milan in the 1994 Champions League final against Barcelona?",
     "options": [
       "Sacchi",
       "Ancelotti",
@@ -399,7 +399,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-34",
-    "question": "In the 1994 Champions League final, who was the manager?",
+    "question": "Who managed Barcelona in the 1994 Champions League final against AC Milan?",
     "options": [
       "Rijkaard",
       "Johan Cruyff",
