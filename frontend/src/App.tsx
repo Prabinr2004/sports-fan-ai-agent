@@ -182,6 +182,13 @@ const CLUB_STADIUMS: Record<string, { name: string; file: string; credit: string
  "81": { name: "Camp Nou", file: "Camp Nou Panoramic Interior View.jpg", credit: "Johannes Falke / Wikimedia Commons (CC BY-SA)" },
  "57": { name: "Emirates Stadium", file: "Insideemirates1.jpg", credit: "Adam Hopkinson / Wikimedia Commons (CC BY-SA)" },
  "64": { name: "Anfield", file: "A corner of Anfield - Home of Liverpool FC - geograph.org.uk - 2999362.jpg", credit: "Wikimedia Commons / Geograph" },
+ "66": { name: "Old Trafford", file: "Old Trafford (interior), Manchester United.jpg", credit: "Stacey MacNaught / Wikimedia Commons" },
+ "73": { name: "Tottenham Hotspur Stadium", file: "Tottenham Hotspur Stadium - South Stand and pitch with grow lights.jpg", credit: "Daniel / Wikimedia Commons" },
+ "108": { name: "San Siro", file: "San Siro stadio Milano.jpg", credit: "Wikimedia Commons / CC BY-SA 4.0" },
+ "98": { name: "San Siro", file: "San Siro stadio Milano.jpg", credit: "Wikimedia Commons / CC BY-SA 4.0" },
+ "5": { name: "Allianz Arena", file: "Allianz Arena inside, 2008.jpg", credit: "Wikimedia Commons" },
+ "61": { name: "Stamford Bridge", file: "Stamford Bridge Stadium 2026.jpg", credit: "Boaventuravinicius / Wikimedia Commons (CC BY 4.0)" },
+ "65": { name: "Etihad Stadium", file: "Etihad Stadium, Manchester City Football Club (Ank Kumar, Infosys) 03.jpg", credit: "Ank Kumar / Wikimedia Commons" },
 };
 function clubStadium(team: SavedTeam) {
  const id = String(team.provider_id);
@@ -192,6 +199,13 @@ function clubStadium(team: SavedTeam) {
  if (/barcelona/.test(n)) return CLUB_STADIUMS["81"];
  if (/arsenal/.test(n)) return CLUB_STADIUMS["57"];
  if (/liverpool/.test(n)) return CLUB_STADIUMS["64"];
+ if (/manchester united|man united/.test(n)) return CLUB_STADIUMS["66"];
+ if (/tottenham|hotspur/.test(n)) return CLUB_STADIUMS["73"];
+ if (/inter milan|internazionale|inter milano/.test(n)) return CLUB_STADIUMS["108"];
+ if (/ac milan|a\.c\. milan|milan fc/.test(n)) return CLUB_STADIUMS["98"];
+ if (/bayern/.test(n)) return CLUB_STADIUMS["5"];
+ if (/chelsea/.test(n)) return CLUB_STADIUMS["61"];
+ if (/manchester city|man city/.test(n)) return CLUB_STADIUMS["65"];
  return null;
 }
 function commonsStadiumImage(file: string) {
