@@ -27,7 +27,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-03",
-    "question": "In the 2007 Champions League final, who scored?",
+    "question": "Who scored Liverpool's goal against AC Milan in the 2007 Champions League final?",
     "options": [
       "Dirk Kuyt",
       "Gerrard",
@@ -207,7 +207,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-18",
-    "question": "In the 2005 Champions League final, who was the goalkeeper?",
+    "question": "Who was AC Milan's goalkeeper in the 2005 Champions League final?",
     "options": [
       "Abbiati",
       "Dida",
@@ -219,7 +219,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-19",
-    "question": "In the 2005 Champions League final, what was the last penalty taker?",
+    "question": "Who took AC Milan's final penalty in the 2005 Champions League final shootout?",
     "options": [
       "Andriy Shevchenko",
       "Pirlo",
@@ -711,7 +711,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-60",
-    "question": "In the 2022 Serie A title Milan, who was the manager?",
+    "question": "Who managed AC Milan when they won the Serie A title in 2022?",
     "options": [
       "Gattuso",
       "Inzaghi",
