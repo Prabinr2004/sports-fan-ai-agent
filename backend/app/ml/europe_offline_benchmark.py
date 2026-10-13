@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -91,7 +92,11 @@ def main():
     parser.add_argument("--rows-json", required=True, type=Path, help="Locally saved JSON array of parsed historical matches")
     parser.add_argument("--output", type=Path, default=Path("app/ml/artifacts/europe_offline_candidate_v1.json"))
     args = parser.parse_args()
-    report = run(json.loads(args.rows_json.read_text()))
+    rows = json.loads(args.rows_json.read_text())
+    for row in rows:
+        if isinstance(row.get("date"), str):
+            row["date"] = datetime.fromisoformat(row["date"])
+    report = run(rows)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2, default=str))
     print(json.dumps(report, indent=2, default=str))
