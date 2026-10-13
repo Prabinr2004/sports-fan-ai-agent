@@ -258,3 +258,41 @@ body{background:#f8f6f1}
 @media(max-width:900px){.fansphere-premium .matches-page .match-list{grid-template-columns:1fr}}
 @media(max-width:560px){.fansphere-premium .matches-page .team-match-section{padding:16px 13px}.fansphere-premium .matches-page .match-top{flex-wrap:wrap}.fansphere-premium .matches-page .prediction-buttons{grid-template-columns:minmax(0,1fr) 55px minmax(0,1fr)}}
 @media(prefers-reduced-motion:reduce){.fansphere-premium .matches-page .match-card{transition:none}.fansphere-premium .matches-page .match-card:hover{transform:none}}
+
+
+/* Matches overview final polish */
+.fansphere-premium .matches-page .match-card{display:flex;flex-direction:column}
+.fansphere-premium .matches-page .match-teams{min-height:125px;padding:16px 14px}
+.fansphere-premium .matches-page .prediction-area{padding-bottom:14px}
+.fansphere-premium .matches-page .prediction-buttons button.picked{background:#f9d9cc;border:2px solid #e67760;color:#993f30;box-shadow:inset 0 0 0 1px #fff5ee}
+.fansphere-premium .matches-page .match-open-button{position:static;display:block;width:calc(100% - 28px);margin:4px 14px 14px;padding:11px 12px;border:1px solid #ec7864;border-radius:10px;background:#ed7966;color:#fff;font-size:12px;line-height:1.3;text-align:center;box-shadow:0 5px 12px #dd796020}
+.fansphere-premium .matches-page .match-open-button:hover{background:#d96350;border-color:#d96350;color:#fff}
+/* Detailed Match Center */
+.fansphere-premium .match-center-page{color:#1c344f}
+.fansphere-premium .match-center-page .eyebrow{color:#957359}
+.fansphere-premium .match-center-back{background:#fff5ec;color:#a55746;border:1px solid #ead2bf}
+.fansphere-premium .match-center-back:hover{background:#ffe9da}
+.fansphere-premium .match-center-hero{background:linear-gradient(135deg,rgba(255,250,243,.95),rgba(255,243,225,.88)),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=80") center/cover;border:1px solid #e9d8c4;box-shadow:0 10px 26px #2d405315}
+.fansphere-premium .match-center-meta h1{color:#19324d}
+.fansphere-premium .match-center-meta p{color:#72839a}
+.fansphere-premium .match-center-team strong{color:#1b344f}
+.fansphere-premium .match-center-vs{color:#b8734c}
+.fansphere-premium .match-center-live-tools{color:#5e748b}
+.fansphere-premium .match-center-live-tools button{background:#fff6ea;border:1px solid #e5c9aa;color:#a45b44;border-radius:9px}
+.fansphere-premium .match-center-live-tools small{color:#75889b}
+.fansphere-premium .match-center-panel{background:#fffdfa;border:1px solid #e9dfd5;box-shadow:0 7px 22px #1c344c0e}
+.fansphere-premium .match-center-panel h2{color:#1b334d}
+.fansphere-premium .match-center-panel p{color:#72849a}
+.fansphere-premium .match-center-picks button{background:#fff8f1;border:1px solid #e7d9cb;color:#263e58;cursor:pointer}
+.fansphere-premium .match-center-picks button:hover:not(:disabled){background:#fff0e2;border-color:#e6a18a}
+.fansphere-premium .match-center-picks button.picked{background:#f9d9cc;border:2px solid #e67760;color:#993f30}
+.fansphere-premium .match-center-lock{color:#75889a}
+.fansphere-premium .match-center-refresh-button{background:#fff0e3;border:1px solid #e5c6aa;color:#a35441}
+.fansphere-premium .match-center-refresh-button:hover:not(:disabled){background:#ffe3d2}
+.fansphere-premium .match-center-loading{color:#9b6b48}
+.fansphere-premium .match-center-skeleton span{background:linear-gradient(100deg,#f8e9d8,#fff8ed,#f8e9d8);background-size:200% 100%}
+.fansphere-premium .match-center-note{background:#e9f3ec;color:#387952}
+.fansphere-premium .match-center-page .comparison-subheading{color:#a56a48}
+.fansphere-premium .match-center-page .comparison-form strong,.fansphere-premium .match-center-page .comparison-table strong,.fansphere-premium .match-center-page .comparison-standings strong{color:#203a55}
+.fansphere-premium .match-center-page .comparison-table>div,.fansphere-premium .match-center-page .comparison-standings>div{border-color:#ebdfd2}
+@media(prefers-reduced-motion:reduce){.fansphere-premium .matches-page .match-card:hover{transform:none}}
