@@ -1,5 +1,5 @@
 from app.api.auth import require_user
-from datetime import date
+from datetime import date, datetime, timezone
 import json
 import random
 
@@ -617,6 +617,7 @@ def reset_quiz_progress(request: Request, db: Session = Depends(get_db)) -> dict
         db.add(state)
     else:
         state.selected_level = 1
+        state.reset_at = datetime.now(timezone.utc)
     db.query(QuizRoundCompletion).filter(QuizRoundCompletion.user_id == user.id).delete(synchronize_session=False)
     db.commit()
     return {"reset": True, "unlocked_level": 1, "selected_level": 1,
