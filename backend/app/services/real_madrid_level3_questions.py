@@ -459,7 +459,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-39",
-    "question": "Which Real Madrid defender was nicknamed the Pirate?",
+    "question": "Which Real Madrid midfielder was nicknamed 'El Pirata' (The Pirate)?",
     "options": [
       "Álvaro Arbeloa",
       "Sergio Ramos",
