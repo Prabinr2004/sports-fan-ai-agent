@@ -1,9 +1,9 @@
-"""Inter Milan Level 3 match-history question bank."""
+"""inter milan Level 3 match-history question bank."""
 
 INTER_MILAN_LEVEL_3_QUESTIONS = [
   {
     "id": "inter-l3-01",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL final Inter first scorer?",
+    "question": "In the 2010 Champions League final Inter, who scored the opening goal?",
     "options": [
       "Sneijder",
       "Diego Milito",
@@ -15,7 +15,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-02",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL final Inter second scorer?",
+    "question": "In the 2010 Champions League final Inter, who scored the second goal?",
     "options": [
       "Diego Milito",
       "Eto'o",
@@ -27,7 +27,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-03",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL final Inter goalkeeper?",
+    "question": "In the 2010 Champions League final Inter, who was the goalkeeper?",
     "options": [
       "Handanović",
       "Toldo",
@@ -39,7 +39,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-04",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL final Inter captain?",
+    "question": "In the 2010 Champions League final Inter, who was the captain?",
     "options": [
       "Lúcio",
       "Samuel",
@@ -51,7 +51,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-05",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL final Inter manager?",
+    "question": "In the 2010 Champions League final Inter, who was the manager?",
     "options": [
       "Mancini",
       "José Mourinho",
@@ -63,7 +63,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-06",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL final Bayern goalkeeper?",
+    "question": "In the 2010 Champions League final Bayern, who was the goalkeeper?",
     "options": [
       "Hans-Jörg Butt",
       "Neuer",
@@ -75,7 +75,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-07",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL semifinal first leg Inter opener vs Barcelona?",
+    "question": "In the 2010 Champions League semifinal first leg Inter, who scored the opening goal against Barcelona?",
     "options": [
       "Maicon",
       "Milito",
@@ -87,7 +87,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-08",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL semifinal first leg Inter second scorer vs Barcelona?",
+    "question": "In the 2010 Champions League semifinal first leg Inter, who scored the second goal against Barcelona?",
     "options": [
       "Sneijder",
       "Milito",
@@ -99,7 +99,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-09",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL semifinal first leg Inter third scorer vs Barcelona?",
+    "question": "In the 2010 Champions League semifinal first leg Inter, who scored the third goal against Barcelona?",
     "options": [
       "Maicon",
       "Diego Milito",
@@ -111,7 +111,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-10",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL semifinal first leg Barcelona scorer?",
+    "question": "In the 2010 Champions League semifinal first leg Barcelona, who scored?",
     "options": [
       "Pedro",
       "Messi",
@@ -123,7 +123,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-11",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL semifinal second leg Inter red card?",
+    "question": "In the 2010 Champions League semifinal second leg Inter, who was sent off?",
     "options": [
       "Cambiasso",
       "Samuel",
@@ -135,7 +135,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-12",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL semifinal second leg Barcelona scorer?",
+    "question": "In the 2010 Champions League semifinal second leg Barcelona, who scored?",
     "options": [
       "Messi",
       "Xavi",
@@ -147,7 +147,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-13",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL quarterfinal first leg Inter scorer vs CSKA?",
+    "question": "In the 2010 Champions League quarterfinal first leg Inter, who scored against CSKA?",
     "options": [
       "Sneijder",
       "Diego Milito",
@@ -159,7 +159,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-14",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL quarterfinal second leg Inter scorer vs CSKA?",
+    "question": "In the 2010 Champions League quarterfinal second leg Inter, who scored against CSKA?",
     "options": [
       "Wesley Sneijder",
       "Milito",
@@ -171,7 +171,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-15",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL round of 16 first leg Inter opener vs Chelsea?",
+    "question": "In the 2010 Champions League round of 16 first leg Inter, who scored the opening goal against Chelsea?",
     "options": [
       "Cambiasso",
       "Sneijder",
@@ -183,7 +183,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-16",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL round of 16 first leg Inter winner vs Chelsea?",
+    "question": "In the 2010 Champions League round of 16 first leg Inter, who scored the winning goal against Chelsea?",
     "options": [
       "Milito",
       "Maicon",
@@ -195,7 +195,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-17",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 UCL round of 16 second leg Inter winner vs Chelsea?",
+    "question": "In the 2010 Champions League round of 16 second leg Inter, who scored the winning goal against Chelsea?",
     "options": [
       "Milito",
       "Samuel Eto'o",
@@ -207,7 +207,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-18",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 Coppa Italia final Inter winner vs Roma?",
+    "question": "In the 2010 Coppa Italia final Inter, who scored the winning goal against Roma?",
     "options": [
       "Diego Milito",
       "Eto'o",
@@ -219,7 +219,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-19",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 treble Inter league?",
+    "question": "In 2010, which answer correctly matches this event: treble Inter league?",
     "options": [
       "Premier League",
       "La Liga",
@@ -231,7 +231,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-20",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 treble Inter domestic cup?",
+    "question": "In 2010, which answer correctly matches this event: treble Inter domestic cup?",
     "options": [
       "FA Cup",
       "Copa del Rey",
@@ -243,7 +243,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-21",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 treble Inter European trophy?",
+    "question": "In 2010, which answer correctly matches this event: treble Inter European trophy?",
     "options": [
       "Europa League",
       "Champions League",
@@ -255,7 +255,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-22",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 Club World Cup final Inter opener?",
+    "question": "In the 2010 Club World Cup final Inter, who scored the opening goal?",
     "options": [
       "Goran Pandev",
       "Eto'o",
@@ -267,7 +267,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-23",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 Club World Cup final Inter second scorer?",
+    "question": "In the 2010 Club World Cup final Inter, who scored the second goal?",
     "options": [
       "Pandev",
       "Biabiany",
@@ -279,7 +279,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-24",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 Club World Cup final Inter third scorer?",
+    "question": "In the 2010 Club World Cup final Inter, who scored the third goal?",
     "options": [
       "Eto'o",
       "Pandev",
@@ -291,7 +291,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-25",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2010 Club World Cup final Inter manager?",
+    "question": "In the 2010 Club World Cup final Inter, who was the manager?",
     "options": [
       "Mourinho",
       "Rafael Benítez",
@@ -303,7 +303,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-26",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL final Inter opponent?",
+    "question": "In the 2023 Champions League final Inter, what was the opponent?",
     "options": [
       "Manchester City",
       "Real Madrid",
@@ -315,7 +315,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-27",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL final Inter captain?",
+    "question": "In the 2023 Champions League final Inter, who was the captain?",
     "options": [
       "Barella",
       "Brozović",
@@ -327,7 +327,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-28",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL final Inter goalkeeper?",
+    "question": "In the 2023 Champions League final Inter, who was the goalkeeper?",
     "options": [
       "Sommer",
       "Handanović",
@@ -339,7 +339,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-29",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL final Inter header off crossbar?",
+    "question": "In 2023, which answer correctly matches this event: Champions League final Inter header off crossbar?",
     "options": [
       "Lautaro",
       "Federico Dimarco",
@@ -351,7 +351,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-30",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL semifinal first leg Inter opener vs Milan?",
+    "question": "In the 2023 Champions League semifinal first leg Inter, who scored the opening goal against Milan?",
     "options": [
       "Edin Džeko",
       "Mkhitaryan",
@@ -363,7 +363,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-31",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL semifinal first leg Inter second scorer vs Milan?",
+    "question": "In the 2023 Champions League semifinal first leg Inter, who scored the second goal against Milan?",
     "options": [
       "Džeko",
       "Lautaro",
@@ -375,7 +375,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-32",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL semifinal second leg Inter winner vs Milan?",
+    "question": "In the 2023 Champions League semifinal second leg Inter, who scored the winning goal against Milan?",
     "options": [
       "Džeko",
       "Lukaku",
@@ -387,7 +387,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-33",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL quarterfinal first leg Inter opener vs Benfica?",
+    "question": "In the 2023 Champions League quarterfinal first leg Inter, who scored the opening goal against Benfica?",
     "options": [
       "Lukaku",
       "Nicolò Barella",
@@ -399,7 +399,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-34",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL quarterfinal first leg Inter second scorer vs Benfica?",
+    "question": "In the 2023 Champions League quarterfinal first leg Inter, who scored the second goal against Benfica?",
     "options": [
       "Romelu Lukaku",
       "Barella",
@@ -411,7 +411,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-35",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 UCL round of 16 first leg Inter winner vs Porto?",
+    "question": "In the 2023 Champions League round of 16 first leg Inter, who scored the winning goal against Porto?",
     "options": [
       "Lautaro",
       "Džeko",
@@ -423,7 +423,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-36",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 Coppa Italia final Inter equalizer vs Fiorentina?",
+    "question": "In the 2023 Coppa Italia final Inter, who scored the equalizer against Fiorentina?",
     "options": [
       "Džeko",
       "Lukaku",
@@ -435,7 +435,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-37",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 Coppa Italia final Inter winner vs Fiorentina?",
+    "question": "In the 2023 Coppa Italia final Inter, who scored the winning goal against Fiorentina?",
     "options": [
       "Džeko",
       "Lautaro Martínez",
@@ -447,7 +447,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-38",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2023 Coppa Italia final Fiorentina opener?",
+    "question": "In the 2023 Coppa Italia final Fiorentina, who scored the opening goal?",
     "options": [
       "Nicolás González",
       "Bonaventura",
@@ -459,7 +459,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-39",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2022 Coppa Italia final Inter equalizer to 2-2 vs Juventus?",
+    "question": "In the 2022 Coppa Italia final Inter, who scored the equalizer to 2-2 against Juventus?",
     "options": [
       "Perišić",
       "Barella",
@@ -471,7 +471,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-40",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2022 Coppa Italia final Inter extra-time first scorer?",
+    "question": "In the 2022 Coppa Italia final Inter, who scored the opening goal?",
     "options": [
       "Çalhanoğlu",
       "Barella",
@@ -483,7 +483,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-41",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2022 Coppa Italia final Inter extra-time second scorer?",
+    "question": "In the 2022 Coppa Italia final Inter, who scored the extra-time second goal?",
     "options": [
       "Lautaro",
       "Ivan Perišić",
@@ -495,7 +495,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-42",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2022 Coppa Italia final Inter opener?",
+    "question": "In the 2022 Coppa Italia final Inter, who scored the opening goal?",
     "options": [
       "Nicolò Barella",
       "Perišić",
@@ -507,7 +507,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-43",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2021 Serie A title Inter manager?",
+    "question": "In the 2021 Serie A title Inter, who was the manager?",
     "options": [
       "Inzaghi",
       "Mourinho",
@@ -519,7 +519,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-44",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2024 Serie A title Inter manager?",
+    "question": "In the 2024 Serie A title Inter, who was the manager?",
     "options": [
       "Conte",
       "Mourinho",
@@ -531,7 +531,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-45",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2024 Serie A title clinched against?",
+    "question": "In 2024, which answer correctly matches this event: Serie A title clinched against?",
     "options": [
       "Juventus",
       "AC Milan",
@@ -543,7 +543,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-46",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2024 title-clinching derby Inter opener?",
+    "question": "In the 2024 title-clinching derby Inter, who scored the opening goal?",
     "options": [
       "Francesco Acerbi",
       "Thuram",
@@ -555,7 +555,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-47",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2024 title-clinching derby Inter second scorer?",
+    "question": "In the 2024 title-clinching derby Inter, who scored the second goal?",
     "options": [
       "Acerbi",
       "Lautaro",
@@ -567,7 +567,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-48",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2024 title-clinching derby Milan scorer?",
+    "question": "In the 2024 title-clinching derby Milan, who scored?",
     "options": [
       "Giroud",
       "Leão",
@@ -579,7 +579,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-49",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 2024 title-clinching derby final score?",
+    "question": "In the 2024 title-clinching derby, what was the final score?",
     "options": [
       "3–1",
       "2–1",
@@ -591,7 +591,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-50",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1964 European Cup final Inter opener?",
+    "question": "In the 1964 European Cup final Inter, who scored the opening goal?",
     "options": [
       "Sandro Mazzola",
       "Milani",
@@ -603,7 +603,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-51",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1964 European Cup final Inter third scorer?",
+    "question": "In the 1964 European Cup final Inter, who scored the third goal?",
     "options": [
       "Milani",
       "Corso",
@@ -615,7 +615,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-52",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1964 European Cup final Inter second scorer?",
+    "question": "In the 1964 European Cup final Inter, who scored the second goal?",
     "options": [
       "Mazzola",
       "Suárez",
@@ -627,7 +627,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-53",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1965 European Cup final Inter winner?",
+    "question": "In the 1965 European Cup final Inter, who scored the winning goal?",
     "options": [
       "Mazzola",
       "Jair da Costa",
@@ -639,7 +639,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-54",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1965 European Cup final Inter goalkeeper?",
+    "question": "In the 1965 European Cup final Inter, who was the goalkeeper?",
     "options": [
       "Giuliano Sarti",
       "Zenga",
@@ -651,7 +651,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-55",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1964 European Cup final Inter manager?",
+    "question": "In the 1964 European Cup final Inter, who was the manager?",
     "options": [
       "Mourinho",
       "Trapattoni",
@@ -663,7 +663,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-56",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1965 European Cup final Inter manager?",
+    "question": "In the 1965 European Cup final Inter, who was the manager?",
     "options": [
       "Mourinho",
       "Inzaghi",
@@ -675,7 +675,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-57",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1998 UEFA Cup final Inter opener?",
+    "question": "In the 1998 UEFA Cup final Inter, who scored the opening goal?",
     "options": [
       "Ronaldo",
       "Iván Zamorano",
@@ -687,7 +687,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-58",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1998 UEFA Cup final Inter second scorer?",
+    "question": "In the 1998 UEFA Cup final Inter, who scored the second goal?",
     "options": [
       "Javier Zanetti",
       "Ronaldo",
@@ -699,7 +699,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-59",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1998 UEFA Cup final Inter third scorer?",
+    "question": "In the 1998 UEFA Cup final Inter, who scored the third goal?",
     "options": [
       "Zanetti",
       "Zamorano",
@@ -711,7 +711,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-60",
-    "question": "In Inter Milan's history, identify the correct answer for this detail: 1998 UEFA Cup final Inter manager?",
+    "question": "In the 1998 UEFA Cup final Inter, who was the manager?",
     "options": [
       "Mourinho",
       "Lippi",
