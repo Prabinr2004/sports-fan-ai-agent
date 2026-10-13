@@ -27,7 +27,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-03",
-    "question": "In the 2010 Champions League final Inter, who was the goalkeeper?",
+    "question": "Who was Inter’s goalkeeper in the 2010 Champions League final?",
     "options": [
       "Handanović",
       "Toldo",
@@ -135,7 +135,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-12",
-    "question": "In the 2010 Champions League semifinal second leg Barcelona, who scored?",
+    "question": "Who scored Barcelona’s only allowed goal in the second leg of the 2010 Champions League semi-final against Inter?",
     "options": [
       "Messi",
       "Xavi",
@@ -247,7 +247,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
     "options": [
       "Europa League",
       "Champions League",
-      "Cup Winners Cup",
+      "Cup Winners’ Cup",
       "UEFA Super Cup"
     ],
     "answer": 1,
@@ -315,14 +315,14 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-27",
-    "question": "In the 2023 Champions League final Inter, who was the captain?",
+    "question": "Who captained Inter in the 2023 Champions League final?",
     "options": [
       "Barella",
       "Brozović",
       "Dimarco",
       "Lautaro Martínez"
     ],
-    "answer": 3,
+    "answer": 1,
     "min_level": 3
   },
   {
@@ -339,7 +339,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-29",
-    "question": "In 2023, which answer correctly matches this event: Champions League final Inter header off crossbar?",
+    "question": "Who hit the crossbar with a header for Inter in the 2023 Champions League final?",
     "options": [
       "Lautaro",
       "Federico Dimarco",
@@ -507,7 +507,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-43",
-    "question": "In the 2021 Serie A title Inter, who was the manager?",
+    "question": "Who managed Inter during their 2020-21 Serie A title-winning season?",
     "options": [
       "Inzaghi",
       "Mourinho",
@@ -519,7 +519,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-44",
-    "question": "In the 2024 Serie A title Inter, who was the manager?",
+    "question": "Who managed Inter during their 2023-24 Serie A title-winning season?",
     "options": [
       "Conte",
       "Mourinho",
@@ -531,7 +531,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-45",
-    "question": "In 2024, which answer correctly matches this event: Serie A title clinched against?",
+    "question": "Which team did Inter beat to clinch the 2023-24 Serie A title?",
     "options": [
       "Juventus",
       "AC Milan",
@@ -579,19 +579,19 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-49",
-    "question": "In the 2024 title-clinching derby, what was the final score?",
+    "question": "What was the result of the 2023-24 title-clinching Milan derby?",
     "options": [
-      "3–1",
-      "2–1",
-      "1–0",
-      "2–0"
+      "Inter won 3-1",
+      "Inter won 2-1",
+      "Inter won 1-0",
+      "Inter won 2-0"
     ],
     "answer": 1,
     "min_level": 3
   },
   {
     "id": "inter-l3-50",
-    "question": "In the 1964 European Cup final Inter, who scored the opening goal?",
+    "question": "Who scored Inter’s opening goal against Real Madrid in the 1964 European Cup final?",
     "options": [
       "Sandro Mazzola",
       "Milani",
@@ -603,7 +603,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-51",
-    "question": "In the 1964 European Cup final Inter, who scored the third goal?",
+    "question": "Who scored Inter’s third goal against Real Madrid in the 1964 European Cup final?",
     "options": [
       "Milani",
       "Corso",
@@ -615,7 +615,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-52",
-    "question": "In the 1964 European Cup final Inter, who scored the second goal?",
+    "question": "Who scored Inter’s second goal against Real Madrid in the 1964 European Cup final?",
     "options": [
       "Mazzola",
       "Suárez",
@@ -627,7 +627,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-53",
-    "question": "In the 1965 European Cup final Inter, who scored the winning goal?",
+    "question": "Who scored Inter’s winning goal against Benfica in the 1965 European Cup final?",
     "options": [
       "Mazzola",
       "Jair da Costa",
@@ -675,7 +675,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-57",
-    "question": "In the 1998 UEFA Cup final Inter, who scored the opening goal?",
+    "question": "Who scored Inter’s opening goal against Lazio in the 1998 UEFA Cup final?",
     "options": [
       "Ronaldo",
       "Iván Zamorano",
@@ -687,7 +687,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-58",
-    "question": "In the 1998 UEFA Cup final Inter, who scored the second goal?",
+    "question": "Who scored Inter’s second goal against Lazio in the 1998 UEFA Cup final?",
     "options": [
       "Javier Zanetti",
       "Ronaldo",
@@ -699,7 +699,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-59",
-    "question": "In the 1998 UEFA Cup final Inter, who scored the third goal?",
+    "question": "Who scored Inter’s third goal against Lazio in the 1998 UEFA Cup final?",
     "options": [
       "Zanetti",
       "Zamorano",
