@@ -1,9 +1,9 @@
-"""Manchester United Level 3 historic matches question bank."""
+"""manchester united Level 3 match-history question bank."""
 
 MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   {
     "id": "man-utd-l3-01",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United equalizer scorer.",
+    "question": "In the 1999 Champions League final United, who scored the equalizer scorer?",
     "options": [
       "Solskjær",
       "Cole",
@@ -15,7 +15,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-02",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United winner scorer.",
+    "question": "In the 1999 Champions League final United, who scored the winning goal scorer?",
     "options": [
       "Sheringham",
       "Ole Gunnar Solskjær",
@@ -27,7 +27,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-03",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United corner taker before equalizer.",
+    "question": "In the 1999 Champions League final United corner taker before, who scored the equalizer?",
     "options": [
       "David Beckham",
       "Giggs",
@@ -39,7 +39,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-04",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United corner taker before winner.",
+    "question": "In the 1999 Champions League final United corner taker before, who scored the winning goal?",
     "options": [
       "Giggs",
       "Scholes",
@@ -51,7 +51,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-05",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final Bayern scorer.",
+    "question": "In the 1999 Champions League final Bayern, who scored?",
     "options": [
       "Effenberg",
       "Jancker",
@@ -63,7 +63,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-06",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United goalkeeper.",
+    "question": "In the 1999 Champions League final United, who was the goalkeeper?",
     "options": [
       "Van der Sar",
       "Peter Schmeichel",
@@ -75,7 +75,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-07",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United captain.",
+    "question": "In the 1999 Champions League final United, who was the captain?",
     "options": [
       "Peter Schmeichel",
       "Keane",
@@ -87,7 +87,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-08",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL final United substitute who scored winner.",
+    "question": "In the 1999 Champions League final United substitute who scored, who scored the winning goal?",
     "options": [
       "Sheringham",
       "Blomqvist",
@@ -99,7 +99,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-09",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL semifinal second leg United first scorer at Juventus.",
+    "question": "In the 1999 Champions League semifinal second leg United, who scored the opening goal at Juventus?",
     "options": [
       "Yorke",
       "Cole",
@@ -111,7 +111,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-10",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL semifinal second leg United second scorer at Juventus.",
+    "question": "In the 1999 Champions League semifinal second leg United, who scored the second goal at Juventus?",
     "options": [
       "Keane",
       "Dwight Yorke",
@@ -123,7 +123,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-11",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL semifinal second leg United third scorer at Juventus.",
+    "question": "In the 1999 Champions League semifinal second leg United, who scored the third goal at Juventus?",
     "options": [
       "Andy Cole",
       "Yorke",
@@ -135,7 +135,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-12",
-    "question": "For Manchester United history, identify the correct answer: 1999 UCL semifinal second leg Juventus brace scorer.",
+    "question": "In the 1999 Champions League semifinal second leg Juventus, who scored twice?",
     "options": [
       "Del Piero",
       "Zidane",
@@ -147,7 +147,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-13",
-    "question": "For Manchester United history, identify the correct answer: 1999 FA Cup semifinal replay United extra-time winner vs Arsenal.",
+    "question": "In the 1999 FA Cup semifinal replay United extra-time, who scored the winning goal against Arsenal?",
     "options": [
       "Beckham",
       "Scholes",
@@ -159,7 +159,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-14",
-    "question": "For Manchester United history, identify the correct answer: 1999 FA Cup semifinal replay United goalkeeper saving Bergkamp penalty.",
+    "question": "In the 1999 FA Cup semifinal replay United, who was the goalkeeper saving Bergkamp penalty?",
     "options": [
       "Van der Sar",
       "Peter Schmeichel",
@@ -171,7 +171,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-15",
-    "question": "For Manchester United history, identify the correct answer: 1999 FA Cup semifinal replay United player sent off.",
+    "question": "In 1999, which answer correctly matches this event: FA Cup semifinal replay United player sent off?",
     "options": [
       "Roy Keane",
       "Scholes",
@@ -183,7 +183,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-16",
-    "question": "For Manchester United history, identify the correct answer: 1999 FA Cup final United opener vs Newcastle.",
+    "question": "In the 1999 FA Cup final United, who scored the opening goal against Newcastle?",
     "options": [
       "Scholes",
       "Cole",
@@ -195,7 +195,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-17",
-    "question": "For Manchester United history, identify the correct answer: 1999 FA Cup final United second scorer vs Newcastle.",
+    "question": "In the 1999 FA Cup final United, who scored the second goal against Newcastle?",
     "options": [
       "Sheringham",
       "Cole",
@@ -207,7 +207,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-18",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL final United opener vs Chelsea.",
+    "question": "In the 2008 Champions League final United, who scored the opening goal against Chelsea?",
     "options": [
       "Rooney",
       "Cristiano Ronaldo",
@@ -219,7 +219,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-19",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL final Chelsea equalizer scorer.",
+    "question": "In the 2008 Champions League final Chelsea, who scored the equalizer scorer?",
     "options": [
       "Frank Lampard",
       "Drogba",
@@ -231,7 +231,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-20",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL final United keeper saving Anelka penalty.",
+    "question": "In 2008, which answer correctly matches this event: Champions League final United keeper saving Anelka penalty?",
     "options": [
       "Schmeichel",
       "Kuszczak",
@@ -243,7 +243,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-21",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL final United player missing shootout penalty.",
+    "question": "In 2008, which answer correctly matches this event: Champions League final United player missing shootout penalty?",
     "options": [
       "Rooney",
       "Tevez",
@@ -255,7 +255,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-22",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL final Chelsea fifth penalty miss.",
+    "question": "In 2008, which answer correctly matches this event: Champions League final Chelsea fifth penalty miss?",
     "options": [
       "Lampard",
       "John Terry",
@@ -267,7 +267,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-23",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL semifinal second leg United winner vs Barcelona.",
+    "question": "In the 2008 Champions League semifinal second leg United, who scored the winning goal against Barcelona?",
     "options": [
       "Paul Scholes",
       "Ronaldo",
@@ -279,7 +279,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-24",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL semifinal first leg United missed penalty vs Barcelona.",
+    "question": "In 2008, which answer correctly matches this event: Champions League semifinal first leg United missed penalty against Barcelona?",
     "options": [
       "Rooney",
       "Tevez",
@@ -291,7 +291,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-25",
-    "question": "For Manchester United history, identify the correct answer: 2008 UCL quarterfinal second leg United opener vs Roma.",
+    "question": "In the 2008 Champions League quarterfinal second leg United, who scored the opening goal against Roma?",
     "options": [
       "Rooney",
       "Ronaldo",
@@ -303,7 +303,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-26",
-    "question": "For Manchester United history, identify the correct answer: 2009 UCL final Barcelona opener vs United.",
+    "question": "In the 2009 Champions League final Barcelona, who scored the opening goal against United?",
     "options": [
       "Messi",
       "Samuel Eto'o",
@@ -315,7 +315,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-27",
-    "question": "For Manchester United history, identify the correct answer: 2009 UCL final Barcelona second scorer vs United.",
+    "question": "In the 2009 Champions League final Barcelona, who scored the second goal against United?",
     "options": [
       "Lionel Messi",
       "Eto'o",
@@ -327,7 +327,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-28",
-    "question": "For Manchester United history, identify the correct answer: 2011 UCL final United equalizer vs Barcelona.",
+    "question": "In the 2011 Champions League final United, who scored the equalizer against Barcelona?",
     "options": [
       "Hernández",
       "Giggs",
@@ -339,7 +339,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-29",
-    "question": "For Manchester United history, identify the correct answer: 2011 UCL final Barcelona opener vs United.",
+    "question": "In the 2011 Champions League final Barcelona, who scored the opening goal against United?",
     "options": [
       "Messi",
       "Villa",
@@ -351,7 +351,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-30",
-    "question": "For Manchester United history, identify the correct answer: 2011 UCL final Barcelona second scorer vs United.",
+    "question": "In the 2011 Champions League final Barcelona, who scored the second goal against United?",
     "options": [
       "Pedro",
       "Lionel Messi",
@@ -363,7 +363,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-31",
-    "question": "For Manchester United history, identify the correct answer: 2011 UCL final Barcelona third scorer vs United.",
+    "question": "In the 2011 Champions League final Barcelona, who scored the third goal against United?",
     "options": [
       "David Villa",
       "Messi",
@@ -375,7 +375,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-32",
-    "question": "For Manchester United history, identify the correct answer: 2017 Europa League final United opener vs Ajax.",
+    "question": "In the 2017 Europa League final United, who scored the opening goal against Ajax?",
     "options": [
       "Mkhitaryan",
       "Rashford",
@@ -387,7 +387,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-33",
-    "question": "For Manchester United history, identify the correct answer: 2017 Europa League final United second scorer vs Ajax.",
+    "question": "In the 2017 Europa League final United, who scored the second goal against Ajax?",
     "options": [
       "Pogba",
       "Rashford",
@@ -399,7 +399,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-34",
-    "question": "For Manchester United history, identify the correct answer: 2017 Europa League final United goalkeeper.",
+    "question": "In the 2017 Europa League final United, who was the goalkeeper?",
     "options": [
       "De Gea",
       "Sergio Romero",
@@ -411,7 +411,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-35",
-    "question": "For Manchester United history, identify the correct answer: 2017 Europa League final United captain.",
+    "question": "In the 2017 Europa League final United, who was the captain?",
     "options": [
       "Antonio Valencia",
       "Rooney",
@@ -423,7 +423,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-36",
-    "question": "For Manchester United history, identify the correct answer: 2016 FA Cup final United extra-time winner vs Crystal Palace.",
+    "question": "In the 2016 FA Cup final United extra-time, who scored the winning goal against Crystal Palace?",
     "options": [
       "Mata",
       "Rooney",
@@ -435,7 +435,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-37",
-    "question": "For Manchester United history, identify the correct answer: 2016 FA Cup final United equalizer vs Crystal Palace.",
+    "question": "In the 2016 FA Cup final United, who scored the equalizer against Crystal Palace?",
     "options": [
       "Lingard",
       "Rooney",
@@ -447,7 +447,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-38",
-    "question": "For Manchester United history, identify the correct answer: 2016 FA Cup final Palace opener vs United.",
+    "question": "In the 2016 FA Cup final Palace, who scored the opening goal against United?",
     "options": [
       "Zaha",
       "Jason Puncheon",
@@ -459,7 +459,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-39",
-    "question": "For Manchester United history, identify the correct answer: 2016 FA Cup final United player sent off in extra time.",
+    "question": "In 2016, which answer correctly matches this event: FA Cup final United player sent off in extra time?",
     "options": [
       "Chris Smalling",
       "Rooney",
@@ -471,7 +471,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-40",
-    "question": "For Manchester United history, identify the correct answer: 2004 FA Cup final United opener vs Millwall.",
+    "question": "In the 2004 FA Cup final United, who scored the opening goal against Millwall?",
     "options": [
       "Van Nistelrooy",
       "Scholes",
@@ -483,7 +483,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-41",
-    "question": "For Manchester United history, identify the correct answer: 2004 FA Cup final United second scorer vs Millwall.",
+    "question": "In the 2004 FA Cup final United, who scored the second goal against Millwall?",
     "options": [
       "Ronaldo",
       "Scholes",
@@ -495,7 +495,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-42",
-    "question": "For Manchester United history, identify the correct answer: 2004 FA Cup final United third scorer vs Millwall.",
+    "question": "In the 2004 FA Cup final United, who scored the third goal against Millwall?",
     "options": [
       "Ronaldo",
       "Ruud van Nistelrooy",
@@ -507,7 +507,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-43",
-    "question": "For Manchester United history, identify the correct answer: 2016 Community Shield United winner vs Leicester.",
+    "question": "In the 2016 Community Shield United, who scored the winning goal against Leicester?",
     "options": [
       "Zlatan Ibrahimović",
       "Lingard",
@@ -519,7 +519,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-44",
-    "question": "For Manchester United history, identify the correct answer: 2016 Community Shield United opener vs Leicester.",
+    "question": "In the 2016 Community Shield United, who scored the opening goal against Leicester?",
     "options": [
       "Ibrahimović",
       "Mata",
@@ -531,7 +531,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-45",
-    "question": "For Manchester United history, identify the correct answer: 2023 League Cup final United opener vs Newcastle.",
+    "question": "In the 2023 League Cup final United, who scored the opening goal against Newcastle?",
     "options": [
       "Rashford",
       "Fernandes",
@@ -543,7 +543,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-46",
-    "question": "For Manchester United history, identify the correct answer: 2023 League Cup final United second scorer vs Newcastle.",
+    "question": "In the 2023 League Cup final United, who scored the second goal against Newcastle?",
     "options": [
       "Weghorst",
       "Marcus Rashford",
@@ -555,7 +555,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-47",
-    "question": "For Manchester United history, identify the correct answer: 2023 FA Cup final United equalizer vs City.",
+    "question": "In the 2023 FA Cup final United, who scored the equalizer against City?",
     "options": [
       "Bruno Fernandes",
       "Rashford",
@@ -567,7 +567,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-48",
-    "question": "For Manchester United history, identify the correct answer: 2023 FA Cup final City opener vs United.",
+    "question": "In the 2023 FA Cup final City, who scored the opening goal against United?",
     "options": [
       "Haaland",
       "Rodri",
@@ -579,7 +579,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-49",
-    "question": "For Manchester United history, identify the correct answer: 2023 FA Cup final City winner vs United.",
+    "question": "In the 2023 FA Cup final City, who scored the winning goal against United?",
     "options": [
       "Haaland",
       "De Bruyne",
@@ -591,7 +591,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-50",
-    "question": "For Manchester United history, identify the correct answer: 2024 FA Cup final United opener vs City.",
+    "question": "In the 2024 FA Cup final United, who scored the opening goal against City?",
     "options": [
       "Mainoo",
       "Alejandro Garnacho",
@@ -603,7 +603,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-51",
-    "question": "For Manchester United history, identify the correct answer: 2024 FA Cup final United second scorer vs City.",
+    "question": "In the 2024 FA Cup final United, who scored the second goal against City?",
     "options": [
       "Kobbie Mainoo",
       "Garnacho",
@@ -615,7 +615,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-52",
-    "question": "For Manchester United history, identify the correct answer: 2024 FA Cup final City scorer vs United.",
+    "question": "In the 2024 FA Cup final City, who scored against United?",
     "options": [
       "Haaland",
       "Foden",
@@ -627,7 +627,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-53",
-    "question": "For Manchester United history, identify the correct answer: 2024 FA Cup final United manager.",
+    "question": "In the 2024 FA Cup final United, who was the manager?",
     "options": [
       "Solskjær",
       "Mourinho",
@@ -639,7 +639,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-54",
-    "question": "For Manchester United history, identify the correct answer: 2013 UCL round of 16 United red-card recipient vs Real Madrid.",
+    "question": "In the 2013 Champions League round of 16 United, who was sent off against Real Madrid?",
     "options": [
       "Rooney",
       "Nani",
@@ -651,7 +651,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-55",
-    "question": "For Manchester United history, identify the correct answer: 2013 UCL round of 16 Real Madrid scorer at Old Trafford.",
+    "question": "In the 2013 Champions League round of 16 Real Madrid, who scored at Old Trafford?",
     "options": [
       "Cristiano Ronaldo",
       "Benzema",
@@ -663,7 +663,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-56",
-    "question": "For Manchester United history, identify the correct answer: 2013 UCL round of 16 Real Madrid equalizer at Old Trafford.",
+    "question": "In the 2013 Champions League round of 16 Real Madrid, who scored the equalizer at Old Trafford?",
     "options": [
       "Ronaldo",
       "Benzema",
@@ -675,7 +675,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-57",
-    "question": "For Manchester United history, identify the correct answer: 2013 UCL round of 16 United goal type at Old Trafford.",
+    "question": "In 2013, which answer correctly matches this event: Champions League round of 16 United goal type at Old Trafford?",
     "options": [
       "Van Persie volley",
       "Rooney header",
@@ -687,7 +687,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-58",
-    "question": "For Manchester United history, identify the correct answer: 2011 UCL semifinal first leg United opener at Schalke.",
+    "question": "In the 2011 Champions League semifinal first leg United, who scored the opening goal at Schalke?",
     "options": [
       "Rooney",
       "Ryan Giggs",
@@ -699,7 +699,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-59",
-    "question": "For Manchester United history, identify the correct answer: 2011 UCL semifinal first leg United second scorer at Schalke.",
+    "question": "In the 2011 Champions League semifinal first leg United, who scored the second goal at Schalke?",
     "options": [
       "Wayne Rooney",
       "Giggs",
@@ -711,7 +711,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-60",
-    "question": "For Manchester United history, identify the correct answer: 1999 Premier League final day United winner vs Tottenham.",
+    "question": "In the 1999 Premier League final day United, who scored the winning goal against Tottenham?",
     "options": [
       "Beckham",
       "Yorke",
