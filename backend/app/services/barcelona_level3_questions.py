@@ -3,7 +3,7 @@
 BARCELONA_LEVEL_3_QUESTIONS = [
   {
     "id": "barcelona-l3-01",
-    "question": "In the 2009 Champions League final first Barcelona scorer, who or what matches this description?",
+    "question": "For the 2009 Champions League final first Barcelona scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Henry",
@@ -15,7 +15,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-02",
-    "question": "In the 2009 Champions League final assist for Eto'o, who or what matches this description?",
+    "question": "For the 2009 Champions League final assist for Eto'o, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Andrés Iniesta",
@@ -27,7 +27,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-03",
-    "question": "In the 2009 Champions League final Barcelona free kick hit crossbar, who or what matches this description?",
+    "question": "For the 2009 Champions League final Barcelona free kick hit crossbar, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Messi",
@@ -39,7 +39,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-04",
-    "question": "In the 2011 Champions League final Barcelona first scorer, who or what matches this description?",
+    "question": "For the 2011 Champions League final Barcelona first scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Villa",
@@ -51,7 +51,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-05",
-    "question": "In the 2011 Champions League final Barcelona second scorer, who or what matches this description?",
+    "question": "For the 2011 Champions League final Barcelona second scorer, which option correctly completes the historical clue?",
     "options": [
       "Pedro",
       "Villa",
@@ -63,7 +63,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-06",
-    "question": "In the 2011 Champions League final Barcelona third scorer, who or what matches this description?",
+    "question": "For the 2011 Champions League final Barcelona third scorer, which option correctly completes the historical clue?",
     "options": [
       "Pedro",
       "David Villa",
@@ -75,7 +75,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-07",
-    "question": "In the 2011 Champions League final assist for Pedro opener, who or what matches this description?",
+    "question": "For the 2011 Champions League final assist for Pedro opener, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Iniesta",
@@ -87,7 +87,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-08",
-    "question": "In the 2011 Champions League final starting Barcelona captain, who or what matches this description?",
+    "question": "For the 2011 Champions League final starting Barcelona captain, which option correctly completes the historical clue?",
     "options": [
       "Puyol",
       "Valdés",
@@ -99,7 +99,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-09",
-    "question": "In the 2011 Champions League final Barcelona goalkeeper, who or what matches this description?",
+    "question": "For the 2011 Champions League final Barcelona goalkeeper, which option correctly completes the historical clue?",
     "options": [
       "Pinto",
       "Ter Stegen",
@@ -111,7 +111,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-10",
-    "question": "In the 2015 Champions League semifinal first leg Barcelona opening scorer against Bayern, who or what matches this description?",
+    "question": "For the 2015 Champions League semifinal first leg Barcelona opening scorer against Bayern, which option correctly completes the historical clue?",
     "options": [
       "Piqué",
       "Lionel Messi",
@@ -123,7 +123,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-11",
-    "question": "In the 2015 Champions League semifinal first leg Messi goals against Bayern, who or what matches this description?",
+    "question": "For the 2015 Champions League semifinal first leg Messi goals against Bayern, which option correctly completes the historical clue?",
     "options": [
       "Two",
       "One",
@@ -135,7 +135,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-12",
-    "question": "In the 2015 Champions League semifinal first leg Barcelona third scorer against Bayern, who or what matches this description?",
+    "question": "For the 2015 Champions League semifinal first leg Barcelona third scorer against Bayern, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Suárez",
@@ -147,7 +147,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-13",
-    "question": "In the 2015 Champions League final Barcelona first scorer, who or what matches this description?",
+    "question": "For the 2015 Champions League final Barcelona first scorer, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Iniesta",
@@ -159,7 +159,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-14",
-    "question": "In the 2015 Champions League final assist for Rakitić, who or what matches this description?",
+    "question": "For the 2015 Champions League final assist for Rakitić, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Andrés Iniesta",
@@ -171,7 +171,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-15",
-    "question": "In the 2015 Champions League final Juventus equalizer scorer, who or what matches this description?",
+    "question": "For the 2015 Champions League final Juventus equalizer scorer, which option correctly completes the historical clue?",
     "options": [
       "Álvaro Morata",
       "Tevez",
@@ -183,7 +183,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-16",
-    "question": "In the 2015 Champions League final Barcelona second scorer, who or what matches this description?",
+    "question": "For the 2015 Champions League final Barcelona second scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Neymar",
@@ -195,7 +195,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-17",
-    "question": "In the 2015 Champions League final Barcelona goalkeeper, who or what matches this description?",
+    "question": "For the 2015 Champions League final Barcelona goalkeeper, which option correctly completes the historical clue?",
     "options": [
       "Bravo",
       "Valdés",
@@ -207,7 +207,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-18",
-    "question": "In the 2015 Champions League final Barcelona starting captain, who or what matches this description?",
+    "question": "For the 2015 Champions League final Barcelona starting captain, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Andrés Iniesta",
@@ -219,7 +219,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-19",
-    "question": "In the 2015 Champions League final Barcelona substitute for Iniesta, who or what matches this description?",
+    "question": "For the 2015 Champions League final Barcelona substitute for Iniesta, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Sergi Roberto",
@@ -231,7 +231,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-20",
-    "question": "In the 2017 Champions League comeback PSG Barcelona two late goals scorer, who or what matches this description?",
+    "question": "For the 2017 Champions League comeback PSG Barcelona two late goals scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Suárez",
@@ -243,7 +243,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-21",
-    "question": "In the 2017 Champions League comeback PSG Barcelona penalty for third goal scorer, who or what matches this description?",
+    "question": "For the 2017 Champions League comeback PSG Barcelona penalty for third goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Neymar",
       "Suárez",
@@ -255,7 +255,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-22",
-    "question": "In the 2017 Champions League comeback PSG own-goal scorer, who or what matches this description?",
+    "question": "For the 2017 Champions League comeback PSG own-goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Marquinhos",
       "Layvin Kurzawa",
@@ -267,7 +267,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-23",
-    "question": "In the 2017 Champions League comeback PSG away goal scorer, who or what matches this description?",
+    "question": "For the 2017 Champions League comeback PSG away goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Edinson Cavani",
       "Di María",
@@ -279,7 +279,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-24",
-    "question": "In the 2017 Champions League comeback PSG assist for Sergi Roberto winner, who or what matches this description?",
+    "question": "For the 2017 Champions League comeback PSG assist for Sergi Roberto winner, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Iniesta",
@@ -291,7 +291,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-25",
-    "question": "In the 2017 Champions League comeback PSG Barcelona manager, who or what matches this description?",
+    "question": "For the 2017 Champions League comeback PSG Barcelona manager, which option correctly completes the historical clue?",
     "options": [
       "Valverde",
       "Guardiola",
@@ -303,7 +303,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-26",
-    "question": "In the 2009 Champions League semifinal Chelsea Barcelona late winning scorer, who or what matches this description?",
+    "question": "For the 2009 Champions League semifinal Chelsea Barcelona late winning scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Andrés Iniesta",
@@ -315,7 +315,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-27",
-    "question": "In the 2009 Champions League semifinal Chelsea Barcelona Iniesta assist, who or what matches this description?",
+    "question": "For the 2009 Champions League semifinal Chelsea Barcelona Iniesta assist, which option correctly completes the historical clue?",
     "options": [
       "Lionel Messi",
       "Xavi",
@@ -327,7 +327,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-28",
-    "question": "In the 2009 Champions League semifinal Chelsea Barcelona sent-off defender, who or what matches this description?",
+    "question": "For the 2009 Champions League semifinal Chelsea Barcelona sent-off defender, which option correctly completes the historical clue?",
     "options": [
       "Piqué",
       "Puyol",
@@ -339,7 +339,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-29",
-    "question": "In the 2009 Champions League semifinal Chelsea scorer against Barcelona, who or what matches this description?",
+    "question": "For the 2009 Champions League semifinal Chelsea scorer against Barcelona, which option correctly completes the historical clue?",
     "options": [
       "Drogba",
       "Lampard",
@@ -351,7 +351,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-30",
-    "question": "In the 2006 Champions League final Barcelona opening scorer, who or what matches this description?",
+    "question": "For the 2006 Champions League final Barcelona opening scorer, which option correctly completes the historical clue?",
     "options": [
       "Larsson",
       "Samuel Eto'o",
@@ -363,7 +363,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-31",
-    "question": "In the 2006 Champions League final both Barcelona goals assister, who or what matches this description?",
+    "question": "For the 2006 Champions League final both Barcelona goals assister, which option correctly completes the historical clue?",
     "options": [
       "Henrik Larsson",
       "Ronaldinho",
@@ -375,7 +375,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-32",
-    "question": "In the 2006 Champions League final Barcelona winner scorer, who or what matches this description?",
+    "question": "For the 2006 Champions League final Barcelona winner scorer, which option correctly completes the historical clue?",
     "options": [
       "Eto'o",
       "Ronaldinho",
@@ -387,7 +387,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-33",
-    "question": "In the 2006 Champions League final Arsenal sent-off goalkeeper, who or what matches this description?",
+    "question": "For the 2006 Champions League final Arsenal sent-off goalkeeper, which option correctly completes the historical clue?",
     "options": [
       "Almunia",
       "Seaman",
@@ -399,7 +399,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-34",
-    "question": "In the 2006 Champions League final Arsenal scorer, who or what matches this description?",
+    "question": "For the 2006 Champions League final Arsenal scorer, which option correctly completes the historical clue?",
     "options": [
       "Henry",
       "Sol Campbell",
@@ -411,7 +411,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-35",
-    "question": "In the 1992 European Cup final Barcelona manager, who or what matches this description?",
+    "question": "For the 1992 European Cup final Barcelona manager, which option correctly completes the historical clue?",
     "options": [
       "Johan Cruyff",
       "Van Gaal",
@@ -423,7 +423,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-36",
-    "question": "In the 1992 European Cup final Barcelona captain, who or what matches this description?",
+    "question": "For the 1992 European Cup final Barcelona captain, which option correctly completes the historical clue?",
     "options": [
       "Puyol",
       "Migueli",
@@ -435,7 +435,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-37",
-    "question": "In the 1992 European Cup final Koeman winner minute, who or what matches this description?",
+    "question": "For the 1992 European Cup final Koeman winner minute, which option correctly completes the historical clue?",
     "options": [
       "90th",
       "105th",
@@ -447,7 +447,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-38",
-    "question": "In the 1992 European Cup final Barcelona goalkeeper, who or what matches this description?",
+    "question": "For the 1992 European Cup final Barcelona goalkeeper, which option correctly completes the historical clue?",
     "options": [
       "Valdés",
       "Andoni Zubizarreta",
@@ -459,7 +459,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-39",
-    "question": "In the 1994 Ballon d'Or Barcelona winner, who or what matches this description?",
+    "question": "For the 1994 Ballon d'Or Barcelona winner, which option correctly completes the historical clue?",
     "options": [
       "Hristo Stoichkov",
       "Romário",
@@ -471,7 +471,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-40",
-    "question": "In the 1993 FIFA World Player of Year Barcelona winner, who or what matches this description?",
+    "question": "For the 1993 FIFA World Player of Year Barcelona winner, which option correctly completes the historical clue?",
     "options": [
       "Stoichkov",
       "Koeman",
@@ -483,7 +483,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-41",
-    "question": "In the 2010 Champions League quarterfinal Arsenal Barcelona four-goal scorer, who or what matches this description?",
+    "question": "For the 2010 Champions League quarterfinal Arsenal Barcelona four-goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Ibrahimović",
       "Pedro",
@@ -495,7 +495,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-42",
-    "question": "In the 2011 Champions League semifinal first leg Real Madrid Barcelona two-goal scorer, who or what matches this description?",
+    "question": "For the 2011 Champions League semifinal first leg Real Madrid Barcelona two-goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Pedro",
       "Lionel Messi",
@@ -507,7 +507,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-43",
-    "question": "In the 2010 Champions League semifinal second leg Inter Barcelona sent-off side, who or what matches this description?",
+    "question": "For the 2010 Champions League semifinal second leg Inter Barcelona sent-off side, which option correctly completes the historical clue?",
     "options": [
       "Inter Milan",
       "Barcelona",
@@ -519,7 +519,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-44",
-    "question": "In the 2010 Champions League semifinal second leg Inter Barcelona lone scorer, who or what matches this description?",
+    "question": "For the 2010 Champions League semifinal second leg Inter Barcelona lone scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Xavi",
@@ -531,7 +531,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-45",
-    "question": "In the 2007 league Clásico 3-3 Barcelona hat-trick scorer, who or what matches this description?",
+    "question": "For the 2007 league Clásico 3-3 Barcelona hat-trick scorer, which option correctly completes the historical clue?",
     "options": [
       "Ronaldinho",
       "Eto'o",
@@ -543,7 +543,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-46",
-    "question": "In the 2009 league Clásico 6-2 Barcelona first two-goal scorer, who or what matches this description?",
+    "question": "For the 2009 league Clásico 6-2 Barcelona first two-goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Xavi",
       "Lionel Messi",
@@ -555,7 +555,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-47",
-    "question": "In the 2009 league Clásico 6-2 Barcelona other two-goal scorer, who or what matches this description?",
+    "question": "For the 2009 league Clásico 6-2 Barcelona other two-goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Thierry Henry",
       "Eto'o",
@@ -567,7 +567,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-48",
-    "question": "In the 2010 league Clásico 5-0 Barcelona fifth scorer, who or what matches this description?",
+    "question": "For the 2010 league Clásico 5-0 Barcelona fifth scorer, which option correctly completes the historical clue?",
     "options": [
       "Villa",
       "Pedro",
@@ -579,7 +579,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-49",
-    "question": "In the 2010 league Clásico 5-0 Barcelona two-goal scorer, who or what matches this description?",
+    "question": "For the 2010 league Clásico 5-0 Barcelona two-goal scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Pedro",
@@ -591,7 +591,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-50",
-    "question": "In the 2010 league Clásico 5-0 Barcelona opener scorer, who or what matches this description?",
+    "question": "For the 2010 league Clásico 5-0 Barcelona opener scorer, which option correctly completes the historical clue?",
     "options": [
       "Pedro",
       "Xavi",
@@ -603,7 +603,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-51",
-    "question": "In the 2009 league Clásico 6-2 Barcelona sixth scorer, who or what matches this description?",
+    "question": "For the 2009 league Clásico 6-2 Barcelona sixth scorer, which option correctly completes the historical clue?",
     "options": [
       "Gerard Piqué",
       "Puyol",
@@ -615,7 +615,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-52",
-    "question": "In the 2015 UEFA Super Cup Sevilla Barcelona extra-time winner scorer, who or what matches this description?",
+    "question": "For the 2015 UEFA Super Cup Sevilla Barcelona extra-time winner scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Suárez",
@@ -627,7 +627,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-53",
-    "question": "In the 2015 UEFA Super Cup Sevilla Barcelona two free-kick scorer, who or what matches this description?",
+    "question": "For the 2015 UEFA Super Cup Sevilla Barcelona two free-kick scorer, which option correctly completes the historical clue?",
     "options": [
       "Neymar",
       "Rakitić",
@@ -639,7 +639,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-54",
-    "question": "In the 2011 UEFA Super Cup Porto Barcelona opening scorer, who or what matches this description?",
+    "question": "For the 2011 UEFA Super Cup Porto Barcelona opening scorer, which option correctly completes the historical clue?",
     "options": [
       "Fàbregas",
       "Lionel Messi",
@@ -651,7 +651,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-55",
-    "question": "In the 2011 UEFA Super Cup Porto Barcelona second scorer, who or what matches this description?",
+    "question": "For the 2011 UEFA Super Cup Porto Barcelona second scorer, which option correctly completes the historical clue?",
     "options": [
       "Cesc Fàbregas",
       "Messi",
@@ -663,7 +663,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-56",
-    "question": "In the 2015 Club World Cup final River Plate Barcelona opener scorer, who or what matches this description?",
+    "question": "For the 2015 Club World Cup final River Plate Barcelona opener scorer, which option correctly completes the historical clue?",
     "options": [
       "Suárez",
       "Neymar",
@@ -675,7 +675,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-57",
-    "question": "In the 2015 Club World Cup final River Plate Barcelona brace scorer, who or what matches this description?",
+    "question": "For the 2015 Club World Cup final River Plate Barcelona brace scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Neymar",
@@ -687,7 +687,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-58",
-    "question": "In the 2009 UEFA Super Cup Shakhtar Barcelona winning scorer, who or what matches this description?",
+    "question": "For the 2009 UEFA Super Cup Shakhtar Barcelona winning scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Pedro",
@@ -699,7 +699,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-59",
-    "question": "In the 2012 UEFA Best Player in Europe Barcelona winner, who or what matches this description?",
+    "question": "For the 2012 UEFA Best Player in Europe Barcelona winner, which option correctly completes the historical clue?",
     "options": [
       "Andrés Iniesta",
       "Xavi",
@@ -711,7 +711,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-60",
-    "question": "In the 2015 Champions League final Barcelona third scorer, who or what matches this description?",
+    "question": "For the 2015 Champions League final Barcelona third scorer, which option correctly completes the historical clue?",
     "options": [
       "Messi",
       "Suárez",
