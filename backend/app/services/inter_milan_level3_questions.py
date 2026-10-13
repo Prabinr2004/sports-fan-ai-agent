@@ -471,7 +471,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-40",
-    "question": "In the 2022 Coppa Italia final Inter, who scored the opening goal?",
+    "question": "Who scored Inter Milan's equalizer to make it 2–2 in the 2022 Coppa Italia final against Juventus?",
     "options": [
       "Çalhanoğlu",
       "Barella",
@@ -495,7 +495,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-42",
-    "question": "In the 2022 Coppa Italia final Inter, who scored the opening goal?",
+    "question": "Who scored Inter Milan's opening goal in the 2022 Coppa Italia final against Juventus?",
     "options": [
       "Nicolò Barella",
       "Perišić",
