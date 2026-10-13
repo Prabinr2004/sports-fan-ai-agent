@@ -1,4 +1,4 @@
-"""Real Madrid Level 3: 60 historical club questions."""
+"""Real Madrid Level 3 question bank."""
 
 REAL_MADRID_LEVEL_3_QUESTIONS = [
   {
@@ -293,7 +293,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
     "id": "rm-l3-25",
     "question": "Who scored Chelsea's opening goal against Real Madrid in the 2021 Champions League semifinal second leg?",
     "options": [
-      "Timo Werner",
+      "Christian Pulisic",
       "Timo Werner",
       "Mason Mount",
       "Kai Havertz"
@@ -332,7 +332,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
       "Raúl",
       "Fernando Morientes",
       "Steve McManaman",
-      "Steve McManaman"
+      "Nicolas Anelka"
     ],
     "answer": 2,
     "min_level": 3
