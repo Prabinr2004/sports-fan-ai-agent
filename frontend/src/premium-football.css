@@ -408,3 +408,71 @@ body{background:#f8f6f1}
 .fansphere-premium .match-center-page .match-center-result.incorrect{background:linear-gradient(110deg,#fff4ef,#fffefa);border-color:#f0d4c9;border-left-color:#e48672}
 .fansphere-premium .match-center-page .match-center-result.incorrect>span{color:#b36552}
 .fansphere-premium .match-center-page .match-center-result.incorrect b{color:#b95749;font-weight:900}
+
+
+/* Premium Football — Daily Quiz */
+.fansphere-premium .quiz-page{color:#1c3650}
+.fansphere-premium .quiz-page h1,.fansphere-premium .quiz-page h2,.fansphere-premium .quiz-page h3{color:#1b344f}
+.fansphere-premium .quiz-page .eyebrow{color:#a17250}
+.fansphere-premium .quiz-page .quiz-header-copy>p{color:#75869b;line-height:1.65}
+.fansphere-premium .quiz-page .quiz-level-reward-box{background:#fff9f0;border:1px solid #ead6bb;box-shadow:0 6px 20px #263c4c0b}
+.fansphere-premium .quiz-page .quiz-level-reward-box>strong{color:#1b3652}
+.fansphere-premium .quiz-page .quiz-level-reward-box small{color:#77879a}
+.fansphere-premium .quiz-page .quiz-level-reward-row{color:#526981}
+.fansphere-premium .quiz-page .quiz-level-reward-row strong{color:#bb7d3d}
+.fansphere-premium .quiz-page .quiz-level-reward-row.current{background:#fce8d7;color:#9d5d40;outline:1px solid #eab99e}
+.fansphere-premium .quiz-page .quiz-progress-panel{background:#fffdfa;border:1px solid #e8ddcf;box-shadow:0 7px 22px #233d5310}
+.fansphere-premium .quiz-page .quiz-progress-head,.fansphere-premium .quiz-page .quiz-milestone-top{color:#1c3854}
+.fansphere-premium .quiz-page .quiz-progress-panel>strong,.fansphere-premium .quiz-page .quiz-progress-panel strong[style]{color:#c18a48!important}
+.fansphere-premium .quiz-page .quiz-progress-panel p,.fansphere-premium .quiz-page .quiz-progress-panel p[style],.fansphere-premium .quiz-page .quiz-progress-panel small[style],.fansphere-premium .quiz-page .quiz-progress-help{color:#73869a!important}
+.fansphere-premium .quiz-page .quiz-progress-track{background:#f0e6dc}
+.fansphere-premium .quiz-page .quiz-progress-fill{background:linear-gradient(90deg,#e8b65f,#ee806b)}
+.fansphere-premium .quiz-page .question-card{background:#fffdfa;border:1px solid #e9dfd5;box-shadow:0 7px 22px #1b344c0c}
+.fansphere-premium .quiz-page .question-card>span{color:#ae7954}
+.fansphere-premium .quiz-page .question-card h3{color:#1b3652}
+.fansphere-premium .quiz-page .answer{background:#fffaf5;border:1px solid #eadfd5;color:#314962}
+.fansphere-premium .quiz-page .answer>span,.fansphere-premium .quiz-page .answer>svg{background:#f8ebdd;color:#a86b48}
+.fansphere-premium .quiz-page .answer:hover:not(:disabled){background:#fff0e6;border-color:#e7aa91;color:#8c4e40}
+.fansphere-premium .quiz-page .answer.selected{background:#fce1d6;border-color:#ed7966;color:#9c4c3c;box-shadow:inset 0 0 0 1px #ed796640}
+.fansphere-premium .quiz-page .answer.selected>span,.fansphere-premium .quiz-page .answer.selected>svg{background:#ed7966;color:#fff}
+.fansphere-premium .quiz-page .answer.answer-correct{background:#eaf6ed;border-color:#91cba4;color:#34784f}
+.fansphere-premium .quiz-page .answer.answer-wrong{background:#fff0ec;border-color:#e9a293;color:#ad5549}
+.fansphere-premium .quiz-page .quiz-review-answer{color:#60758a}
+.fansphere-premium .quiz-page .quiz-review-answer strong{color:#2e8050}
+.fansphere-premium .quiz-page .quiz-submit{background:#ed7966;border-color:#ed7966;color:#fff}
+.fansphere-premium .quiz-page .quiz-submit:hover:not(:disabled){background:#d96552}
+.fansphere-premium .quiz-page .quiz-complete-note{background:#edf7ee;border:1px solid #cbe5d1;color:#397c55}
+.fansphere-premium .quiz-page .quiz-result{background:#fff9f0;border:1px solid #ead7bf}
+.fansphere-premium .quiz-page .quiz-result>svg{color:#c48d46}
+.fansphere-premium .quiz-page .quiz-result>p,.fansphere-premium .quiz-page .quiz-result>p[style]{color:#75879b!important}
+.fansphere-premium .quiz-page .quiz-summary-grid>div{background:#fffdfa;border:1px solid #e9ddcf}
+.fansphere-premium .quiz-page .quiz-summary-grid span{color:#8b765e}
+.fansphere-premium .quiz-page .quiz-summary-grid strong{color:#c18a48}
+.fansphere-premium .quiz-page .quiz-milestone{background:#fffdfa;border:1px solid #eadccd}
+.fansphere-premium .quiz-page .quiz-milestone small{color:#73869a}
+.fansphere-premium .quiz-page .quiz-practice-button{background:#fff1e6;border:1px solid #e9cbb7;color:#a95c47}
+/* Premium Football — Leaderboard */
+.fansphere-premium .leaderboard-page{max-width:1040px;color:#1d3651}
+.fansphere-premium .leaderboard-page>.eyebrow{color:#a17250}
+.fansphere-premium .leaderboard-page>h1{color:#19334f}
+.fansphere-premium .leaderboard-page>p{color:#77889c}
+.fansphere-premium .leaderboard-page>.secondary-button{background:#fff0e4;border:1px solid #e9cbb8;color:#ad5c48}
+.fansphere-premium .leaderboard-page>.secondary-button:hover{background:#ffe4d6}
+.fansphere-premium .leaderboard-page .leader-hero{background:linear-gradient(115deg,#fff0d6,#fffaf1 60%,#fffdfa);border:1px solid #e9d0a6;box-shadow:0 9px 25px #3a332515}
+.fansphere-premium .leaderboard-page .leader-hero>svg{color:#c99641}
+.fansphere-premium .leaderboard-page .leader-hero span:not(.leaderboard-rank-emblem){color:#a77c46}
+.fansphere-premium .leaderboard-page .leader-hero h2{color:#1e3853}
+.fansphere-premium .leaderboard-page .leader-hero p{color:#728399}
+.fansphere-premium .leaderboard-page .leader-hero>strong{color:#b9833e}
+.fansphere-premium .leaderboard-page .leaderboard-table{background:#fffdfa;border:1px solid #e8dcd0;box-shadow:0 7px 22px #263b500d}
+.fansphere-premium .leaderboard-page .leaderboard-head{background:#fbf0e4;color:#946d51}
+.fansphere-premium .leaderboard-page .leaderboard-row{border-top:1px solid #eee2d7;color:#546c83}
+.fansphere-premium .leaderboard-page .leaderboard-row:nth-child(even){background:#fffaf5}
+.fansphere-premium .leaderboard-page .leaderboard-row.current{background:#fff0e3;box-shadow:inset 4px 0 #ee7966}
+.fansphere-premium .leaderboard-page .rank-cell{color:#b17b43}
+.fansphere-premium .leaderboard-page .rank-cell svg{color:#d4a347}
+.fansphere-premium .leaderboard-page .fan-avatar{background:#f9e8d6;color:#a75f43}
+.fansphere-premium .leaderboard-page .fan-cell strong{color:#1e3953}
+.fansphere-premium .leaderboard-page .fan-cell small{color:#ad7650}
+.fansphere-premium .leaderboard-page .leaderboard-rank-label{color:#75869b}
+.fansphere-premium .leaderboard-page .leaderboard-note{color:#78889b}
