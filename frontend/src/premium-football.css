@@ -325,3 +325,69 @@ body{background:#f8f6f1}
 .fansphere-premium .match-center-page .match-center-event-minute{color:#b76a4c}
 .fansphere-premium .match-center-page .match-center-event-title{color:#1d3751}
 .fansphere-premium .match-center-page .match-center-event-details small{color:#74859a}
+
+
+/* Match Center ML access controls — replace leftover mint/navy */
+.fansphere-premium .match-center-page .model-outlook .model-head>div>span{color:#ae6947!important}
+.fansphere-premium .match-center-page .model-outlook .model-head small:not(.analysis-access-chip){color:#78889b!important}
+.fansphere-premium .match-center-page .model-outlook .analysis-access-chip{background:#fff1de!important;border:1px solid #e9cfab!important;color:#a36d32!important;padding:5px 9px!important;font-size:10px!important;letter-spacing:0!important}
+.fansphere-premium .match-center-page .model-outlook button.model-button{background:#ed7966!important;border:1px solid #ed7966!important;color:#fff!important;border-radius:9px!important;box-shadow:0 5px 12px #d8776322!important}
+.fansphere-premium .match-center-page .model-outlook button.model-button:hover:not(:disabled){background:#d96250!important;border-color:#d96250!important}
+.fansphere-premium .match-center-page .model-outlook button.model-button:disabled{opacity:.6!important;cursor:not-allowed!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob{background:#fff8f0!important;border:1px solid #e9dacb!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob.best{background:#fff0e3!important;border-color:#e7ad88!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob span{color:#728398!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob strong{color:#1d3650!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob-track{background:#eadfd3!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob-fill{background:#799abd!important}
+.fansphere-premium .match-center-page .model-outlook .model-prob.best .model-prob-fill{background:#e69b52!important}
+.fansphere-premium .match-center-page .model-outlook .model-pick-comparison{background:#fff4e7!important;border-color:#ead3b7!important;color:#38516b!important}
+.fansphere-premium .match-center-page .model-outlook .rich-analysis{background:#fff7ed!important;border-color:#e9d6c2!important}
+.fansphere-premium .match-center-page .model-outlook .rich-analysis>strong{color:#b46d45!important}
+.fansphere-premium .match-center-page .model-outlook .rich-analysis p{color:#536a81!important}
+/* Phase 5: Predictions dashboard */
+.fansphere-premium .predictions-dashboard{color:#1c344f}
+.fansphere-premium .predictions-dashboard .eyebrow{color:#95745a}
+.fansphere-premium .predictions-dashboard .prediction-header h1{color:#19324e;letter-spacing:-.035em}
+.fansphere-premium .predictions-dashboard .prediction-header p{color:#75859a}
+.fansphere-premium .predictions-dashboard .prediction-header-actions .secondary-button{background:#fff1e5;border:1px solid #e8cbb8;color:#aa5947}
+.fansphere-premium .predictions-dashboard .prediction-header-actions .secondary-button:hover{background:#ffe5d4}
+.fansphere-premium .predictions-dashboard .prediction-stats section{background:#fffdfa;border:1px solid #e9dfd5;border-top:3px solid #dfa84d;box-shadow:0 7px 20px #1b344c10}
+.fansphere-premium .predictions-dashboard .prediction-stats section:nth-child(2){border-top-color:#7d9fc6;background:#f8fafd}
+.fansphere-premium .predictions-dashboard .prediction-stats section:nth-child(3){border-top-color:#e9836c;background:#fff8f4}
+.fansphere-premium .predictions-dashboard .prediction-stats section:nth-child(4){border-top-color:#caa064;background:#fff9f0}
+.fansphere-premium .predictions-dashboard .prediction-stats svg{color:#c48a47}
+.fansphere-premium .predictions-dashboard .prediction-stats section:nth-child(2) svg{color:#638bb7}
+.fansphere-premium .predictions-dashboard .prediction-stats section:nth-child(3) svg{color:#d87561}
+.fansphere-premium .predictions-dashboard .prediction-stats strong{color:#203b56}
+.fansphere-premium .predictions-dashboard .prediction-stats span,.fansphere-premium .predictions-dashboard .prediction-pick span,.fansphere-premium .predictions-dashboard .prediction-result span{color:#98795e}
+.fansphere-premium .predictions-dashboard .prediction-filters button{background:#fffdfa;border:1px solid #e8dbce;color:#63788f}
+.fansphere-premium .predictions-dashboard .prediction-filters button:hover{background:#fff0e4;border-color:#e9b39d}
+.fansphere-premium .predictions-dashboard .prediction-filters button.active{background:#fce2d7;border-color:#e97f69;color:#a34e3f}
+.fansphere-premium .predictions-dashboard .prediction-toolbar input,.fansphere-premium .predictions-dashboard .prediction-toolbar select{background:#fffefa;border:1px solid #e5d8cc;color:#233c56}
+.fansphere-premium .predictions-dashboard .prediction-toolbar input::placeholder{color:#9ba8b6}
+.fansphere-premium .predictions-dashboard .prediction-toolbar input:focus,.fansphere-premium .predictions-dashboard .prediction-toolbar select:focus{outline:2px solid #efac95;outline-offset:1px}
+.fansphere-premium .predictions-dashboard .prediction-group-heading{color:#966d4e}
+.fansphere-premium .predictions-dashboard .prediction-group-heading span{color:#7b8b9c}
+.fansphere-premium .predictions-dashboard .prediction-history-row{background:#fffdfa;border:1px solid #e9dfd5;box-shadow:0 6px 20px #1b344c0e}
+.fansphere-premium .predictions-dashboard .prediction-match-icon{background:#fff0e4;color:#bc7153}
+.fansphere-premium .predictions-dashboard .prediction-match-name strong,.fansphere-premium .predictions-dashboard .prediction-pick strong{color:#1d3651}
+.fansphere-premium .predictions-dashboard .prediction-match-name strong span{color:#a37f64}
+.fansphere-premium .predictions-dashboard .prediction-match-name small{color:#7c8a9d}
+.fansphere-premium .predictions-dashboard .prediction-result.pending strong{color:#ac7935}
+.fansphere-premium .predictions-dashboard .prediction-result.correct strong{color:#3b8058}
+.fansphere-premium .predictions-dashboard .prediction-result.incorrect strong{color:#ba5f50}
+.fansphere-premium .predictions-dashboard .result-detail{color:#75869a!important}
+.fansphere-premium .predictions-dashboard .prediction-ml{border-top-color:#eee1d5}
+.fansphere-premium .predictions-dashboard .prediction-ml-toggle .secondary-button,.fansphere-premium .predictions-dashboard .prediction-ml .secondary-button{background:#fff1e6;border:1px solid #e8cbb7;color:#a85b47}
+.fansphere-premium .predictions-dashboard .prediction-ml-toggle .secondary-button:hover,.fansphere-premium .predictions-dashboard .prediction-ml .secondary-button:hover{background:#ffe7d9}
+.fansphere-premium .predictions-dashboard .forecast-hero{background:linear-gradient(115deg,#fff1df,#fffaf2);border:1px solid #e9d3b9}
+.fansphere-premium .predictions-dashboard .forecast-hero span{color:#997052}
+.fansphere-premium .predictions-dashboard .forecast-hero strong{color:#1d3853}
+.fansphere-premium .predictions-dashboard .forecast-hero small{color:#76889a}
+.fansphere-premium .predictions-dashboard .forecast-prob{color:#c17a41}
+.fansphere-premium .predictions-dashboard .prediction-ml-note,.fansphere-premium .predictions-dashboard .forecast-note{color:#75879b}
+.fansphere-premium .predictions-dashboard .prediction-ml-note strong[style]{color:#b76c45!important}
+.fansphere-premium .predictions-dashboard .prediction-ml-bar{color:#2d455e}
+.fansphere-premium .predictions-dashboard .prediction-ml-track{background:#e9dfd5}
+.fansphere-premium .predictions-dashboard .prediction-ml-fill{background:#e49c54}
