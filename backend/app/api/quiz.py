@@ -265,10 +265,6 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
     ))
     context = quiz_context(db, user)
     if existing:
-        # A snapshot predating a reset must never become a new rewarded round.
-        state = db.get(QuizProgressState, user.id)
-        if state is not None and existing.created_at and state.reset_at and existing.created_at < state.reset_at:
-            raise HTTPException(status_code=409, detail="Today's old quiz belongs to the previous progression. Try again tomorrow.")
         questions = json.loads(existing.questions_json)
         snapshot_team = None
         if existing.team_provider_id and existing.team_name:
