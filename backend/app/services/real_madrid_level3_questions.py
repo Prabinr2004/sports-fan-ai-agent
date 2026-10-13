@@ -662,6 +662,30 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
     "min_level": 3
   },
   {
+    "id": "rm-l3-56",
+    "question": "Who scored both of Real Madrid's goals in the 2–2 draw against Bayern Munich in the first leg of the 2024 Champions League semi-final?",
+    "options": [
+      "Rodrygo",
+      "Jude Bellingham",
+      "Vinícius Júnior",
+      "Joselu"
+    ],
+    "answer": 2,
+    "min_level": 3
+  },
+  {
+    "id": "rm-l3-57",
+    "question": "Who scored Real Madrid's fourth goal in their 4–0 victory over Bayern Munich in the second leg of the 2014 Champions League semi-final?",
+    "options": [
+      "Gareth Bale",
+      "Cristiano Ronaldo",
+      "Sergio Ramos",
+      "Karim Benzema"
+    ],
+    "answer": 1,
+    "min_level": 3
+  },
+  {
     "id": "rm-l3-58",
     "question": "Which Real Madrid defender headed in a goal against Bayern Munich in the 2014 Champions League semifinal second leg?",
     "options": [
