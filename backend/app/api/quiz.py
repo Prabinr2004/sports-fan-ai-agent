@@ -265,6 +265,10 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
     ))
     context = quiz_context(db, user)
     if existing:
+        # A snapshot predating a reset must never become a new rewarded round.
+        state = db.get(QuizProgressState, user.id)
+        if state is not None and existing.created_at and state.reset_at and existing.created_at < state.reset_at:
+            raise HTTPException(status_code=409, detail="Today's old quiz belongs to the previous progression. Try again tomorrow.")
         questions = json.loads(existing.questions_json)
         snapshot_team = None
         if existing.team_provider_id and existing.team_name:
@@ -588,7 +592,25 @@ def reset_quiz_progress(request: Request, db: Session = Depends(get_db)) -> dict
     analysis records, or any other user data.
     """
     user = require_user(request, db)
+    # Keep the once-per-day reward cap intact; never reuse a rewarded legacy
+    # snapshot as the first round of a fresh progression.
+    rewarded_today = db.scalar(select(XPEvent.id).where(
+        XPEvent.user_id == user.id,
+        XPEvent.source_type == "daily_quiz",
+        XPEvent.source_id == quiz_id(),
+    ))
+    if rewarded_today is not None:
+        raise HTTPException(
+            status_code=409,
+            detail="Today's quiz already awarded XP. Reset quiz progress tomorrow so the first new round starts cleanly.",
+        )
     db.scalar(select(User).where(User.id == user.id).with_for_update())
+    # Only discard an unfinished quiz assignment for today, not its XP,
+    # streak, or any other activity record.
+    db.query(DailyQuizSnapshot).filter(
+        DailyQuizSnapshot.user_id == user.id,
+        DailyQuizSnapshot.quiz_date == quiz_id(),
+    ).delete(synchronize_session=False)
     state = db.get(QuizProgressState, user.id)
     if state is None:
         state = QuizProgressState(user_id=user.id, selected_level=1)
