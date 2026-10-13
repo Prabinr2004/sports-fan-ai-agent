@@ -216,11 +216,23 @@ class FootballDataOrgProvider(FootballProvider):
         return leaders
 
     async def get_recent_results(self, provider_team_id: str, limit: int = 8) -> list[dict[str, Any]]:
-        # football-data.org's team-match endpoint may ignore or reject a small
-        # limit for finished-match history on some plans. Fetch the provider's
-        # normal finished set, then trim locally so Match Center has a stable
-        # last-N view and shares one cached response across callers.
+        # Supplement sparse active-season history with the previous season,
+        # only if that history is available on the provider's API plan.
         payload = await self._get(f"/teams/{provider_team_id}/matches", params={"status": "FINISHED"}, ttl=300)
         matches = [self._normalize_match(m) for m in payload.get("matches", [])]
-        matches.sort(key=lambda m: m.get("utc_date") or "")
-        return matches[-limit:]
+        def valid(m: dict) -> bool:
+            score = m.get("score") or {}
+            return m.get("status") == "FINISHED" and score.get("home") is not None and score.get("away") is not None
+        matches = [m for m in matches if valid(m)]
+        if len(matches) < limit:
+            from datetime import date
+            today = date.today()
+            previous_season = today.year - 1 if today.month >= 7 else today.year - 2
+            try:
+                earlier = await self._get(f"/teams/{provider_team_id}/matches",
+                                          params={"status": "FINISHED", "season": previous_season}, ttl=3600)
+                matches.extend(self._normalize_match(m) for m in earlier.get("matches", []))
+            except httpx.HTTPError:
+                pass
+        unique = {m["id"]: m for m in matches if valid(m)}
+        return sorted(unique.values(), key=lambda m: m.get("utc_date") or "")[-limit:]
