@@ -17,6 +17,7 @@ from app.models.quiz import DailyQuizSnapshot
 from app.services.analysis_access import grant_quiz_token
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
+from app.services.quiz_progression import MAX_LEVEL, ROUNDS_PER_LEVEL, ROUNDS_TO_UNLOCK, level_progress, unlocked_level
 from app.services.club_knowledge_questions import CLUB_KNOWLEDGE_QUESTIONS
 from app.services.real_madrid_level2_questions import REAL_MADRID_LEVEL_2_QUESTIONS
 from app.services.barcelona_level2_questions import BARCELONA_LEVEL_2_QUESTIONS
@@ -501,4 +502,37 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
         "correct_answers": [question["answer"] for question in questions],
         "quiz": {**context, "unlocked_level": updated_context["unlocked_level"], "days_to_next_level": updated_context["days_to_next_level"]},
         "progress": progress_summary(db, user.id),
+    }
+
+
+def rewarded_rounds_by_level(db: Session, user_id: int) -> dict[int, int]:
+    """Count only rewarded snapshots; never count unsubmitted or practice rounds."""
+    rows = db.execute(
+        select(DailyQuizSnapshot.level, func.count(DailyQuizSnapshot.id))
+        .join(
+            XPEvent,
+            (XPEvent.user_id == DailyQuizSnapshot.user_id)
+            & (XPEvent.source_type == "daily_quiz")
+            & (XPEvent.source_id == DailyQuizSnapshot.quiz_date),
+        )
+        .where(DailyQuizSnapshot.user_id == user_id)
+        .group_by(DailyQuizSnapshot.level)
+    ).all()
+    return {level: int(count) for level, count in rows if 1 <= level <= MAX_LEVEL}
+
+
+@router.get("/levels")
+def quiz_levels_status(request: Request, db: Session = Depends(get_db)) -> dict:
+    """Read-only preview of the 7-of-12 progression; no user data is changed."""
+    user = require_user(request, db)
+    rounds = rewarded_rounds_by_level(db, user.id)
+    # The old system advanced every five rewarded days. Preserve any unlocks.
+    legacy_level = min(MAX_LEVEL, quiz_level_from_completions(rewarded_quiz_completions(db, user.id)))
+    highest = unlocked_level(rounds, legacy_unlocked_level=legacy_level)
+    return {
+        "unlocked_level": highest,
+        "rounds_per_level": ROUNDS_PER_LEVEL,
+        "rounds_to_unlock": ROUNDS_TO_UNLOCK,
+        "levels": [level_progress(level, rounds, highest) for level in range(1, MAX_LEVEL + 1)],
+        "preview_only": True,
     }
