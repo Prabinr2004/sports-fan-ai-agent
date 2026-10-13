@@ -189,3 +189,31 @@ body{background:#f8f6f1}
 .fansphere-premium .my-team-dashboard .club-hero{background-image:linear-gradient(105deg,rgba(255,249,241,.86),rgba(255,245,230,.63)),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=80")}
 .fansphere-premium .my-team-dashboard .club-stadium-credit{display:block;width:fit-content;margin-top:5px;font-size:9px;line-height:1.35;color:#827b72;text-decoration:none;opacity:.75}
 .fansphere-premium .my-team-dashboard .club-stadium-credit:hover,.fansphere-premium .my-team-dashboard .club-stadium-credit:focus-visible{opacity:1;text-decoration:underline}
+
+
+/* Phase 3: Favorites — premium football club collection */
+.fansphere-premium .followed-clubs{color:#19324d}
+.fansphere-premium .followed-clubs>h1{color:#192f49;letter-spacing:-.035em}
+.fansphere-premium .followed-clubs>p{color:#728398;max-width:680px}
+.fansphere-premium .followed-clubs .eyebrow{color:#95775e}
+.fansphere-premium .followed-clubs .followed-grid{gap:20px}
+.fansphere-premium .followed-clubs .followed-card{background:#fffdfa;border:1px solid #e9dfd5;border-top:3px solid #dfa94d;box-shadow:0 9px 26px #20334812;transition:transform .18s,box-shadow .18s}
+.fansphere-premium .followed-clubs .followed-card:nth-child(3n+2){border-top-color:#7e9fc6}
+.fansphere-premium .followed-clubs .followed-card:nth-child(3n){border-top-color:#ef806b}
+.fansphere-premium .followed-clubs .followed-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #2033481b}
+.fansphere-premium .followed-clubs .followed-head{align-items:center}
+.fansphere-premium .followed-clubs .followed-head img{background:#fff9f2;border:1px solid #eee1d4;box-shadow:0 5px 15px #3040560f}
+.fansphere-premium .followed-clubs .followed-head h2{color:#1b334f;letter-spacing:-.02em}
+.fansphere-premium .followed-clubs .followed-head span[style],.fansphere-premium .followed-clubs .followed-stat span[style]{color:#78889b!important}
+.fansphere-premium .followed-clubs .followed-stats{gap:12px}
+.fansphere-premium .followed-clubs .followed-stat{background:linear-gradient(140deg,#fff8eb,#fffdf8);border:1px solid #efdfc6}
+.fansphere-premium .followed-clubs .followed-stat:nth-child(2){background:linear-gradient(140deg,#f1f6fc,#fffefa);border-color:#dfe8f2}
+.fansphere-premium .followed-clubs .followed-stat strong{color:#bd7c32}
+.fansphere-premium .followed-clubs .followed-stat:nth-child(2) strong{color:#587ca4}
+.fansphere-premium .followed-clubs .followed-row{border-top-color:#eee5db}
+.fansphere-premium .followed-clubs .followed-row strong{color:#1f3954;line-height:1.45}
+.fansphere-premium .followed-clubs .followed-row small{color:#75869a}
+.fansphere-premium .followed-clubs .followed-open{background:#ee7966;border-color:#ee7966;color:#fff;border-radius:11px;box-shadow:0 6px 15px #e77c6325}
+.fansphere-premium .followed-clubs .followed-open:hover{background:#d86452;border-color:#d86452}
+.fansphere-premium .followed-clubs .empty-state{background:#fffefa;border:1px solid #ebdfd2;color:#20354c}
+@media(prefers-reduced-motion:reduce){.fansphere-premium .followed-clubs .followed-card{transition:none}.fansphere-premium .followed-clubs .followed-card:hover{transform:none}}
