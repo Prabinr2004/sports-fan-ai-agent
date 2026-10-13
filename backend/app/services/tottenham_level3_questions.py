@@ -3,7 +3,7 @@
 TOTTENHAM_LEVEL_3_QUESTIONS = [
   {
     "id": "tottenham-l3-01",
-    "question": "In the 2019 Ajax semifinal, who scored a hat-trick?",
+    "question": "Who scored a second-half hat-trick for Tottenham against Ajax in the 2019 Champions League semifinal second leg?",
     "options": [
       "Kane",
       "Lucas Moura",
@@ -51,7 +51,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-05",
-    "question": "In the 2019 Ajax semifinal, what was the halftime deficit?",
+    "question": "How many goals behind were Tottenham at halftime of the 2019 Champions League semifinal second leg against Ajax?",
     "options": [
       "One goal",
       "Two goals",
