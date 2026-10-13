@@ -51,3 +51,21 @@ def test_new_progress_preserves_existing_unlocks():
     assert result["rounds_remaining"] == 5
     assert result["rounds_to_unlock_next"] == 0
     assert result["next_level_unlocked"] is True
+
+
+def test_unlock_boundaries_and_completed_rounds():
+    for completed in range(7):
+        assert unlocked_level({1: completed, 2: 0}) == 1
+    assert unlocked_level({1: 7, 2: 0}) == 2
+    for completed in range(7):
+        assert unlocked_level({1: 7, 2: completed}) == 2
+    assert unlocked_level({1: 7, 2: 7}) == 3
+    assert not can_play_rewarded(2, {1: 7, 2: 12}, 3)
+    assert can_play_rewarded(1, {1: 7, 2: 12}, 3)
+
+
+def test_unlocked_level_switch_does_not_change_rounds():
+    rounds = {1: 8, 2: 7, 3: 1}
+    for chosen in (1, 2, 3):
+        assert can_play_rewarded(chosen, rounds, unlocked_level(rounds))
+    assert rounds == {1: 8, 2: 7, 3: 1}
