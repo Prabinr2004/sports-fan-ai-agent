@@ -3,7 +3,7 @@ import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History} from "lucide-react
 type WalletData={gems:number;spendable_xp:number;xp_per_gem:number};
 type WalletEvent={id:string;currency:"XP"|"GEM";amount:number;source:string;created_at:string|null};
 type Access={free_remaining:number;extra_remaining:number;gems_per_analysis:number};
-export default function WalletPage(){
+export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:number)=>void}){
  const [wallet,setWallet]=useState<WalletData|null>(null);
  const [access,setAccess]=useState<Access|null>(null);
  const [quantity,setQuantity]=useState(2);
@@ -16,7 +16,7 @@ export default function WalletPage(){
  async function refresh(){
   const [w,a]=await Promise.all([fetch("/api/v1/economy"),fetch("/api/v1/analysis/access")]);
   if(!w.ok||!a.ok)throw new Error("Could not load wallet.");
-  setWallet(await w.json());setAccess(await a.json());
+  const walletData:WalletData=await w.json();setWallet(walletData);onBalanceChange?.(walletData.gems);setAccess(await a.json());
   try{const h=await fetch("/api/v1/economy/history");if(!h.ok)throw new Error("History unavailable.");const payload=await h.json();setHistory(payload.events||[]);setHistoryError("");}catch{setHistoryError("Could not load recent activity.");}
  }
  useEffect(()=>{refresh().catch(e=>setError(String(e)))},[]);
