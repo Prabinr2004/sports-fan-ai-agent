@@ -111,7 +111,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-10",
-    "question": "In the 2023 Champions League final City, who was the goalkeeper?",
+    "question": "Who started in goal for Manchester City in the 2023 Champions League final?",
     "options": [
       "Ederson",
       "Ortega",
@@ -123,7 +123,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-11",
-    "question": "In the 2023 Champions League final City, who was the captain?",
+    "question": "Who captained Manchester City in the 2023 Champions League final?",
     "options": [
       "De Bruyne",
       "Walker",
@@ -171,7 +171,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-15",
-    "question": "In the 2023 FA Cup final United penalty, who scored the equalizer?",
+    "question": "Who scored Manchester United's equalizing penalty in the 2023 FA Cup final against Manchester City?",
     "options": [
       "Rashford",
       "Sancho",
