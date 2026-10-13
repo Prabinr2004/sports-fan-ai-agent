@@ -1,0 +1,97 @@
+
+/* FanSphere V2 · Premium Football / first-pass visual system.
+   Scope: shared chrome + Home only; no quiz, ML, wallet, or API behavior changes. */
+:root{--fs-ink:#162840;--fs-navy:#152d4b;--fs-coral:#ef735e;--fs-gold:#d69c42;--fs-paper:#f8f6f1;--fs-line:#e7e3dc}
+body{background:#f8f6f1}
+.app-shell.fansphere-premium{background:#f8f6f1;color:var(--fs-ink)}
+.fansphere-premium .sidebar{background:#fffdf9;border-right:1px solid var(--fs-line);box-shadow:4px 0 28px #172a4310}
+.fansphere-premium .brand-mark{background:linear-gradient(140deg,#ffbd85,#ed7663);color:#fff;box-shadow:0 6px 15px #ef735e40}
+.fansphere-premium .brand strong{color:var(--fs-navy)}
+.fansphere-premium .brand span{color:#8b8790}
+.fansphere-premium .nav-item{color:#66738a;font-weight:650;transition:background .18s,color .18s,transform .18s}
+.fansphere-premium .nav-item:hover{background:#f5ede5;color:#213750;transform:translateX(2px)}
+.fansphere-premium .nav-item.active{background:#fcece4;color:#a4473d;box-shadow:inset 3px 0 #ec806c}
+.fansphere-premium .sidebar-card{background:#fff3e8;border-color:#f0d7c2;color:#253953}
+.fansphere-premium .sidebar-card span{color:#987b65}
+.fansphere-premium .sidebar-card svg{color:#d78940}
+.fansphere-premium .topbar{background:#fffdf9ed;border-bottom:1px solid var(--fs-line);box-shadow:0 3px 18px #142e4210}
+.fansphere-premium .search{background:#f6f5f2;border-color:#e4e3df;color:#79889b}
+.fansphere-premium .search input{color:#172a43}
+.fansphere-premium .search input::placeholder{color:#9099a6}
+.fansphere-premium .search-submit{background:#eae6e1;color:#53657b}
+.fansphere-premium .search-submit:not(:disabled):hover{background:#f1c2a9;color:#633f33}
+.fansphere-premium .search-popover{background:#fffefa;border-color:#e8e2db;box-shadow:0 18px 42px #1b2e4625}
+.fansphere-premium .search-result{color:#1c3149}
+.fansphere-premium .search-result:hover{background:#fff0e5}
+.fansphere-premium .api-status{border-color:#e1e7e0;background:#f3f8f1;color:#54735c}
+.fansphere-premium .api-status.online{color:#357553}
+.fansphere-premium .api-status.online span{background:#45a574}
+.fansphere-premium .icon-button{margin-left:0;background:#fff;border-color:#e4e3df;color:#4b5b72}
+.fansphere-premium .icon-button:hover{background:#fff0e8;color:#b45a49}
+.fansphere-premium .avatar{background:#f2b87b;color:#273b52}
+.fansphere-premium .content:has(>.home-dashboard){max-width:1290px}
+.fansphere-premium .content:has(>.home-dashboard) .home-dashboard{color:var(--fs-ink)}
+.fansphere-premium .home-dashboard .eyebrow{color:#95775e}
+.fansphere-premium .home-dashboard .premium-welcome h1{color:#172d49}
+.fansphere-premium .home-dashboard .premium-welcome p{color:#6b798b}
+.fansphere-premium .home-dashboard .premium-period{color:var(--fs-coral)}
+.fansphere-premium .home-dashboard .premium-level{background:#fffdf9;border-color:#e9e2d8;box-shadow:0 8px 24px #1b2d4310}
+.fansphere-premium .home-dashboard .premium-level>span{color:#85786b}
+.fansphere-premium .home-dashboard .premium-level strong{color:#1b344e}
+.fansphere-premium .home-dashboard .premium-level small{color:#d16a53}
+.fansphere-premium .home-dashboard .premium-level-track{background:#f0e8de}
+.fansphere-premium .home-dashboard .premium-level-track span{background:linear-gradient(90deg,#e9a54e,#f27f6e)}
+.fansphere-premium .home-dashboard .premium-hero{border-color:#e5d5c6;background:linear-gradient(120deg,#fff9f0 0%,#fff5e9 55%,#f5e6db 100%);box-shadow:0 16px 38px #9d795326}
+.fansphere-premium .home-dashboard .premium-hero-glow{background:radial-gradient(circle,#f8bb8155,transparent 70%)}
+.fansphere-premium .home-dashboard .premium-kicker{color:#b85d4c}
+.fansphere-premium .home-dashboard .premium-club-identity h2{color:#1a2e48}
+.fansphere-premium .home-dashboard .premium-club-identity p{color:#788496}
+.fansphere-premium .home-dashboard .premium-crest{background:#fff;border:1px solid #e7d9cc;box-shadow:0 8px 24px #8c66451f}
+.fansphere-premium .home-dashboard .premium-hero-aside{background:#f9eadf;border-left-color:#e8d6c6}
+.fansphere-premium .home-dashboard .premium-hero-aside>strong{color:#1c314b}
+.fansphere-premium .home-dashboard .premium-hero-aside>strong span,.fansphere-premium .home-dashboard .premium-hero-aside p{color:#778294}
+.fansphere-premium .home-dashboard .premium-countdown{color:#9f4b3d;background:#f7d3c5}
+.fansphere-premium .home-dashboard .premium-text-button{color:#ad5144}
+.fansphere-premium .home-dashboard .primary-button{background:#ed7967;color:#fff;box-shadow:0 5px 14px #df80604a}
+.fansphere-premium .home-dashboard .primary-button:hover{background:#d85e50}
+.fansphere-premium .home-dashboard .secondary-button{background:#fffaf5;border-color:#decab7;color:#253a53}
+.fansphere-premium .home-dashboard .premium-stat{background:#fffefa;border-color:#e9e1d8;box-shadow:0 7px 20px #152b4010}
+.fansphere-premium .home-dashboard .premium-stat>span{color:#8c7d72}
+.fansphere-premium .home-dashboard .premium-stat strong{color:#d46e59}
+.fansphere-premium .home-dashboard .premium-stat strong em{color:#2e4159}
+.fansphere-premium .home-dashboard .premium-stat small{color:#6d7b8c}
+.fansphere-premium .home-dashboard .premium-quiz,.fansphere-premium .home-dashboard .premium-radar,.fansphere-premium .home-dashboard .premium-pulse{background:#fffefa;border-color:#e8e0d8;box-shadow:0 8px 22px #1b2d4310}
+.fansphere-premium .home-dashboard .premium-quiz{background:linear-gradient(145deg,#fff0e1,#fffdf9 80%)}
+.fansphere-premium .home-dashboard .premium-quiz-symbol{background:#fbe0d3;color:#b65b48}
+.fansphere-premium .home-dashboard .premium-quiz p,.fansphere-premium .home-dashboard .premium-section-title p{color:#738095}
+.fansphere-premium .home-dashboard .premium-section-title h2{color:#1c3149}
+.fansphere-premium .home-dashboard .premium-quiz-rewards>div{background:#fffaf4;border-color:#efded0}
+.fansphere-premium .home-dashboard .premium-quiz-rewards span{color:#907c6a}
+.fansphere-premium .home-dashboard .premium-quiz-rewards strong{color:#a65347}
+.fansphere-premium .home-dashboard .premium-radar-list .home-radar-match,.fansphere-premium .home-dashboard .premium-radar-list article{background:#fffaf5;border-color:#ebdfd3;color:#21364f}
+.fansphere-premium .home-dashboard .premium-radar-list .home-radar-match:hover{background:#fff0e6;border-color:#e2a38c}
+.fansphere-premium .home-dashboard .premium-radar-list .home-radar-match>div small{color:#798497}
+.fansphere-premium .home-dashboard .premium-radar-list .home-radar-arrow,.fansphere-premium .home-dashboard .premium-radar-list time{color:#c16a50}
+.fansphere-premium .home-dashboard .premium-pulse-card{background:#fffaf4;border-color:#e8dcd0;color:#21364f}
+.fansphere-premium .home-dashboard .premium-pulse-card:hover{background:#fff0e4;border-color:#e6a58b}
+.fansphere-premium .home-dashboard .premium-pulse-card>small{color:#738197}
+.fansphere-premium .home-dashboard .premium-pulse-link,.fansphere-premium .home-dashboard .premium-pulse-arrow,.fansphere-premium .home-dashboard .premium-club-count{color:#b75d4d}
+.fansphere-premium .home-dashboard .premium-club-count{border-color:#edd8c7}
+.fansphere-premium .home-dashboard .premium-pulse-fixture{border-color:#eaded1}
+.fansphere-premium .home-dashboard .premium-pulse-fixture strong{color:#233a51}
+.fansphere-premium .home-dashboard .premium-pulse-fixture small{color:#bb6955}
+.fansphere-premium .home-dashboard .premium-empty{color:#75849a}
+.fansphere-premium .home-dashboard .home-rank-card{background:linear-gradient(115deg,#fff8e9,#fffdf8)!important;border-color:#e9d6b9!important;box-shadow:0 8px 24px #9d79531b}
+.fansphere-premium .home-dashboard .home-rank-content h2{color:#1e334e}
+.fansphere-premium .home-dashboard .home-rank-content p{color:#798392!important}
+.fansphere-premium .home-dashboard .home-rank-track{background:#f1e4d2}
+.fansphere-premium .home-dashboard .home-rank-track span{background:linear-gradient(90deg,#d69c42,#f2c978)}
+.fansphere-premium .home-dashboard .home-achievements{background:#fffefa!important;border-color:#e9ded2!important}
+.fansphere-premium .home-dashboard .home-achievements-header p{color:#778499!important}
+.fansphere-premium .home-dashboard .home-achievements-header button{background:#fff1e5!important;border-color:#e6b79e!important;color:#a95846!important}
+.fansphere-premium .home-dashboard .home-achievement-item{background:#fff9f0!important;border-color:#e9ddcf!important}
+.fansphere-premium .home-dashboard .home-achievement-item strong{color:#263c53}
+.fansphere-premium .home-dashboard .home-achievement-item small{color:#7b8695!important}
+.fansphere-premium .home-dashboard .home-quiz-completed{color:#438e69}
+@media(max-width:760px){.fansphere-premium .topbar{padding:0 15px;gap:7px}.fansphere-premium .search{min-width:0}.fansphere-premium .api-status{display:none}}
+@media(prefers-reduced-motion:reduce){.fansphere-premium .nav-item{transition:none}.fansphere-premium .nav-item:hover{transform:none}}
