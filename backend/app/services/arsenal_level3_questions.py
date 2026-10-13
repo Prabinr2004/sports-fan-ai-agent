@@ -363,7 +363,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-31",
-    "question": "Which Arsenal attacker was taken off to allow Almunia to enter the 2006 final?",
+    "question": "Which Arsenal attacker was taken off after Jens Lehmann's red card in the 2006 Champions League final?",
     "options": [
       "Henry",
       "Ljungberg",
@@ -387,7 +387,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-33",
-    "question": "Who scored Arsenal's opener against Barcelona in that 2010 quarterfinal second leg?",
+    "question": "Who scored Arsenal's opener in the 2010 Champions League quarterfinal second leg at Barcelona?",
     "options": [
       "Walcott",
       "Nicklas Bendtner",
@@ -411,7 +411,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-35",
-    "question": "Who scored Arsenal's equalizer against Barcelona in that 2011 first leg?",
+    "question": "Who scored Arsenal's equalizer against Barcelona in the 2011 Champions League round of 16 first leg?",
     "options": [
       "Arshavin",
       "Fàbregas",
@@ -423,7 +423,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-36",
-    "question": "Who scored Barcelona's opener at Arsenal in that 2011 Champions League first leg?",
+    "question": "Who scored Barcelona's opening goal at Arsenal in the 2011 Champions League round of 16 first leg?",
     "options": [
       "Messi",
       "Pedro",
@@ -471,7 +471,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-40",
-    "question": "Who assisted Welbeck's late winner against Leicester in February 2016?",
+    "question": "Who provided the assist for Arsenal's stoppage-time winner against Leicester in February 2016?",
     "options": [
       "Sánchez",
       "Ramsey",
@@ -591,7 +591,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-50",
-    "question": "Who scored Arsenal's fifth goal against Reading in that 2012 League Cup comeback?",
+    "question": "Who scored Arsenal's fifth goal against Reading in the 2012 League Cup 7–5 comeback?",
     "options": [
       "Marouane Chamakh",
       "Walcott",
@@ -639,7 +639,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-54",
-    "question": "Who scored twice for Arsenal in that February 2012 5–2 win against Tottenham?",
+    "question": "Who scored twice for Arsenal in the February 2012 north London derby, a 5–2 win over Tottenham?",
     "options": [
       "Theo Walcott",
       "Van Persie",
@@ -651,7 +651,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-55",
-    "question": "Who scored Arsenal's third goal in that February 2012 derby?",
+    "question": "Who scored Arsenal's third goal in the February 2012 north London derby, a 5–2 win over Tottenham?",
     "options": [
       "Walcott",
       "Van Persie",
@@ -663,7 +663,7 @@ ARSENAL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "arsenal-l3-56",
-    "question": "Who scored Arsenal's equalizer in that February 2012 derby?",
+    "question": "Who scored Arsenal's equalizer in the February 2012 north London derby, a 5–2 win over Tottenham?",
     "options": [
       "Walcott",
       "Rosický",
