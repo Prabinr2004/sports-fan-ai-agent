@@ -1,9 +1,9 @@
-"""Bayern Munich Level 3 question bank."""
+"""bayern munich Level 3 match-history question bank."""
 
 BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   {
     "id": "bayern-l3-01",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL final Bayern winner scorer?",
+    "question": "In the 2013 Champions League final Bayern, who scored the winning goal scorer?",
     "options": [
       "Müller",
       "Mandžukić",
@@ -15,7 +15,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-02",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL final Bayern opener scorer?",
+    "question": "In the 2013 Champions League final Bayern, who scored the opening goal scorer?",
     "options": [
       "Robben",
       "Mario Mandžukić",
@@ -27,7 +27,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-03",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL final Dortmund equalizer scorer?",
+    "question": "In the 2013 Champions League final Dortmund, who scored the equalizer scorer?",
     "options": [
       "İlkay Gündoğan",
       "Reus",
@@ -39,7 +39,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-04",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL final Bayern winning assist provider?",
+    "question": "In the 2013 Champions League final Bayern, who provided the assist?",
     "options": [
       "Müller",
       "Lahm",
@@ -51,7 +51,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-05",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL final Bayern starting goalkeeper?",
+    "question": "In the 2013 Champions League final Bayern, who was the goalkeeper?",
     "options": [
       "Ulreich",
       "Butt",
@@ -63,7 +63,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-06",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL final Bayern starting captain?",
+    "question": "In the 2013 Champions League final Bayern, who was the captain?",
     "options": [
       "Schweinsteiger",
       "Philipp Lahm",
@@ -75,7 +75,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-07",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal first leg Bayern opener vs Barcelona?",
+    "question": "In the 2013 Champions League semifinal first leg Bayern, who scored the opening goal against Barcelona?",
     "options": [
       "Thomas Müller",
       "Gómez",
@@ -87,7 +87,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-08",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal first leg Bayern second scorer vs Barcelona?",
+    "question": "In the 2013 Champions League semifinal first leg Bayern, who scored the second goal against Barcelona?",
     "options": [
       "Müller",
       "Robben",
@@ -99,7 +99,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-09",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal first leg Bayern third scorer vs Barcelona?",
+    "question": "In the 2013 Champions League semifinal first leg Bayern, who scored the third goal against Barcelona?",
     "options": [
       "Müller",
       "Gómez",
@@ -111,7 +111,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-10",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal first leg Bayern fourth scorer vs Barcelona?",
+    "question": "In the 2013 Champions League semifinal first leg Bayern, who scored the fourth goal against Barcelona?",
     "options": [
       "Gómez",
       "Thomas Müller",
@@ -123,7 +123,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-11",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal second leg Bayern opener vs Barcelona?",
+    "question": "In the 2013 Champions League semifinal second leg Bayern, who scored the opening goal against Barcelona?",
     "options": [
       "Arjen Robben",
       "Müller",
@@ -135,7 +135,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-12",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal second leg Barcelona own goal credited to?",
+    "question": "In 2013, which answer correctly matches this event: Champions League semifinal second leg Barcelona own goal credited to?",
     "options": [
       "Puyol",
       "Alves",
@@ -147,7 +147,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-13",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 UCL semifinal second leg Bayern third goal scorer?",
+    "question": "In the 2013 Champions League semifinal second leg Bayern third goal, who scored?",
     "options": [
       "Robben",
       "Ribéry",
@@ -159,7 +159,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-14",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2012 UCL final Bayern opener scorer vs Chelsea?",
+    "question": "In the 2012 Champions League final Bayern, who scored the opening goal scorer against Chelsea?",
     "options": [
       "Robben",
       "Thomas Müller",
@@ -171,7 +171,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-15",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2012 UCL final Chelsea equalizer scorer?",
+    "question": "In the 2012 Champions League final Chelsea, who scored the equalizer scorer?",
     "options": [
       "Didier Drogba",
       "Lampard",
@@ -183,7 +183,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-16",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2012 UCL final Bayern extra-time missed penalty taker?",
+    "question": "In the 2012 Champions League final Bayern extra-time, what was the missed penalty taker?",
     "options": [
       "Müller",
       "Lahm",
@@ -195,7 +195,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-17",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2012 UCL final Bayern final shootout miss?",
+    "question": "In the 2012 Champions League final Bayern final, what was the shootout miss?",
     "options": [
       "Robben",
       "Lahm",
@@ -207,7 +207,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-18",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2012 UCL final Bayern goalkeeper?",
+    "question": "In the 2012 Champions League final Bayern, who was the goalkeeper?",
     "options": [
       "Kahn",
       "Manuel Neuer",
@@ -219,7 +219,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-19",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL final Bayern winner scorer?",
+    "question": "In the 2020 Champions League final Bayern, who scored the winning goal scorer?",
     "options": [
       "Kingsley Coman",
       "Lewandowski",
@@ -231,7 +231,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-20",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL final Bayern assist for winner?",
+    "question": "In the 2020 Champions League final Bayern assist for, who scored the winning goal?",
     "options": [
       "Davies",
       "Müller",
@@ -243,7 +243,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-21",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL final Bayern opponent?",
+    "question": "In the 2020 Champions League final Bayern, what was the opponent?",
     "options": [
       "Chelsea",
       "Barcelona",
@@ -255,7 +255,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-22",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL final Bayern goalkeeper?",
+    "question": "In the 2020 Champions League final Bayern, who was the goalkeeper?",
     "options": [
       "Ulreich",
       "Manuel Neuer",
@@ -267,7 +267,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-23",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL semifinal Bayern opener vs Lyon?",
+    "question": "In the 2020 Champions League semifinal Bayern, who scored the opening goal against Lyon?",
     "options": [
       "Serge Gnabry",
       "Lewandowski",
@@ -279,7 +279,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-24",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL semifinal Bayern second scorer vs Lyon?",
+    "question": "In the 2020 Champions League semifinal Bayern, who scored the second goal against Lyon?",
     "options": [
       "Lewandowski",
       "Müller",
@@ -291,7 +291,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-25",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL semifinal Bayern third scorer vs Lyon?",
+    "question": "In the 2020 Champions League semifinal Bayern, who scored the third goal against Lyon?",
     "options": [
       "Gnabry",
       "Müller",
@@ -303,7 +303,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-26",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern opener vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the opening goal against Barcelona?",
     "options": [
       "Perišić",
       "Thomas Müller",
@@ -315,7 +315,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-27",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern second scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the second goal against Barcelona?",
     "options": [
       "Ivan Perišić",
       "Müller",
@@ -327,7 +327,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-28",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern third scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the third goal against Barcelona?",
     "options": [
       "Müller",
       "Perišić",
@@ -339,7 +339,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-29",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern fourth scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the fourth goal against Barcelona?",
     "options": [
       "Gnabry",
       "Kimmich",
@@ -351,7 +351,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-30",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern fifth scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the fifth goal against Barcelona?",
     "options": [
       "Davies",
       "Joshua Kimmich",
@@ -363,7 +363,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-31",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern sixth scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the sixth goal against Barcelona?",
     "options": [
       "Robert Lewandowski",
       "Kimmich",
@@ -375,7 +375,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-32",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern seventh scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the seventh goal against Barcelona?",
     "options": [
       "Lewandowski",
       "Coman",
@@ -387,7 +387,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-33",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern eighth scorer vs Barcelona?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, who scored the eighth goal against Barcelona?",
     "options": [
       "Lewandowski",
       "Coman",
@@ -399,7 +399,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-34",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern sixth-goal assist provider?",
+    "question": "In the 2020 Champions League quarterfinal Bayern sixth-goal, who provided the assist?",
     "options": [
       "Davies",
       "Philippe Coutinho",
@@ -411,7 +411,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-35",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern fifth-goal assist provider?",
+    "question": "In the 2020 Champions League quarterfinal Bayern fifth-goal, who provided the assist?",
     "options": [
       "Alphonso Davies",
       "Coutinho",
@@ -423,7 +423,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-36",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL quarterfinal Bayern final score?",
+    "question": "In the 2020 Champions League quarterfinal Bayern, what was the final score?",
     "options": [
       "7–2",
       "8–3",
@@ -435,7 +435,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-37",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL round of 16 first leg Bayern first scorer at Chelsea?",
+    "question": "In the 2020 Champions League round of 16 first leg Bayern, who scored the opening goal at Chelsea?",
     "options": [
       "Lewandowski",
       "Müller",
@@ -447,7 +447,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-38",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL round of 16 first leg Bayern second scorer at Chelsea?",
+    "question": "In the 2020 Champions League round of 16 first leg Bayern, who scored the second goal at Chelsea?",
     "options": [
       "Lewandowski",
       "Serge Gnabry",
@@ -459,7 +459,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-39",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL round of 16 first leg Bayern third scorer at Chelsea?",
+    "question": "In the 2020 Champions League round of 16 first leg Bayern, who scored the third goal at Chelsea?",
     "options": [
       "Robert Lewandowski",
       "Gnabry",
@@ -471,7 +471,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-40",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL semifinal Bayern score vs Lyon?",
+    "question": "In the 2020 Champions League semifinal Bayern, what was the score against Lyon?",
     "options": [
       "2–0",
       "3–1",
@@ -483,7 +483,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-41",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2020 UCL final Bayern winning margin?",
+    "question": "In the 2020 Champions League final Bayern, what was the winning margin?",
     "options": [
       "Two goals",
       "Three goals",
@@ -495,7 +495,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-42",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 DFB Pokal final Bayern opener vs Stuttgart?",
+    "question": "In the 2013 DFB Pokal final Bayern, who scored the opening goal against Stuttgart?",
     "options": [
       "Gómez",
       "Thomas Müller",
@@ -507,7 +507,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-43",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 DFB Pokal final Bayern second scorer vs Stuttgart?",
+    "question": "In the 2013 DFB Pokal final Bayern, who scored the second goal against Stuttgart?",
     "options": [
       "Mario Gómez",
       "Müller",
@@ -519,7 +519,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-44",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 DFB Pokal final Bayern third scorer vs Stuttgart?",
+    "question": "In the 2013 DFB Pokal final Bayern, who scored the third goal against Stuttgart?",
     "options": [
       "Müller",
       "Robben",
@@ -531,7 +531,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-45",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2013 DFB Pokal final Bayern manager?",
+    "question": "In the 2013 DFB Pokal final Bayern, who was the manager?",
     "options": [
       "Guardiola",
       "Ancelotti",
@@ -543,7 +543,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-46",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2012 DFB Pokal final Dortmund four-goal scorer vs Bayern?",
+    "question": "In the 2012 DFB Pokal final Dortmund four-goal, who scored against Bayern?",
     "options": [
       "Götze",
       "Robert Lewandowski scored three",
@@ -555,7 +555,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-47",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2014 DFB Pokal final Bayern extra-time opener vs Dortmund?",
+    "question": "In the 2014 DFB Pokal final Bayern extra-time, who scored the opening goal against Dortmund?",
     "options": [
       "Arjen Robben",
       "Müller",
@@ -567,7 +567,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-48",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2014 DFB Pokal final Bayern extra-time second scorer vs Dortmund?",
+    "question": "In the 2014 DFB Pokal final Bayern, who scored the extra-time second goal against Dortmund?",
     "options": [
       "Robben",
       "Götze",
@@ -579,7 +579,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-49",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2014 World Cup final Germany scorer who played for Bayern?",
+    "question": "In the 2014 World Cup final Germany, who scored who played for Bayern?",
     "options": [
       "Müller",
       "Kroos",
@@ -591,7 +591,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-50",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2001 UCL final Bayern opening penalty scorer?",
+    "question": "In the 2001 Champions League final Bayern opening penalty, who scored?",
     "options": [
       "Elber",
       "Stefan Effenberg",
@@ -603,7 +603,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-51",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2001 UCL final Valencia opening scorer?",
+    "question": "In the 2001 Champions League final Valencia, who scored the opening goal?",
     "options": [
       "Gaizka Mendieta",
       "Carew",
@@ -615,7 +615,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-52",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2001 UCL final Bayern shootout goalkeeper?",
+    "question": "In the 2001 Champions League final Bayern, who was the goalkeeper?",
     "options": [
       "Neuer",
       "Butt",
@@ -627,7 +627,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-53",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2001 UCL final Bayern decisive shootout save against?",
+    "question": "In the 2001 Champions League final Bayern, what was the decisive shootout save against?",
     "options": [
       "Mendieta",
       "Carew",
@@ -639,7 +639,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-54",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 2001 UCL final Bayern manager?",
+    "question": "In the 2001 Champions League final Bayern, who was the manager?",
     "options": [
       "Heynckes",
       "Ottmar Hitzfeld",
@@ -651,7 +651,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-55",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 1974 European Cup final replay Bayern opener vs Atlético?",
+    "question": "In the 1974 European Cup final replay Bayern, who scored the opening goal against Atlético?",
     "options": [
       "Uli Hoeneß",
       "Gerd Müller",
@@ -663,7 +663,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-56",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 1974 European Cup final replay Bayern brace scorer?",
+    "question": "In the 1974 European Cup final replay Bayern, who scored twice?",
     "options": [
       "Hoeneß only",
       "Müller only",
@@ -675,7 +675,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-57",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 1975 European Cup final Bayern opener vs Leeds?",
+    "question": "In the 1975 European Cup final Bayern, who scored the opening goal against Leeds?",
     "options": [
       "Gerd Müller",
       "Hoeneß",
@@ -687,7 +687,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-58",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 1975 European Cup final Bayern second scorer vs Leeds?",
+    "question": "In the 1975 European Cup final Bayern, who scored the second goal against Leeds?",
     "options": [
       "Roth",
       "Gerd Müller",
@@ -699,7 +699,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-59",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 1976 European Cup final Bayern winner vs Saint-Étienne?",
+    "question": "In the 1976 European Cup final Bayern, who scored the winning goal against Saint-Étienne?",
     "options": [
       "Franz Roth",
       "Gerd Müller",
@@ -711,7 +711,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-60",
-    "question": "In Bayern Munich's history, which answer matches this match detail: 1974 European Cup original final Bayern late equalizer vs Atlético?",
+    "question": "In the 1974 European Cup original final Bayern late, who scored the equalizer against Atlético?",
     "options": [
       "Gerd Müller",
       "Hoeneß",
