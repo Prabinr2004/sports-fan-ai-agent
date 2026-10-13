@@ -39,7 +39,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-04",
-    "question": "In the 2013 Champions League final, who provided the assist?",
+    "question": "Who assisted Arjen Robben's winning goal in the 2013 Champions League final?",
     "options": [
       "Müller",
       "Lahm",
@@ -231,7 +231,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-20",
-    "question": "In the 2020 Champions League final Bayern assist for, who scored the winning goal?",
+    "question": "Who assisted Kingsley Coman's winning goal against PSG in the 2020 Champions League final?",
     "options": [
       "Davies",
       "Müller",
@@ -543,10 +543,10 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-46",
-    "question": "In the 2012 DFB Pokal final Dortmund four-goal, who scored against Bayern?",
+    "question": "Which Borussia Dortmund striker scored a hat-trick against Bayern Munich in the 2012 DFB-Pokal final?",
     "options": [
       "Götze",
-      "Robert Lewandowski scored three",
+      "Robert Lewandowski",
       "Reus",
       "Kagawa"
     ],
@@ -579,7 +579,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-49",
-    "question": "In the 2014 World Cup final Germany, who scored who played for Bayern?",
+    "question": "Which Bayern Munich player scored Germany's winning goal in the 2014 World Cup final?",
     "options": [
       "Müller",
       "Kroos",
