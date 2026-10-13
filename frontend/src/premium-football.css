@@ -131,3 +131,16 @@ body{background:#f8f6f1}
 .fansphere-premium .header-gem-wallet:hover{background:#ffefd3;box-shadow:0 5px 15px #bd87412b;transform:translateY(-1px)}
 .fansphere-premium .header-gem-wallet:focus-visible{outline:3px solid #e8876d;outline-offset:3px}
 @media(prefers-reduced-motion:reduce){.fansphere-premium .header-gem-wallet{transition:none}.fansphere-premium .header-gem-wallet:hover{transform:none}}
+
+
+/* Harmonize club form/standing colors with Premium Football palette */
+.fansphere-premium .home-dashboard .premium-pulse-standing strong{color:#b77a2d;font-size:19px;letter-spacing:-.02em}
+.fansphere-premium .home-dashboard .premium-pulse-standing small{color:#79899d}
+.fansphere-premium .home-dashboard .premium-form>span{color:#8d7d70}
+.fansphere-premium .home-dashboard .premium-form-result.form-w{background:#e4efe7;color:#367c58;border:1px solid #c7e0d0}
+.fansphere-premium .home-dashboard .premium-form-result.form-d{background:#fff0d5;color:#946827;border:1px solid #edd7a9}
+.fansphere-premium .home-dashboard .premium-form-result.form-l{background:#fbe4de;color:#b65b4b;border:1px solid #f0c9bf}
+.fansphere-premium .home-dashboard .premium-form-result{font-weight:850}
+.fansphere-premium .header-gem-wallet{gap:11px;padding:9px 13px}
+.fansphere-premium .header-gem-wallet>span:not(.header-gem-plus){display:inline-block;min-width:13px;text-align:center;margin-right:4px}
+.fansphere-premium .header-gem-plus{margin-left:2px;flex-shrink:0}
