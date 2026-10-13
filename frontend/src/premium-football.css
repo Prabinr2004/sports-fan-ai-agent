@@ -542,3 +542,16 @@ body{background:#f8f6f1}
 .fansphere-premium .profile-page .achievement-dashboard p,.fansphere-premium .profile-page .achievement-dashboard small{color:#78899b}
 .fansphere-premium .profile-page .achievement-filter-row button,.fansphere-premium .profile-page .achievement-collapse-button{background:#fffaf5;border:1px solid #e9d8c9;color:#667b90}
 .fansphere-premium .profile-page .achievement-filter-row button[aria-pressed="true"],.fansphere-premium .profile-page .achievement-collapse-button:hover{background:#fce4d8;border-color:#e98973;color:#a95140}
+
+
+/* Quiz progression sidebar: clear hierarchy and scannable milestones */
+.fansphere-premium .quiz-page .quiz-level-guide{display:flex;flex-direction:column;gap:11px;padding:18px 17px}
+.fansphere-premium .quiz-page .quiz-level-guide-title{display:block;color:#1e3953;font-size:16px;line-height:1.25;margin:1px 0 3px}
+.fansphere-premium .quiz-page .quiz-level-guide-metric{display:flex;flex-direction:column;gap:3px;padding:10px 12px;border:1px solid #edddc8;border-radius:10px;background:#fffdf9}
+.fansphere-premium .quiz-page .quiz-level-guide-metric>strong{color:#bd7a42;font-size:17px;line-height:1.15}
+.fansphere-premium .quiz-page .quiz-level-guide-metric>span{color:#667b90;font-size:11px;line-height:1.4}
+.fansphere-premium .quiz-page .quiz-level-guide-footer{border-top:1px solid #e8d8c5;margin-top:2px;padding-top:13px;display:flex;flex-direction:column;gap:5px}
+.fansphere-premium .quiz-page .quiz-level-guide-footer .eyebrow{color:#a67850;font-size:10px}
+.fansphere-premium .quiz-page .quiz-level-guide-footer p{margin:0;color:#718398;font-size:11px;line-height:1.5}
+.fansphere-premium .quiz-page .quiz-level-guide-footer>strong{color:#a65b44;font-size:12px}
+.fansphere-premium .quiz-page .quiz-level-guide-footer>small{color:#8290a0;font-size:10px}
