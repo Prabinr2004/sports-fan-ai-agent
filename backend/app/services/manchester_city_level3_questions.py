@@ -327,7 +327,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-28",
-    "question": "In the 2022 Aston Villa title decider City, who scored the opening goal?",
+    "question": "Who scored Manchester City's first goal in their 3–2 title-clinching comeback against Aston Villa in 2022?",
     "options": [
       "Rodri",
       "De Bruyne",
