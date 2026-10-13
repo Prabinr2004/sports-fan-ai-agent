@@ -12,7 +12,8 @@ from sqlalchemy.orm import Session
 from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
-from app.models.quiz import DailyQuizSnapshot
+from app.models.user import User
+from app.models.quiz import DailyQuizSnapshot, QuizProgressState, QuizRoundCompletion
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
 from app.services.quiz_progression import MAX_LEVEL, ROUNDS_PER_LEVEL, ROUNDS_TO_UNLOCK, level_progress, unlocked_level
@@ -505,18 +506,55 @@ def rewarded_rounds_by_level(db: Session, user_id: int) -> dict[int, int]:
     return {level: int(count) for level, count in rows if 1 <= level <= MAX_LEVEL}
 
 
+def new_quiz_rounds(db: Session, user_id: int) -> dict[int, int]:
+    """New progression ledger, independent of all historic XP transactions."""
+    rows = db.execute(
+        select(QuizRoundCompletion.level, func.count(QuizRoundCompletion.id))
+        .where(QuizRoundCompletion.user_id == user_id)
+        .group_by(QuizRoundCompletion.level)
+    ).all()
+    return {int(level): int(count) for level, count in rows if 1 <= level <= MAX_LEVEL}
+
+
+@router.post("/progress/reset")
+def reset_quiz_progress(request: Request, db: Session = Depends(get_db)) -> dict:
+    """Reset only the authenticated player's new quiz progress.
+
+    This does not delete XP events, Gems, streaks, historic quiz snapshots,
+    analysis records, or any other user data.
+    """
+    user = require_user(request, db)
+    db.scalar(select(User).where(User.id == user.id).with_for_update())
+    state = db.get(QuizProgressState, user.id)
+    if state is None:
+        state = QuizProgressState(user_id=user.id, selected_level=1)
+        db.add(state)
+    else:
+        state.selected_level = 1
+    db.query(QuizRoundCompletion).filter(QuizRoundCompletion.user_id == user.id).delete(synchronize_session=False)
+    db.commit()
+    return {"reset": True, "unlocked_level": 1, "selected_level": 1,
+            "rounds_completed": 0, "rewards_preserved": True}
+
+
 @router.get("/levels")
 def quiz_levels_status(request: Request, db: Session = Depends(get_db)) -> dict:
     """Read-only preview of the 7-of-12 progression; no user data is changed."""
     user = require_user(request, db)
-    rounds = rewarded_rounds_by_level(db, user.id)
-    # The old system advanced every five rewarded days. Preserve any unlocks.
-    legacy_level = min(MAX_LEVEL, quiz_level_from_completions(rewarded_quiz_completions(db, user.id)))
-    highest = unlocked_level(rounds, legacy_unlocked_level=legacy_level)
+    state = db.get(QuizProgressState, user.id)
+    if state is not None:
+        rounds = new_quiz_rounds(db, user.id)
+        highest = unlocked_level(rounds)
+    else:
+        # Legacy preview remains unchanged until this user explicitly resets.
+        rounds = rewarded_rounds_by_level(db, user.id)
+        legacy_level = min(MAX_LEVEL, quiz_level_from_completions(rewarded_quiz_completions(db, user.id)))
+        highest = unlocked_level(rounds, legacy_unlocked_level=legacy_level)
     return {
         "unlocked_level": highest,
         "rounds_per_level": ROUNDS_PER_LEVEL,
         "rounds_to_unlock": ROUNDS_TO_UNLOCK,
         "levels": [level_progress(level, rounds, highest) for level in range(1, MAX_LEVEL + 1)],
         "preview_only": True,
+        "reset_mode": state is not None,
     }
