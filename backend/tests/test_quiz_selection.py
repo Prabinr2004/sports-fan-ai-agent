@@ -37,3 +37,33 @@ def test_duplicate_ids_are_rejected():
         pass
     else:
         assert False, "Expected duplicate-ID error"
+
+
+def test_club_round_counts_are_isolated():
+    from unittest.mock import MagicMock
+    from app.api.quiz import new_quiz_rounds
+
+    db = MagicMock()
+    db.execute.return_value.all.return_value = [
+        (1, None, 7),
+        (2, "madrid", 8),
+        (2, "barcelona", 3),
+        (3, "madrid", 2),
+        (3, "barcelona", 1),
+    ]
+    assert new_quiz_rounds(db, 42, "madrid") == {1: 7, 2: 8, 3: 2}
+    assert new_quiz_rounds(db, 42, "barcelona") == {1: 7, 2: 3, 3: 1}
+    assert new_quiz_rounds(db, 42) == {1: 7, 2: 8, 3: 2}
+
+
+def test_global_unlock_does_not_sum_clubs():
+    from unittest.mock import MagicMock
+    from app.api.quiz import new_quiz_rounds
+    from app.services.quiz_progression import unlocked_level
+
+    db = MagicMock()
+    db.execute.return_value.all.return_value = [
+        (1, None, 7), (2, "madrid", 4), (2, "barcelona", 4),
+    ]
+    assert new_quiz_rounds(db, 42)[2] == 4
+    assert unlocked_level(new_quiz_rounds(db, 42)) == 2
