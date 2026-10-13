@@ -121,3 +121,13 @@ body{background:#f8f6f1}
 @keyframes fs-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @media(max-width:760px){.fansphere-premium .home-dashboard .premium-hero-stadium{background-image:linear-gradient(90deg,rgba(255,250,242,.97),rgba(255,248,238,.83)),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1000&q=75")}.fansphere-premium .home-dashboard .premium-stat{padding-right:45px}.fansphere-premium .home-dashboard .premium-stat-symbol{right:10px;top:10px;width:29px;height:29px}}
 @media(prefers-reduced-motion:reduce){.fansphere-premium .home-dashboard .premium-stat,.fansphere-premium .home-dashboard .premium-radar-list article{transition:none}.fansphere-premium .home-dashboard .premium-stat:hover,.fansphere-premium .home-dashboard .premium-radar-list article:hover{transform:none}.fansphere-premium .home-dashboard .premium-level-track span,.fansphere-premium .home-dashboard .home-rank-track span{animation:none}}
+
+
+/* Reward currency in the shared topbar */
+.fansphere-premium .header-gem-wallet{display:inline-flex;align-items:center;gap:8;flex-shrink:0;padding:8px 11px;border:1px solid #e7c58d;border-radius:11px;background:linear-gradient(135deg,#fff7e7,#fbe7c1);color:#233c58;font-weight:800;white-space:nowrap;cursor:pointer;box-shadow:0 3px 9px #ae853b18;transition:background .18s,box-shadow .18s,transform .18s}
+.fansphere-premium .header-gem-wallet>svg{color:#9e712e}
+.fansphere-premium .header-gem-wallet>span:not(.header-gem-plus){color:#9d6d27;font-variant-numeric:tabular-nums}
+.fansphere-premium .header-gem-plus{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:6px;background:#ee7965;color:#fff;font-size:15px;font-weight:800;line-height:1}
+.fansphere-premium .header-gem-wallet:hover{background:#ffefd3;box-shadow:0 5px 15px #bd87412b;transform:translateY(-1px)}
+.fansphere-premium .header-gem-wallet:focus-visible{outline:3px solid #e8876d;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.fansphere-premium .header-gem-wallet{transition:none}.fansphere-premium .header-gem-wallet:hover{transform:none}}
