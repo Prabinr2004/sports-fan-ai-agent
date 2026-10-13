@@ -601,6 +601,30 @@ def reset_quiz_progress(request: Request, db: Session = Depends(get_db)) -> dict
             "rounds_completed": 0, "rewards_preserved": True}
 
 
+class QuizLevelSelection(BaseModel):
+    level: int
+
+
+@router.post("/levels/select")
+def select_quiz_level(body: QuizLevelSelection, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
+    state = db.get(QuizProgressState, user.id)
+    if state is None:
+        raise HTTPException(status_code=409, detail="New quiz progression is not activated yet.")
+    highest = unlocked_level(new_quiz_rounds(db, user.id))
+    if not 1 <= body.level <= highest:
+        raise HTTPException(status_code=400, detail="This quiz level is locked.")
+    if body.level > 1 and user.primary_team is None:
+        raise HTTPException(status_code=400, detail="Select a primary team first.")
+    if db.scalar(select(DailyQuizSnapshot).where(
+        DailyQuizSnapshot.user_id == user.id, DailyQuizSnapshot.quiz_date == quiz_id()
+    )) is not None:
+        raise HTTPException(status_code=409, detail="Today's quiz is already assigned. Change levels tomorrow.")
+    state.selected_level = body.level
+    db.commit()
+    return {"selected_level": body.level, "unlocked_level": highest}
+
+
 @router.get("/levels")
 def quiz_levels_status(request: Request, db: Session = Depends(get_db)) -> dict:
     """Read-only preview of the 7-of-12 progression; no user data is changed."""
@@ -621,4 +645,5 @@ def quiz_levels_status(request: Request, db: Session = Depends(get_db)) -> dict:
         "levels": [level_progress(level, rounds, highest) for level in range(1, MAX_LEVEL + 1)],
         "preview_only": True,
         "reset_mode": state is not None,
+        "selected_level": state.selected_level if state is not None else highest,
     }
