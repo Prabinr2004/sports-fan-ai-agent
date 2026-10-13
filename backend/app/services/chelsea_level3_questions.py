@@ -702,9 +702,9 @@ CHELSEA_LEVEL_3_QUESTIONS = [
     "question": "Who started in goal for Chelsea in the 2021 UEFA Super Cup against Villarreal?",
     "options": [
       "Édouard Mendy",
-      "Mount",
-      "Rüdiger",
-      "Pulisic"
+      "Kepa Arrizabalaga",
+      "Petr Čech",
+      "Willy Caballero"
     ],
     "answer": 0,
     "min_level": 3
