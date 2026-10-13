@@ -217,3 +217,44 @@ body{background:#f8f6f1}
 .fansphere-premium .followed-clubs .followed-open:hover{background:#d86452;border-color:#d86452}
 .fansphere-premium .followed-clubs .empty-state{background:#fffefa;border:1px solid #ebdfd2;color:#20354c}
 @media(prefers-reduced-motion:reduce){.fansphere-premium .followed-clubs .followed-card{transition:none}.fansphere-premium .followed-clubs .followed-card:hover{transform:none}}
+
+
+/* Phase 4: Matches — fixture list and prediction cards */
+.fansphere-premium .matches-page{color:#1b334d}
+.fansphere-premium .matches-page>h1{color:#192f49;letter-spacing:-.035em}
+.fansphere-premium .matches-page>p{color:#73849a}
+.fansphere-premium .matches-page .eyebrow{color:#98785e}
+.fansphere-premium .matches-page .team-match-groups{gap:34px}
+.fansphere-premium .matches-page .team-match-section{padding:20px 22px 22px;border:1px solid #e9dfd5;border-top:3px solid #dfa84d;border-radius:18px;background:#fffdfa;box-shadow:0 9px 28px #20344812}
+.fansphere-premium .matches-page .team-match-section:nth-child(3n+2){border-top-color:#7d9ec4}
+.fansphere-premium .matches-page .team-match-section:nth-child(3n){border-top-color:#ec806a}
+.fansphere-premium .matches-page .team-match-header{margin-bottom:18px}
+.fansphere-premium .matches-page .team-match-header img,.fansphere-premium .matches-page .team-match-fallback{background:#fff8ef;border:1px solid #eadfd3}
+.fansphere-premium .matches-page .team-match-header h2{color:#1a324e}
+.fansphere-premium .matches-page .team-match-header p{color:#78889a}
+.fansphere-premium .matches-page .count-chip{background:#fff2e4;border:1px solid #eed5ba;color:#a36b3a;font-weight:800}
+.fansphere-premium .matches-page .match-list{gap:16px}
+.fansphere-premium .matches-page .match-card{background:linear-gradient(150deg,#fffefa,#fff8f1);border:1px solid #e8dfd6;box-shadow:0 5px 17px #172c3d0c;transition:box-shadow .18s,transform .18s}
+.fansphere-premium .matches-page .match-card:hover{box-shadow:0 10px 23px #172c3d1a;transform:translateY(-2px)}
+.fansphere-premium .matches-page .match-top{border-bottom-color:#eee3d8;color:#8b735e;font-weight:800}
+.fansphere-premium .matches-page .match-top time{color:#718399}
+.fansphere-premium .matches-page .match-team{color:#1d354e}
+.fansphere-premium .matches-page .match-team strong{color:#1c344f;line-height:1.4}
+.fansphere-premium .matches-page .versus{color:#b47b53}
+.fansphere-premium .matches-page .prediction-area{border-top-color:#eee2d5;padding-bottom:45px}
+.fansphere-premium .matches-page .prediction-area>span{color:#8e7158}
+.fansphere-premium .matches-page .prediction-area small{color:#b77a41}
+.fansphere-premium .matches-page .prediction-buttons button{background:#fffefa;border:1px solid #e6d9cb;color:#263d56;font-weight:750;min-height:35px;cursor:pointer}
+.fansphere-premium .matches-page .prediction-buttons button:hover:not(:disabled){background:#fff1e4;border-color:#e5a989}
+.fansphere-premium .matches-page .prediction-buttons button.picked{background:#fce3d7;border-color:#e9856d;color:#a34c3d}
+.fansphere-premium .matches-page .prediction-buttons button:disabled{cursor:not-allowed;opacity:.65}
+.fansphere-premium .matches-page .match-open-button{color:#b85f4c;font-size:11px;bottom:16px}
+.fansphere-premium .matches-page .match-open-button:hover{color:#8e3f30}
+.fansphere-premium .matches-page .show-more-matches button{background:#fff4e9;border-color:#ead2be;color:#a65b48;cursor:pointer}
+.fansphere-premium .matches-page .show-more-matches button:hover{background:#ffe9da;border-color:#e7a58d;color:#9b4637}
+.fansphere-premium .matches-page .prediction-toast{background:#e9f3ec;color:#387952}
+.fansphere-premium .matches-page .empty-state{background:#fffdfa;border:1px solid #e9dfd5;color:#233a53}
+.fansphere-premium .matches-loading{color:#77879b}
+@media(max-width:900px){.fansphere-premium .matches-page .match-list{grid-template-columns:1fr}}
+@media(max-width:560px){.fansphere-premium .matches-page .team-match-section{padding:16px 13px}.fansphere-premium .matches-page .match-top{flex-wrap:wrap}.fansphere-premium .matches-page .prediction-buttons{grid-template-columns:minmax(0,1fr) 55px minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.fansphere-premium .matches-page .match-card{transition:none}.fansphere-premium .matches-page .match-card:hover{transform:none}}
