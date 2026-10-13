@@ -632,3 +632,22 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .team-hub .club-info-disclaimer{color:#70859a!important}
 .fansphere-premium .team-hub .count-chip{background:#fff0e4!important;color:#b66a4a!important;border-color:#f0dccb!important}
 @media(max-width:600px){.fansphere-premium .team-hub .team-hub-tabs{display:flex;flex-wrap:wrap}.fansphere-premium .team-hub .team-hub-tabs button{flex:1;min-width:70px;padding:9px 8px!important}}
+
+
+/* Team hub final details: player popup, filters, fixture status and form */
+.fansphere-premium .premium-player-profile{background:#fffdfa!important;color:#203a54!important;border:1px solid #ead9c9!important;box-shadow:0 24px 80px #07182b40!important}
+.fansphere-premium .premium-player-profile h2,.fansphere-premium .premium-player-profile strong{color:#203a54!important}
+.fansphere-premium .premium-player-profile p,.fansphere-premium .premium-player-profile small{color:#71869a!important}
+.fansphere-premium .premium-player-profile .eyebrow{color:#b5764c!important}
+.fansphere-premium .premium-player-profile .club-info-cell{background:#fff5eb!important;border:1px solid #eadbcc!important}
+.fansphere-premium .premium-player-profile .club-info-cell small{color:#75899b!important}
+.fansphere-premium .premium-player-profile .club-info-cell strong{color:#203a54!important}
+.fansphere-premium .premium-player-profile .secondary-button{background:#fff0e6!important;color:#b0644b!important;border:1px solid #ead5c4!important}
+.fansphere-premium .premium-player-profile img{background:#fff3e8!important}
+.fansphere-premium .team-hub .team-hub-tab-content select{background:#fffdfa!important;color:#203a54!important;border:1px solid #e4d6c9!important}
+.fansphere-premium .team-hub .team-hub-tab-content select option{background:#fffdfa;color:#203a54}
+.fansphere-premium .team-hub .team-fixture-status{background:#fff0df!important;color:#a76341!important;border:1px solid #eed8c3!important;font-weight:750}
+.fansphere-premium .team-hub .team-result-form{background:#f2ece4!important;color:#60758b!important}
+.fansphere-premium .team-hub .team-result-form.form-w{background:#e0f2e6!important;color:#27734c!important}
+.fansphere-premium .team-hub .team-result-form.form-d{background:#fff0d7!important;color:#a3732f!important}
+.fansphere-premium .team-hub .team-result-form.form-l{background:#f9e2e3!important;color:#b75a60!important}
