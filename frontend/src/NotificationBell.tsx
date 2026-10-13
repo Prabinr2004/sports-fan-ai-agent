@@ -139,7 +139,7 @@ export default function NotificationBell({ userId, onNavigate }: { userId: numbe
       <Bell size={19}/>
       {unread > 0 && <span style={{ position: "absolute", top: 2, right: 2, width: 7, height: 7, borderRadius: "50%", background: "#7cf3c7" }}/>}
     </button>
-    {open && <section role="dialog" aria-label="Notifications" style={{
+    {open && <section className="premium-notifications-popover" role="dialog" aria-label="Notifications" style={{
       position: "absolute", right: 0, top: "calc(100% + 12px)", zIndex: 100,
       width: "min(340px, 85vw)", maxHeight: "70vh", overflowY: "auto",
       padding: 14, background: "#0d2234", border: "1px solid #315269",
@@ -147,13 +147,13 @@ export default function NotificationBell({ userId, onNavigate }: { userId: numbe
     }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, marginBottom: 12 }}>
         <strong>Notifications</strong>
-        {unread > 0 && <button type="button" onClick={() => markRead(items.map(item => item.id))}
+        {unread > 0 && <button className="premium-notifications-read" type="button" onClick={() => markRead(items.map(item => item.id))}
           style={{ background: "none", border: 0, color: "#7cf3c7", cursor: "pointer", fontSize: 12 }}>Mark all read</button>}
       </div>
       {loading && <p style={{ fontSize: 12, color: "#9bb5c8" }}>Checking updates…</p>}
       {error && <p role="alert" style={{ fontSize: 12, color: "#ffb4b4" }}>{error}</p>}
       {!loading && !error && items.length === 0 && <p style={{ fontSize: 12, color: "#9bb5c8" }}>You're all caught up!</p>}
-      {!loading && items.map(item => <button type="button" key={item.id} onClick={() => {
+      {!loading && items.map(item => <button className="premium-notification-item" type="button" key={item.id} onClick={() => {
         markRead([item.id]); setOpen(false); onNavigate(item.page);
       }} style={{ display: "flex", gap: 10, width: "100%", textAlign: "left", padding: "12px 8px",
         background: read.includes(item.id) ? "transparent" : "#143449",
