@@ -109,3 +109,21 @@ def logout(request: Request, response: Response, db: Session = Depends(get_db)) 
             db.commit()
     response.delete_cookie(COOKIE_NAME, path="/", samesite="strict")
     return {"signed_out": True}
+
+
+class PasswordChange(BaseModel):
+    current_password: str = Field(min_length=1, max_length=128)
+    new_password: str = Field(min_length=12, max_length=128)
+
+
+@router.post("/change-password")
+def change_password(payload: PasswordChange, request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
+    if not verify_password(payload.current_password, user.password_hash):
+        raise HTTPException(status_code=400, detail="Current password is incorrect.")
+    if payload.current_password == payload.new_password:
+        raise HTTPException(status_code=400, detail="Choose a different new password.")
+    user.password_hash = hash_password(payload.new_password)
+    db.add(user)
+    db.commit()
+    return {"password_changed": True}
