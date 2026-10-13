@@ -15,7 +15,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-02",
-    "question": "In the 2019 Ajax semifinal, who scored the winning goal?",
+    "question": "Who provided the final pass for Lucas Moura's stoppage-time winner against Ajax in the 2019 Champions League semifinal?",
     "options": [
       "Dele Alli",
       "Eriksen",
@@ -27,7 +27,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-03",
-    "question": "In the 2019 Ajax semifinal Ajax, who scored the opening goal?",
+    "question": "Who scored Ajax's opening goal against Tottenham in the 2019 Champions League semifinal second leg?",
     "options": [
       "Ziyech",
       "Tadić",
@@ -39,7 +39,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-04",
-    "question": "In the 2019 Ajax semifinal Ajax, who scored the second goal?",
+    "question": "Who scored Ajax's second goal against Tottenham in the 2019 Champions League semifinal second leg?",
     "options": [
       "De Ligt",
       "Tadić",
@@ -219,7 +219,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-19",
-    "question": "In the 2019 Champions League final Tottenham, what was the goals?",
+    "question": "How many goals did Tottenham score in the 2019 Champions League final?",
     "options": [
       "One",
       "Two",
@@ -543,7 +543,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-46",
-    "question": "In the 2009 League Cup final Tottenham, what was the goals?",
+    "question": "How many goals did Tottenham score in the 2009 League Cup final?",
     "options": [
       "Zero",
       "One",
