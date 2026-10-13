@@ -610,3 +610,25 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 /* Coverage notice in Matches — readable informational status */
 .fansphere-premium .matches-page>.quiz-complete-note{background:#fff7ea!important;border:1px solid #e8d2b5!important;color:#936443!important;border-radius:11px!important;padding:12px 15px!important;font-weight:600;line-height:1.5}
 .fansphere-premium .matches-page>.quiz-complete-note *{color:#936443!important}
+
+
+/* Team Hub remaining tabs — squad, club details, controls */
+.fansphere-premium .team-hub .team-hub-tabs{display:inline-flex;gap:5px;padding:5px;background:#fff4e9!important;border:1px solid #ebd9c9!important;border-radius:12px}
+.fansphere-premium .team-hub .team-hub-tabs button{background:transparent!important;color:#63788e!important;border:0!important;border-radius:9px!important;padding:10px 16px!important;font-weight:700}
+.fansphere-premium .team-hub .team-hub-tabs button.active{background:#ed7966!important;color:white!important;box-shadow:0 3px 10px #ed796630}
+.fansphere-premium .team-hub .secondary-button{background:#fff4e9!important;border:1px solid #ebd4c1!important;color:#a85f49!important;border-radius:10px!important}
+.fansphere-premium .team-hub .secondary-button:hover{background:#ffe8da!important}
+.fansphere-premium .team-hub #squad-player-search,.fansphere-premium .team-hub #squad-position-filter{background:#fffefa!important;color:#203a54!important;border:1px solid #e4d5c5!important;border-radius:10px!important}
+.fansphere-premium .team-hub #squad-player-search::placeholder{color:#91a0af!important}
+.fansphere-premium .team-hub label[for="squad-player-search"],.fansphere-premium .team-hub label[for="squad-position-filter"]{color:#667e93!important}
+.fansphere-premium .team-hub .squad-upgrade .squad-player{background:#fff8f0!important;border:1px solid #e9dbcd!important;color:#203a54!important}
+.fansphere-premium .team-hub .squad-upgrade .squad-player:hover,.fansphere-premium .team-hub .squad-upgrade .squad-player:focus-visible{border-color:#ed7966!important;background:#fff0e6!important}
+.fansphere-premium .team-hub .squad-upgrade .squad-player strong{color:#203a54!important}
+.fansphere-premium .team-hub .squad-upgrade .squad-player small,.fansphere-premium .team-hub .squad-upgrade .squad-summary{color:#70869a!important}
+.fansphere-premium .team-hub .squad-upgrade .squad-player .player-avatar img{background:#f0e6db!important}
+.fansphere-premium .team-hub .club-info-cell{background:#fff8f0!important;border:1px solid #e9dbcd!important;color:#203a54!important}
+.fansphere-premium .team-hub .club-info-cell small{color:#74869a!important}
+.fansphere-premium .team-hub .club-info-cell strong{color:#203a54!important}
+.fansphere-premium .team-hub .club-info-disclaimer{color:#70859a!important}
+.fansphere-premium .team-hub .count-chip{background:#fff0e4!important;color:#b66a4a!important;border-color:#f0dccb!important}
+@media(max-width:600px){.fansphere-premium .team-hub .team-hub-tabs{display:flex;flex-wrap:wrap}.fansphere-premium .team-hub .team-hub-tabs button{flex:1;min-width:70px;padding:9px 8px!important}}
