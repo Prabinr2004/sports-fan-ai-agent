@@ -3,7 +3,7 @@
 AC_MILAN_LEVEL_3_QUESTIONS = [
   {
     "id": "ac-milan-l3-01",
-    "question": "In the 2007 Champions League final, who scored the opening goal?",
+    "question": "Who scored AC Milan's opening goal against Liverpool in the 2007 Champions League final?",
     "options": [
       "Kaká",
       "Seedorf",
@@ -555,7 +555,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-47",
-    "question": "In the 1963 European Cup final, who scored the opening goal?",
+    "question": "Who scored AC Milan's first goal against Benfica in the 1963 European Cup final?",
     "options": [
       "José Altafini",
       "Rivera",
@@ -567,7 +567,7 @@ AC_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "ac-milan-l3-48",
-    "question": "In the 1963 European Cup final, who scored the second goal?",
+    "question": "Who scored AC Milan's second goal against Benfica in the 1963 European Cup final?",
     "options": [
       "Rivera",
       "Sani",
