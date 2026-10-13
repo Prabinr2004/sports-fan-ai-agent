@@ -391,3 +391,20 @@ body{background:#f8f6f1}
 .fansphere-premium .predictions-dashboard .prediction-ml-bar{color:#2d455e}
 .fansphere-premium .predictions-dashboard .prediction-ml-track{background:#e9dfd5}
 .fansphere-premium .predictions-dashboard .prediction-ml-fill{background:#e49c54}
+
+
+/* Finished Match Center: premium readable result banner */
+.fansphere-premium .match-center-page .match-center-result{
+  margin-top:14px;padding:18px 20px;border:1px solid #e5d5c5;border-left:4px solid #d8a65a;
+  border-radius:13px;background:linear-gradient(110deg,#fffaf1,#fffdf9);display:grid;gap:6px;
+  box-shadow:0 7px 22px #213b5210;
+}
+.fansphere-premium .match-center-page .match-center-result>span{color:#9d7653;font-size:10px;font-weight:900;letter-spacing:.11em}
+.fansphere-premium .match-center-page .match-center-result>strong{color:#1d3651;font-size:19px;line-height:1.4}
+.fansphere-premium .match-center-page .match-center-result p{color:#63788f;font-size:12px;line-height:1.5;margin:0}
+.fansphere-premium .match-center-page .match-center-result.correct{background:linear-gradient(110deg,#eff9f0,#fffefa);border-color:#c8e3d1;border-left-color:#59a57a}
+.fansphere-premium .match-center-page .match-center-result.correct>span{color:#43815e}
+.fansphere-premium .match-center-page .match-center-result.correct b{color:#2f8753;font-weight:900}
+.fansphere-premium .match-center-page .match-center-result.incorrect{background:linear-gradient(110deg,#fff4ef,#fffefa);border-color:#f0d4c9;border-left-color:#e48672}
+.fansphere-premium .match-center-page .match-center-result.incorrect>span{color:#b36552}
+.fansphere-premium .match-center-page .match-center-result.incorrect b{color:#b95749;font-weight:900}
