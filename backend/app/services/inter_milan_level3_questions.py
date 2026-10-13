@@ -3,7 +3,7 @@
 INTER_MILAN_LEVEL_3_QUESTIONS = [
   {
     "id": "inter-l3-01",
-    "question": "In the 2010 Champions League final Inter, who scored the opening goal?",
+    "question": "Who scored Inter Milan's opening goal against Bayern Munich in the 2010 Champions League final?",
     "options": [
       "Sneijder",
       "Diego Milito",
@@ -15,7 +15,7 @@ INTER_MILAN_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "inter-l3-02",
-    "question": "In the 2010 Champions League final Inter, who scored the second goal?",
+    "question": "Who scored Inter Milan's second goal against Bayern Munich in the 2010 Champions League final?",
     "options": [
       "Diego Milito",
       "Eto'o",
