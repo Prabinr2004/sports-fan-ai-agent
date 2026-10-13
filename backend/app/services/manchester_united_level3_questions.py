@@ -51,7 +51,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-05",
-    "question": "In the 1999 Champions League final, who scored?",
+    "question": "Who scored Bayern Munich's goal in the 1999 Champions League final against Manchester United?",
     "options": [
       "Effenberg",
       "Jancker",
@@ -63,7 +63,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-06",
-    "question": "In the 1999 Champions League final, who was the goalkeeper?",
+    "question": "Who was Manchester United's goalkeeper in the 1999 Champions League final?",
     "options": [
       "Van der Sar",
       "Peter Schmeichel",
@@ -75,7 +75,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-07",
-    "question": "In the 1999 Champions League final, who was the captain?",
+    "question": "Who captained Manchester United in the 1999 Champions League final?",
     "options": [
       "Peter Schmeichel",
       "Keane",
@@ -219,7 +219,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-19",
-    "question": "In the 2008 Champions League final, who scored the equalizer?",
+    "question": "Who scored Chelsea's equalizer in the 2008 Champions League final against Manchester United?",
     "options": [
       "Frank Lampard",
       "Drogba",
@@ -627,7 +627,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-53",
-    "question": "In the 2024 FA Cup final, who was the manager?",
+    "question": "Who managed Manchester United in the 2024 FA Cup final?",
     "options": [
       "Solskjær",
       "Mourinho",
