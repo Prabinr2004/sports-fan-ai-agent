@@ -651,3 +651,10 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .team-hub .team-result-form.form-w{background:#e0f2e6!important;color:#27734c!important}
 .fansphere-premium .team-hub .team-result-form.form-d{background:#fff0d7!important;color:#a3732f!important}
 .fansphere-premium .team-hub .team-result-form.form-l{background:#f9e2e3!important;color:#b75a60!important}
+
+
+/* Readable placeholder portraits when the provider has no player photo */
+.fansphere-premium .team-hub .squad-upgrade .squad-player .player-avatar:not(:has(img)),
+.fansphere-premium .team-hub .squad-upgrade .squad-player .player-avatar.photo-failed{background:#f5e5d4!important;color:#9b593e!important;border:1px solid #ead4bf!important;border-radius:50%!important}
+.fansphere-premium .team-hub .squad-upgrade .squad-player .player-avatar:not(:has(img)) *,
+.fansphere-premium .team-hub .squad-upgrade .squad-player .player-avatar.photo-failed *{color:#9b593e!important}
