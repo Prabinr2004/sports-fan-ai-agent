@@ -99,7 +99,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-09",
-    "question": "In the 1999 Champions League semifinal second leg United, who scored the opening goal at Juventus?",
+    "question": "Who scored Manchester United's first goal away to Juventus in the 1999 Champions League semifinal second leg?",
     "options": [
       "Yorke",
       "Cole",
@@ -111,7 +111,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-10",
-    "question": "In the 1999 Champions League semifinal second leg United, who scored the second goal at Juventus?",
+    "question": "Who scored Manchester United's second goal away to Juventus in the 1999 Champions League semifinal second leg?",
     "options": [
       "Keane",
       "Dwight Yorke",
@@ -123,7 +123,7 @@ MANCHESTER_UNITED_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-utd-l3-11",
-    "question": "In the 1999 Champions League semifinal second leg United, who scored the third goal at Juventus?",
+    "question": "Who scored Manchester United's third goal away to Juventus in the 1999 Champions League semifinal second leg?",
     "options": [
       "Andy Cole",
       "Yorke",
