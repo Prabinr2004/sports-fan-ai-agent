@@ -247,7 +247,8 @@ def quiz_context(db: Session, user) -> dict:
         effective_level = state.selected_level if 1 <= state.selected_level <= level else 1
         if effective_level > 1 and team is None:
             effective_level = 1
-        remaining = max(0, ROUNDS_TO_UNLOCK - rounds.get(effective_level, 0)) if effective_level < MAX_LEVEL else 0
+        club_rounds = new_quiz_rounds(db, user.id, team.provider_id if team else None)
+        remaining = max(0, ROUNDS_TO_UNLOCK - club_rounds.get(effective_level, 0)) if effective_level < MAX_LEVEL else 0
     meta = QUIZ_LEVELS[effective_level]
     return {
         "level": effective_level, "unlocked_level": level,
@@ -281,7 +282,7 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
     state = db.get(QuizProgressState, user.id)
     if state is not None:
         level, team = context["level"], context["team"]
-        rounds = new_quiz_rounds(db, user.id)
+        rounds = new_quiz_rounds(db, user.id, team["id"] if team else None)
         if rounds.get(level, 0) >= ROUNDS_PER_LEVEL:
             raise HTTPException(status_code=409, detail="All 12 rounds complete. Select another unlocked level.")
         if level > 1 and team is None:
@@ -516,7 +517,7 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
         if snapshot is None:
             raise HTTPException(status_code=409, detail="Daily quiz snapshot missing.")
         rounds = new_quiz_rounds(db, user.id)
-        if snapshot.level > unlocked_level(rounds) or rounds.get(snapshot.level, 0) >= ROUNDS_PER_LEVEL:
+        if snapshot.level > unlocked_level(rounds) or new_quiz_rounds(db, user.id, snapshot.team_provider_id).get(snapshot.level, 0) >= ROUNDS_PER_LEVEL:
             raise HTTPException(status_code=409, detail="This level is locked or complete.")
         db.add(QuizRoundCompletion(
             user_id=user.id, quiz_date=source_id, level=snapshot.level,
@@ -570,14 +571,22 @@ def rewarded_rounds_by_level(db: Session, user_id: int) -> dict[int, int]:
     return {level: int(count) for level, count in rows if 1 <= level <= MAX_LEVEL}
 
 
-def new_quiz_rounds(db: Session, user_id: int) -> dict[int, int]:
-    """New progression ledger, independent of all historic XP transactions."""
+def new_quiz_rounds(db: Session, user_id: int, team_provider_id: str | None = None) -> dict[int, int]:
+    """Track club-specific rounds; global unlocks use the highest single-club count."""
     rows = db.execute(
-        select(QuizRoundCompletion.level, func.count(QuizRoundCompletion.id))
+        select(QuizRoundCompletion.level, QuizRoundCompletion.team_provider_id, func.count(QuizRoundCompletion.id))
         .where(QuizRoundCompletion.user_id == user_id)
-        .group_by(QuizRoundCompletion.level)
+        .group_by(QuizRoundCompletion.level, QuizRoundCompletion.team_provider_id)
     ).all()
-    return {int(level): int(count) for level, count in rows if 1 <= level <= MAX_LEVEL}
+    counts = {}
+    for level, club, count in rows:
+        level = int(level)
+        if not 1 <= level <= MAX_LEVEL:
+            continue
+        if level > 1 and team_provider_id is not None and club != team_provider_id:
+            continue
+        counts[level] = max(counts.get(level, 0), int(count))
+    return counts
 
 
 @router.post("/progress/reset")
@@ -635,10 +644,15 @@ def select_quiz_level(body: QuizLevelSelection, request: Request, db: Session = 
         raise HTTPException(status_code=400, detail="This quiz level is locked.")
     if body.level > 1 and user.primary_team is None:
         raise HTTPException(status_code=400, detail="Select a primary team first.")
-    if db.scalar(select(DailyQuizSnapshot).where(
+    snapshot = db.scalar(select(DailyQuizSnapshot).where(
         DailyQuizSnapshot.user_id == user.id, DailyQuizSnapshot.quiz_date == quiz_id()
-    )) is not None:
-        raise HTTPException(status_code=409, detail="Today's quiz is already assigned. Change levels tomorrow.")
+    ))
+    rewarded = db.scalar(select(XPEvent.id).where(
+        XPEvent.user_id == user.id, XPEvent.source_type == "daily_quiz",
+        XPEvent.source_id == quiz_id()
+    ))
+    if snapshot is not None and rewarded is None and snapshot.level != body.level:
+        db.delete(snapshot)
     state.selected_level = body.level
     db.commit()
     return {"selected_level": body.level, "unlocked_level": highest}
@@ -650,8 +664,8 @@ def quiz_levels_status(request: Request, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
     state = db.get(QuizProgressState, user.id)
     if state is not None:
-        rounds = new_quiz_rounds(db, user.id)
-        highest = unlocked_level(rounds)
+        rounds = new_quiz_rounds(db, user.id, user.primary_team.provider_id if user.primary_team else None)
+        highest = unlocked_level(new_quiz_rounds(db, user.id))
     else:
         # Legacy preview remains unchanged until this user explicitly resets.
         rounds = rewarded_rounds_by_level(db, user.id)
@@ -662,7 +676,7 @@ def quiz_levels_status(request: Request, db: Session = Depends(get_db)) -> dict:
         "rounds_per_level": ROUNDS_PER_LEVEL,
         "rounds_to_unlock": ROUNDS_TO_UNLOCK,
         "levels": [level_progress(level, rounds, highest) for level in range(1, MAX_LEVEL + 1)],
-        "preview_only": True,
+        "preview_only": state is None,
         "reset_mode": state is not None,
         "selected_level": state.selected_level if state is not None else highest,
     }
