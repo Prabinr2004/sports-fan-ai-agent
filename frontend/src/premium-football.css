@@ -579,3 +579,34 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .premium-account-popover input{background:#fffefa!important;border:1px solid #e1d1c2!important;color:#203a54!important}
 .fansphere-premium .premium-account-popover .premium-account-save{background:#ed7966!important;color:#fff!important;border-radius:9px!important}
 .fansphere-premium .premium-account-popover p[role="status"]{color:#43845b!important}
+
+
+/* Premium Football — Full Team Hub (previously legacy navy) */
+.fansphere-premium .team-hub{color:#233c56}
+.fansphere-premium .team-hub .close-hub,.fansphere-premium .team-hub>.secondary-button{background:#fff3e9!important;color:#a65b48!important;border:1px solid #ebd1c0!important}
+.fansphere-premium .team-hub .team-hero{background:linear-gradient(115deg,#fff1dd,#fffdfa)!important;border:1px solid #e9d5bf!important;box-shadow:0 8px 24px #253b5010}
+.fansphere-premium .team-hub .team-hero h1,.fansphere-premium .team-hub .section-heading h2,.fansphere-premium .team-hub h2,.fansphere-premium .team-hub h3{color:#203a54!important}
+.fansphere-premium .team-hub .team-hero p,.fansphere-premium .team-hub .section-heading p{color:#74879a!important}
+.fansphere-premium .team-hub .eyebrow{color:#a67953!important}
+.fansphere-premium .team-hub .team-hero-crest{background:#fffefa;border:1px solid #eadccd}
+.fansphere-premium .team-hub .team-hero .team-actions button{background:#fff8f0!important;color:#9d5c46!important;border:1px solid #e9cdb8!important}
+.fansphere-premium .team-hub .team-hero .team-actions button:first-child{background:#ed7966!important;color:#fff!important;border-color:#ed7966!important}
+.fansphere-premium .team-hub .provider-notice,.fansphere-premium .team-hub .hub-panel,.fansphere-premium .team-hub .season-snapshot,.fansphere-premium .team-hub .season-leaders{background:#fffdfa!important;border:1px solid #e9ded2!important;box-shadow:0 6px 20px #20394c0c}
+.fansphere-premium .team-hub .provider-notice,.fansphere-premium .team-hub .provider-notice p{color:#657c90!important}
+.fansphere-premium .team-hub .provider-notice summary{color:#a55c46!important}
+.fansphere-premium .team-hub .standing-card,.fansphere-premium .team-hub .leader-card,.fansphere-premium .team-hub .player-row,.fansphere-premium .team-hub .fixture-row{background:#fff8f0!important;border:1px solid #ebded0!important}
+.fansphere-premium .team-hub .standing-card>div:first-child span,.fansphere-premium .team-hub .standing-metrics b,.fansphere-premium .team-hub .leader-card strong,.fansphere-premium .team-hub .player-row strong,.fansphere-premium .team-hub .fixture-row strong{color:#203a54!important}
+.fansphere-premium .team-hub .standing-card>div:first-child strong,.fansphere-premium .team-hub .leader-card>b{color:#bf8647!important}
+.fansphere-premium .team-hub .standing-metrics span,.fansphere-premium .team-hub .leader-card small,.fansphere-premium .team-hub .player-row span,.fansphere-premium .team-hub .fixture-row small{color:#71869a!important}
+.fansphere-premium .team-hub .leader-rank{background:#ffe9d4;color:#aa6746}
+.fansphere-premium .team-hub .empty-panel{border-color:#dfcdbb;color:#71849a}
+.fansphere-premium .team-hub .empty-panel strong{color:#233c56}
+.fansphere-premium .team-hub .fixture-row>span{color:#b47745}
+.fansphere-premium .team-hub .fixture-row strong em{color:#9c7659}
+.fansphere-premium .team-hub button:not(.primary-button):not(.secondary-button):not(.close-hub){accent-color:#ed7966}
+.fansphere-premium .team-hub .hub-tabs,.fansphere-premium .team-hub .team-tabs,.fansphere-premium .team-hub .tab-bar{background:#fff4e9!important;border-color:#ead5c2!important}
+.fansphere-premium .team-hub .hub-tabs button,.fansphere-premium .team-hub .team-tabs button,.fansphere-premium .team-hub .tab-bar button{color:#60778d!important}
+.fansphere-premium .team-hub .hub-tabs button.active,.fansphere-premium .team-hub .team-tabs button.active,.fansphere-premium .team-hub .tab-bar button.active{background:#ed7966!important;color:#fff!important}
+/* Coverage notice in Matches — readable informational status */
+.fansphere-premium .matches-page>.quiz-complete-note{background:#fff7ea!important;border:1px solid #e8d2b5!important;color:#936443!important;border-radius:11px!important;padding:12px 15px!important;font-weight:600;line-height:1.5}
+.fansphere-premium .matches-page>.quiz-complete-note *{color:#936443!important}
