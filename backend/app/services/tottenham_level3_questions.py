@@ -1,9 +1,9 @@
-"""Tottenham Level 3 question bank."""
+"""tottenham Level 3 match-history question bank."""
 
 TOTTENHAM_LEVEL_3_QUESTIONS = [
   {
     "id": "tottenham-l3-01",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax semifinal hat-trick?",
+    "question": "In the 2019 Ajax semifinal, who scored a hat-trick?",
     "options": [
       "Kane",
       "Lucas Moura",
@@ -15,7 +15,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-02",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax semifinal final pass to winner?",
+    "question": "In the 2019 Ajax semifinal, who scored the winning goal?",
     "options": [
       "Dele Alli",
       "Eriksen",
@@ -27,7 +27,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-03",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax semifinal Ajax first scorer?",
+    "question": "In the 2019 Ajax semifinal Ajax, who scored the opening goal?",
     "options": [
       "Ziyech",
       "Tadić",
@@ -39,7 +39,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-04",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax semifinal Ajax second scorer?",
+    "question": "In the 2019 Ajax semifinal Ajax, who scored the second goal?",
     "options": [
       "De Ligt",
       "Tadić",
@@ -51,7 +51,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-05",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax semifinal halftime deficit?",
+    "question": "In the 2019 Ajax semifinal, what was the halftime deficit?",
     "options": [
       "One goal",
       "Two goals",
@@ -63,7 +63,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-06",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 City UCL quarterfinal second leg Spurs first scorer?",
+    "question": "In the 2019 City Champions League quarterfinal second leg Tottenham, who scored the opening goal?",
     "options": [
       "Son Heung-min",
       "Moura",
@@ -75,7 +75,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-07",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 City UCL quarterfinal second leg Spurs second scorer?",
+    "question": "In the 2019 City Champions League quarterfinal second leg Tottenham, who scored the second goal?",
     "options": [
       "Moura",
       "Alli",
@@ -87,7 +87,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-08",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 City UCL quarterfinal second leg Spurs third scorer?",
+    "question": "In the 2019 City Champions League quarterfinal second leg Tottenham, who scored the third goal?",
     "options": [
       "Son",
       "Moura",
@@ -99,7 +99,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-09",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 City UCL quarterfinal first leg winner?",
+    "question": "In the 2019 City Champions League quarterfinal first leg, who scored the winning goal?",
     "options": [
       "Kane",
       "Son Heung-min",
@@ -111,7 +111,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-10",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 City UCL quarterfinal first leg penalty-saving keeper?",
+    "question": "In the 2019 City Champions League quarterfinal first leg, who was the goalkeeper?",
     "options": [
       "Hugo Lloris",
       "Vorm",
@@ -123,7 +123,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-11",
-    "question": "In Tottenham's history, which answer matches this match detail: 2017 Real Madrid UCL Wembley Spurs first scorer?",
+    "question": "In the 2017 Real Madrid Champions League Wembley Tottenham, who scored the opening goal?",
     "options": [
       "Eriksen",
       "Kane",
@@ -135,7 +135,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-12",
-    "question": "In Tottenham's history, which answer matches this match detail: 2017 Real Madrid UCL Wembley Spurs second scorer?",
+    "question": "In the 2017 Real Madrid Champions League Wembley Tottenham, who scored the second goal?",
     "options": [
       "Eriksen",
       "Kane",
@@ -147,7 +147,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-13",
-    "question": "In Tottenham's history, which answer matches this match detail: 2017 Real Madrid UCL Wembley Spurs third scorer?",
+    "question": "In the 2017 Real Madrid Champions League Wembley Tottenham, who scored the third goal?",
     "options": [
       "Alli",
       "Christian Eriksen",
@@ -159,7 +159,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-14",
-    "question": "In Tottenham's history, which answer matches this match detail: 2017 Real Madrid UCL Wembley Madrid scorer?",
+    "question": "In the 2017 Real Madrid Champions League Wembley Madrid, who scored?",
     "options": [
       "Cristiano Ronaldo",
       "Benzema",
@@ -171,7 +171,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-15",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Dortmund UCL first leg Spurs opener?",
+    "question": "In the 2019 Dortmund Champions League first leg Tottenham, who scored the opening goal?",
     "options": [
       "Vertonghen",
       "Llorente",
@@ -183,7 +183,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-16",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Dortmund UCL first leg Spurs second scorer?",
+    "question": "In the 2019 Dortmund Champions League first leg Tottenham, who scored the second goal?",
     "options": [
       "Son",
       "Kane",
@@ -195,7 +195,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-17",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Dortmund UCL first leg Spurs third scorer?",
+    "question": "In the 2019 Dortmund Champions League first leg Tottenham, who scored the third goal?",
     "options": [
       "Vertonghen",
       "Fernando Llorente",
@@ -207,7 +207,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-18",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Dortmund UCL second leg Spurs scorer?",
+    "question": "In the 2019 Dortmund Champions League second leg Tottenham, who scored?",
     "options": [
       "Harry Kane",
       "Son",
@@ -219,7 +219,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-19",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 UCL final Spurs goals?",
+    "question": "In the 2019 Champions League final Tottenham, what was the goals?",
     "options": [
       "One",
       "Two",
@@ -231,7 +231,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-20",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 UCL final Liverpool opener?",
+    "question": "In the 2019 Champions League final Liverpool, who scored the opening goal?",
     "options": [
       "Origi",
       "Mané",
@@ -243,7 +243,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-21",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 UCL final Liverpool second scorer?",
+    "question": "In the 2019 Champions League final Liverpool, who scored the second goal?",
     "options": [
       "Salah",
       "Divock Origi",
@@ -255,7 +255,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-22",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 UCL final Spurs manager?",
+    "question": "In the 2019 Champions League final Tottenham, who was the manager?",
     "options": [
       "Mauricio Pochettino",
       "Mourinho",
@@ -267,7 +267,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-23",
-    "question": "In Tottenham's history, which answer matches this match detail: 2008 League Cup final Spurs equalizer?",
+    "question": "In the 2008 League Cup final Tottenham, who scored the equalizer?",
     "options": [
       "Woodgate",
       "Keane",
@@ -279,7 +279,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-24",
-    "question": "In Tottenham's history, which answer matches this match detail: 2008 League Cup final Spurs winner?",
+    "question": "In the 2008 League Cup final Tottenham, who scored the winning goal?",
     "options": [
       "Berbatov",
       "Keane",
@@ -291,7 +291,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-25",
-    "question": "In Tottenham's history, which answer matches this match detail: 2008 League Cup final Chelsea scorer?",
+    "question": "In the 2008 League Cup final Chelsea, who scored?",
     "options": [
       "Lampard",
       "Didier Drogba",
@@ -303,7 +303,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-26",
-    "question": "In Tottenham's history, which answer matches this match detail: 1991 FA Cup final Spurs equalizer?",
+    "question": "In the 1991 FA Cup final Tottenham, who scored the equalizer?",
     "options": [
       "Paul Stewart",
       "Walker",
@@ -315,7 +315,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-27",
-    "question": "In Tottenham's history, which answer matches this match detail: 1991 FA Cup final winning goal?",
+    "question": "In the 1991 FA Cup final, who scored the winning goal?",
     "options": [
       "Lineker penalty",
       "Gascoigne free kick",
@@ -327,7 +327,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-28",
-    "question": "In Tottenham's history, which answer matches this match detail: 1991 FA Cup final Forest scorer?",
+    "question": "In the 1991 FA Cup final Forest, who scored?",
     "options": [
       "Roy Keane",
       "Clough",
@@ -339,7 +339,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-29",
-    "question": "In Tottenham's history, which answer matches this match detail: 1981 FA Cup final replay Spurs winner?",
+    "question": "In the 1981 FA Cup final replay Tottenham, who scored the winning goal?",
     "options": [
       "Hoddle",
       "Ricky Villa",
@@ -351,7 +351,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-30",
-    "question": "In Tottenham's history, which answer matches this match detail: 1981 FA Cup final replay Spurs brace?",
+    "question": "In the 1981 FA Cup final replay Tottenham, who scored twice?",
     "options": [
       "Ricky Villa",
       "Hoddle",
@@ -363,7 +363,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-31",
-    "question": "In Tottenham's history, which answer matches this match detail: 1981 FA Cup final replay Spurs other scorer?",
+    "question": "In the 1981 FA Cup final replay Tottenham other, who scored?",
     "options": [
       "Hoddle",
       "Villa",
@@ -375,7 +375,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-32",
-    "question": "In Tottenham's history, which answer matches this match detail: 1981 FA Cup final replay City second scorer?",
+    "question": "In the 1981 FA Cup final replay City, who scored the second goal?",
     "options": [
       "Reeves",
       "Hutchison",
@@ -387,7 +387,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-33",
-    "question": "In Tottenham's history, which answer matches this match detail: 1982 FA Cup final replay Spurs scorer?",
+    "question": "In the 1982 FA Cup final replay Tottenham, who scored?",
     "options": [
       "Villa",
       "Glenn Hoddle",
@@ -399,7 +399,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-34",
-    "question": "In Tottenham's history, which answer matches this match detail: 1984 UEFA Cup final second leg Spurs equalizer?",
+    "question": "In the 1984 UEFA Cup final second leg Tottenham, who scored the equalizer?",
     "options": [
       "Graham Roberts",
       "Parks",
@@ -411,7 +411,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-35",
-    "question": "In Tottenham's history, which answer matches this match detail: 1984 UEFA Cup final Spurs shootout keeper?",
+    "question": "In the 1984 UEFA Cup final Tottenham, who was the goalkeeper?",
     "options": [
       "Clemence",
       "Lloris",
@@ -423,7 +423,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-36",
-    "question": "In Tottenham's history, which answer matches this match detail: 1972 UEFA Cup final first leg Spurs brace?",
+    "question": "In the 1972 UEFA Cup final first leg Tottenham, who scored twice?",
     "options": [
       "Mullery",
       "Peters",
@@ -435,7 +435,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-37",
-    "question": "In Tottenham's history, which answer matches this match detail: 1972 UEFA Cup final second leg Spurs scorer?",
+    "question": "In the 1972 UEFA Cup final second leg Tottenham, who scored?",
     "options": [
       "Chivers",
       "Alan Mullery",
@@ -447,7 +447,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-38",
-    "question": "In Tottenham's history, which answer matches this match detail: 1963 Cup Winners Cup final Spurs other brace besides Greaves?",
+    "question": "In the 1963 Cup Winners Cup final Tottenham other, who scored twice besides Greaves?",
     "options": [
       "Terry Dyson",
       "Smith",
@@ -459,7 +459,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-39",
-    "question": "In Tottenham's history, which answer matches this match detail: 1963 Cup Winners Cup final Spurs goal total?",
+    "question": "In the 1963 Cup Winners Cup final Tottenham, what was the goal total?",
     "options": [
       "Three",
       "Four",
@@ -471,7 +471,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-40",
-    "question": "In Tottenham's history, which answer matches this match detail: 1967 FA Cup final Spurs opener?",
+    "question": "In the 1967 FA Cup final Tottenham, who scored the opening goal?",
     "options": [
       "Saul",
       "Greaves",
@@ -483,7 +483,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-41",
-    "question": "In Tottenham's history, which answer matches this match detail: 1967 FA Cup final Spurs second scorer?",
+    "question": "In the 1967 FA Cup final Tottenham, who scored the second goal?",
     "options": [
       "Robertson",
       "Frank Saul",
@@ -495,7 +495,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-42",
-    "question": "In Tottenham's history, which answer matches this match detail: 1967 FA Cup final Chelsea scorer?",
+    "question": "In the 1967 FA Cup final Chelsea, who scored?",
     "options": [
       "Bobby Tambling",
       "Osgood",
@@ -507,7 +507,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-43",
-    "question": "In Tottenham's history, which answer matches this match detail: 1973 League Cup final Spurs winner?",
+    "question": "In the 1973 League Cup final Tottenham, who scored the winning goal?",
     "options": [
       "Chivers",
       "Peters",
@@ -519,7 +519,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-44",
-    "question": "In Tottenham's history, which answer matches this match detail: 1971 League Cup final Spurs brace?",
+    "question": "In the 1971 League Cup final Tottenham, who scored twice?",
     "options": [
       "Mullery",
       "Peters",
@@ -531,7 +531,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-45",
-    "question": "In Tottenham's history, which answer matches this match detail: 1971 League Cup final Spurs opponent?",
+    "question": "In the 1971 League Cup final Tottenham, what was the opponent?",
     "options": [
       "Norwich",
       "Aston Villa",
@@ -543,7 +543,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-46",
-    "question": "In Tottenham's history, which answer matches this match detail: 2009 League Cup final Spurs goals?",
+    "question": "In the 2009 League Cup final Tottenham, what was the goals?",
     "options": [
       "Zero",
       "One",
@@ -555,7 +555,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-47",
-    "question": "In Tottenham's history, which answer matches this match detail: 2009 League Cup final Spurs goalkeeper?",
+    "question": "In the 2009 League Cup final Tottenham, who was the goalkeeper?",
     "options": [
       "Cudicini",
       "Robinson",
@@ -567,7 +567,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-48",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Arsenal away 3-2 comeback Spurs winner?",
+    "question": "In the 2010 Arsenal away 3-2 comeback Tottenham, who scored the winning goal?",
     "options": [
       "Bale",
       "Van der Vaart",
@@ -579,7 +579,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-49",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Arsenal away 3-2 comeback Spurs first scorer?",
+    "question": "In the 2010 Arsenal away 3-2 comeback Tottenham, who scored the opening goal?",
     "options": [
       "Kaboul",
       "Gareth Bale",
@@ -591,7 +591,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-50",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Arsenal away 3-2 comeback Spurs equalizer?",
+    "question": "In the 2010 Arsenal away 3-2 comeback Tottenham, who scored the equalizer?",
     "options": [
       "Rafael van der Vaart",
       "Bale",
@@ -603,7 +603,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-51",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Inter home UCL Spurs opener?",
+    "question": "In the 2010 Inter home Champions League Tottenham, who scored the opening goal?",
     "options": [
       "Crouch",
       "Pavlyuchenko",
@@ -615,7 +615,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-52",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Inter home UCL Spurs second scorer?",
+    "question": "In the 2010 Inter home Champions League Tottenham, who scored the second goal?",
     "options": [
       "Van der Vaart",
       "Bale",
@@ -627,7 +627,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-53",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Inter home UCL Spurs third scorer?",
+    "question": "In the 2010 Inter home Champions League Tottenham, who scored the third goal?",
     "options": [
       "Crouch",
       "Roman Pavlyuchenko",
@@ -639,7 +639,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-54",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Inter away UCL Spurs hat-trick?",
+    "question": "In the 2010 Inter away Champions League Tottenham, who scored a hat-trick?",
     "options": [
       "Gareth Bale",
       "Van der Vaart",
@@ -651,7 +651,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-55",
-    "question": "In Tottenham's history, which answer matches this match detail: 2010 Inter away UCL Spurs early red card?",
+    "question": "In the 2010 Inter away Champions League Tottenham early, who was sent off?",
     "options": [
       "Bale",
       "Gallas",
@@ -663,7 +663,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-56",
-    "question": "In Tottenham's history, which answer matches this match detail: 2011 AC Milan away UCL Spurs winner?",
+    "question": "In the 2011 AC Milan away Champions League Tottenham, who scored the winning goal?",
     "options": [
       "Bale",
       "Van der Vaart",
@@ -675,7 +675,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-57",
-    "question": "In Tottenham's history, which answer matches this match detail: 2011 AC Milan away UCL Spurs winning margin?",
+    "question": "In the 2011 AC Milan away Champions League Tottenham, what was the winning margin?",
     "options": [
       "Two goals",
       "One goal",
@@ -687,7 +687,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-58",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax UCL semifinal Spurs qualification tiebreaker?",
+    "question": "In the 2019 Ajax Champions League semifinal Tottenham, what was the qualification tiebreaker?",
     "options": [
       "Away goals",
       "Penalties",
@@ -699,7 +699,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-59",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax UCL semifinal second-leg result?",
+    "question": "In the 2019 Ajax Champions League semifinal, what was the second-leg result?",
     "options": [
       "2–1",
       "3–1",
@@ -711,7 +711,7 @@ TOTTENHAM_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "tottenham-l3-60",
-    "question": "In Tottenham's history, which answer matches this match detail: 2019 Ajax UCL semifinal Spurs goals in second half?",
+    "question": "In the 2019 Ajax Champions League semifinal Tottenham, what was the goals in second half?",
     "options": [
       "Two",
       "One",
