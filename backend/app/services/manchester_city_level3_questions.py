@@ -27,14 +27,14 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-03",
-    "question": "In the 2023 Champions League semifinal second leg, who scored the third goal against Real Madrid?",
+    "question": "How was Manchester City's third goal recorded in the 2023 Champions League semifinal second leg against Real Madrid?",
     "options": [
-      "Haaland",
-      "Mahrez",
-      "De Bruyne",
-      "Manuel Akanji"
+      "Éder Militão own goal",
+      "Manuel Akanji",
+      "John Stones",
+      "Rúben Dias"
     ],
-    "answer": 3,
+    "answer": 0,
     "min_level": 3
   },
   {
@@ -51,7 +51,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-05",
-    "question": "In the 2023 Champions League semifinal first leg City, who scored at Real Madrid?",
+    "question": "Who scored Manchester City's goal away to Real Madrid in the 2023 Champions League semifinal first leg?",
     "options": [
       "Haaland",
       "Kevin De Bruyne",
@@ -63,7 +63,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-06",
-    "question": "In the 2023 Champions League semifinal first leg Real Madrid, who scored against City?",
+    "question": "Who scored Real Madrid's goal against Manchester City in the 2023 Champions League semifinal first leg?",
     "options": [
       "Vinícius Júnior",
       "Rodrygo",
@@ -75,7 +75,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-07",
-    "question": "In the 2023 Champions League final City, who scored?",
+    "question": "Who scored Manchester City's winning goal in the 2023 Champions League final against Inter Milan?",
     "options": [
       "Haaland",
       "De Bruyne",
@@ -87,7 +87,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-08",
-    "question": "In 2023, which answer correctly matches this event: Champions League final City midfielder injured and substituted?",
+    "question": "Which Manchester City midfielder went off injured in the 2023 Champions League final?",
     "options": [
       "Rodri",
       "Gündoğan",
@@ -99,7 +99,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-09",
-    "question": "In 2023, which answer correctly matches this event: Champions League final substitute for De Bruyne?",
+    "question": "Who replaced Kevin De Bruyne in the 2023 Champions League final?",
     "options": [
       "Álvarez",
       "Phil Foden",
@@ -243,7 +243,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-21",
-    "question": "In the 2012 QPR title decider assist for, who scored the winning goal?",
+    "question": "Who assisted Sergio Agüero's title-winning goal against QPR in May 2012?",
     "options": [
       "Silva",
       "Mario Balotelli",
@@ -255,7 +255,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-22",
-    "question": "Which option correctly describes May 2012 Newcastle away City two-goal scorer?",
+    "question": "Who scored twice for Manchester City away to Newcastle in May 2012?",
     "options": [
       "Yaya Touré",
       "Agüero",
@@ -267,7 +267,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-23",
-    "question": "Which option correctly describes April 2012 Manchester derby City winner?",
+    "question": "Who scored Manchester City's winning goal in the April 2012 derby against Manchester United?",
     "options": [
       "Agüero",
       "Touré",
@@ -363,7 +363,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-31",
-    "question": "In the 2022 Aston Villa title decider assist for, who scored the winning goal?",
+    "question": "Who assisted İlkay Gündoğan's winning goal against Aston Villa in May 2022?",
     "options": [
       "Bernardo Silva",
       "Foden",
@@ -447,7 +447,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-38",
-    "question": "Which option correctly describes May 2019 Leicester City City winning scorer?",
+    "question": "Who scored Manchester City's winner against Leicester in May 2019?",
     "options": [
       "Vincent Kompany",
       "Agüero",
@@ -459,7 +459,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-39",
-    "question": "Which option correctly describes May 2018 Southampton away City 100-point winner?",
+    "question": "Who scored Manchester City's stoppage-time winner at Southampton to reach 100 Premier League points in 2018?",
     "options": [
       "Agüero",
       "Sterling",
@@ -483,7 +483,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-41",
-    "question": "In 2019, which answer correctly matches this event: League Cup final City keeper who saved Jorginho penalty?",
+    "question": "Which Manchester City goalkeeper saved Jorginho's penalty in the 2019 League Cup final shootout?",
     "options": [
       "Bravo",
       "Ederson",
@@ -603,7 +603,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-51",
-    "question": "In 2016, which answer correctly matches this event: League Cup final City keeper saving three shootout penalties?",
+    "question": "Which Manchester City goalkeeper saved three penalties in the 2016 League Cup final shootout against Liverpool?",
     "options": [
       "Hart",
       "Ederson",
@@ -711,7 +711,7 @@ MANCHESTER_CITY_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "man-city-l3-60",
-    "question": "In the 2023 Club World Cup final City, what was the second goal type?",
+    "question": "How was Manchester City's second goal against Fluminense in the 2023 Club World Cup final recorded?",
     "options": [
       "Rodri penalty",
       "Haaland header",
