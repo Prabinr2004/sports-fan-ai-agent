@@ -171,7 +171,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-15",
-    "question": "Who scored Liverpool's second goal in that 2019 comeback against Barcelona?",
+    "question": "Who scored Liverpool's second goal in the 2019 Champions League semifinal second leg against Barcelona?",
     "options": [
       "Divock Origi",
       "Henderson",
@@ -183,7 +183,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-16",
-    "question": "Who scored Liverpool's third goal in that 2019 comeback against Barcelona?",
+    "question": "Who scored Liverpool's third goal in the 2019 Champions League semifinal second leg against Barcelona?",
     "options": [
       "Divock Origi",
       "Mané",
@@ -231,7 +231,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-20",
-    "question": "Who came on for Andrew Robertson at halftime against Barcelona in 2019?",
+    "question": "Which midfielder came on at halftime for Liverpool in the 2019 Champions League semifinal second leg against Barcelona?",
     "options": [
       "Milner",
       "Fabinho",
@@ -255,14 +255,14 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-22",
-    "question": "How many goals did Salah score against Roma in that 2018 semifinal first leg?",
+    "question": "What was the final score of Liverpool's 2018 Champions League semifinal first leg against Roma at Anfield?",
     "options": [
-      "Two",
-      "One",
-      "Three",
-      "Four"
+      "3-0",
+      "5-2",
+      "4-2",
+      "5-1"
     ],
-    "answer": 0,
+    "answer": 1,
     "min_level": 3
   },
   {
@@ -291,7 +291,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-25",
-    "question": "Who scored Liverpool's second goal against Manchester City in that 2018 quarterfinal first leg?",
+    "question": "Who scored Liverpool's second goal against Manchester City in the 2018 Champions League quarterfinal first leg?",
     "options": [
       "Salah",
       "Alex Oxlade-Chamberlain",
@@ -303,7 +303,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-26",
-    "question": "Who scored Liverpool's third goal against Manchester City in that 2018 quarterfinal first leg?",
+    "question": "Who scored Liverpool's third goal against Manchester City in the 2018 Champions League quarterfinal first leg?",
     "options": [
       "Sadio Mané",
       "Salah",
@@ -327,7 +327,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-28",
-    "question": "Who scored Liverpool's winner in that 2018 quarterfinal second leg at Manchester City?",
+    "question": "Who scored Liverpool's winning goal against Manchester City in the 2018 Champions League quarterfinal second leg?",
     "options": [
       "Salah",
       "Mané",
@@ -387,7 +387,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-33",
-    "question": "Who scored Liverpool's second goal in that 2021 5–0 league win at Manchester United?",
+    "question": "Who scored Liverpool's second goal in their 5–0 Premier League win at Manchester United in 2021?",
     "options": [
       "Salah",
       "Diogo Jota",
@@ -471,12 +471,12 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-40",
-    "question": "How was the winning goal recorded in Liverpool's 2001 UEFA Cup final against Alavés?",
+    "question": "What was the winning goal in Liverpool's 5-4 win over Alavés in the 2001 UEFA Cup final?",
     "options": [
-      "Gerrard free kick",
-      "Fowler header",
-      "Delfí Geli own goal",
-      "Owen penalty"
+      "A Gerrard free kick",
+      "A Fowler header",
+      "A golden-goal own goal by Delfí Geli",
+      "An Owen penalty"
     ],
     "answer": 2,
     "min_level": 3
@@ -495,7 +495,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-42",
-    "question": "Who scored Liverpool's second goal in that 2001 UEFA Cup final?",
+    "question": "Who scored Liverpool's second goal in the 2001 UEFA Cup final against Alavés?",
     "options": [
       "Steven Gerrard",
       "Owen",
@@ -507,7 +507,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-43",
-    "question": "Who scored Liverpool's third goal in that 2001 UEFA Cup final?",
+    "question": "Who scored Liverpool's third goal in the 2001 UEFA Cup final against Alavés?",
     "options": [
       "Gerrard",
       "Fowler",
@@ -519,7 +519,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-44",
-    "question": "Who scored Liverpool's fourth goal in that 2001 UEFA Cup final?",
+    "question": "Who scored Liverpool's fourth goal in the 2001 UEFA Cup final against Alavés?",
     "options": [
       "Owen",
       "Gerrard",
@@ -627,7 +627,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-53",
-    "question": "Who scored Liverpool's third goal in that 2016 Europa League semifinal second leg?",
+    "question": "Who scored Liverpool's third goal in the 2016 Europa League semifinal second leg against Villarreal?",
     "options": [
       "Sturridge",
       "Adam Lallana",
@@ -663,7 +663,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-56",
-    "question": "Who scored Liverpool's second goal in that 2016 Europa League quarterfinal second leg?",
+    "question": "Who scored Liverpool's second goal in the 2016 Europa League quarterfinal second leg against Dortmund?",
     "options": [
       "Origi",
       "Sakho",
@@ -675,7 +675,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-57",
-    "question": "Who scored Liverpool's third goal in that 2016 Europa League quarterfinal second leg?",
+    "question": "Who scored Liverpool's third goal in the 2016 Europa League quarterfinal second leg against Dortmund?",
     "options": [
       "Origi",
       "Mamadou Sakho",
@@ -687,7 +687,7 @@ LIVERPOOL_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "liverpool-l3-58",
-    "question": "Who scored Liverpool's winner against Napoli in the 2018 Champions League group stage at Anfield?",
+    "question": "Who scored Liverpool's winner against Napoli in the 2018-19 Champions League group stage at Anfield?",
     "options": [
       "Mohamed Salah",
       "Mané",
