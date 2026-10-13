@@ -75,7 +75,7 @@ BAYERN_MUNICH_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "bayern-l3-07",
-    "question": "In the 2013 Champions League semifinal first leg Bayern, who scored the opening goal against Barcelona?",
+    "question": "Who scored Bayern Munich's opening goal against Barcelona in the 2013 Champions League semifinal first leg?",
     "options": [
       "Thomas Müller",
       "Gómez",
