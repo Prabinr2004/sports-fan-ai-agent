@@ -32,6 +32,6 @@ def test_normalize_match_keeps_score_and_competition():
 
     result = FootballDataOrgProvider._normalize_match(match)
 
-    assert result["competition"] == "Primera Division"
+    assert result["competition"] == "LaLiga"
     assert result["score"] == {"home": 2, "away": 1}
     assert result["home_team"]["id"] == "86"
