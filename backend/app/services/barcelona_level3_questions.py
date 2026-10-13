@@ -15,7 +15,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-02",
-    "question": "Who assisted Samuel Eto'o's goal in the 2009 Champions League final?",
+    "question": "Who assisted Barcelona's opening goal in the 2009 Champions League final?",
     "options": [
       "Xavi",
       "Andrés Iniesta",
@@ -27,7 +27,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-03",
-    "question": "Which Barcelona player struck the crossbar with a free kick in the 2009 Champions League final?",
+    "question": "Which Barcelona player hit the post with a free kick in the 2009 Champions League final?",
     "options": [
       "Xavi",
       "Messi",
@@ -75,7 +75,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-07",
-    "question": "Who assisted Pedro's opening goal in the 2011 Champions League final?",
+    "question": "Who assisted Barcelona's opening goal in the 2011 Champions League final?",
     "options": [
       "Xavi",
       "Iniesta",
@@ -122,18 +122,6 @@ BARCELONA_LEVEL_3_QUESTIONS = [
     "min_level": 3
   },
   {
-    "id": "barcelona-l3-11",
-    "question": "How many goals did Lionel Messi score against Bayern Munich in the 2015 Champions League semifinal first leg?",
-    "options": [
-      "Two",
-      "One",
-      "Three",
-      "Four"
-    ],
-    "answer": 0,
-    "min_level": 3
-  },
-  {
     "id": "barcelona-l3-12",
     "question": "Who scored Barcelona's third goal against Bayern Munich in the 2015 Champions League semifinal first leg?",
     "options": [
@@ -159,7 +147,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-14",
-    "question": "Who assisted Ivan Rakitić's opening goal in the 2015 Champions League final?",
+    "question": "Who assisted Barcelona's opening goal in the 2015 Champions League final?",
     "options": [
       "Messi",
       "Andrés Iniesta",
@@ -315,7 +303,7 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-27",
-    "question": "Who assisted Andrés Iniesta's late goal at Chelsea in the 2009 Champions League semifinal?",
+    "question": "Who provided the assist for Barcelona's late equalizer at Chelsea in the 2009 Champions League semifinal second leg?",
     "options": [
       "Lionel Messi",
       "Xavi",
@@ -435,12 +423,12 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-37",
-    "question": "In which minute did Ronald Koeman score Barcelona's winning goal in the 1992 European Cup final?",
+    "question": "In which stage of the match did Ronald Koeman score the winner in the 1992 European Cup final?",
     "options": [
-      "90th",
-      "105th",
-      "112th",
-      "120th"
+      "First half",
+      "Second half",
+      "Extra time",
+      "Penalty shootout"
     ],
     "answer": 2,
     "min_level": 3
@@ -543,24 +531,12 @@ BARCELONA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "barcelona-l3-46",
-    "question": "Which Barcelona player scored twice in the 6–2 league Clásico against Real Madrid in 2009, alongside Thierry Henry?",
-    "options": [
-      "Xavi",
-      "Lionel Messi",
-      "Busquets",
-      "Piqué"
-    ],
-    "answer": 1,
-    "min_level": 3
-  },
-  {
-    "id": "barcelona-l3-47",
-    "question": "Who was Barcelona's other two-goal scorer alongside Lionel Messi in the 6–2 league Clásico in 2009?",
+    "question": "Which of these players scored twice for Barcelona in the 6-2 Clásico win at Real Madrid in 2009?",
     "options": [
       "Thierry Henry",
-      "Eto'o",
-      "Pedro",
-      "Iniesta"
+      "Samuel Eto'o",
+      "Andrés Iniesta",
+      "Yaya Touré"
     ],
     "answer": 0,
     "min_level": 3
