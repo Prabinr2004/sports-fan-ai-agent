@@ -144,3 +144,38 @@ body{background:#f8f6f1}
 .fansphere-premium .header-gem-wallet{gap:11px;padding:9px 13px}
 .fansphere-premium .header-gem-wallet>span:not(.header-gem-plus){display:inline-block;min-width:13px;text-align:center;margin-right:4px}
 .fansphere-premium .header-gem-plus{margin-left:2px;flex-shrink:0}
+
+
+/* Phase 2: My Team / Club HQ — Premium Football */
+.fansphere-premium .my-team-dashboard{color:#172d49}
+.fansphere-premium .my-team-dashboard>h1{color:#182f4a;letter-spacing:-.035em}
+.fansphere-premium .my-team-dashboard>p{color:#738095}
+.fansphere-premium .my-team-dashboard .eyebrow{color:#947359}
+.fansphere-premium .my-team-dashboard .club-hero{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(105deg,rgba(255,249,241,.97),rgba(255,245,230,.86)),url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=80") center/cover;border:1px solid #e9d6c2;box-shadow:0 12px 32px #987b5420;min-height:210px}
+.fansphere-premium .my-team-dashboard .club-hero h2{color:#182f4a;letter-spacing:-.035em}
+.fansphere-premium .my-team-dashboard .club-hero p{color:#667990}
+.fansphere-premium .my-team-dashboard .club-hero img{background:#fffdfb;border:1px solid #eadccc;box-shadow:0 7px 18px #795e3c24}
+.fansphere-premium .my-team-dashboard .club-hero .primary-button{background:#ed7967;color:#fff;border-color:#ed7967}
+.fansphere-premium .my-team-dashboard .club-hero .primary-button:hover{background:#d96250}
+.fansphere-premium .my-team-dashboard .club-stat{background:#fffefa;border:1px solid #e9e0d6;box-shadow:0 7px 20px #152b4010;transition:transform .2s,box-shadow .2s}
+.fansphere-premium .my-team-dashboard .club-stat:nth-child(1){border-top:3px solid #d6a047;background:linear-gradient(145deg,#fffefa,#fff8e9)}
+.fansphere-premium .my-team-dashboard .club-stat:nth-child(2){border-top:3px solid #7596bd;background:linear-gradient(145deg,#fffefa,#f2f6fc)}
+.fansphere-premium .my-team-dashboard .club-stat:nth-child(3){border-top:3px solid #ed806a;background:linear-gradient(145deg,#fffefa,#fff1e9)}
+.fansphere-premium .my-team-dashboard .club-stat strong{color:#b97736}
+.fansphere-premium .my-team-dashboard .club-stat:nth-child(2) strong{color:#547aa4}
+.fansphere-premium .my-team-dashboard .club-stat:nth-child(3) strong{color:#c76b54}
+.fansphere-premium .my-team-dashboard .club-stat span[style]{color:#77869a!important}
+.fansphere-premium .my-team-dashboard .club-stat:hover{transform:translateY(-2px);box-shadow:0 13px 26px #1c314b1b}
+.fansphere-premium .my-team-dashboard .club-overview-panel{background:#fffefa!important;border:1px solid #e9dfd5!important;box-shadow:0 7px 22px #1b2d4310}
+.fansphere-premium .my-team-dashboard .club-overview-panel:nth-child(1){border-top:3px solid #dfac57!important}
+.fansphere-premium .my-team-dashboard .club-overview-panel:nth-child(2){border-top:3px solid #7898bc!important}
+.fansphere-premium .my-team-dashboard .club-overview-panel:nth-child(3){border-top:3px solid #ed8a73!important}
+.fansphere-premium .my-team-dashboard .club-overview-panel:nth-child(4){border-top:3px solid #c8a57a!important}
+.fansphere-premium .my-team-dashboard .club-overview-panel h2{color:#1a314c!important}
+.fansphere-premium .my-team-dashboard .club-row{border-bottom-color:#ede4db}
+.fansphere-premium .my-team-dashboard .club-row strong,.fansphere-premium .my-team-dashboard .club-player strong{color:#213a55}
+.fansphere-premium .my-team-dashboard .club-row small,.fansphere-premium .my-team-dashboard .club-player small,.fansphere-premium .my-team-dashboard .club-overview-panel p[style],.fansphere-premium .my-team-dashboard .club-row span[style]{color:#76869b!important}
+.fansphere-premium .my-team-dashboard .club-player{background:#fff8f0;border-color:#eadfd3}
+.fansphere-premium .my-team-dashboard .secondary-button{background:#fff4ea;color:#a85646;border-color:#e9c6b4}
+.fansphere-premium .my-team-dashboard .secondary-button:hover{background:#ffe7d7}
+@media(prefers-reduced-motion:reduce){.fansphere-premium .my-team-dashboard .club-stat{transition:none}.fansphere-premium .my-team-dashboard .club-stat:hover{transform:none}}
