@@ -16,6 +16,7 @@ from app.models.user import User
 from app.models.quiz import DailyQuizSnapshot, QuizProgressState, QuizRoundCompletion
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
+from app.services.quiz_selection import select_unseen_questions, question_history_key, QuizBankExhausted
 from app.services.quiz_progression import MAX_LEVEL, ROUNDS_PER_LEVEL, ROUNDS_TO_UNLOCK, level_progress, unlocked_level
 from app.services.club_knowledge_questions import CLUB_KNOWLEDGE_QUESTIONS
 from app.services.real_madrid_level2_questions import REAL_MADRID_LEVEL_2_QUESTIONS
@@ -233,18 +234,26 @@ def rewarded_quiz_completions(db: Session, user_id: int) -> int:
 
 
 def quiz_context(db: Session, user) -> dict:
-    completions = rewarded_quiz_completions(db, user.id)
-    level = quiz_level_from_completions(completions)
+    state = db.get(QuizProgressState, user.id)
     team = user.primary_team
-    effective_level = level if level == 1 or team is not None else 1
+    if state is None:
+        completions = rewarded_quiz_completions(db, user.id)
+        level = quiz_level_from_completions(completions)
+        effective_level = level if level == 1 or team is not None else 1
+        remaining = max(0, 5 - completions % 5) if level < 5 else 0
+    else:
+        rounds = new_quiz_rounds(db, user.id)
+        level = unlocked_level(rounds)
+        effective_level = state.selected_level if 1 <= state.selected_level <= level else 1
+        if effective_level > 1 and team is None:
+            effective_level = 1
+        remaining = max(0, ROUNDS_TO_UNLOCK - rounds.get(effective_level, 0)) if effective_level < MAX_LEVEL else 0
     meta = QUIZ_LEVELS[effective_level]
     return {
-        "level": effective_level,
-        "unlocked_level": level,
-        "theme": meta["theme"],
-        "description": meta["description"],
+        "level": effective_level, "unlocked_level": level,
+        "theme": meta["theme"], "description": meta["description"],
         "team": {"id": team.provider_id, "name": team.name} if team else None,
-        "days_to_next_level": max(0, 5 - (completions % 5)) if level < 5 else 0,
+        "days_to_next_level": remaining,
     }
 
 
@@ -269,6 +278,45 @@ async def get_or_create_daily_snapshot(db: Session, user) -> tuple[list[dict], d
         return questions, snapshot_context
 
     rng = random.Random(f"{today}:{user.id}:{context['level']}:daily")
+    state = db.get(QuizProgressState, user.id)
+    if state is not None:
+        level, team = context["level"], context["team"]
+        rounds = new_quiz_rounds(db, user.id)
+        if rounds.get(level, 0) >= ROUNDS_PER_LEVEL:
+            raise HTTPException(status_code=409, detail="All 12 rounds complete. Select another unlocked level.")
+        if level > 1 and team is None:
+            raise HTTPException(status_code=400, detail="Choose a primary team for club quizzes.")
+        pool = level_question_pool(level, team)
+        if len(pool) != 60:
+            raise HTTPException(status_code=409, detail="A complete 60-question bank is unavailable for this club.")
+        key = question_history_key(level, team["id"] if team else None)
+        completed = db.scalars(select(QuizRoundCompletion).where(QuizRoundCompletion.user_id == user.id)).all()
+        seen_ids = set()
+        for row in completed:
+            if question_history_key(row.level, row.team_provider_id) == key:
+                seen_ids.update(json.loads(row.question_ids_json))
+        try:
+            selected = select_unseen_questions(pool, seen_ids, count=5, seed=f"{user.id}:{today}:{key}")
+        except QuizBankExhausted as exc:
+            raise HTTPException(status_code=409, detail=str(exc)) from exc
+        questions = shuffle_answers(selected, rng)
+        db.add(DailyQuizSnapshot(
+            user_id=user.id, quiz_date=today, level=level, theme=context["theme"],
+            team_provider_id=team["id"] if team else None,
+            team_name=team["name"] if team else None, questions_json=json.dumps(questions),
+        ))
+        try:
+            db.commit()
+        except IntegrityError:
+            db.rollback()
+            existing = db.scalar(select(DailyQuizSnapshot).where(
+                DailyQuizSnapshot.user_id == user.id, DailyQuizSnapshot.quiz_date == today
+            ))
+            if existing:
+                return json.loads(existing.questions_json), context
+            raise
+        return questions, context
+
     # Prefer questions not seen in previous daily quizzes at the current level.
     previous = db.scalars(select(DailyQuizSnapshot).where(
         DailyQuizSnapshot.user_id == user.id,
@@ -459,6 +507,22 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
     analysis_token_awarded = False
     level_bonus_tokens = 0
     completed_level = None
+
+    state = db.get(QuizProgressState, user.id)
+    if state is not None and not existing:
+        snapshot = db.scalar(select(DailyQuizSnapshot).where(
+            DailyQuizSnapshot.user_id == user.id, DailyQuizSnapshot.quiz_date == source_id
+        ))
+        if snapshot is None:
+            raise HTTPException(status_code=409, detail="Daily quiz snapshot missing.")
+        rounds = new_quiz_rounds(db, user.id)
+        if snapshot.level > unlocked_level(rounds) or rounds.get(snapshot.level, 0) >= ROUNDS_PER_LEVEL:
+            raise HTTPException(status_code=409, detail="This level is locked or complete.")
+        db.add(QuizRoundCompletion(
+            user_id=user.id, quiz_date=source_id, level=snapshot.level,
+            team_provider_id=snapshot.team_provider_id,
+            question_ids_json=json.dumps([q["id"] for q in questions]),
+        ))
 
     if not existing:
         xp_awarded = 50 + correct * 10
