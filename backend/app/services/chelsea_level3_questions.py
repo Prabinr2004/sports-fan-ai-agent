@@ -699,9 +699,9 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-59",
-    "question": "Who converted Chelsea's fifth penalty in the 2021 UEFA Super Cup shootout against Villarreal?",
+    "question": "Who started in goal for Chelsea in the 2021 UEFA Super Cup against Villarreal?",
     "options": [
-      "Jorginho",
+      "Édouard Mendy",
       "Mount",
       "Rüdiger",
       "Pulisic"
@@ -711,7 +711,7 @@ CHELSEA_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "chelsea-l3-60",
-    "question": "Who scored Chelsea's equalizer in the 2021 UEFA Super Cup against Villarreal?",
+    "question": "Who scored Chelsea's opening goal in the 2021 UEFA Super Cup against Villarreal?",
     "options": [
       "Havertz",
       "Werner",
