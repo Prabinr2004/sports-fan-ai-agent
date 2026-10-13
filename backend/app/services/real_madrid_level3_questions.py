@@ -87,7 +87,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-08",
-    "question": "Which Brazilian left-back was Real Madrid's club captain in 2022?",
+    "question": "Which Brazilian left-back was Real Madrid's club captain during the 2021-22 season?",
     "options": [
       "Roberto Carlos",
       "Danilo",
@@ -231,7 +231,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-20",
-    "question": "Which opponent did Real Madrid defeat in the 2022 Champions League semifinal after Rodrygo's late double?",
+    "question": "Which opponent did Real Madrid defeat in the 2022 Champions League semifinal?",
     "options": [
       "Chelsea",
       "Liverpool",
@@ -243,7 +243,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-21",
-    "question": "Who scored both late goals for Real Madrid in the second leg of the 2022 semifinal against Manchester City?",
+    "question": "Who scored both late goals for Real Madrid in the second leg of the 2022 Champions League semifinal?",
     "options": [
       "Vinícius Júnior",
       "Rodrygo",
@@ -255,7 +255,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-22",
-    "question": "Who scored the winning extra-time penalty against Manchester City in that 2022 semifinal?",
+    "question": "Who scored the extra-time penalty that sent Real Madrid to the 2022 Champions League final?",
     "options": [
       "Karim Benzema",
       "Luka Modrić",
@@ -279,7 +279,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-24",
-    "question": "Who scored Real Madrid's winning extra-time goal against Chelsea in the 2022 Champions League quarterfinal second leg?",
+    "question": "Who scored the extra-time goal that sent Real Madrid through against Chelsea in the 2022 Champions League quarterfinal second leg?",
     "options": [
       "Rodrygo",
       "Luka Modrić",
@@ -363,7 +363,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-31",
-    "question": "Who assisted Zidane's famous volley in the 2002 Champions League final?",
+    "question": "Whose cross set up the winning goal in the 2002 Champions League final?",
     "options": [
       "Luís Figo",
       "Raúl",
@@ -375,7 +375,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-32",
-    "question": "Which Real Madrid goalkeeper made a crucial late substitute appearance in the 2002 Champions League final?",
+    "question": "Which Real Madrid goalkeeper came on as an injury substitute in the 2002 Champions League final?",
     "options": [
       "César Sánchez",
       "Diego López",
@@ -651,7 +651,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-55",
-    "question": "Who scored Real Madrid's decisive second goal against Bayern Munich in the 2024 Champions League semifinal second leg?",
+    "question": "Who scored both of Real Madrid's goals in the second leg of the 2024 Champions League semifinal against Bayern Munich?",
     "options": [
       "Rodrygo",
       "Vinícius Júnior",
@@ -659,30 +659,6 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
       "Joselu"
     ],
     "answer": 3,
-    "min_level": 3
-  },
-  {
-    "id": "rm-l3-56",
-    "question": "How many goals did Joselu score in the 2024 Champions League semifinal second leg against Bayern Munich?",
-    "options": [
-      "One",
-      "Three",
-      "Two",
-      "Four"
-    ],
-    "answer": 2,
-    "min_level": 3
-  },
-  {
-    "id": "rm-l3-57",
-    "question": "Who scored Real Madrid's opening goal against Borussia Dortmund in the 2024 Champions League final?",
-    "options": [
-      "Jude Bellingham",
-      "Dani Carvajal",
-      "Rodrygo",
-      "Vinícius Júnior"
-    ],
-    "answer": 1,
     "min_level": 3
   },
   {
