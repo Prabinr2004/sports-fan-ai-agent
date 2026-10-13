@@ -179,3 +179,7 @@ body{background:#f8f6f1}
 .fansphere-premium .my-team-dashboard .secondary-button{background:#fff4ea;color:#a85646;border-color:#e9c6b4}
 .fansphere-premium .my-team-dashboard .secondary-button:hover{background:#ffe7d7}
 @media(prefers-reduced-motion:reduce){.fansphere-premium .my-team-dashboard .club-stat{transition:none}.fansphere-premium .my-team-dashboard .club-stat:hover{transform:none}}
+
+
+.fansphere-premium .my-team-dashboard .club-stadium-credit{display:block;width:fit-content;max-width:100%;margin-top:7px;font-size:11px;line-height:1.4;color:#806b58;text-decoration:underline;text-underline-offset:2px}
+.fansphere-premium .my-team-dashboard .club-stadium-credit:hover{color:#af6048}
