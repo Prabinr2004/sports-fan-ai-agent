@@ -12,9 +12,7 @@ from sqlalchemy.orm import Session
 from app.api.profile import _get_or_create_local_user
 from app.database.session import get_db
 from app.models.progress import XPEvent
-from app.models.analysis import AnalysisTokenEvent
 from app.models.quiz import DailyQuizSnapshot
-from app.services.analysis_access import grant_quiz_token
 from app.services.progress import progress_summary, record_activity_day
 from app.services.quiz_questions import build_team_questions
 from app.services.quiz_progression import MAX_LEVEL, ROUNDS_PER_LEVEL, ROUNDS_TO_UNLOCK, level_progress, unlocked_level
@@ -455,29 +453,15 @@ async def submit_daily_quiz(submission: QuizSubmission, request: Request, db: Se
         XPEvent.source_id == source_id,
     ))
     xp_awarded = 0
+    # Gems are the sole spendable reward currency. Existing Analysis Token
+    # records remain untouched for historical/audit compatibility.
     analysis_token_awarded = False
     level_bonus_tokens = 0
     completed_level = None
 
     if not existing:
-        completion_count = rewarded_quiz_completions(db, user.id) + 1
         xp_awarded = 50 + correct * 10
         db.add(XPEvent(user_id=user.id, amount=xp_awarded, source_type="daily_quiz", source_id=source_id))
-        analysis_token_awarded = grant_quiz_token(db, user.id, source_id)
-        # Award each level milestone exactly once, in the same transaction as XP.
-        if completion_count in (5, 10, 15, 20, 25):
-            completed_level = completion_count // 5
-            bonus_amount = {1: 2, 2: 3, 3: 5, 4: 6, 5: 8}[completed_level]
-            bonus_id = f"level-{completed_level}"
-            previous_bonus = db.scalar(select(AnalysisTokenEvent).where(
-                AnalysisTokenEvent.user_id == user.id,
-                AnalysisTokenEvent.source_type == "quiz_level_bonus",
-                AnalysisTokenEvent.source_id == bonus_id,
-            ))
-            if previous_bonus is None:
-                db.add(AnalysisTokenEvent(user_id=user.id, amount=bonus_amount,
-                                          source_type="quiz_level_bonus", source_id=bonus_id))
-                level_bonus_tokens = bonus_amount
         record_activity_day(db, user.id)
         try:
             db.commit()
