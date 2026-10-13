@@ -483,12 +483,12 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-41",
-    "question": "Which Real Madrid player was sent off in the 2017 Champions League final?",
+    "question": "Which statement about Real Madrid's players in the 2017 Champions League final is correct?",
     "options": [
-      "Sergio Ramos",
+      "Sergio Ramos was sent off",
       "No Real Madrid player was sent off",
-      "Casemiro",
-      "Dani Carvajal"
+      "Casemiro was sent off",
+      "Dani Carvajal was sent off"
     ],
     "answer": 1,
     "min_level": 3
@@ -651,7 +651,7 @@ REAL_MADRID_LEVEL_3_QUESTIONS = [
   },
   {
     "id": "rm-l3-55",
-    "question": "Which Real Madrid player scored the 2024 Champions League semifinal winner against Bayern Munich?",
+    "question": "Who scored Real Madrid's decisive second goal against Bayern Munich in the 2024 Champions League semifinal second leg?",
     "options": [
       "Rodrygo",
       "Vinícius Júnior",
