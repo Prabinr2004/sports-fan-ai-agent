@@ -1,91 +1,148 @@
-# Sports Fan AI Agent
+# FanSphere V2 ⚽
+### The football fan hub — personalized, interactive, and AI-powered
 
-An AI-powered fan engagement platform that allows users to chat with an intelligent sports assistant, take quizzes, predict game outcomes, and earn rewards through continuous interaction.
+FanSphere is a full-stack football fan engagement platform combining club discovery, match insights, machine-learning predictions, daily quizzes, and a personalized AI assistant. Fans can follow clubs, explore fixtures and squads, make match picks for in-app XP, and track their progress through ranks, achievements, and leaderboards.
 
-## Overview
+> **Project evolution:** FanSphere V2 is a major redesign and expansion of my original **Sports Fan AI Agent** college project. The original version is preserved on the `main` branch and in the `Final_Proj/` archive. Active V2 development lives on `v2-development`.
 
-This project is an agentic AI system where the model does not just respond with text — it dynamically selects tools to perform actions such as generating quizzes, making predictions, and tracking user rewards.
+## What's new in V2?
 
-It also maintains long-term user memory to personalize interactions over time.
+| Area | Original Sports Fan AI Agent | FanSphere V2 |
+| --- | --- | --- |
+| Interface | HTML, CSS, JavaScript | React, TypeScript, Vite; responsive premium football dashboard |
+| AI | Tool-oriented sports agent prototype | In-app conversational FanSphere AI and separate match analysis |
+| Football experience | General sports assistant | Primary club, favorites, squad profiles, fixtures, results, match center |
+| Predictions | Early prediction tool | Historical-data ML match outlook, fan picks, prediction tracking |
+| Quizzes | Dynamic quiz prototype | Club-based quiz levels, daily rewarded challenge, streaks |
+| Rewards | Points, badges, leaderboard | Lifetime/spendable XP, ranks, achievements, Gems, analysis unlocks |
+| Persistence | SQLite user memory and activity | SQLAlchemy/SQLite-backed accounts, preferences, activity and rewards |
 
-## Key Features
+## Features
 
-* 💬 AI Sports Chat Assistant
-* 🧠 Tool-based Agent Architecture (Quiz, Prediction, Rewards)
-* 🏆 Dynamic Quiz Generation with difficulty levels
-* 📊 Game Outcome Prediction Engine
-* 🎯 Points, Badges & Leaderboard System
-* 💾 Persistent User Memory (SQLite)
+- **Personalized home:** primary-club hub, club pulse, next match, fan rank and daily challenge.
+- **My Team & Favorites:** club details, player profiles, followed teams, fixtures and recent results.
+- **Matches & Match Center:** match schedules, fan picks, recent form, team comparison and match analysis.
+- **ML match outlook:** estimated outcomes from a trained historical model; probabilities are uncertain, not guarantees.
+- **Daily Quiz:** club-specific questions, progressive levels, daily rewarded rounds, XP and streaks.
+- **Progress & community:** fan ranks, achievements, leaderboard, prediction record and profile.
+- **Gem Wallet:** view spendable XP and Gems, exchange XP, and track analysis unlocks.
+- **FanSphere AI:** authenticated football and app-help chat, available as a dedicated page and floating launcher. It uses limited account context; it **does not** retrieve live match data or perform account-changing actions through chat.
 
-## Tech Stack
+Fan picks and rewards are in-app engagement features, **not real-money betting**.
 
-* Python (FastAPI backend)
-* OpenRouter API (LLM orchestration)
-* SQLite (persistent storage)
-* HTML / CSS / JavaScript (frontend)
-* Agentic tool-based architecture (MCP-style design)
-* Deployed on Render
+## Technology
 
-## System Design
+| Layer | Stack |
+| --- | --- |
+| Frontend | React 19, TypeScript, Vite, Lucide icons, CSS |
+| Backend | Python, FastAPI, Pydantic, SQLAlchemy |
+| Database | SQLite locally; configurable SQLAlchemy database URL |
+| Football data | football-data.org integration and local fallback/caching logic |
+| AI | OpenRouter for assistant responses and optional match explanations |
+| Predictions | Python-based historical football ML pipeline |
+| Quality | Pytest backend tests; TypeScript check and Vite production build |
 
-The AI agent follows a tool-using architecture:
+## Architecture
 
-User Input → LLM → Tool Selection → Execution → Observation → Response
+```text
+React + TypeScript frontend
+       │
+       ▼
+FastAPI /api/v1
+       ├── Authentication and profiles
+       ├── Clubs, favorites, matches and football provider
+       ├── Quiz, predictions, XP, Gems and achievements
+       ├── Historical ML prediction services
+       └── FanSphere AI ──► OpenRouter (optional external LLM)
+       │
+       ▼
+SQLAlchemy + SQLite (local)
+```
 
-Available tools include:
+The **original V1** explored an agentic loop — user request → LLM → tool selection → execution → observation → response — with quiz, prediction, rewards and memory tools. **V2's current chat is intentionally narrower:** it answers questions using provided user context and does not invoke those tools or live football APIs. The quiz, prediction and reward systems operate through their own application features and endpoints.
 
-* Quiz generation
-* Sports prediction engine
-* Reward tracking system
-* User memory updates
+## Run locally
 
-## Data Persistence
+**Requirements:** Python 3, Node.js/npm, and optional API credentials for connected services.
 
-The system stores:
-
-* User profiles
-* Quiz history and scores
-* Predictions
-* Points and badges
-* Leaderboard data
-
-## Setup Instructions
-
-### Backend
+### 1. Clone and switch to V2
 
 ```bash
+git clone https://github.com/Prabinr2004/sports-fan-ai-agent.git
+cd sports-fan-ai-agent
+git switch v2-development
+```
+
+### 2. Start the backend
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r backend/requirements.txt
 cd backend
-pip install -r requirements.txt
+cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
-Server runs at:
+Configure `backend/.env` with your own `OPENROUTER_API_KEY` for AI chat and analysis. Football-provider features may require `FOOTBALL_API_KEY` and the provider base URL. Never commit actual credentials.
 
-```
-http://localhost:8000
-```
+Backend: **http://localhost:8000**  
+API documentation: **http://localhost:8000/docs**
 
-### Frontend
+### 3. Start the frontend
+
+In a second terminal, from the repository root:
 
 ```bash
 cd frontend
-python -m http.server 8001
+npm install
+npm run dev
 ```
 
-Open:
+Frontend: **http://localhost:5173**. Vite proxies `/api` requests to the local backend.
 
+### 4. Check the project
+
+```bash
+cd frontend
+npm run build
 ```
-http://localhost:8001
+
+Backend tests (from the repository root, with the Python environment active):
+
+```bash
+cd backend
+pytest
 ```
 
-## API Endpoints
+These are commands to run locally; they are not claims that every test has passed on this commit.
 
-* `POST /api/chat` → Chat with AI agent
-* `GET /api/user/<user_id>` → User profile
-* `GET /api/leaderboard` → Rankings
-* `GET /api/quiz` → Get quizzes
-* `POST /api/quiz/submit` → Submit answers
+## Configuration and security
 
-## Purpose
+- Use `backend/.env.example` and `frontend/.env.example` as templates.
+- Keep API keys, passwords, local databases, virtual environments and generated build files out of version control.
+- The backend protects chat behind authentication; keep API credentials on the server, not in frontend `VITE_*` variables.
+- Do not publish real user records, screenshots containing private information, or production database backups.
+- Football data availability depends on provider coverage and configuration. AI responses and model probabilities can be inaccurate.
 
-This project demonstrates an end-to-end AI agent system with tool use, persistent memory, and gamified user engagement.
+## Repository guide
+
+| Location | Purpose |
+| --- | --- |
+| `frontend/` | FanSphere V2 React app |
+| `backend/app/api/` | FastAPI endpoints |
+| `backend/app/services/` | Football, quiz, rewards and AI integrations |
+| `backend/app/ml/` | ML experiments, training and prediction utilities |
+| `backend/tests/` | Backend test suite |
+| `docs/` | Architecture and ML development notes |
+| `Final_Proj/` | Original project archive |
+| `V2_README.md` | Additional V2 development notes |
+
+## Project status
+
+**FanSphere V2 is an active portfolio project**, not a production service with guaranteed live data. Its current UI and core fan features are implemented, and ongoing work includes testing, reliability and deployment readiness.
+
+**Created and developed by Prabin Roka** · Computer Science, Mathematics & Digital Marketing student.
+
+---
+*Built to bring football fandom, AI and interactive learning into one experience.*
