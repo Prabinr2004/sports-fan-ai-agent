@@ -3,10 +3,14 @@ import { Bot, MessageCircle, Send, Sparkles, X } from "lucide-react";
 import "./fansphere-assistant.css";
 
 type ChatMessage = { role: "user" | "assistant"; content: string };
+let sharedMessages: ChatMessage[] = [];
+const chatListeners = new Set<(messages: ChatMessage[]) => void>();
+function appendMessage(message: ChatMessage) { sharedMessages = [...sharedMessages, message]; chatListeners.forEach(listener => listener(sharedMessages)); }
 const STARTERS = ["How does Daily Quiz work?", "Explain my XP and Gems", "Help me understand match predictions"];
 export default function FanSphereAssistant({ fullPage = false }: { fullPage?: boolean }) {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(sharedMessages);
+  useEffect(() => { chatListeners.add(setMessages); return () => { chatListeners.delete(setMessages); }; }, []);
   const [draft, setDraft] = useState("");
   const [busy, setBusy] = useState(false);
   const bottom = useRef<HTMLDivElement>(null);
@@ -16,7 +20,7 @@ export default function FanSphereAssistant({ fullPage = false }: { fullPage?: bo
     const message = (suggested ?? draft).trim();
     if (!message || busy) return;
     const history = messages.slice(-10);
-    setMessages(prev => [...prev, { role: "user", content: message }]);
+    appendMessage({ role: "user", content: message });
     setDraft(""); setBusy(true);
     try {
       const response = await fetch("/api/v1/chat", {
@@ -25,9 +29,9 @@ export default function FanSphereAssistant({ fullPage = false }: { fullPage?: bo
       });
       const data = await response.json();
       if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "Chat unavailable.");
-      setMessages(prev => [...prev, { role: "assistant", content: data.reply }]);
+      appendMessage({ role: "assistant", content: data.reply });
     } catch (error) {
-      setMessages(prev => [...prev, { role: "assistant", content: error instanceof Error ? error.message : "Chat unavailable. Try again." }]);
+      appendMessage({ role: "assistant", content: error instanceof Error ? error.message : "Chat unavailable. Try again." });
     } finally { setBusy(false); }
   }
   const visible = fullPage || open;
