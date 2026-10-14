@@ -136,7 +136,6 @@ These are commands to run locally; they are not claims that every test has passe
 | `backend/tests/` | Backend test suite |
 | `docs/` | Architecture and ML development notes |
 | `Final_Proj/` | Original project archive |
-| `V2_README.md` | Additional V2 development notes |
 
 ## Project status
 
