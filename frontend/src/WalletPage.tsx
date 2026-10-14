@@ -1,11 +1,13 @@
 import {useEffect,useState} from "react";
-import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History, Sparkles, Gift, Ticket} from "lucide-react";
+import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History, Sparkles, Gift, Ticket, CalendarCheck, PlayCircle} from "lucide-react";
 type WalletData={gems:number;spendable_xp:number;xp_per_gem:number};
 type WalletEvent={id:string;currency:"XP"|"GEM";amount:number;source:string;created_at:string|null};
 type Access={free_remaining:number;extra_remaining:number;gems_per_analysis:number};
+type EarnStatus={daily_login:{gems:number;claimed_today:boolean};rewarded_videos:{gems:number;available:boolean}};
 export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:number)=>void}){
  const [wallet,setWallet]=useState<WalletData|null>(null);
  const [access,setAccess]=useState<Access|null>(null);
+ const [earn,setEarn]=useState<EarnStatus|null>(null);
  const [quantity,setQuantity]=useState(2);
  const [history,setHistory]=useState<WalletEvent[]>([]);
  const [historyFilter,setHistoryFilter]=useState<"ALL"|"XP"|"GEM">("ALL");
@@ -14,9 +16,9 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
  const [message,setMessage]=useState("");
  const [error,setError]=useState("");
  async function refresh(){
-  const [w,a]=await Promise.all([fetch("/api/v1/economy"),fetch("/api/v1/analysis/access")]);
-  if(!w.ok||!a.ok)throw new Error("Could not load wallet.");
-  const walletData:WalletData=await w.json();setWallet(walletData);onBalanceChange?.(walletData.gems);setAccess(await a.json());
+  const [w,a,e]=await Promise.all([fetch("/api/v1/economy"),fetch("/api/v1/analysis/access"),fetch("/api/v1/economy/earn")]);
+  if(!w.ok||!a.ok||!e.ok)throw new Error("Could not load wallet.");
+  const walletData:WalletData=await w.json();setWallet(walletData);onBalanceChange?.(walletData.gems);setAccess(await a.json());setEarn(await e.json());
   try{const h=await fetch("/api/v1/economy/history");if(!h.ok)throw new Error("History unavailable.");const payload=await h.json();setHistory(payload.events||[]);setHistoryError("");}catch{setHistoryError("Could not load recent activity.");}
  }
  useEffect(()=>{refresh().catch(e=>setError(String(e)))},[]);
@@ -34,7 +36,7 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
  }
  const cost=quantity*(wallet?.xp_per_gem||200);
  return <div className="profile-page wallet-page" style={{maxWidth:1000}}>
-  <style>{`.wallet-history{margin:24px 0;padding:20px;border:1px solid #29475c;border-radius:16px;background:#0b1d2e}.wallet-history-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:15px}.wallet-history-heading h2{display:flex;align-items:center;gap:9px;margin:7px 0}.wallet-history-heading p{font-size:13px;color:#9db5c8}.wallet-history-filters{display:flex;gap:7px}.wallet-history-filters button{background:#10283a;color:#b6cad9;border:1px solid #35536b;border-radius:9px;padding:9px 14px;cursor:pointer}.wallet-history-filters button[aria-pressed="true"]{border-color:#72ecc7;color:#72ecc7;background:#143e3e}.wallet-history-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto;overscroll-behavior:contain;padding-right:6px;scrollbar-width:thin;scrollbar-color:#456b7d #0b1d2e}.wallet-history-list::-webkit-scrollbar{width:7px}.wallet-history-list::-webkit-scrollbar-thumb{background:#456b7d;border-radius:8px}.wallet-history-list::-webkit-scrollbar-track{background:#0b1d2e}.wallet-history-item{display:flex;align-items:center;gap:12px;padding:12px;background:#0e2639;border:1px solid #233e54;border-radius:12px}.wallet-history-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;flex-shrink:0}.wallet-history-icon.earned{color:#7cf3c7;background:#153c3d}.wallet-history-icon.spent{color:#ffbc8c;background:#3a2b2d}.wallet-history-details{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}.wallet-history-details strong{font-size:13px;text-transform:capitalize}.wallet-history-details small{color:#9db5c8;font-size:11px}.wallet-history-amount{font-size:13px;white-space:nowrap}.wallet-history-amount.earned{color:#7cf3c7}.wallet-history-amount.spent{color:#ffbc8c}.wallet-history-empty{padding:16px;color:#9db5c8}`}</style>
+  <style>{`.wallet-rewards-panel{margin-top:18px;padding:24px;border:1px solid #f0d9bf;border-radius:18px;background:#fffaf4;color:#213c56}.wallet-rewards-panel h2{margin:8px 0 4px;font-size:24px}.wallet-rewards-intro{margin:0 0 18px;color:#71859b;font-size:14px}.wallet-reward-list{display:grid;gap:12px}.wallet-reward-row{display:grid;grid-template-columns:46px minmax(0,1fr) auto;align-items:center;gap:16px;padding:18px;border:1px solid #eedfcc;border-radius:14px;background:#fff}.wallet-reward-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#fff0e6;color:#e47f57}.wallet-reward-copy{min-width:0}.wallet-reward-copy strong{display:block;font-size:16px;color:#213c56}.wallet-reward-copy p{margin:5px 0 0;color:#71859b;font-size:13px;line-height:1.5}.wallet-reward-action{display:flex;align-items:flex-end;flex-direction:column;gap:8px;min-width:155px}.wallet-reward-value{font-weight:750;color:#e07b56;font-size:15px}.wallet-reward-status{font-size:12px;color:#637990;font-weight:650}.wallet-reward-status.claimed{color:#248765}.wallet-reward-coming-soon{border:1px solid #d5dce1;border-radius:9px;padding:8px 13px;background:#f0f2f4;color:#687783;font-weight:700;cursor:not-allowed;opacity:1}@media(max-width:650px){.wallet-rewards-panel{padding:18px}.wallet-reward-row{grid-template-columns:40px minmax(0,1fr);gap:12px;padding:14px}.wallet-reward-icon{width:40px;height:40px}.wallet-reward-action{grid-column:2;align-items:flex-start;min-width:0;gap:6px}}.wallet-history{margin:24px 0;padding:20px;border:1px solid #29475c;border-radius:16px;background:#0b1d2e}.wallet-history-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:15px}.wallet-history-heading h2{display:flex;align-items:center;gap:9px;margin:7px 0}.wallet-history-heading p{font-size:13px;color:#9db5c8}.wallet-history-filters{display:flex;gap:7px}.wallet-history-filters button{background:#10283a;color:#b6cad9;border:1px solid #35536b;border-radius:9px;padding:9px 14px;cursor:pointer}.wallet-history-filters button[aria-pressed="true"]{border-color:#72ecc7;color:#72ecc7;background:#143e3e}.wallet-history-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto;overscroll-behavior:contain;padding-right:6px;scrollbar-width:thin;scrollbar-color:#456b7d #0b1d2e}.wallet-history-list::-webkit-scrollbar{width:7px}.wallet-history-list::-webkit-scrollbar-thumb{background:#456b7d;border-radius:8px}.wallet-history-list::-webkit-scrollbar-track{background:#0b1d2e}.wallet-history-item{display:flex;align-items:center;gap:12px;padding:12px;background:#0e2639;border:1px solid #233e54;border-radius:12px}.wallet-history-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;flex-shrink:0}.wallet-history-icon.earned{color:#7cf3c7;background:#153c3d}.wallet-history-icon.spent{color:#ffbc8c;background:#3a2b2d}.wallet-history-details{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}.wallet-history-details strong{font-size:13px;text-transform:capitalize}.wallet-history-details small{color:#9db5c8;font-size:11px}.wallet-history-amount{font-size:13px;white-space:nowrap}.wallet-history-amount.earned{color:#7cf3c7}.wallet-history-amount.spent{color:#ffbc8c}.wallet-history-empty{padding:16px;color:#9db5c8}`}</style>
   <span className="eyebrow">FANSPHERE ECONOMY</span><h1>Gem Wallet</h1>
   <p>One place to view Gems, exchange earned XP, and track match unlocks.</p>
   {error&&<p role="alert" style={{color:"#ff9da5"}}>{error}</p>}
@@ -55,6 +57,23 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
    <button className="primary-button" disabled={busy||wallet.spendable_xp<cost} onClick={exchange}>{busy?"Exchanging...":`Exchange ${cost} XP for ${quantity} Gems`}</button>
    {wallet.spendable_xp<cost&&<p style={{color:"#a9bfd3",marginTop:10}}>You need {cost-wallet.spendable_xp} more spendable XP for this exchange.</p>}
    {message&&<p role="status" style={{color:"#7cf3c7",marginTop:10}}>{message}</p>}
+  </section>
+  <section className="wallet-rewards-panel" aria-labelledby="wallet-rewards-title">
+   <span className="eyebrow">EARN GEMS</span>
+   <h2 id="wallet-rewards-title">Daily rewards</h2>
+   <p className="wallet-rewards-intro">Simple ways to earn more Gems for your FanSphere wallet.</p>
+   <div className="wallet-reward-list">
+    <div className="wallet-reward-row">
+     <span className="wallet-reward-icon"><CalendarCheck size={22}/></span>
+     <div className="wallet-reward-copy"><strong>Daily Login</strong><p>Get 1 Gem automatically on your first sign-in each UTC day.</p></div>
+     <div className="wallet-reward-action"><span className="wallet-reward-value">+1 Gem</span><span className={earn?.daily_login.claimed_today?"wallet-reward-status claimed":"wallet-reward-status"}>{earn?.daily_login.claimed_today?"✓ Claimed today":"Available on next sign-in"}</span></div>
+    </div>
+    <div className="wallet-reward-row">
+     <span className="wallet-reward-icon"><PlayCircle size={22}/></span>
+     <div className="wallet-reward-copy"><strong>Rewarded Videos</strong><p>Earn Gems by watching a video when this feature launches.</p></div>
+     <div className="wallet-reward-action"><span className="wallet-reward-value">+5 Gems</span><button type="button" className="wallet-reward-coming-soon" disabled>Coming Soon</button></div>
+    </div>
+   </div>
   </section>
   <p className="wallet-allowance" style={{marginTop:12}}>Today's allowance: {access?.free_remaining??0} free match remaining and {access?.extra_remaining??0} additional paid unlock slots. Slots are not free matches: each requires {access?.gems_per_analysis??2} Gems.</p>
   <section className="wallet-history">

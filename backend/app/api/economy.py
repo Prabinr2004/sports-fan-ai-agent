@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy import select
@@ -20,6 +22,18 @@ def get_economy(request: Request, db: Session = Depends(get_db)) -> dict:
     user = require_user(request, db)
     return {"gems": gem_balance(db, user.id), "spendable_xp": spendable_xp(db, user.id),
             "xp_per_gem": XP_PER_GEM}
+
+@router.get("/earn")
+def earn_status(request: Request, db: Session = Depends(get_db)) -> dict:
+    user = require_user(request, db)
+    today = datetime.now(timezone.utc).date().isoformat()
+    claimed = db.scalar(select(GemEvent.id).where(
+        GemEvent.user_id == user.id,
+        GemEvent.source_type == "daily_login",
+        GemEvent.source_id == today,
+    )) is not None
+    return {"daily_login": {"gems": 1, "claimed_today": claimed}, "rewarded_videos": {"gems": 5, "available": False}}
+
 
 @router.post("/exchange")
 def exchange(body: ExchangeRequest, request: Request, db: Session = Depends(get_db)) -> dict:

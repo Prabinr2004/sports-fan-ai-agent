@@ -1,7 +1,8 @@
-from datetime import date
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from sqlalchemy import func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 from app.models.gems import GemEvent
 from app.models.progress import XPEvent
@@ -40,3 +41,22 @@ def spend_analysis_gems(db: Session, user_id: int, match_id: str) -> None:
     if gem_balance(db, user_id) < GEMS_PER_ANALYSIS:
         raise ValueError("Not enough gems. Exchange XP to unlock another analysis.")
     db.add(GemEvent(user_id=user_id, amount=-GEMS_PER_ANALYSIS, source_type="match_analysis", source_id=match_id))
+
+def grant_daily_login_gem(db: Session, user_id: int) -> bool:
+    """Grant one Gem per UTC day on successful sign-in."""
+    today = datetime.now(timezone.utc).date().isoformat()
+    if db.scalar(select(GemEvent.id).where(
+        GemEvent.user_id == user_id,
+        GemEvent.source_type == "daily_login",
+        GemEvent.source_id == today,
+    )) is not None:
+        return False
+    try:
+        with db.begin_nested():
+            db.add(GemEvent(user_id=user_id, amount=1, source_type="daily_login", source_id=today))
+            db.flush()
+        db.commit()
+        return True
+    except IntegrityError:
+        db.rollback()
+        return False

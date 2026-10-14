@@ -11,6 +11,7 @@ from app.database.session import get_db
 from app.models.auth_session import AuthSession
 from app.models.user import User
 from app.services.auth_security import hash_password, new_session_token, token_digest, verify_password
+from app.services.gems import grant_daily_login_gem
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 COOKIE_NAME = "fansphere_session"
@@ -79,6 +80,7 @@ def register(payload: Registration, request: Request, response: Response, db: Se
         raise HTTPException(status_code=409, detail="An account with this email already exists.")
     db.refresh(user)
     _set_session(response, request, db, user)
+    grant_daily_login_gem(db, user.id)
     return {"user": _public_user(user)}
 
 
@@ -88,6 +90,7 @@ def login(payload: Credentials, request: Request, response: Response, db: Sessio
     if not user or not verify_password(payload.password, user.password_hash):
         raise HTTPException(status_code=401, detail="Invalid email or password.")
     _set_session(response, request, db, user)
+    grant_daily_login_gem(db, user.id)
     return {"user": _public_user(user)}
 
 
