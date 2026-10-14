@@ -7,12 +7,13 @@ let sharedMessages: ChatMessage[] = [];
 const chatListeners = new Set<(messages: ChatMessage[]) => void>();
 function appendMessage(message: ChatMessage) { sharedMessages = [...sharedMessages, message]; chatListeners.forEach(listener => listener(sharedMessages)); }
 function renderChatText(content: string) {
-  // Support both actual line breaks and literal "\\n" returned by some models.
   const normalized = content.replace(/\\n/g, "\n").replace(/\r\n/g, "\n");
-  // Some responses contain numbered entries in a single paragraph.
-  const lines = normalized.replace(/([^\n])\s+(?=\d{1,2}\.\s+)/g, "$1\n").split("\n");
+  // Split model output even when it omits spaces/newlines: **1.Team** or 1.Team.
+  const lines = normalized
+    .replace(/\*{0,2}(\d{1,2})\.\s*(?=[A-Za-zÀ-ÿ])/g, "\n$1. ")
+    .split("\n").filter((line) => line.trim().length > 0);
   return lines.map((line, index) => {
-    const numbered = line.match(/^\s*(\d{1,2})\.\s+(.+)$/);
+    const numbered = line.match(/^\s*(\d{1,2})\.\s*(.+)$/);
     const text = numbered ? numbered[2] : line;
     const parts = text.split(/(\*\*[^*]+\*\*)/g).map((part, partIndex) =>
       part.startsWith("**") && part.endsWith("**")
