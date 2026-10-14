@@ -6,6 +6,16 @@ type ChatMessage = { role: "user" | "assistant"; content: string };
 let sharedMessages: ChatMessage[] = [];
 const chatListeners = new Set<(messages: ChatMessage[]) => void>();
 function appendMessage(message: ChatMessage) { sharedMessages = [...sharedMessages, message]; chatListeners.forEach(listener => listener(sharedMessages)); }
+function renderChatText(content: string) {
+  return content.split("\\n").map((line, index) => {
+    const parts = line.split(/(\\*\\*[^*]+\\*\\*)/g).map((part, partIndex) =>
+      part.startsWith("**") && part.endsWith("**")
+        ? <strong key={partIndex}>{part.slice(2, -2)}</strong>
+        : part
+    );
+    return <span key={index} className="fs-chat-line">{parts}</span>;
+  });
+}
 const STARTERS = ["How does Daily Quiz work?", "Explain my XP and Gems", "Help me understand match predictions"];
 export default function FanSphereAssistant({ fullPage = false }: { fullPage?: boolean }) {
   const [open, setOpen] = useState(false);
@@ -42,7 +52,7 @@ export default function FanSphereAssistant({ fullPage = false }: { fullPage?: bo
       <div className="fs-chat-messages" aria-live="polite">
         <div className="fs-chat-intro"><div className="fs-chat-intro-icon"><Bot size={25}/></div><h3>What can I help you with?</h3><p>Ask about football, your fan journey, quizzes, XP, or how to use FanSphere.</p></div>
         {messages.length === 0 && <div className="fs-chat-starters">{STARTERS.map(q => <button key={q} type="button" onClick={() => void send(undefined, q)}>{q}</button>)}</div>}
-        {messages.map((m, i) => <div key={i} className={`fs-chat-bubble ${m.role}`}>{m.content}</div>)}
+        {messages.map((m, i) => <div key={i} className={`fs-chat-message fs-chat-message-${m.role}`}><span className="fs-chat-message-label">{m.role === "user" ? "You" : "FanSphere AI"}</span><div className={`fs-chat-bubble ${m.role}`}>{m.role === "assistant" ? renderChatText(m.content) : m.content}</div></div>)}
         {busy && <div className="fs-chat-bubble assistant">Thinking…</div>}
         <div ref={bottom}/>
       </div>
