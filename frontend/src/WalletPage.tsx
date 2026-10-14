@@ -33,18 +33,18 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
   finally{setBusy(false)}
  }
  const cost=quantity*(wallet?.xp_per_gem||200);
- return <div className="profile-page" style={{maxWidth:1000}}>
+ return <div className="profile-page wallet-page" style={{maxWidth:1000}}>
   <style>{`.wallet-history{margin:24px 0;padding:20px;border:1px solid #29475c;border-radius:16px;background:#0b1d2e}.wallet-history-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:15px}.wallet-history-heading h2{display:flex;align-items:center;gap:9px;margin:7px 0}.wallet-history-heading p{font-size:13px;color:#9db5c8}.wallet-history-filters{display:flex;gap:7px}.wallet-history-filters button{background:#10283a;color:#b6cad9;border:1px solid #35536b;border-radius:9px;padding:9px 14px;cursor:pointer}.wallet-history-filters button[aria-pressed="true"]{border-color:#72ecc7;color:#72ecc7;background:#143e3e}.wallet-history-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto;overscroll-behavior:contain;padding-right:6px;scrollbar-width:thin;scrollbar-color:#456b7d #0b1d2e}.wallet-history-list::-webkit-scrollbar{width:7px}.wallet-history-list::-webkit-scrollbar-thumb{background:#456b7d;border-radius:8px}.wallet-history-list::-webkit-scrollbar-track{background:#0b1d2e}.wallet-history-item{display:flex;align-items:center;gap:12px;padding:12px;background:#0e2639;border:1px solid #233e54;border-radius:12px}.wallet-history-icon{width:36px;height:36px;display:grid;place-items:center;border-radius:10px;flex-shrink:0}.wallet-history-icon.earned{color:#7cf3c7;background:#153c3d}.wallet-history-icon.spent{color:#ffbc8c;background:#3a2b2d}.wallet-history-details{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}.wallet-history-details strong{font-size:13px;text-transform:capitalize}.wallet-history-details small{color:#9db5c8;font-size:11px}.wallet-history-amount{font-size:13px;white-space:nowrap}.wallet-history-amount.earned{color:#7cf3c7}.wallet-history-amount.spent{color:#ffbc8c}.wallet-history-empty{padding:16px;color:#9db5c8}`}</style>
   <span className="eyebrow">FANSPHERE ECONOMY</span><h1>Gem Wallet</h1>
   <p>One place to view Gems, exchange earned XP, and track match unlocks.</p>
   {error&&<p role="alert" style={{color:"#ff9da5"}}>{error}</p>}
-  {wallet&&<><div className="profile-stat-grid wallet-summary-grid" style={{marginTop:30}}>
+  {wallet&&<><div className="profile-stat-grid wallet-summary-grid" style={{marginTop:16}}>
    <div><Gem/><span>Available Gems</span><strong>{wallet.gems}</strong></div>
    <div><Sparkles/><span>Spendable XP</span><strong>{wallet.spendable_xp}</strong></div>
    <div><Gift/><span>Free match today</span><strong>{access?.free_remaining??"—"}</strong></div>
    <div><Ticket/><span>Paid unlock slots left</span><strong>{access?.extra_remaining??"—"}</strong></div>
   </div>
-  <section className="profile-analysis-access wallet-exchange-panel" style={{marginTop:28,display:"block"}}>
+  <section className="profile-analysis-access wallet-exchange-panel" style={{marginTop:18,display:"block"}}>
    <span className="eyebrow">XP → GEMS</span><h2 style={{margin:"8px 0"}}>Exchange XP for Gems</h2>
    <p style={{marginBottom:12}}>1 Gem costs {wallet.xp_per_gem} spendable XP. An additional match costs {access?.gems_per_analysis??2} Gems. Lifetime XP and your level do not decrease.</p>
    <label htmlFor="gem-quantity" style={{display:"block",marginBottom:6}}>Number of Gems</label>
@@ -56,7 +56,7 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
    {wallet.spendable_xp<cost&&<p style={{color:"#a9bfd3",marginTop:10}}>You need {cost-wallet.spendable_xp} more spendable XP for this exchange.</p>}
    {message&&<p role="status" style={{color:"#7cf3c7",marginTop:10}}>{message}</p>}
   </section>
-  <p style={{marginTop:16}}>Today's allowance: {access?.free_remaining??0} free match remaining and {access?.extra_remaining??0} additional paid unlock slots. Slots are not free matches: each requires {access?.gems_per_analysis??2} Gems.</p>
+  <p className="wallet-allowance" style={{marginTop:12}}>Today's allowance: {access?.free_remaining??0} free match remaining and {access?.extra_remaining??0} additional paid unlock slots. Slots are not free matches: each requires {access?.gems_per_analysis??2} Gems.</p>
   <section className="wallet-history">
    <div className="wallet-history-heading"><div><span className="eyebrow">REWARDS LEDGER</span><h2><History size={22}/> Activity history</h2><p>Recent earned and spent XP and Gems, newest first.</p></div><div className="wallet-history-filters">{(["ALL","XP","GEM"] as const).map(filter=><button type="button" key={filter} aria-pressed={historyFilter===filter} onClick={()=>setHistoryFilter(filter)}>{filter==="ALL"?"All":filter==="XP"?"XP":"Gems"}</button>)}</div></div>
    {historyError&&<p role="alert">{historyError}</p>}
