@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.analysis import router as analysis_router
+from app.api.chat import router as chat_router
 from app.api.auth import router as auth_router
 from app.api.health import router as health_router
 from app.api.economy import router as economy_router
@@ -38,6 +39,7 @@ def create_app() -> FastAPI:
     app.include_router(health_router, prefix=settings.api_v1_prefix)
     app.include_router(auth_router, prefix=settings.api_v1_prefix)
     app.include_router(analysis_router, prefix=settings.api_v1_prefix)
+    app.include_router(chat_router, prefix=settings.api_v1_prefix)
     app.include_router(economy_router, prefix=settings.api_v1_prefix)
     app.include_router(teams_router, prefix=settings.api_v1_prefix)
     app.include_router(profile_router, prefix=settings.api_v1_prefix)
