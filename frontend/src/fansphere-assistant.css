@@ -37,3 +37,13 @@
 .fansphere-premium .fs-assistant-floating .fs-chat-header{background:linear-gradient(115deg,#fff1df,#fffaf5)}
 .fansphere-premium .fs-assistant-floating .fs-chat-compose,
 .fansphere-premium .fs-assistant-floating .fs-chat-disclaimer{background:#fffdf9}
+
+/* Readable chat turns and basic assistant Markdown formatting */
+.fs-chat-message{display:flex;flex-direction:column;gap:5px;max-width:90%;min-width:0}
+.fs-chat-message-user{align-self:flex-end;align-items:flex-end}
+.fs-chat-message-assistant{align-self:flex-start;align-items:flex-start}
+.fs-chat-message-label{font-size:10px;font-weight:700;letter-spacing:.04em;color:#8492a1;padding:0 5px}
+.fs-chat-message .fs-chat-bubble{max-width:100%;min-width:0;white-space:normal}
+.fs-chat-line{display:block;min-height:1.45em;overflow-wrap:anywhere}
+.fs-chat-line strong{font-weight:750}
+.fs-chat-message+.fs-chat-message{margin-top:4px}
