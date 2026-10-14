@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://fansphere-v2-api.onrender.com/api/:path*"
+    }
+  ]
+}
