@@ -3,6 +3,16 @@
 
 FanSphere is a full-stack football fan engagement platform combining club discovery, match insights, machine-learning predictions, daily quizzes, and a personalized AI assistant. Fans can follow clubs, explore fixtures and squads, make match picks for in-app XP, and track their progress through ranks, achievements, and leaderboards.
 
+## Live application
+
+**[Launch FanSphere V2](https://fansphere-v2.vercel.app/)** — deployed frontend on Vercel.
+
+- **Backend health:** [FanSphere V2 API](https://fansphere-v2-api.onrender.com/api/v1/health) (Render)
+- **Production database:** Neon PostgreSQL
+- **Active branch:** `v2-development`
+
+The application is live and under active development; not all features or live football information are guaranteed to be available at all times.
+
 > **Project evolution:** FanSphere V2 is a major redesign and expansion of my original **Sports Fan AI Agent** college project. The original version is preserved on the `main` branch and in the `Final_Proj/` archive. Active V2 development lives on `v2-development`.
 
 ## What's new in V2?
@@ -15,7 +25,7 @@ FanSphere is a full-stack football fan engagement platform combining club discov
 | Predictions | Early prediction tool | Historical-data ML match outlook, fan picks, prediction tracking |
 | Quizzes | Dynamic quiz prototype | Club-based quiz levels, daily rewarded challenge, streaks |
 | Rewards | Points, badges, leaderboard | Lifetime/spendable XP, ranks, achievements, Gems, analysis unlocks |
-| Persistence | SQLite user memory and activity | SQLAlchemy/SQLite-backed accounts, preferences, activity and rewards |
+| Persistence | SQLite user memory and activity | SQLAlchemy with SQLite locally and Neon PostgreSQL in production |
 
 ## Features
 
@@ -36,7 +46,7 @@ Fan picks and rewards are in-app engagement features, **not real-money betting**
 | --- | --- |
 | Frontend | React 19, TypeScript, Vite, Lucide icons, CSS |
 | Backend | Python, FastAPI, Pydantic, SQLAlchemy |
-| Database | SQLite locally; configurable SQLAlchemy database URL |
+| Database | SQLite locally; Neon PostgreSQL in production |
 | Football data | football-data.org integration and local fallback/caching logic |
 | AI | OpenRouter for assistant responses and optional match explanations |
 | Predictions | Python-based historical football ML pipeline |
@@ -56,7 +66,7 @@ FastAPI /api/v1
        └── FanSphere AI ──► OpenRouter (optional external LLM)
        │
        ▼
-SQLAlchemy + SQLite (local)
+SQLAlchemy + SQLite (local) / Neon PostgreSQL (production)
 ```
 
 The **original V1** explored an agentic loop — user request → LLM → tool selection → execution → observation → response — with quiz, prediction, rewards and memory tools. **V2's chat uses a bounded, read-only tool workflow:** it can retrieve the signed-in fan's wallet, quiz progress and saved match picks from the application database. It does not invoke live football APIs, modify account data, spend Gems or place predictions. The quiz, prediction and reward systems operate through their own application features and endpoints.
@@ -146,7 +156,7 @@ Keep local `backend/app/ml/artifacts/` files and databases safe; do not delete, 
 
 ## Project status
 
-**FanSphere V2 is an active portfolio project**, not a production service with guaranteed live data. Its current UI and core fan features are implemented, and ongoing work includes testing, reliability and deployment readiness.
+**FanSphere V2 is a live, actively developed portfolio project.** The frontend is deployed on Vercel, the FastAPI backend on Render, and production account data is stored in Neon PostgreSQL. Ongoing work includes testing, reliability, and improvements to football information freshness; live data availability is not guaranteed.
 
 **Created and developed by Prabin Roka** · Computer Science, Mathematics & Digital Marketing student.
 
