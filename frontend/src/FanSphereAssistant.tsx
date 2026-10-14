@@ -7,13 +7,21 @@ let sharedMessages: ChatMessage[] = [];
 const chatListeners = new Set<(messages: ChatMessage[]) => void>();
 function appendMessage(message: ChatMessage) { sharedMessages = [...sharedMessages, message]; chatListeners.forEach(listener => listener(sharedMessages)); }
 function renderChatText(content: string) {
-  return content.split("\\n").map((line, index) => {
-    const parts = line.split(/(\\*\\*[^*]+\\*\\*)/g).map((part, partIndex) =>
+  // Support both actual line breaks and literal "\\n" returned by some models.
+  const normalized = content.replace(/\\n/g, "\n").replace(/\r\n/g, "\n");
+  // Some responses contain numbered entries in a single paragraph.
+  const lines = normalized.replace(/([^\n])\s+(?=\d{1,2}\.\s+)/g, "$1\n").split("\n");
+  return lines.map((line, index) => {
+    const numbered = line.match(/^\s*(\d{1,2})\.\s+(.+)$/);
+    const text = numbered ? numbered[2] : line;
+    const parts = text.split(/(\*\*[^*]+\*\*)/g).map((part, partIndex) =>
       part.startsWith("**") && part.endsWith("**")
         ? <strong key={partIndex}>{part.slice(2, -2)}</strong>
         : part
     );
-    return <span key={index} className="fs-chat-line">{parts}</span>;
+    return <span key={index} className={numbered ? "fs-chat-line fs-chat-numbered" : "fs-chat-line"}>
+      {numbered && <span className="fs-chat-number">{numbered[1]}.</span>}{parts}
+    </span>;
   });
 }
 const STARTERS = ["How does Daily Quiz work?", "Explain my XP and Gems", "Help me understand match predictions"];
