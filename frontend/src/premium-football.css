@@ -676,3 +676,22 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .profile-page .profile-progress .progress-track{height:9px!important;background:#f0e5d9!important;border:0!important;border-radius:999px!important;overflow:hidden}
 .fansphere-premium .profile-page .fan-rank-progress .progress-track>span,
 .fansphere-premium .profile-page .profile-progress .progress-track>span{display:block;height:100%;border-radius:999px!important}
+
+/* Refined FanSphere navigation and identity */
+.fansphere-premium .sidebar{padding:25px 15px 19px!important;background:linear-gradient(180deg,#fffdf9 0%,#fffaf5 100%)!important}
+.fansphere-premium .brand{padding:5px 7px 23px!important;gap:12px!important;margin-bottom:13px;border-bottom:1px solid #f0e6dc}
+.fansphere-premium .brand-mark{position:relative;flex:0 0 46px;width:46px;height:46px;border-radius:15px;background:linear-gradient(145deg,#f7b16d,#ef7967 75%)!important;box-shadow:0 6px 17px #e8917640!important;color:#fff!important}
+.fansphere-premium .brand-mark-spark{position:absolute;right:5px;top:2px;color:#fff8dc!important;font-size:12px!important;line-height:1;letter-spacing:0!important}
+.fansphere-premium .brand strong{font-size:20px!important;letter-spacing:-.045em;color:#20364e;line-height:1.15}
+.fansphere-premium .brand div:last-child>span{font-size:8px!important;font-weight:850;letter-spacing:.115em!important;color:#b7825c!important}
+.fansphere-premium .sidebar nav{gap:5px!important}
+.fansphere-premium .sidebar .nav-item{min-height:43px;border-radius:12px!important;padding:11px 13px!important;gap:13px!important;font-size:13px;font-weight:730;transition:background .18s,color .18s,transform .18s}
+.fansphere-premium .sidebar .nav-item svg{flex-shrink:0;stroke-width:1.9}
+.fansphere-premium .sidebar .nav-item.active{background:#fbe9e1!important;color:#aa493d!important;box-shadow:inset 3px 0 #ef806b!important}
+.fansphere-premium .sidebar .nav-item.active svg{color:#d36c58}
+.fansphere-premium .sidebar-card{position:relative;overflow:hidden;padding:15px 13px!important;border-radius:16px!important;background:linear-gradient(115deg,#fff2e4,#fff9ef)!important;border:1px solid #efd9c4!important;box-shadow:0 5px 16px #b9875c0b}
+.fansphere-premium .sidebar-card:after{content:"";position:absolute;right:-20px;top:-26px;width:83px;height:83px;border:1px solid #e9bf9d55;border-radius:50%;pointer-events:none}
+.fansphere-premium .sidebar-card svg{width:25px;height:25px;color:#d58a43!important}
+.fansphere-premium .sidebar-card span{font-size:10px;font-weight:800;letter-spacing:.075em}
+.fansphere-premium .sidebar-card strong{font-size:18px;color:#253c55}
+@media(max-width:800px){.fansphere-premium .sidebar{padding:15px 9px!important}.fansphere-premium .brand{gap:7px!important}.fansphere-premium .brand-mark{width:38px;height:38px;flex-basis:38px}.fansphere-premium .brand strong{font-size:16px!important}.fansphere-premium .brand div:last-child>span{font-size:7px!important}}
