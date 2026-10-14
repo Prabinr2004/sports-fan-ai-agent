@@ -1,0 +1,22 @@
+.fansphere-premium .fs-assistant-page{max-width:980px;margin:0 auto;min-height:calc(100vh - 140px)}
+.fansphere-premium .fs-assistant-page .fs-chat-panel{height:min(760px,calc(100vh - 160px));min-height:490px}
+.fs-assistant-floating{position:fixed;bottom:24px;right:24px;z-index:110}
+.fs-chat-launcher{margin-left:auto;display:flex;align-items:center;justify-content:center;width:58px;height:58px;border:0;border-radius:19px;background:linear-gradient(135deg,#f8a66f,#ec715f);color:white;box-shadow:0 9px 26px #9d4e3e40;cursor:pointer}
+.fs-chat-panel{display:flex;flex-direction:column;overflow:hidden;background:#fffdf9;border:1px solid #eeded0;border-radius:20px;box-shadow:0 16px 48px #21314a20;color:#203953}
+.fs-assistant-floating .fs-chat-panel{position:absolute;right:0;bottom:74px;width:min(400px,calc(100vw - 28px));height:min(570px,calc(100vh - 120px))}
+.fs-chat-header{display:flex;align-items:center;gap:12px;padding:17px 19px;background:linear-gradient(115deg,#fff1df,#fffaf5);border-bottom:1px solid #f0e1d4}
+.fs-chat-avatar,.fs-chat-intro-icon{display:flex;align-items:center;justify-content:center;background:#fce1d3;color:#d15d4c;border-radius:13px;width:42px;height:42px}
+.fs-chat-header strong{display:block;font-size:16px;color:#1c354f}.fs-chat-header span{display:flex;align-items:center;gap:5px;color:#98775f;font-size:12px;margin-top:3px}
+.fs-chat-header>button{margin-left:auto;background:transparent;border:0;color:#866c60;cursor:pointer}
+.fs-chat-messages{flex:1;min-height:0;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:13px}
+.fs-chat-intro{text-align:center;margin:15px auto 5px;max-width:310px}.fs-chat-intro-icon{margin:0 auto 12px}.fs-chat-intro h3{font-size:20px;margin:0 0 8px;color:#203953}.fs-chat-intro p{color:#718198;font-size:13px;line-height:1.5;margin:0}
+.fs-chat-starters{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.fs-chat-starters button{border:1px solid #eed8c7;background:#fff7ef;color:#a95844;border-radius:12px;padding:9px 11px;cursor:pointer;font-size:12px}
+.fs-chat-bubble{white-space:pre-wrap;overflow-wrap:anywhere;max-width:88%;padding:11px 14px;border-radius:15px;font-size:13px;line-height:1.55}
+.fs-chat-bubble.user{align-self:flex-end;background:#ed806a;color:white;border-bottom-right-radius:4px}
+.fs-chat-bubble.assistant{align-self:flex-start;background:#f6f2ec;color:#263c56;border-bottom-left-radius:4px}
+.fs-chat-compose{display:flex;gap:9px;padding:13px 15px;border-top:1px solid #f0e5db}
+.fs-chat-compose input{flex:1;min-width:0;background:#faf7f2;border:1px solid #ebded2;border-radius:11px;padding:11px;color:#203953;font:inherit;font-size:13px}
+.fs-chat-compose button{display:flex;align-items:center;justify-content:center;width:43px;border:0;border-radius:11px;background:#ed806a;color:white;cursor:pointer}
+.fs-chat-compose button:disabled{opacity:.5;cursor:not-allowed}
+.fs-chat-disclaimer{padding:0 15px 12px;color:#8b96a3;text-align:center;font-size:10px}
+@media(max-width:650px){.fs-assistant-floating{right:12px;bottom:12px}.fs-assistant-floating .fs-chat-panel{bottom:70px;height:min(550px,calc(100dvh - 110px))}.fansphere-premium .fs-assistant-page .fs-chat-panel{height:calc(100dvh - 150px);min-height:400px}}
