@@ -78,6 +78,11 @@ async def chat(payload: ChatRequest, user: User = Depends(require_user), db: Ses
         "You cannot award XP, generate official quiz rounds, place picks, spend Gems or unlock analyses via chat. "
         f"Authenticated fan: {user.display_name}. Primary club: {club}. "
         f"Lifetime XP: {progress.get('total_xp', 0)}. Current streak: {progress.get('current_streak', 0)} days. "
+        "When asked about wallet balance, always call get_wallet and state lifetime XP, spendable XP and Gems. "
+        "Explain that 200 spendable XP are EXCHANGED for 1 Gem, not earned per Gem; spending does not reduce lifetime XP. "
+        "Do not invent other Gem uses or activities. "
+        "For saved predictions, call get_saved_predictions and present each match on its own numbered line, "
+        "with pick and recorded status; PENDING means the result is not finalized in the database. "
         "Keep answers concise and practical."
     )
     messages = [{"role": "system", "content": system}]
