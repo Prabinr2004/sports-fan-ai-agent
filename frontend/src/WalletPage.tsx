@@ -1,5 +1,5 @@
 import {useEffect,useState} from "react";
-import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History} from "lucide-react";
+import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History, Sparkles, Gift, Ticket} from "lucide-react";
 type WalletData={gems:number;spendable_xp:number;xp_per_gem:number};
 type WalletEvent={id:string;currency:"XP"|"GEM";amount:number;source:string;created_at:string|null};
 type Access={free_remaining:number;extra_remaining:number;gems_per_analysis:number};
@@ -38,13 +38,13 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
   <span className="eyebrow">FANSPHERE ECONOMY</span><h1>Gem Wallet</h1>
   <p>One place to view Gems, exchange earned XP, and track match unlocks.</p>
   {error&&<p role="alert" style={{color:"#ff9da5"}}>{error}</p>}
-  {wallet&&<><div className="profile-stat-grid" style={{marginTop:24}}>
+  {wallet&&<><div className="profile-stat-grid wallet-summary-grid" style={{marginTop:30}}>
    <div><Gem/><span>Available Gems</span><strong>{wallet.gems}</strong></div>
-   <div><Gem/><span>Spendable XP</span><strong>{wallet.spendable_xp}</strong></div>
-   <div><Gem/><span>Free match today</span><strong>{access?.free_remaining??"—"}</strong></div>
-   <div><Gem/><span>Paid unlock slots left</span><strong>{access?.extra_remaining??"—"}</strong></div>
+   <div><Sparkles/><span>Spendable XP</span><strong>{wallet.spendable_xp}</strong></div>
+   <div><Gift/><span>Free match today</span><strong>{access?.free_remaining??"—"}</strong></div>
+   <div><Ticket/><span>Paid unlock slots left</span><strong>{access?.extra_remaining??"—"}</strong></div>
   </div>
-  <section className="profile-analysis-access" style={{marginTop:22,display:"block"}}>
+  <section className="profile-analysis-access wallet-exchange-panel" style={{marginTop:28,display:"block"}}>
    <span className="eyebrow">XP → GEMS</span><h2 style={{margin:"8px 0"}}>Exchange XP for Gems</h2>
    <p style={{marginBottom:12}}>1 Gem costs {wallet.xp_per_gem} spendable XP. An additional match costs {access?.gems_per_analysis??2} Gems. Lifetime XP and your level do not decrease.</p>
    <label htmlFor="gem-quantity" style={{display:"block",marginBottom:6}}>Number of Gems</label>
