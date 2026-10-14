@@ -10,7 +10,7 @@ FanSphere is a full-stack football fan engagement platform combining club discov
 | Area | Original Sports Fan AI Agent | FanSphere V2 |
 | --- | --- | --- |
 | Interface | HTML, CSS, JavaScript | React, TypeScript, Vite; responsive premium football dashboard |
-| AI | Tool-oriented sports agent prototype | In-app conversational FanSphere AI and separate match analysis |
+| AI | Tool-oriented sports agent prototype | Authenticated read-only tool-using FanSphere AI and separate match analysis |
 | Football experience | General sports assistant | Primary club, favorites, squad profiles, fixtures, results, match center |
 | Predictions | Early prediction tool | Historical-data ML match outlook, fan picks, prediction tracking |
 | Quizzes | Dynamic quiz prototype | Club-based quiz levels, daily rewarded challenge, streaks |
@@ -26,7 +26,7 @@ FanSphere is a full-stack football fan engagement platform combining club discov
 - **Daily Quiz:** club-specific questions, progressive levels, daily rewarded rounds, XP and streaks.
 - **Progress & community:** fan ranks, achievements, leaderboard, prediction record and profile.
 - **Gem Wallet:** view spendable XP and Gems, exchange XP, and track analysis unlocks.
-- **FanSphere AI:** authenticated football and app-help chat, available as a dedicated page and floating launcher. It uses limited account context; it **does not** retrieve live match data or perform account-changing actions through chat.
+- **FanSphere AI:** authenticated football and app-help chat, available as a dedicated page and floating launcher. It uses authenticated, read-only tools to retrieve wallet balances, quiz progression and saved match picks. It **does not** retrieve live match data or perform account-changing actions through chat.
 
 Fan picks and rewards are in-app engagement features, **not real-money betting**.
 
@@ -59,7 +59,7 @@ FastAPI /api/v1
 SQLAlchemy + SQLite (local)
 ```
 
-The **original V1** explored an agentic loop — user request → LLM → tool selection → execution → observation → response — with quiz, prediction, rewards and memory tools. **V2's current chat is intentionally narrower:** it answers questions using provided user context and does not invoke those tools or live football APIs. The quiz, prediction and reward systems operate through their own application features and endpoints.
+The **original V1** explored an agentic loop — user request → LLM → tool selection → execution → observation → response — with quiz, prediction, rewards and memory tools. **V2's chat uses a bounded, read-only tool workflow:** it can retrieve the signed-in fan's wallet, quiz progress and saved match picks from the application database. It does not invoke live football APIs, modify account data, spend Gems or place predictions. The quiz, prediction and reward systems operate through their own application features and endpoints.
 
 ## Run locally
 
