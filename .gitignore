@@ -1,21 +1,52 @@
-# Python
+# Python and tests
 __pycache__/
 *.py[cod]
 .venv/
 venv/
 .pytest_cache/
-*.db
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
 
-# Environment/secrets
+# Local databases, journals and backups
+*.db
+*.sqlite
+*.sqlite3
+*.db-*
+*.sqlite-*
+*.sqlite3-*
+*.db.bak
+*.db.backup
+
+# Environment files and credentials
 .env
 .env.*
 !.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets.json
+credentials.json
 
-# Node/Vite
+# Node / Vite
 node_modules/
 dist/
 .vite/
+coverage/
+*.tsbuildinfo
 
-# macOS/editor
+# Local logs, temporary files
+*.log
+logs/
+tmp/
+temp/
+*.swp
+*.swo
+
+# macOS and editors
 .DS_Store
+Thumbs.db
 .vscode/
+.idea/
