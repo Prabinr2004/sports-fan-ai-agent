@@ -20,3 +20,12 @@
 .fs-chat-compose button:disabled{opacity:.5;cursor:not-allowed}
 .fs-chat-disclaimer{padding:0 15px 12px;color:#8b96a3;text-align:center;font-size:10px}
 @media(max-width:650px){.fs-assistant-floating{right:12px;bottom:12px}.fs-assistant-floating .fs-chat-panel{bottom:70px;height:min(550px,calc(100dvh - 110px))}.fansphere-premium .fs-assistant-page .fs-chat-panel{height:calc(100dvh - 150px);min-height:400px}}
+
+/* Floating chat: frosted-glass treatment leaves dashboard context visible. */
+.fansphere-premium .fs-assistant-floating .fs-chat-panel{background:rgba(255,253,249,.84);-webkit-backdrop-filter:blur(13px) saturate(115%);backdrop-filter:blur(13px) saturate(115%);border-color:rgba(238,222,208,.85);box-shadow:0 18px 52px rgba(33,49,74,.16)}
+.fansphere-premium .fs-assistant-floating .fs-chat-header{background:rgba(255,241,223,.78)}
+.fansphere-premium .fs-assistant-floating .fs-chat-messages{background:transparent}
+.fansphere-premium .fs-assistant-floating .fs-chat-compose{background:rgba(255,253,249,.72)}
+.fansphere-premium .fs-assistant-floating .fs-chat-disclaimer{background:rgba(255,253,249,.72)}
+.fansphere-premium .fs-chat-intro-icon{background:linear-gradient(135deg,#ffe3d3,#f9c5b4);color:#d15d4c}
+@media(prefers-reduced-transparency:reduce){.fansphere-premium .fs-assistant-floating .fs-chat-panel{background:#fffdf9;-webkit-backdrop-filter:none;backdrop-filter:none}}
