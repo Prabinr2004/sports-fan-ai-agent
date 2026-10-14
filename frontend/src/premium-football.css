@@ -667,3 +667,9 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .profile-page .fan-rank-progress>span,
 .fansphere-premium .profile-page .profile-progress-track>span,
 .fansphere-premium .profile-page .level-progress-track>span{background:linear-gradient(90deg,#e7b65a,#ee8b70)!important}
+
+/* Profile rank and level: target the actual shared .progress-track elements */
+.fansphere-premium .profile-page .fan-rank-progress .progress-track,
+.fansphere-premium .profile-page .profile-progress .progress-track{background:#f0e2d1!important;border-radius:999px!important;overflow:hidden}
+.fansphere-premium .profile-page .fan-rank-progress .progress-track>span,
+.fansphere-premium .profile-page .profile-progress .progress-track>span{background:linear-gradient(90deg,#e4b65d,#ee8b70)!important;border-radius:999px!important}
