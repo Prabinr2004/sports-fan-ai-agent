@@ -51,3 +51,9 @@
 .fs-chat-numbered{display:flex;align-items:baseline;gap:7px;padding:5px 0;border-bottom:1px solid rgba(32,57,83,.07)}
 .fs-chat-numbered:last-child{border-bottom:0}
 .fs-chat-number{flex:0 0 20px;font-weight:700;color:#d46b58}
+
+/* Prediction entries use a vertical flow, never two text columns. */
+.fs-chat-message .fs-chat-numbered{display:block;position:relative;padding:9px 2px 9px 27px;line-height:1.55;overflow-wrap:anywhere}
+.fs-chat-message .fs-chat-numbered .fs-chat-number{position:absolute;left:2px;top:9px;display:inline-block;width:22px}
+.fs-chat-message-assistant{width:100%;max-width:100%;min-width:0}
+.fs-chat-message-assistant .fs-chat-bubble{width:100%;box-sizing:border-box}
