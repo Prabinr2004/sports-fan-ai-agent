@@ -127,6 +127,9 @@ These are commands to run locally; they are not claims that every test has passe
 
 ## Repository guide
 
+The repository intentionally preserves both generations of the project. `main` remains the original V1 baseline, while `v2-development` contains the active V2 application and the `Final_Proj/` V1 archive. Do not merge V2 into `main` until deployment checks are complete.
+
+
 | Location | Purpose |
 | --- | --- |
 | `frontend/` | FanSphere V2 React app |
@@ -135,7 +138,11 @@ These are commands to run locally; they are not claims that every test has passe
 | `backend/app/ml/` | ML experiments, training and prediction utilities |
 | `backend/tests/` | Backend test suite |
 | `docs/` | Architecture and ML development notes |
-| `Final_Proj/` | Original project archive |
+| `Final_Proj/` | Original project archive; retained for project history |
+
+### Local-only files
+
+Keep local `backend/app/ml/artifacts/` files and databases safe; do not delete, move, or commit them without reviewing their contents and deployment needs. `frontend/package-lock.json` is currently generated locally and should be reviewed for a future reproducible-dependency commit. Neither is required to be changed for this documentation update.
 
 ## Project status
 
