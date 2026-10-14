@@ -695,3 +695,8 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .sidebar-card span{font-size:10px;font-weight:800;letter-spacing:.075em}
 .fansphere-premium .sidebar-card strong{font-size:18px;color:#253c55}
 @media(max-width:800px){.fansphere-premium .sidebar{padding:15px 9px!important}.fansphere-premium .brand{gap:7px!important}.fansphere-premium .brand-mark{width:38px;height:38px;flex-basis:38px}.fansphere-premium .brand strong{font-size:16px!important}.fansphere-premium .brand div:last-child>span{font-size:7px!important}}
+
+/* Match model explanation: readable, quiet and clearly separated metadata */
+.fansphere-premium .model-outlook .model-caption{display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px;margin:12px 0 0;padding:10px 12px;border:1px solid #f0e4d8;border-radius:10px;background:#fffaf4;color:#667b90!important;font-size:12px;line-height:1.55}
+.fansphere-premium .model-outlook .model-caption strong{color:#30465d;font-weight:800}
+.fansphere-premium .model-outlook .model-caption-version{display:block;flex-basis:100%;color:#9b806e;font-size:10px;letter-spacing:.015em}
