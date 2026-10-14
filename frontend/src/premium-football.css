@@ -661,15 +661,18 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 
 
 /* Profile progression: warm tracks and gold-to-coral fills */
-.fansphere-premium .profile-page .fan-rank-progress,
-.fansphere-premium .profile-page .profile-progress-track,
-.fansphere-premium .profile-page .level-progress-track{background:#eee1d2!important}
-.fansphere-premium .profile-page .fan-rank-progress>span,
-.fansphere-premium .profile-page .profile-progress-track>span,
-.fansphere-premium .profile-page .level-progress-track>span{background:linear-gradient(90deg,#e7b65a,#ee8b70)!important}
+/* Progress tracks are styled below without coloring their outer containers. */
 
 /* Profile rank and level: target the actual shared .progress-track elements */
 .fansphere-premium .profile-page .fan-rank-progress .progress-track,
 .fansphere-premium .profile-page .profile-progress .progress-track{background:#f0e2d1!important;border-radius:999px!important;overflow:hidden}
 .fansphere-premium .profile-page .fan-rank-progress .progress-track>span,
 .fansphere-premium .profile-page .profile-progress .progress-track>span{background:linear-gradient(90deg,#e4b65d,#ee8b70)!important;border-radius:999px!important}
+
+/* Keep the rank label outside the track; eliminate the rectangular shaded band */
+.fansphere-premium .profile-page .fan-rank-progress{background:transparent!important;border:0!important;padding:0!important}
+.fansphere-premium .profile-page .fan-rank-progress-top{background:transparent!important;border:0!important;padding:0!important;margin-bottom:10px!important}
+.fansphere-premium .profile-page .fan-rank-progress .progress-track,
+.fansphere-premium .profile-page .profile-progress .progress-track{height:9px!important;background:#f0e5d9!important;border:0!important;border-radius:999px!important;overflow:hidden}
+.fansphere-premium .profile-page .fan-rank-progress .progress-track>span,
+.fansphere-premium .profile-page .profile-progress .progress-track>span{display:block;height:100%;border-radius:999px!important}
