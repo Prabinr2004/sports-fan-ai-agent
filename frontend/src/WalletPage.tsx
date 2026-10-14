@@ -1,11 +1,13 @@
 import {useEffect,useState} from "react";
-import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History, Sparkles, Gift, Ticket} from "lucide-react";
+import {Gem, RefreshCw, ArrowUpRight, ArrowDownLeft, History, Sparkles, Gift, Ticket, CalendarCheck, PlayCircle} from "lucide-react";
 type WalletData={gems:number;spendable_xp:number;xp_per_gem:number};
 type WalletEvent={id:string;currency:"XP"|"GEM";amount:number;source:string;created_at:string|null};
 type Access={free_remaining:number;extra_remaining:number;gems_per_analysis:number};
+type EarnStatus={daily_login:{gems:number;claimed_today:boolean};rewarded_videos:{gems:number;available:boolean}};
 export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:number)=>void}){
  const [wallet,setWallet]=useState<WalletData|null>(null);
  const [access,setAccess]=useState<Access|null>(null);
+ const [earn,setEarn]=useState<EarnStatus|null>(null);
  const [quantity,setQuantity]=useState(2);
  const [history,setHistory]=useState<WalletEvent[]>([]);
  const [historyFilter,setHistoryFilter]=useState<"ALL"|"XP"|"GEM">("ALL");
@@ -14,9 +16,9 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
  const [message,setMessage]=useState("");
  const [error,setError]=useState("");
  async function refresh(){
-  const [w,a]=await Promise.all([fetch("/api/v1/economy"),fetch("/api/v1/analysis/access")]);
-  if(!w.ok||!a.ok)throw new Error("Could not load wallet.");
-  const walletData:WalletData=await w.json();setWallet(walletData);onBalanceChange?.(walletData.gems);setAccess(await a.json());
+  const [w,a,e]=await Promise.all([fetch("/api/v1/economy"),fetch("/api/v1/analysis/access"),fetch("/api/v1/economy/earn")]);
+  if(!w.ok||!a.ok||!e.ok)throw new Error("Could not load wallet.");
+  const walletData:WalletData=await w.json();setWallet(walletData);onBalanceChange?.(walletData.gems);setAccess(await a.json());setEarn(await e.json());
   try{const h=await fetch("/api/v1/economy/history");if(!h.ok)throw new Error("History unavailable.");const payload=await h.json();setHistory(payload.events||[]);setHistoryError("");}catch{setHistoryError("Could not load recent activity.");}
  }
  useEffect(()=>{refresh().catch(e=>setError(String(e)))},[]);
@@ -55,6 +57,11 @@ export default function WalletPage({onBalanceChange}:{onBalanceChange?:(gems:num
    <button className="primary-button" disabled={busy||wallet.spendable_xp<cost} onClick={exchange}>{busy?"Exchanging...":`Exchange ${cost} XP for ${quantity} Gems`}</button>
    {wallet.spendable_xp<cost&&<p style={{color:"#a9bfd3",marginTop:10}}>You need {cost-wallet.spendable_xp} more spendable XP for this exchange.</p>}
    {message&&<p role="status" style={{color:"#7cf3c7",marginTop:10}}>{message}</p>}
+  </section>
+  <section className="profile-analysis-access wallet-exchange-panel" style={{marginTop:18,display:"block"}}>
+   <span className="eyebrow">EARN GEMS</span><h2 style={{margin:"8px 0"}}>Daily rewards</h2>
+   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,flexWrap:"wrap",padding:"12px 0"}}><div><strong style={{display:"flex",alignItems:"center",gap:8}}><CalendarCheck size={20}/> Daily Login · +1 Gem</strong><p style={{margin:"6px 0 0"}}>Automatically awarded on your first sign-in each UTC day.</p></div><strong>{earn?.daily_login.claimed_today?"Claimed today":"Available on next sign-in"}</strong></div>
+   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:12,flexWrap:"wrap",padding:"12px 0",borderTop:"1px solid #35536b"}}><div><strong style={{display:"flex",alignItems:"center",gap:8}}><PlayCircle size={20}/> Rewarded Videos · +5 Gems</strong><p style={{margin:"6px 0 0"}}>Video rewards are not available yet.</p></div><button type="button" className="secondary-button" disabled>Coming Soon</button></div>
   </section>
   <p className="wallet-allowance" style={{marginTop:12}}>Today's allowance: {access?.free_remaining??0} free match remaining and {access?.extra_remaining??0} additional paid unlock slots. Slots are not free matches: each requires {access?.gems_per_analysis??2} Gems.</p>
   <section className="wallet-history">
