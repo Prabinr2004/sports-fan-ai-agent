@@ -700,3 +700,18 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .model-outlook .model-caption{display:flex;flex-wrap:wrap;align-items:center;gap:4px 7px;margin:12px 0 0;padding:10px 12px;border:1px solid #f0e4d8;border-radius:10px;background:#fffaf4;color:#667b90!important;font-size:12px;line-height:1.55}
 .fansphere-premium .model-outlook .model-caption strong{color:#30465d;font-weight:800}
 .fansphere-premium .model-outlook .model-caption-version{display:block;flex-basis:100%;color:#9b806e;font-size:10px;letter-spacing:.015em}
+
+/* Wallet: stronger visual hierarchy and distinct metric icons */
+.fansphere-premium .wallet-summary-grid{gap:14px!important}
+.fansphere-premium .wallet-summary-grid>div{position:relative;min-height:94px;padding:17px 16px 15px 62px!important;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;border-radius:15px!important}
+.fansphere-premium .wallet-summary-grid>div>svg{position:absolute;left:17px;top:50%;transform:translateY(-50%);width:31px;height:31px;padding:7px;border-radius:10px;box-sizing:content-box}
+.fansphere-premium .wallet-summary-grid>div:nth-child(1)>svg{background:#fff0d6;color:#bd8738!important}
+.fansphere-premium .wallet-summary-grid>div:nth-child(2)>svg{background:#e8f2ff;color:#6089bd!important}
+.fansphere-premium .wallet-summary-grid>div:nth-child(3)>svg{background:#e8f5ec;color:#4c9975!important}
+.fansphere-premium .wallet-summary-grid>div:nth-child(4)>svg{background:#fcece6;color:#d57864!important}
+.fansphere-premium .wallet-summary-grid>div>span{font-size:11px!important;line-height:1.3;letter-spacing:.035em}
+.fansphere-premium .wallet-summary-grid>div>strong{font-size:23px!important;line-height:1.15}
+.fansphere-premium .wallet-exchange-panel{padding:25px 26px!important}
+.fansphere-premium .wallet-exchange-panel>p{line-height:1.6;max-width:750px}
+.fansphere-premium .wallet-exchange-panel select{min-width:140px!important;background:#fffaf5!important;color:#233c54!important;border:1px solid #e9d7c7!important;font-size:14px!important}
+@media(max-width:700px){.fansphere-premium .wallet-summary-grid>div{min-height:85px;padding-left:56px!important}.fansphere-premium .wallet-summary-grid>div>svg{left:12px}.fansphere-premium .wallet-exchange-panel{padding:18px!important}}
