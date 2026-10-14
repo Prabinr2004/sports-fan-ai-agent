@@ -1,5 +1,7 @@
 # Sports Fan AI Agent — V2 Architecture
 
+> **Document status (October 2026):** This is an early architecture and roadmap document. Some sections below describe proposed designs rather than the implemented V2 code. For the current application, see the root README and source code. In particular, V2 currently uses React/TypeScript/Vite with CSS, a FastAPI backend with SQLAlchemy and local SQLite, and a bounded read-only OpenRouter chat tool workflow for wallet, quiz progress, and saved predictions. PostgreSQL is a future deployment option, not the current local database. The ML production v2 model is intentionally frozen; proposed ML approaches below are historical plans, not instructions to retrain it.
+
 ## Product goal
 Build a personalized football fan platform that combines reliable football data, user-selected teams, daily engagement, machine-learning match predictions, and an AI assistant.
 
