@@ -40,7 +40,7 @@ export default function FanSphereAssistant({ fullPage = false }: { fullPage?: bo
     {visible && <section className="fs-chat-panel" aria-label="FanSphere AI Assistant">
       <header className="fs-chat-header"><div className="fs-chat-avatar"><Bot size={22}/></div><div><strong>FanSphere AI</strong><span><Sparkles size={12}/> Your football companion</span></div>{!fullPage && <button type="button" onClick={() => setOpen(false)} aria-label="Close chat"><X size={19}/></button>}</header>
       <div className="fs-chat-messages" aria-live="polite">
-        <div className="fs-chat-intro"><div className="fs-chat-intro-icon"><Sparkles size={24}/></div><h3>What can I help you with?</h3><p>Ask about football, your fan journey, quizzes, XP, or how to use FanSphere.</p></div>
+        <div className="fs-chat-intro"><div className="fs-chat-intro-icon"><Bot size={25}/></div><h3>What can I help you with?</h3><p>Ask about football, your fan journey, quizzes, XP, or how to use FanSphere.</p></div>
         {messages.length === 0 && <div className="fs-chat-starters">{STARTERS.map(q => <button key={q} type="button" onClick={() => void send(undefined, q)}>{q}</button>)}</div>}
         {messages.map((m, i) => <div key={i} className={`fs-chat-bubble ${m.role}`}>{m.content}</div>)}
         {busy && <div className="fs-chat-bubble assistant">Thinking…</div>}
