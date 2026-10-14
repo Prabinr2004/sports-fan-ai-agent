@@ -47,3 +47,7 @@
 .fs-chat-line{display:block;min-height:1.45em;overflow-wrap:anywhere}
 .fs-chat-line strong{font-weight:750}
 .fs-chat-message+.fs-chat-message{margin-top:4px}
+
+.fs-chat-numbered{display:flex;align-items:baseline;gap:7px;padding:5px 0;border-bottom:1px solid rgba(32,57,83,.07)}
+.fs-chat-numbered:last-child{border-bottom:0}
+.fs-chat-number{flex:0 0 20px;font-weight:700;color:#d46b58}
