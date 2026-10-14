@@ -719,8 +719,8 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 /* Wallet page rhythm: compact vertical flow, preserve the existing stat card layout */
 .fansphere-premium .wallet-page>h1{margin-top:8px!important;margin-bottom:8px!important}
 .fansphere-premium .wallet-page>p:first-of-type{margin-top:0!important;margin-bottom:0!important}
-.fansphere-premium .wallet-page .wallet-summary-grid{margin-top:16px!important;gap:10px!important}
-.fansphere-premium .wallet-page .wallet-summary-grid>div{min-height:unset!important;padding-top:13px!important;padding-bottom:13px!important}
+.fansphere-premium .wallet-page .wallet-summary-grid{margin-top:16px!important}
+/* Keep the original comfortable dimensions and spacing of the four summary cards. */
 .fansphere-premium .wallet-page .wallet-exchange-panel{margin-top:18px!important;padding:20px 22px!important}
 .fansphere-premium .wallet-page .wallet-exchange-panel>p{margin-top:7px!important;margin-bottom:9px!important}
 .fansphere-premium .wallet-page .wallet-allowance{margin:12px 0 0!important;line-height:1.5}
