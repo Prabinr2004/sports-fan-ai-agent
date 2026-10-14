@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
-import { Award, BarChart3, Bell, Check, Crown, Gem, Flame, Goal, Home, LoaderCircle, Search, Shield, Sparkles, Star, Trophy, Users, X } from "lucide-react";
+import { Award, BarChart3, Bell, Bot, Check, Crown, Gem, Flame, Goal, Home, LoaderCircle, Search, Shield, Sparkles, Star, Trophy, Users, X } from "lucide-react";
 import type { Player, TeamHubData, TeamSummary } from "./types";
 import LeaderboardPage from "./LeaderboardPage";
 import PredictionsPage from "./PredictionsPage";
@@ -21,7 +21,7 @@ type DailyQuiz = { quiz_id:string; title:string; questions:QuizQuestion[]; compl
 type MatchTeam = { id:string; name:string; short_name?:string|null; tla?:string|null; crest_url?:string|null };
 type FanMatch = { id:string; utc_date?:string|null; status?:string|null; competition?:string|null; home_team:MatchTeam; away_team:MatchTeam; source_team_id:string; user_prediction?:"HOME"|"DRAW"|"AWAY"|null; prediction_locked?:boolean };
 
-const navItems=[{label:"Home",icon:Home},{label:"My Team",icon:Shield},{label:"Favorites",icon:Star},{label:"Matches",icon:Trophy},{label:"Predictions",icon:BarChart3},{label:"Daily Quiz",icon:Sparkles},{label:"Leaderboard",icon:Users},{label:"AI Assistant",icon:Sparkles},{label:"Wallet",icon:Gem},{label:"Profile",icon:Award}];
+const navItems=[{label:"Home",icon:Home},{label:"My Team",icon:Shield},{label:"Favorites",icon:Star},{label:"Matches",icon:Trophy},{label:"Predictions",icon:BarChart3},{label:"Daily Quiz",icon:Sparkles},{label:"Leaderboard",icon:Users},{label:"AI Assistant",icon:Bot},{label:"Wallet",icon:Gem},{label:"Profile",icon:Award}];
 
 const TEAM_HUB_CACHE_MS=30*60*1000;
 const TEAM_HUB_CACHE_PREFIX="fansphere-team-hub-v2";
