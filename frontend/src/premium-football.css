@@ -729,3 +729,27 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .wallet-page .wallet-history-heading h2{margin:5px 0!important}
 .fansphere-premium .wallet-page .wallet-history-heading p{margin:0!important}
 @media(max-width:700px){.fansphere-premium .wallet-page .wallet-exchange-panel{padding:16px!important}.fansphere-premium .wallet-page .wallet-history{padding:14px!important}}
+
+/* Wallet redesign: balanced dashboard layout, readable exchange controls and less dead space */
+.fansphere-premium .wallet-page{max-width:1120px!important;width:100%;margin:0 auto;padding-top:18px!important}
+.fansphere-premium .wallet-page>.eyebrow{display:block;margin-bottom:7px}
+.fansphere-premium .wallet-page>h1{margin:0 0 7px!important;line-height:1.12}
+.fansphere-premium .wallet-page>h1+p{margin:0 0 20px!important;line-height:1.5}
+.fansphere-premium .wallet-page .wallet-summary-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px!important;margin:0 0 20px!important}
+.fansphere-premium .wallet-page .wallet-summary-grid>div{min-width:0;min-height:108px!important;padding:20px 14px 18px 68px!important;gap:7px!important;box-shadow:0 8px 24px rgba(35,54,72,.035)}
+.fansphere-premium .wallet-page .wallet-summary-grid>div>svg{left:17px!important;width:29px;height:29px}
+.fansphere-premium .wallet-page .wallet-summary-grid>div>span{font-size:11px!important;letter-spacing:.015em!important}
+.fansphere-premium .wallet-page .wallet-summary-grid>div>strong{font-size:25px!important}
+.fansphere-premium .wallet-page .wallet-exchange-panel{margin:0!important;padding:23px 27px!important;border-radius:18px!important}
+.fansphere-premium .wallet-page .wallet-exchange-panel h2{margin:6px 0 7px!important}
+.fansphere-premium .wallet-page .wallet-exchange-panel>p{max-width:850px;margin:0 0 14px!important;line-height:1.5}
+.fansphere-premium .wallet-page .wallet-exchange-panel label{margin:0 0 7px!important;font-weight:700;color:#344e67}
+.fansphere-premium .wallet-page .wallet-exchange-panel select{display:block;min-width:190px!important;min-height:42px;padding:9px 12px!important;margin:0 0 12px!important}
+.fansphere-premium .wallet-page .wallet-exchange-panel .primary-button{margin-top:1px!important;min-height:43px}
+.fansphere-premium .wallet-page .wallet-exchange-panel .primary-button:disabled{opacity:.65}
+.fansphere-premium .wallet-page .wallet-allowance{margin:15px 0 18px!important;padding:12px 16px;background:#fffaf4;border:1px solid #f0e4d7;border-radius:12px;color:#60788e!important}
+.fansphere-premium .wallet-page .wallet-history{margin:0 0 15px!important;padding:22px 24px!important;border-radius:18px!important}
+.fansphere-premium .wallet-page .wallet-history-heading{margin-bottom:16px!important}
+.fansphere-premium .wallet-page .wallet-history-heading p{margin:4px 0 0!important}
+@media(max-width:950px){.fansphere-premium .wallet-page .wallet-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){.fansphere-premium .wallet-page{padding-top:12px!important}.fansphere-premium .wallet-page .wallet-summary-grid{gap:10px!important}.fansphere-premium .wallet-page .wallet-summary-grid>div{padding:14px 10px 14px 51px!important;min-height:88px!important}.fansphere-premium .wallet-page .wallet-summary-grid>div>svg{left:9px!important;width:24px;height:24px}.fansphere-premium .wallet-page .wallet-summary-grid>div>span{font-size:9px!important}.fansphere-premium .wallet-page .wallet-summary-grid>div>strong{font-size:21px!important}.fansphere-premium .wallet-page .wallet-exchange-panel{padding:19px!important}.fansphere-premium .wallet-page .wallet-history{padding:16px!important}}
