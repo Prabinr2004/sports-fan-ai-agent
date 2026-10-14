@@ -758,3 +758,22 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .wallet-page .wallet-summary-grid>div{padding-left:86px!important}
 .fansphere-premium .wallet-page .wallet-summary-grid>div>svg{left:19px!important}
 @media(max-width:550px){.fansphere-premium .wallet-page .wallet-summary-grid>div{padding-left:61px!important}.fansphere-premium .wallet-page .wallet-summary-grid>div>svg{left:10px!important}}
+
+/* Profile finishing touches: club identity, rank readability, connected level progress */
+.fansphere-premium .profile-page .profile-club-grid{gap:15px!important}
+.fansphere-premium .profile-page .profile-primary-club,.fansphere-premium .profile-page .profile-followed-clubs{min-height:118px!important;padding:18px 20px!important;border-radius:14px!important}
+.fansphere-premium .profile-page .profile-primary-club{gap:18px!important}
+.fansphere-premium .profile-page .profile-primary-club>img{width:70px!important;height:70px!important;object-fit:contain;padding:8px;background:#fffdfa;border:1px solid #f0e3d6;border-radius:15px}
+.fansphere-premium .profile-page .profile-primary-club strong{font-size:16px!important;line-height:1.35}
+.fansphere-premium .profile-page .profile-followed-clubs>div{display:flex;align-items:center;justify-content:center;gap:12px!important;margin-top:12px!important}
+.fansphere-premium .profile-page .profile-followed-clubs>div img{width:37px!important;height:37px!important;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(31,50,66,.09))}
+.fansphere-premium .profile-page .fan-rank-ladder{gap:8px!important}
+.fansphere-premium .profile-page .fan-rank-step{min-width:0;min-height:91px;padding:13px 4px!important;justify-content:center;gap:7px!important}
+.fansphere-premium .profile-page .fan-rank-step strong{font-size:11px!important;line-height:1.25;overflow-wrap:anywhere}
+.fansphere-premium .profile-page .fan-rank-step small{font-size:10px!important;line-height:1.3}
+.fansphere-premium .profile-page .fan-rank-section{margin-bottom:12px!important}
+.fansphere-premium .profile-page .profile-progress{margin-top:0!important;padding:17px 21px!important;border-left:3px solid #e6b461!important}
+.fansphere-premium .profile-page .profile-progress>div:first-child{margin-bottom:10px!important}
+.fansphere-premium .profile-page .profile-progress strong{font-size:13px!important}
+@media(max-width:850px){.fansphere-premium .profile-page .fan-rank-ladder{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.fansphere-premium .profile-page .profile-club-grid{grid-template-columns:1fr!important}.fansphere-premium .profile-page .profile-primary-club,.fansphere-premium .profile-page .profile-followed-clubs{min-height:105px!important}.fansphere-premium .profile-page .profile-primary-club>img{width:60px!important;height:60px!important}}
