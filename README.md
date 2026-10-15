@@ -1,81 +1,109 @@
-# FanSphere V2 ⚽
-### The football fan hub — personalized, interactive, and AI-powered
+<div align="center">
 
-FanSphere is a full-stack football fan engagement platform combining club discovery, match insights, machine-learning predictions, daily quizzes, and a personalized AI assistant. Fans can follow clubs, explore fixtures and squads, make match picks for in-app XP, and track their progress through ranks, achievements, and leaderboards.
+# ⚽ FanSphere V2
 
-## Live application
+### Your club. Your matches. Your football universe.
 
-**[Launch FanSphere V2](https://fansphere-v2.vercel.app/)** — deployed frontend on Vercel.
+**A full-stack, AI-powered football fan experience** combining personalized club hubs, match predictions, daily quizzes, rewards, and an intelligent football assistant.
 
-- **Backend health:** [FanSphere V2 API](https://fansphere-v2-api.onrender.com/api/v1/health) (Render)
-- **Production database:** Neon PostgreSQL
-- **Active branch:** `v2-development`
+[**🌐 Explore Live App**](https://fansphere-v2.vercel.app/) · [**📖 API Documentation**](https://fansphere-v2-api.onrender.com/docs) · [**🩺 API Health**](https://fansphere-v2-api.onrender.com/api/v1/health)
 
-The application is live and under active development; not all features or live football information are guaranteed to be available at all times.
+![React](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 
-> **Project evolution:** FanSphere V2 is a major redesign and expansion of my original **Sports Fan AI Agent** college project. The original version is preserved on the `main` branch and in the `Final_Proj/` archive. Active V2 development lives on `v2-development`.
+**Live on Vercel + Render · Neon PostgreSQL · Actively developed**
 
-## What's new in V2?
+</div>
 
-| Area | Original Sports Fan AI Agent | FanSphere V2 |
-| --- | --- | --- |
-| Interface | HTML, CSS, JavaScript | React, TypeScript, Vite; responsive premium football dashboard |
-| AI | Tool-oriented sports agent prototype | Authenticated read-only tool-using FanSphere AI and separate match analysis |
-| Football experience | General sports assistant | Primary club, favorites, squad profiles, fixtures, results, match center |
-| Predictions | Early prediction tool | Historical-data ML match outlook, fan picks, prediction tracking |
-| Quizzes | Dynamic quiz prototype | Club-based quiz levels, daily rewarded challenge, streaks |
-| Rewards | Points, badges, leaderboard | Lifetime/spendable XP, ranks, achievements, Gems, analysis unlocks |
-| Persistence | SQLite user memory and activity | SQLAlchemy with SQLite locally and Neon PostgreSQL in production |
+---
 
-## Features
+## ✨ Why FanSphere?
 
-- **Personalized home:** primary-club hub, club pulse, next match, fan rank and daily challenge.
-- **My Team & Favorites:** club details, player profiles, followed teams, fixtures and recent results.
-- **Matches & Match Center:** match schedules, fan picks, recent form, team comparison and match analysis.
-- **ML match outlook:** estimated outcomes from a trained historical model; probabilities are uncertain, not guarantees.
-- **Daily Quiz:** club-specific questions, progressive levels, daily rewarded rounds, XP and streaks.
-- **Progress & community:** fan ranks, achievements, leaderboard, prediction record and profile.
-- **Gem Wallet:** view spendable XP and Gems, exchange XP, and track analysis unlocks.
-- **FanSphere AI:** authenticated football and app-help chat, available as a dedicated page and floating launcher. It uses authenticated, read-only tools to retrieve wallet balances, quiz progression and saved match picks. It **does not** retrieve live match data or perform account-changing actions through chat.
+Football fandom is more than checking a score. FanSphere brings the experience together in one personalized platform: follow your clubs, explore matches, test your knowledge, make predictions, and earn rewards as you go.
 
-Fan picks and rewards are in-app engagement features, **not real-money betting**.
+Originally developed as a college **Sports Fan AI Agent**, FanSphere V2 grew into a redesigned full-stack application with user accounts, persistent progress, a modern React interface, historical-data machine-learning predictions, and a bounded AI assistant.
 
-## Technology
+> **Try it:** [fansphere-v2.vercel.app](https://fansphere-v2.vercel.app/)  
+> The Render free-tier backend may need time to wake after inactivity. Football-data coverage and AI availability depend on external services.
 
-| Layer | Stack |
-| --- | --- |
-| Frontend | React 19, TypeScript, Vite, Lucide icons, CSS |
-| Backend | Python, FastAPI, Pydantic, SQLAlchemy |
-| Database | SQLite locally; Neon PostgreSQL in production |
-| Football data | football-data.org integration and local fallback/caching logic |
-| AI | OpenRouter for assistant responses and optional match explanations |
-| Predictions | Python-based historical football ML pipeline |
-| Quality | Pytest backend tests; TypeScript check and Vite production build |
+## 🚀 What you can do
 
-## Architecture
+| Experience | Highlights |
+| :--- | :--- |
+| 🏟️ **My Club** | Choose a primary team, follow favorites, and explore club and squad information |
+| 📅 **Match Center** | Browse fixtures and results, compare teams, and save fan match picks |
+| 📊 **ML Predictions** | Explore historical-data-driven match outcome estimates and analysis |
+| 🧠 **Daily Quizzes** | Play club-focused quiz levels, build streaks, and earn in-app XP |
+| 💎 **Gem Wallet** | Track Gems and XP, exchange eligible XP, and unlock analysis features |
+| 🎁 **Daily Rewards** | Earn **+1 Gem on login once per UTC day**; rewarded videos are marked **Coming Soon** |
+| 🏆 **Progress & Rankings** | Follow achievements, fan rank, prediction history, and leaderboards |
+| 🤖 **FanSphere AI** | Ask football and app questions; authenticated, read-only tools can retrieve selected account progress |
+
+FanSphere's picks, XP, and Gems are **in-app engagement features—not real-money betting**. ML predictions are estimates, not guarantees.
+
+## 🖥️ Live application
+
+<div align="center">
+
+### [**▶ Open FanSphere V2**](https://fansphere-v2.vercel.app/)
+
+**Frontend:** Vercel · **API:** Render · **Production database:** Neon PostgreSQL
+
+</div>
+
+**Suggested portfolio screenshots:** Login / club dashboard · Match Center · Quiz · Gem Wallet · AI assistant. Screenshots are intentionally not embedded until reviewed images are available; this avoids showing outdated UI or private user data.
+
+## 🛠️ Technology stack
+
+| Layer | Tools |
+| :--- | :--- |
+| **Frontend** | React 19, TypeScript, Vite, CSS, Lucide icons |
+| **Backend** | Python, FastAPI, Pydantic, SQLAlchemy |
+| **Database** | SQLite for local development; Neon PostgreSQL in production |
+| **Machine learning** | Python, scikit-learn, historical football data |
+| **AI integration** | OpenRouter for assistant responses and optional match explanations |
+| **Football data** | football-data.org integration, caching and fallback logic |
+| **Deployment** | Vercel (frontend), Render (backend) |
+| **Validation** | TypeScript checks, Vite build, Pytest backend tests |
+
+## 🧩 How it works
 
 ```text
-React + TypeScript frontend
-       │
-       ▼
-FastAPI /api/v1
-       ├── Authentication and profiles
-       ├── Clubs, favorites, matches and football provider
-       ├── Quiz, predictions, XP, Gems and achievements
-       ├── Historical ML prediction services
-       └── FanSphere AI ──► OpenRouter (optional external LLM)
-       │
-       ▼
-SQLAlchemy + SQLite (local) / Neon PostgreSQL (production)
+                       ┌───────────────────────────┐
+                       │   React + TypeScript UI   │
+                       │   Club · Matches · Wallet │
+                       └─────────────┬─────────────┘
+                                     │ /api/v1
+                                     ▼
+                       ┌───────────────────────────┐
+                       │      FastAPI backend      │
+                       ├───────────────────────────┤
+                       │ Auth & profiles           │
+                       │ Clubs, fixtures & picks   │
+                       │ Quizzes, XP & Gems        │
+                       │ ML predictions            │
+                       │ FanSphere AI              │
+                       └───────┬───────────┬───────┘
+                               │           │
+                               ▼           ▼
+                        ┌────────────┐ ┌───────────────────┐
+                        │ SQLAlchemy │ │ External services │
+                        │ SQLite /   │ │ Football provider │
+                        │ PostgreSQL │ │ OpenRouter         │
+                        └────────────┘ └───────────────────┘
 ```
 
-The **original V1** explored an agentic loop — user request → LLM → tool selection → execution → observation → response — with quiz, prediction, rewards and memory tools. **V2's chat uses a bounded, read-only tool workflow:** it can retrieve the signed-in fan's wallet, quiz progress and saved match picks from the application database. It does not invoke live football APIs, modify account data, spend Gems or place predictions. The quiz, prediction and reward systems operate through their own application features and endpoints.
+**AI boundaries:** FanSphere AI uses authenticated, read-only application tools for selected wallet, quiz, and saved-pick information. It does **not** place picks, spend Gems, change account settings, or retrieve live match data through chat. Predictions, quizzes, and rewards are implemented through separate application services.
 
-## Run locally
+## 🧑‍💻 Run locally
 
-**Requirements:** Python 3, Node.js/npm, and optional API credentials for connected services.
+**Prerequisites:** Python 3, Node.js/npm, and optional credentials for external integrations.
 
-### 1. Clone and switch to V2
+### 1. Clone the active V2 branch
 
 ```bash
 git clone https://github.com/Prabinr2004/sports-fan-ai-agent.git
@@ -94,14 +122,13 @@ cp .env.example .env
 uvicorn app.main:app --reload
 ```
 
-Configure `backend/.env` with your own `OPENROUTER_API_KEY` for AI chat and analysis. Football-provider features may require `FOOTBALL_API_KEY` and the provider base URL. Never commit actual credentials.
+API: **http://localhost:8000** · Docs: **http://localhost:8000/docs**
 
-Backend: **http://localhost:8000**  
-API documentation: **http://localhost:8000/docs**
+Set your own values in `backend/.env`. AI features require an `OPENROUTER_API_KEY`; some football-provider features may require `FOOTBALL_API_KEY` and provider configuration. **Never commit credentials.**
 
 ### 3. Start the frontend
 
-In a second terminal, from the repository root:
+Open a second terminal from the repository root:
 
 ```bash
 cd frontend
@@ -109,56 +136,61 @@ npm install
 npm run dev
 ```
 
-Frontend: **http://localhost:5173**. Vite proxies `/api` requests to the local backend.
+App: **http://localhost:5173** · Vite proxies `/api` to the local backend.
 
-### 4. Check the project
+### 4. Run checks
 
 ```bash
-cd frontend
+# From frontend/
+npx tsc --noEmit
 npm run build
-```
 
-Backend tests (from the repository root, with the Python environment active):
-
-```bash
-cd backend
+# From backend/ (with the virtual environment active)
 pytest
 ```
 
-These are commands to run locally; they are not claims that every test has passed on this commit.
+These are the available local validation commands, not a claim that every backend test passes in every environment.
 
-## Configuration and security
+## 📁 Repository map
 
-- Use `backend/.env.example` and `frontend/.env.example` as templates.
-- Keep API keys, passwords, local databases, virtual environments and generated build files out of version control.
-- The backend protects chat behind authentication; keep API credentials on the server, not in frontend `VITE_*` variables.
-- Do not publish real user records, screenshots containing private information, or production database backups.
-- Football data availability depends on provider coverage and configuration. AI responses and model probabilities can be inaccurate.
+| Path | Contents |
+| :--- | :--- |
+| `frontend/` | FanSphere V2 React and TypeScript application |
+| `backend/app/api/` | FastAPI routes |
+| `backend/app/services/` | Core football, quiz, economy, and AI logic |
+| `backend/app/ml/` | Prediction pipelines and ML research |
+| `backend/tests/` | Backend tests |
+| `docs/` | Technical and ML documentation |
+| `Final_Proj/` | Preserved original project archive |
 
-## Repository guide
+### Project history and branches
 
-The repository intentionally preserves both generations of the project. `main` remains the original V1 baseline, while `v2-development` contains the active V2 application and the `Final_Proj/` V1 archive. Do not merge V2 into `main` until deployment checks are complete.
+- **`main`** — original Sports Fan AI Agent baseline.
+- **`v2-development`** — active FanSphere V2 application and live backend deployment source.
+- **`Final_Proj/`** — original version retained for historical context.
 
+V2 represents a substantial redesign, not just a visual reskin: it introduces a modern client, account-backed fan experience, richer football workflows, and a more structured backend.
 
-| Location | Purpose |
-| --- | --- |
-| `frontend/` | FanSphere V2 React app |
-| `backend/app/api/` | FastAPI endpoints |
-| `backend/app/services/` | Football, quiz, rewards and AI integrations |
-| `backend/app/ml/` | ML experiments, training and prediction utilities |
-| `backend/tests/` | Backend test suite |
-| `docs/` | Architecture and ML development notes |
-| `Final_Proj/` | Original project archive; retained for project history |
+## 🔒 Security and limitations
 
-### Local-only files
+- Use the supplied `.env.example` templates; keep keys, local databases, generated artifacts, and production records out of Git.
+- Do not expose API credentials through frontend `VITE_*` variables.
+- Football fixtures, squads, and availability depend on provider coverage, caching, and configuration.
+- AI responses and ML probabilities may be inaccurate.
+- The application is an evolving portfolio project; some features may change or be temporarily unavailable.
 
-Keep local `backend/app/ml/artifacts/` files and databases safe; do not delete, move, or commit them without reviewing their contents and deployment needs. `frontend/package-lock.json` is currently generated locally and should be reviewed for a future reproducible-dependency commit. Neither is required to be changed for this documentation update.
+## 👨‍💻 About the developer
 
-## Project status
+**Prabin Roka** — Computer Science, Mathematics & Digital Marketing student.
 
-**FanSphere V2 is a live, actively developed portfolio project.** The frontend is deployed on Vercel, the FastAPI backend on Render, and production account data is stored in Neon PostgreSQL. Ongoing work includes testing, reliability, and improvements to football information freshness; live data availability is not guaranteed.
+I built FanSphere to combine my interests in football, software engineering, machine learning, and interactive digital experiences. It started as an AI agent project and evolved into a deployed full-stack application that I continue to improve.
 
-**Created and developed by Prabin Roka** · Computer Science, Mathematics & Digital Marketing student.
+**[Personal portfolio](https://prabinr2004.github.io/)** · **[GitHub profile](https://github.com/Prabinr2004)** · **[Live FanSphere](https://fansphere-v2.vercel.app/)**
 
 ---
-*Built to bring football fandom, AI and interactive learning into one experience.*
+
+<div align="center">
+
+**Built for football fans, with code, curiosity, and a love of the game. ⚽**
+
+</div>
