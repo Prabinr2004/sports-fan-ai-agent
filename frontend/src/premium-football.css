@@ -809,3 +809,35 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
  .mobile-nav-item{font-size:9px}
  .fansphere-premium .content{padding-inline:10px}
 }
+
+
+/* Phone polish: readable search results and denser, easier-to-scan screens. */
+@media (max-width:650px){
+ .fansphere-premium .topbar{position:relative;z-index:105}
+ .fansphere-premium .topbar .search{position:static;flex:1 1 auto;min-width:0}
+ .fansphere-premium .search-popover{
+   position:absolute;left:10px;right:10px;top:calc(100% + 6px);
+   width:auto;max-width:none;max-height:min(58vh,440px);overflow-y:auto;
+   border-radius:16px;z-index:110;box-shadow:0 16px 36px #172a432a;
+ }
+ .fansphere-premium .search-result{display:flex;align-items:center;gap:10px;min-height:58px;padding:10px 12px;text-align:left}
+ .fansphere-premium .search-result>span:nth-child(2){flex:1;min-width:0}
+ .fansphere-premium .search-result strong{display:block;font-size:13px;line-height:1.25;overflow-wrap:normal;word-break:normal}
+ .fansphere-premium .search-result small{display:block;font-size:11px;line-height:1.3}
+ .fansphere-premium .search-crest{flex:0 0 32px}
+ .fansphere-premium .search-crest img{width:30px;height:30px;object-fit:contain}
+ .fansphere-premium .content{padding-top:14px;padding-bottom:22px}
+ .fansphere-premium .team-hub-tabs{gap:3px;margin:12px 0 16px;padding:4px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+ .fansphere-premium .team-hub-tabs button{white-space:nowrap;flex:1 0 auto;min-width:0;padding:9px 10px}
+ .fansphere-premium .team-hub-tab-content{gap:12px}
+ .fansphere-premium .team-fixture-card{min-height:0;padding:12px 14px;gap:8px}
+ .fansphere-premium .team-fixture-date{gap:2px}
+ .fansphere-premium .team-fixture-club img{width:27px;height:27px}
+ .fansphere-premium .team-fixture-matchup{gap:7px}
+ .fansphere-premium .team-fixture-club{gap:7px}
+ .fansphere-premium .team-fixture-club strong{font-size:12px;line-height:1.3}
+ .fansphere-premium .team-fixture-status{padding:5px 8px;font-size:10px}
+ .fansphere-premium .team-result-row{padding:12px 14px;gap:9px}
+ .fansphere-premium .mobile-bottom-nav{padding-top:5px;padding-bottom:calc(5px + env(safe-area-inset-bottom,0px))}
+ .fansphere-premium .mobile-nav-item{min-height:48px}
+}
