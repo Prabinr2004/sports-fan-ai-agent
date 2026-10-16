@@ -777,3 +777,35 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
 .fansphere-premium .profile-page .profile-progress strong{font-size:13px!important}
 @media(max-width:850px){.fansphere-premium .profile-page .fan-rank-ladder{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){.fansphere-premium .profile-page .profile-club-grid{grid-template-columns:1fr!important}.fansphere-premium .profile-page .profile-primary-club,.fansphere-premium .profile-page .profile-followed-clubs{min-height:105px!important}.fansphere-premium .profile-page .profile-primary-club>img{width:60px!important;height:60px!important}}
+
+
+/* Phone navigation: keep the important destinations within thumb reach. */
+.mobile-nav-wrap{display:none}
+@media(max-width:650px){
+ .fansphere-premium main{min-width:0;padding-bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+ .fansphere-premium .topbar{gap:8px;padding-inline:12px;min-width:0}
+ .fansphere-premium .topbar .search{min-width:0}
+ .fansphere-premium .topbar .search input{min-width:0;width:100%;font-size:16px}
+ .fansphere-premium .content{min-width:0;padding:20px 14px 26px}
+ .fansphere-premium .home-dashboard,.fansphere-premium .home-dashboard>*,.fansphere-premium .dashboard-grid>*{min-width:0;max-width:100%}
+ .fansphere-premium .home-insight-strip{grid-template-columns:1fr}
+ .fansphere-premium .home-dashboard img{max-width:100%}
+ .mobile-nav-wrap{display:block}
+ .mobile-bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:102;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;padding:7px 7px calc(7px + env(safe-area-inset-bottom,0px));background:#fffdf9;border-top:1px solid #e7e3dc;box-shadow:0 -8px 30px #172a431a}
+ .mobile-nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px;padding:5px 2px;border:0;border-radius:12px;background:transparent;color:#69758a;font-size:10px;font-weight:750;white-space:nowrap}
+ .mobile-nav-item.active{background:#fcece4;color:#aa493b}
+ .mobile-nav-item:focus-visible,.mobile-more-item:focus-visible{outline:3px solid #df8b73;outline-offset:2px}
+ .mobile-menu-backdrop{position:fixed;inset:0;z-index:100;background:#172a4350;border:0}
+ .mobile-more-menu{position:fixed;left:10px;right:10px;bottom:calc(75px + env(safe-area-inset-bottom,0px));z-index:101;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;background:#fffdf9;border:1px solid #e7e3dc;border-radius:18px;box-shadow:0 12px 35px #172a4330}
+ .mobile-more-item{display:flex;align-items:center;gap:10px;min-height:48px;min-width:0;padding:10px;border:1px solid #eee7df;border-radius:11px;background:#fff;color:#253953;font-size:13px;font-weight:700;text-align:left}
+ .mobile-more-item.active{background:#fcece4;color:#a4473d;border-color:#efc5b7}
+}
+@media(min-width:651px) and (max-width:1024px){
+ .fansphere-premium .content{padding-inline:22px}
+ .fansphere-premium .home-insight-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .fansphere-premium .dashboard-grid,.fansphere-premium .hub-grid{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:380px){
+ .mobile-nav-item{font-size:9px}
+ .fansphere-premium .content{padding-inline:10px}
+}
