@@ -874,3 +874,897 @@ background:#fff5eb!important;border-bottom:1px solid #ecdfd1!important;color:#22
  .fansphere-premium .wallet-page .wallet-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
  .fansphere-premium .predictions-dashboard .prediction-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
+
+
+/* Keep mobile summary labels readable and properly spaced. */
+@media (max-width:650px) {
+  .fansphere-premium .wallet-page .wallet-summary-grid span,
+  .fansphere-premium .predictions-dashboard .prediction-stats span {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div {
+    min-width: 0 !important;
+    padding-right: 10px !important;
+  }
+
+  .fansphere-premium .mobile-bottom-nav {
+    border-top: 1px solid #e7e3dc;
+  }
+}
+
+/* Compact phone layout */
+@media (max-width:650px) {
+  .fansphere-premium .content {
+    padding: 10px 10px 16px;
+  }
+
+  .fansphere-premium .profile-page,
+  .fansphere-premium .wallet-page,
+  .fansphere-premium .matches-page,
+  .fansphere-premium .predictions-dashboard {
+    min-width: 0;
+  }
+
+  .fansphere-premium .wallet-page h1,
+  .fansphere-premium .matches-page h1,
+  .fansphere-premium .predictions-dashboard h1 {
+    font-size: 23px;
+    line-height: 1.15;
+    letter-spacing: -.035em;
+  }
+
+  .fansphere-premium .wallet-page p {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  /* Wallet overview */
+  .fansphere-premium .wallet-page .wallet-summary-grid {
+    gap: 7px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div {
+    min-height: 68px !important;
+    padding: 10px 8px 9px 36px !important;
+    gap: 3px !important;
+    border-radius: 12px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div > svg {
+    left: 8px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid span {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    letter-spacing: 0 !important;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid strong {
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Smaller panels and controls */
+  .fansphere-premium .wallet-page .wallet-rewards-panel {
+    padding: 12px !important;
+    border-radius: 14px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-reward-row {
+    padding: 9px !important;
+  }
+
+  .fansphere-premium .team-fixture-card,
+  .fansphere-premium .team-result-row {
+    padding: 10px 11px;
+  }
+
+  .fansphere-premium .team-hub-tabs button {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  /* Predictions */
+  .fansphere-premium .predictions-dashboard .prediction-stats {
+    gap: 7px !important;
+    margin: 10px 0 !important;
+  }
+
+  .fansphere-premium .predictions-dashboard .prediction-stats section {
+    min-height: 64px !important;
+    padding: 9px !important;
+  }
+
+  .fansphere-premium .predictions-dashboard .prediction-stats strong {
+    font-size: 18px !important;
+  }
+
+  /* Bottom navigation */
+  .fansphere-premium .mobile-bottom-nav {
+    padding: 4px 6px calc(4px + env(safe-area-inset-bottom,0px));
+  }
+
+  .fansphere-premium .mobile-nav-item {
+    min-height: 44px;
+    gap: 2px;
+    font-size: 10px;
+  }
+}
+
+/* FanSphere mobile quiz redesign */
+@media (max-width: 650px) {
+  .fansphere-premium .quiz-page {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .fansphere-premium .quiz-page .quiz-header-rewards {
+    margin-bottom: 12px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-header-copy h1 {
+    font-size: 21px;
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    margin: 4px 0 8px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-header-copy > p {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .fansphere-premium .quiz-page .eyebrow {
+    font-size: 9px;
+    letter-spacing: .1em;
+  }
+
+  .fansphere-premium .quiz-page .quiz-level-guide {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    gap: 8px;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-level-guide-title {
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .fansphere-premium .quiz-page .quiz-level-guide-metric {
+    padding: 8px 10px;
+    gap: 2px;
+    border-radius: 8px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-level-guide-metric > strong {
+    font-size: 13px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-level-guide-metric > span {
+    font-size: 10px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-level-guide-footer {
+    padding-top: 9px;
+    gap: 3px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-progress-panel {
+    padding: 12px !important;
+    margin: 12px 0 !important;
+    border-radius: 12px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-progress-panel h2 {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .fansphere-premium .quiz-page .quiz-progress-panel p,
+  .fansphere-premium .quiz-page .quiz-progress-help {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .fansphere-premium .quiz-page .question-card {
+    padding: 13px;
+    border-radius: 12px;
+  }
+
+  .fansphere-premium .quiz-page .question-card h3 {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .fansphere-premium .quiz-page .answer {
+    font-size: 12px;
+    line-height: 1.35;
+    min-height: 42px;
+    padding: 9px 10px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-summary-grid > div {
+    padding: 9px;
+    min-width: 0;
+  }
+
+  .fansphere-premium .quiz-page .quiz-summary-grid strong {
+    font-size: 16px;
+  }
+
+  .fansphere-premium .quiz-page .quiz-summary-grid span {
+    font-size: 9px;
+    line-height: 1.3;
+  }
+}
+
+/* Wallet phone layout: separate icons, labels and values */
+@media (max-width: 550px) {
+  .fansphere-premium .wallet-page .wallet-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div {
+    display: grid !important;
+    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 8px;
+    row-gap: 4px;
+    align-content: center;
+    align-items: center;
+    min-height: 94px !important;
+    padding: 12px 10px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div > svg {
+    position: static !important;
+    transform: none !important;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 22px !important;
+    height: 22px !important;
+    padding: 5px !important;
+    box-sizing: content-box;
+    align-self: center;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div > span {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div > strong {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 22px !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+  }
+
+  .fansphere-premium .wallet-page > h1 {
+    font-size: 25px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-exchange-panel h2 {
+    font-size: 21px !important;
+  }
+}
+
+/* FanSphere Wallet — mobile refinements */
+@media (max-width: 550px) {
+
+  /* Wallet introduction */
+  .fansphere-premium .wallet-page > h1 {
+    margin: 7px 0 10px !important;
+  }
+
+  .fansphere-premium .wallet-page > p {
+    margin-bottom: 12px;
+  }
+
+  /* Balance cards */
+  .fansphere-premium .wallet-page .wallet-summary-grid {
+    gap: 9px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div {
+    min-height: 86px !important;
+    padding: 11px 8px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div > span {
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-summary-grid > div > strong {
+    font-size: 21px !important;
+  }
+
+  /* XP exchange */
+  .fansphere-premium .wallet-page .wallet-exchange-panel {
+    padding: 16px !important;
+    border-radius: 15px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-exchange-panel h2 {
+    font-size: 20px !important;
+    line-height: 1.25;
+  }
+
+  .fansphere-premium .wallet-page .wallet-exchange-panel select {
+    width: 100%;
+    max-width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .fansphere-premium .wallet-page .wallet-exchange-panel .primary-button {
+    width: 100%;
+    min-height: 44px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* Daily rewards */
+  .fansphere-premium .wallet-page .wallet-rewards-panel {
+    padding: 13px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-rewards-panel h2 {
+    font-size: 20px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-reward-row {
+    padding: 12px !important;
+    gap: 10px !important;
+  }
+
+  .fansphere-premium .wallet-page .wallet-reward-copy strong {
+    font-size: 14px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-reward-copy p {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .fansphere-premium .wallet-page .wallet-reward-action {
+    grid-column: 2;
+    align-items: flex-start;
+    min-width: 0;
+  }
+
+  /* Activity history */
+  .fansphere-premium .wallet-page .wallet-history {
+    padding: 13px !important;
+    margin: 18px 0;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-heading {
+    gap: 10px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-heading h2 {
+    font-size: 20px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-filters {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-filters button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-item {
+    padding: 10px;
+    gap: 9px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-details strong {
+    font-size: 12px;
+  }
+
+  .fansphere-premium .wallet-page .wallet-history-amount {
+    font-size: 12px;
+  }
+}
+
+/* FanSphere — Leaderboard mobile layout */
+@media (max-width: 650px) {
+
+  .fansphere-premium .leaderboard-page {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .fansphere-premium .leaderboard-page .leader-hero {
+    padding: 15px 14px;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .fansphere-premium .leaderboard-page .leader-hero h2 {
+    font-size: 19px;
+    margin: 3px 0;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .leaderboard-page .leader-hero > strong {
+    font-size: 25px;
+  }
+
+  /* Show three essential columns without horizontal scrolling */
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-head,
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-row {
+    display: grid;
+    grid-template-columns: 66px minmax(0, 1fr) 70px !important;
+    min-width: 0 !important;
+    width: 100%;
+    gap: 6px;
+    align-items: center;
+    padding: 12px 10px;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-head > :nth-child(3),
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-head > :nth-child(5),
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-row > :nth-child(3),
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-row > :nth-child(5) {
+    display: none;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .fan-cell {
+    min-width: 0;
+    gap: 7px;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .fan-cell > span:last-child {
+    min-width: 0;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .fan-cell strong {
+    display: block;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-row > :nth-child(4) {
+    text-align: right;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  .fansphere-premium .leaderboard-page .leaderboard-prediction-table .leaderboard-head > :nth-child(4) {
+    text-align: right;
+  }
+}
+
+/* FanSphere — My Team mobile refinements */
+@media (max-width: 650px) {
+
+  .fansphere-premium .my-team-dashboard {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Club introduction */
+  .fansphere-premium .my-team-dashboard > h1 {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard > p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Club hero */
+  .fansphere-premium .my-team-dashboard .club-hero {
+    min-height: 0 !important;
+    padding: 18px !important;
+    gap: 12px !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-hero h2 {
+    font-size: 25px !important;
+    line-height: 1.2 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-hero p {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Compact league statistics */
+  .fansphere-premium .my-team-dashboard .club-stats {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-stat {
+    min-width: 0 !important;
+    padding: 14px !important;
+    min-height: 100px !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-stat:last-child {
+    grid-column: 1 / -1;
+    min-height: 85px !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-stat > strong {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Fixtures, results, squad and club information */
+  .fansphere-premium .my-team-dashboard .club-overview-panel {
+    padding: 16px !important;
+    min-width: 0 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-overview-panel h2 {
+    font-size: 19px !important;
+    line-height: 1.25 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-players {
+    gap: 8px !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-players > * {
+    padding: 10px 12px !important;
+    min-width: 0;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-row {
+    gap: 12px !important;
+    padding: 12px 0 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-row > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* My Team — compact mobile statistics */
+@media (max-width: 650px) {
+  .fansphere-premium .my-team-dashboard .club-stat-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+    margin-top: 14px !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-stat-grid > .club-stat {
+    min-width: 0 !important;
+    padding: 14px !important;
+    margin: 0 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-stat-grid > .club-stat:nth-child(3) {
+    grid-column: 1 / -1 !important;
+  }
+
+  .fansphere-premium .my-team-dashboard .club-stat strong {
+    line-height: 1.25;
+  }
+}
+
+/* FanSphere — compact mobile Matches layout */
+@media (max-width: 650px) {
+
+  .fansphere-premium .matches-page .team-match-groups {
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .fansphere-premium .matches-page .team-match-section {
+    padding: 12px 10px;
+  }
+
+  .fansphere-premium .matches-page .team-match-header {
+    gap: 9px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .fansphere-premium .matches-page .team-match-header img,
+  .fansphere-premium .matches-page .team-match-fallback {
+    width: 38px;
+    height: 38px;
+  }
+
+  .fansphere-premium .matches-page .team-match-header h2 {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .fansphere-premium .matches-page .team-match-header p {
+    font-size: 11px;
+  }
+
+  .fansphere-premium .matches-page .match-list {
+    gap: 10px;
+  }
+
+  .fansphere-premium .matches-page .match-top {
+    gap: 5px 10px;
+    padding: 10px 12px;
+    align-items: center;
+  }
+
+  .fansphere-premium .matches-page .match-top span,
+  .fansphere-premium .matches-page .match-top time {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .fansphere-premium .matches-page .match-teams {
+    min-height: 100px;
+    padding: 12px 10px;
+    gap: 8px;
+  }
+
+  .fansphere-premium .matches-page .match-team {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  .fansphere-premium .matches-page .match-team img,
+  .fansphere-premium .matches-page .mini-crest {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+  }
+
+  .fansphere-premium .matches-page .match-team strong {
+    font-size: 12px;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .matches-page .prediction-area {
+    padding: 11px 12px 10px;
+  }
+
+  .fansphere-premium .matches-page .prediction-buttons {
+    gap: 7px;
+  }
+
+  .fansphere-premium .matches-page .prediction-buttons button {
+    min-height: 38px;
+    padding: 7px 5px;
+    font-size: 11px;
+  }
+
+  .fansphere-premium .matches-page .match-card > button.match-open-button {
+    width: calc(100% - 24px) !important;
+    margin: 3px 12px 12px !important;
+    padding: 10px 12px !important;
+    font-size: 11px !important;
+  }
+
+  .fansphere-premium .matches-page .show-more-matches {
+    margin-top: 10px;
+  }
+
+  .fansphere-premium .matches-page .show-more-matches button {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+}
+
+/* Detailed Match Center — mobile layout */
+@media (max-width: 650px) {
+
+  .fansphere-premium .match-center-page {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .fansphere-premium .match-center-back {
+    margin-bottom: 12px;
+  }
+
+  .fansphere-premium .match-center-hero {
+    padding: 16px 12px;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .match-center-hero h1 {
+    font-size: 23px;
+    line-height: 1.2;
+  }
+
+  .fansphere-premium .match-center-live-tools {
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .fansphere-premium .match-center-live-tools button {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .fansphere-premium .match-center-page .match-center-panel {
+    padding: 15px 14px;
+    border-radius: 15px;
+  }
+
+  .fansphere-premium .match-center-page .match-center-panel h2 {
+    font-size: 19px;
+    line-height: 1.25;
+  }
+
+  .fansphere-premium .match-center-page .match-center-panel p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .fansphere-premium .match-center-picks {
+    gap: 7px;
+  }
+
+  .fansphere-premium .match-center-picks button {
+    min-height: 40px;
+    padding: 8px 5px;
+    font-size: 11px;
+  }
+
+  .fansphere-premium .match-center-page .model-outlook .model-head {
+    gap: 10px;
+    align-items: center;
+  }
+
+  .fansphere-premium .match-center-page .model-outlook button.model-button {
+    padding: 10px 12px !important;
+    font-size: 11px !important;
+  }
+
+  .fansphere-premium .match-center-page .comparison-form {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .fansphere-premium .match-center-page .comparison-form > div {
+    min-width: 0;
+    padding: 10px 9px !important;
+  }
+
+  .fansphere-premium .match-center-page .comparison-form strong {
+    font-size: 11px;
+  }
+
+  .fansphere-premium .match-center-page .comparison-standings {
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .fansphere-premium .match-center-page .comparison-standings > div {
+    min-width: 0;
+    padding: 10px !important;
+  }
+
+  .fansphere-premium .match-center-page .comparison-table {
+    margin-top: 10px;
+  }
+}
+
+/* FanSphere Home — compact mobile refinements */
+@media (max-width: 650px) {
+
+  /* Keep all three dashboard stats balanced */
+  .fansphere-premium .home-dashboard .premium-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat {
+    min-width: 0;
+    padding: 14px 12px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat-symbol {
+    right: 10px;
+    top: 10px;
+  }
+
+  /* Reduce Daily Challenge spacing */
+  .fansphere-premium .home-dashboard .premium-quiz {
+    padding: 16px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-quiz h2 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .fansphere-premium .home-dashboard .premium-quiz p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Compact Club Pulse */
+  .fansphere-premium .home-dashboard .premium-pulse {
+    padding: 16px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-pulse-card {
+    padding: 12px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-pulse-fixture {
+    margin-top: 10px;
+  }
+
+  /* Preserve comfortable achievement spacing */
+  .fansphere-premium .home-dashboard .home-achievements {
+    padding: 16px;
+  }
+}
+
+/* FanSphere mobile Home: compact quiz rewards and club cards */
+@media (max-width: 650px) {
+  .fansphere-premium .home-dashboard .premium-quiz-rewards {
+    margin-top: 14px;
+    padding-top: 0;
+    gap: 7px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-quiz-rewards > div {
+    padding: 9px 10px;
+    gap: 4px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-pulse-card {
+    min-height: 0;
+    height: auto;
+    gap: 7px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-pulse-grid {
+    gap: 10px;
+  }
+}

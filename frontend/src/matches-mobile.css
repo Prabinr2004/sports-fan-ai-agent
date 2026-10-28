@@ -1,0 +1,165 @@
+/* FanSphere Matches — mobile match center */
+
+@media (max-width: 650px) {
+  .fansphere-premium .matches-page {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .fansphere-premium .matches-page > h1 {
+    font-size: 25px !important;
+    line-height: 1.2;
+    margin: 6px 0 8px;
+  }
+
+  .fansphere-premium .matches-page > p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  /* Team grouping */
+  .fansphere-premium .matches-page .team-match-groups {
+    display: grid;
+    gap: 20px;
+    margin-top: 18px;
+  }
+
+  .fansphere-premium .matches-page .team-match-section {
+    min-width: 0;
+    padding: 0 !important;
+  }
+
+  .fansphere-premium .matches-page .team-match-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 11px;
+    min-width: 0;
+  }
+
+  .fansphere-premium .matches-page .team-match-header img,
+  .fansphere-premium .matches-page .team-match-fallback {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+  }
+
+  .fansphere-premium .matches-page .team-match-header > div {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .fansphere-premium .matches-page .team-match-header h2 {
+    font-size: 17px !important;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  /* Fixture cards */
+  .fansphere-premium .matches-page .match-list {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 11px;
+  }
+
+  .fansphere-premium .matches-page .match-card {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .matches-page .match-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    padding: 12px 13px;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .fansphere-premium .matches-page .match-top time {
+    font-size: 11px;
+  }
+
+  /* Team crests and names */
+  .fansphere-premium .matches-page .match-teams {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+    align-items: center;
+    gap: 5px;
+    min-height: 0 !important;
+    padding: 14px 10px !important;
+  }
+
+  .fansphere-premium .matches-page .match-team {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .fansphere-premium .matches-page .match-team img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+  }
+
+  .fansphere-premium .matches-page .match-team strong {
+    display: block;
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .matches-page .versus {
+    font-size: 11px;
+    font-weight: 800;
+    text-align: center;
+  }
+
+  /* Predictions */
+  .fansphere-premium .matches-page .prediction-area {
+    padding: 12px 13px !important;
+  }
+
+  .fansphere-premium .matches-page .prediction-area > span {
+    display: block;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .fansphere-premium .matches-page .prediction-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  .fansphere-premium .matches-page .prediction-buttons button {
+    min-width: 0;
+    min-height: 44px;
+    padding: 8px 5px;
+    font-size: 11px;
+    line-height: 1.25;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    border-radius: 9px;
+  }
+
+  .fansphere-premium .matches-page .match-open-button {
+    position: static !important;
+    display: block;
+    width: calc(100% - 26px);
+    min-height: 44px;
+    margin: 0 13px 13px;
+    padding: 10px 12px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  .fansphere-premium .matches-page .show-more-matches button {
+    min-height: 44px;
+    font-size: 12px;
+  }
+}

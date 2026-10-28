@@ -1,0 +1,279 @@
+/* FanSphere Home — phone-first layout */
+
+@media (max-width: 650px) {
+  .fansphere-premium .premium-home {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  /* Welcome and XP */
+  .fansphere-premium .premium-home .premium-welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin: 0;
+    padding: 4px 0;
+  }
+
+  .fansphere-premium .premium-home .premium-welcome h1 {
+    font-size: 25px !important;
+    line-height: 1.2;
+    margin: 5px 0 7px;
+  }
+
+  .fansphere-premium .premium-home .premium-welcome p {
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  .fansphere-premium .premium-home .premium-level {
+    width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .fansphere-premium .premium-home .premium-level strong {
+    font-size: 19px;
+  }
+
+  /* Club hero and next fixture */
+  .fansphere-premium .premium-home .premium-hero {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    border-radius: 17px;
+    overflow: hidden;
+  }
+
+  .fansphere-premium .premium-home .premium-hero-main {
+    width: 100%;
+    min-width: 0;
+    padding: 18px 15px;
+  }
+
+  .fansphere-premium .premium-home .premium-club-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .fansphere-premium .premium-home .premium-crest {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+  }
+
+  .fansphere-premium .premium-home .premium-crest img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .fansphere-premium .premium-home .premium-club-identity h2 {
+    font-size: 21px !important;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .premium-home .premium-hero-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 16px;
+  }
+
+  .fansphere-premium .premium-home .premium-hero-actions button {
+    min-width: 0;
+    min-height: 44px;
+    padding: 9px 8px;
+    font-size: 12px;
+  }
+
+  .fansphere-premium .premium-home .premium-hero-aside {
+    width: 100%;
+    min-width: 0;
+    padding: 15px;
+  }
+
+  .fansphere-premium .premium-home .premium-hero-aside strong {
+    font-size: 17px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  /* Fan rank */
+  .fansphere-premium .premium-home .home-rank-card {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 12px;
+    align-items: center;
+    margin: 0;
+    padding: 14px;
+    border-radius: 15px;
+  }
+
+  .fansphere-premium .premium-home .home-rank-emblem {
+    width: 45px;
+    height: 52px;
+  }
+
+  .fansphere-premium .premium-home .home-rank-content {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .fansphere-premium .premium-home .home-rank-content h2 {
+    font-size: 18px !important;
+    margin: 3px 0;
+  }
+
+  .fansphere-premium .premium-home .home-rank-content p {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  /* Overview statistics */
+  .fansphere-premium .premium-home .premium-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0;
+  }
+
+  .fansphere-premium .premium-home .premium-stat {
+    min-width: 0;
+    min-height: 110px;
+    padding: 13px;
+    border-radius: 14px;
+  }
+
+  .fansphere-premium .premium-home .premium-stat span {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+
+  .fansphere-premium .premium-home .premium-stat strong {
+    font-size: 21px;
+  }
+
+  .fansphere-premium .premium-home .premium-stat small {
+    font-size: 11px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  /* Daily quiz and match radar */
+  .fansphere-premium .premium-home .premium-home-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    margin: 0;
+  }
+
+  .fansphere-premium .premium-home .premium-quiz,
+  .fansphere-premium .premium-home .premium-radar {
+    min-width: 0;
+    padding: 17px 15px;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .premium-home .premium-quiz h2 {
+    font-size: 22px !important;
+    line-height: 1.2;
+  }
+
+  .fansphere-premium .premium-home .premium-quiz-rewards {
+    gap: 8px;
+  }
+
+  .fansphere-premium .premium-home .premium-radar-list {
+    display: grid;
+    gap: 9px;
+  }
+
+  .fansphere-premium .premium-home .home-radar-match {
+    min-width: 0;
+    padding: 12px !important;
+  }
+
+  /* Other dashboard sections */
+  .fansphere-premium .premium-home .premium-pulse-grid,
+  .fansphere-premium .premium-home .home-achievements-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .fansphere-premium .premium-home .premium-pulse-card {
+    min-width: 0;
+    padding: 13px;
+  }
+
+  .fansphere-premium .premium-home .home-achievements {
+    margin: 0;
+    padding: 15px;
+  }
+}
+
+/* Home mobile — prevent metric icons overlapping labels */
+@media (max-width: 650px) {
+  .fansphere-premium .home-dashboard .premium-stat {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 30px;
+    grid-template-rows: auto auto auto;
+    column-gap: 6px;
+    row-gap: 7px;
+    align-content: start;
+    min-height: 132px;
+    padding: 13px !important;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat-symbol {
+    position: static !important;
+    grid-column: 2;
+    grid-row: 1;
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 10px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat-symbol svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat > span {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    min-width: 0;
+    font-size: 10px !important;
+    line-height: 1.35 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat > strong {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 23px !important;
+    line-height: 1.15;
+  }
+
+  .fansphere-premium .home-dashboard .premium-stat > small {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    min-width: 0;
+    font-size: 11px !important;
+    line-height: 1.4;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+}
