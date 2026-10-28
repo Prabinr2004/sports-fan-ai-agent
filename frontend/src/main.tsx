@@ -10,3 +10,9 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>,
 );
+import "./mobile-design.css";
+import "./home-mobile.css";
+import "./team-hub-mobile.css";
+import "./matches-mobile.css";
+import "./match-center-mobile.css";
+import "./quiz-mobile.css";

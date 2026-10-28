@@ -1,0 +1,247 @@
+/* FanSphere Team Hub — phone layout */
+
+@media (max-width: 650px) {
+
+  .fansphere-premium .team-hub {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .fansphere-premium .team-hub .close-hub {
+    min-height: 40px;
+    padding: 9px 12px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  /* Compact team header */
+  .fansphere-premium .team-hub .team-hero {
+    padding: 16px !important;
+    border-radius: 17px;
+    min-height: 0;
+  }
+
+  .fansphere-premium .team-hub .team-hero img {
+    max-width: 74px;
+    max-height: 74px;
+    object-fit: contain;
+  }
+
+  .fansphere-premium .team-hub .team-hero h1 {
+    font-size: 25px !important;
+    line-height: 1.2;
+  }
+
+  .fansphere-premium .team-hub .team-hero p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* Tabs */
+  .fansphere-premium .team-hub .team-hub-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    gap: 3px !important;
+    padding: 4px !important;
+    margin: 14px 0 !important;
+  }
+
+  .fansphere-premium .team-hub .team-hub-tabs button {
+    min-width: 0 !important;
+    min-height: 43px;
+    padding: 8px 3px !important;
+    font-size: 11px !important;
+    white-space: nowrap;
+  }
+
+  /* Content panels */
+  .fansphere-premium .team-hub .hub-panel,
+  .fansphere-premium .team-hub .season-snapshot,
+  .fansphere-premium .team-hub .season-leaders {
+    min-width: 0;
+    padding: 15px !important;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .team-hub .section-heading {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .fansphere-premium .team-hub .section-heading h2 {
+    font-size: 19px !important;
+    line-height: 1.3;
+  }
+
+  /* Competition positions */
+  .fansphere-premium .team-hub .standing-cards {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .fansphere-premium .team-hub .standing-card {
+    min-width: 0;
+    padding: 13px !important;
+  }
+
+  .fansphere-premium .team-hub .standing-metrics {
+    gap: 8px;
+  }
+
+  /* Club information: compact label and value rows */
+  .fansphere-premium .team-hub .club-info-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 8px;
+  }
+
+  .fansphere-premium .team-hub .club-info-cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+    padding: 12px 13px !important;
+    border-radius: 12px;
+  }
+
+  .fansphere-premium .team-hub .club-info-cell small {
+    flex: 0 0 34%;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .fansphere-premium .team-hub .club-info-cell strong {
+    flex: 1;
+    min-width: 0;
+    text-align: right;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  /* Squad controls */
+  .fansphere-premium .team-hub #squad-player-search,
+  .fansphere-premium .team-hub #squad-position-filter {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .fansphere-premium .team-hub .team-hub-tab-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .fansphere-premium .team-hub .team-hub-tabs button {
+    font-size: 10px !important;
+  }
+}
+
+/* Team Hub: compact phone header */
+@media (max-width: 650px) {
+  .fansphere-premium .team-hub .team-hero {
+    display: grid !important;
+    grid-template-columns: 62px minmax(0, 1fr) !important;
+    align-items: start !important;
+    gap: 12px !important;
+    min-height: 0 !important;
+    padding: 15px !important;
+  }
+
+  .fansphere-premium .team-hub .team-hero-crest {
+    width: 62px !important;
+    height: 62px !important;
+    min-width: 0 !important;
+    padding: 7px !important;
+    margin: 0 !important;
+    border-radius: 13px !important;
+  }
+
+  .fansphere-premium .team-hub .team-hero-crest img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain;
+  }
+
+  .fansphere-premium .team-hub .team-hero > div:nth-child(2) {
+    min-width: 0;
+  }
+
+  .fansphere-premium .team-hub .team-hero h1 {
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+    margin: 3px 0 5px !important;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .team-hub .team-hero p {
+    margin: 0 !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Metadata and buttons occupy full card width */
+  .fansphere-premium .team-hub .team-meta {
+    grid-column: 1 / -1;
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 6px !important;
+    margin-top: 10px !important;
+  }
+
+  .fansphere-premium .team-hub .team-meta span {
+    font-size: 10px !important;
+    padding: 5px 8px !important;
+  }
+
+  .fansphere-premium .team-hub .team-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px !important;
+    margin-top: 12px !important;
+  }
+
+  .fansphere-premium .team-hub .team-actions button {
+    min-width: 0;
+    min-height: 44px;
+    padding: 9px 6px !important;
+    font-size: 12px !important;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 650px) {
+  .fansphere-premium .team-hub .team-hero {
+    grid-template-rows: auto;
+  }
+
+  .fansphere-premium .team-hub .team-hero > div:nth-child(2) {
+    display: contents;
+  }
+
+  .fansphere-premium .team-hub .team-hero > div:nth-child(2) > .eyebrow,
+  .fansphere-premium .team-hub .team-hero > div:nth-child(2) > h1,
+  .fansphere-premium .team-hub .team-hero > div:nth-child(2) > p {
+    grid-column: 2;
+  }
+
+  .fansphere-premium .team-hub .team-hero-crest {
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+
+  .fansphere-premium .team-hub .team-hero .team-meta,
+  .fansphere-premium .team-hub .team-hero .team-actions {
+    grid-column: 1 / -1;
+  }
+}

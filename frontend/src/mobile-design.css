@@ -1,0 +1,269 @@
+/*
+ * FanSphere V2 — Mobile Design System
+ * Responsive presentation only.
+ * No changes to API, authentication, rewards or user data.
+ */
+
+@media (max-width: 650px) {
+  .fansphere-premium {
+    --mobile-page-padding: 16px;
+    --mobile-card-radius: 16px;
+    --mobile-card-gap: 12px;
+    --mobile-ink: #203953;
+    --mobile-muted: #64748b;
+    --mobile-border: #eaded1;
+  }
+
+  .fansphere-premium .content {
+    width: 100%;
+    min-width: 0;
+    padding: 16px var(--mobile-page-padding) 28px;
+  }
+
+  .fansphere-premium .content h1 {
+    font-size: clamp(24px, 6.5vw, 28px);
+    line-height: 1.18;
+    letter-spacing: -0.035em;
+  }
+
+  .fansphere-premium .content h2 {
+    font-size: 19px;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+  }
+
+  .fansphere-premium .content h3 {
+    font-size: 16px;
+    line-height: 1.35;
+  }
+
+  .fansphere-premium .content p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .fansphere-premium .content .eyebrow {
+    font-size: 10px;
+    line-height: 1.4;
+    letter-spacing: .12em;
+  }
+
+  .fansphere-premium .content button,
+  .fansphere-premium .content select {
+    min-height: 44px;
+  }
+
+  .fansphere-premium .profile-page {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .fansphere-premium .profile-page .profile-club-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .fansphere-premium .profile-page .profile-primary-club,
+  .fansphere-premium .profile-page .profile-followed-clubs {
+    min-height: 0 !important;
+    padding: 14px !important;
+    border-radius: var(--mobile-card-radius) !important;
+  }
+
+  .fansphere-premium .profile-page .profile-primary-club > img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .fansphere-premium .profile-page .profile-primary-club strong {
+    font-size: 15px !important;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs > div {
+    margin-top: 6px !important;
+  }
+
+  .fansphere-premium .profile-page .fan-rank-ladder {
+    gap: 7px !important;
+  }
+
+  .fansphere-premium .profile-page .fan-rank-step {
+    min-height: 76px !important;
+    padding: 10px 6px !important;
+  }
+
+  .fansphere-premium .mobile-bottom-nav {
+    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .fansphere-premium .mobile-nav-item {
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 360px) {
+  .fansphere-premium {
+    --mobile-page-padding: 12px;
+  }
+}
+
+/* FanSphere — compact mobile Profile */
+@media (max-width: 650px) {
+
+  /* Profile identity card */
+  .fansphere-premium .profile-page .profile-hero {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    min-height: 0;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .profile-page .profile-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 20px;
+    border-radius: 15px;
+  }
+
+  .fansphere-premium .profile-page .profile-hero > div:nth-child(2) {
+    min-width: 0;
+  }
+
+  .fansphere-premium .profile-page .profile-hero h1 {
+    font-size: 23px;
+    margin: 3px 0;
+    overflow-wrap: anywhere;
+  }
+
+  .fansphere-premium .profile-page .profile-hero p {
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .fansphere-premium .profile-page .profile-level {
+    align-self: start;
+    text-align: right;
+    min-width: 0;
+  }
+
+  .fansphere-premium .profile-page .profile-level strong {
+    font-size: 17px;
+    white-space: nowrap;
+  }
+
+  /* Football identity */
+  .fansphere-premium .profile-page .profile-clubs {
+    padding: 15px;
+    margin-top: 12px;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .profile-page .profile-clubs h2 {
+    margin: 4px 0 12px;
+    font-size: 19px;
+  }
+
+  .fansphere-premium .profile-page .profile-club-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .fansphere-premium .profile-page .profile-primary-club {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    min-height: 0;
+  }
+
+  .fansphere-premium .profile-page .profile-primary-club > img {
+    width: 48px;
+    height: 48px;
+    padding: 5px;
+    flex-shrink: 0;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px;
+    min-height: 0;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs > div {
+    margin: 0;
+  }
+
+  /* Reduce excessive gaps */
+  .fansphere-premium .profile-page .fan-rank-section {
+    margin: 12px 0;
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  .fansphere-premium .profile-page .profile-progress {
+    padding: 14px !important;
+    margin-top: 10px;
+  }
+
+  .fansphere-premium .profile-page .profile-stat-grid {
+    gap: 10px;
+  }
+}
+
+/* Profile mobile refinements */
+@media (max-width: 650px) {
+
+  .fansphere-premium .profile-page .profile-clubs {
+    margin-top: 12px !important;
+    padding: 14px !important;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 0 !important;
+    padding: 12px 14px !important;
+    text-align: left !important;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs > small {
+    font-size: 11px !important;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs > strong {
+    font-size: 13px !important;
+  }
+
+  .fansphere-premium .profile-page .profile-followed-clubs > div:empty {
+    display: none !important;
+  }
+
+  .fansphere-premium .profile-page .fan-rank-header {
+    gap: 12px;
+    align-items: center;
+  }
+
+  .fansphere-premium .profile-page .fan-rank-header h2 {
+    font-size: 22px !important;
+  }
+
+  .fansphere-premium .profile-page .fan-rank-header p {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  .fansphere-premium .profile-page .fan-rank-crest {
+    width: 62px !important;
+    height: 72px !important;
+  }
+}

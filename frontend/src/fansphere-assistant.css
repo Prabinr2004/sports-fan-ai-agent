@@ -57,3 +57,46 @@
 .fs-chat-message .fs-chat-numbered .fs-chat-number{position:absolute;left:2px;top:9px;display:inline-block;width:22px}
 .fs-chat-message-assistant{width:100%;max-width:100%;min-width:0}
 .fs-chat-message-assistant .fs-chat-bubble{width:100%;box-sizing:border-box}
+
+/* Keep floating AI chat clear of mobile navigation */
+
+
+/* Keep floating AI chat clear of mobile navigation */
+@media (max-width: 650px) {
+  .fansphere-premium .fs-assistant-floating {
+    position: fixed;
+    right: 14px;
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .fansphere-premium .fs-assistant-floating .fs-chat-launcher {
+    width: 46px;
+    height: 46px;
+    border-radius: 15px;
+  }
+
+  .fansphere-premium .fs-assistant-floating .fs-chat-panel {
+    right: 0;
+    bottom: 58px;
+    width: min(370px, calc(100vw - 28px));
+    height: min(520px, calc(100dvh - 180px));
+  }
+}
+
+@media (max-width: 650px) {
+  .fansphere-premium .fs-assistant-floating {
+    right: 8px !important;
+    bottom: calc(86px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .fansphere-premium .fs-assistant-floating .fs-chat-launcher {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 14px !important;
+  }
+
+  .fansphere-premium .fs-assistant-floating .fs-chat-launcher svg {
+    width: 20px;
+    height: 20px;
+  }
+}
